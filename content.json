@@ -1,0 +1,48 @@
+{
+  "name": "Haoliang Huang",
+  "email": "haoliang.huang.research@gmail.com",
+  "github": "https://github.com/haolianghuang-research",
+  "intro": "I study Robotics, Cognition, Intelligence at the Technical University of Munich (TUM), with a background in Computer Science from the Karlsruhe Institute of Technology (KIT). My work spans robot learning, vision-language-action models, 3D perception, and autonomous driving.",
+  "focus": "I am interested in connecting perception, learning, and control to build robots that can act in the real world. My projects combine hands-on robot deployment with large-scale data pipelines, distributed training, and careful experimental evaluation.",
+  "experience": [
+    {
+      "title": "AI Intern · Intelligent Vehicle Dynamics Controls",
+      "organization": "Huawei Munich Research Center · AEL",
+      "dates": "Mar – Sep 2026",
+      "description": "Designed and implemented a CAN-based foundation model for vehicle chassis dynamics using large-scale CAN-bus time-series data, with modular interfaces for future vision-language integration. Contributed to large-scale data processing and distributed training on GPU clusters."
+    },
+    {
+      "title": "Student Research Assistant · Cyber-Physical Systems",
+      "organization": "Technical University of Munich · CPS",
+      "dates": "Mar 2025 – Feb 2026",
+      "description": "Worked on CommonRoad competition management, competition algorithm design, autonomous-driving AI systems, and data processing."
+    }
+  ],
+  "awards": [
+    {"year": "2026", "result": "4th / 32 teams", "title": "ManipArena Real-Robot Manipulation Challenge", "venue": "CVPR 2026 Workshop", "description": "Developed an AI agent + VLA framework for general-purpose embodied manipulation."},
+    {"year": "2025", "result": "First prize", "title": "Category-Level Object Pose Estimation in the Wild", "venue": "ICCV 2025 Workshop", "description": "Integrated GCEPose with DINOv3 and trained on Omni6DPose and PACE for category-level 6D object pose estimation."},
+    {"year": "2024", "result": "First prize", "title": "CommonRoad AI Programming Prize Challenge", "venue": "Technical University of Munich", "description": "Designed a search-based motion planner for autonomous vehicles in CommonRoad scenarios."}
+  ],
+  "projects": [
+    {"id": "semantic-reconstruction", "title": "Semantic-Aware 3D Reconstruction", "organization": "TUM · CAMP", "dates": "Nov 2025 – Apr 2026", "category": "vision", "label": "3D vision", "type": "Research project", "description": "Integrated and benchmarked RaySt3R, VGGT, and VolSplat for semantic-aware 3D reconstruction. Contributed to model components and refinement, and led Slurm-based distributed training, large-scale HPC experiments, and scalable data generation pipelines.", "tags": ["3D reconstruction", "Slurm / HPC", "Distributed training"], "visual": "reconstruction"},
+    {"id": "humanoid", "title": "Whole-Body Humanoid Loco-Manipulation", "organization": "TUM · AIR", "dates": "Oct 2025 – Feb 2026", "category": "robotics", "label": "Robot learning", "type": "Practical course", "description": "Developed a hierarchical reinforcement learning framework for the Booster T1 humanoid. Combined low-level motor skills with high-level, vision-integrated interaction policies for coordinated locomotion and manipulation in complex environments.", "tags": ["Booster T1", "Hierarchical RL", "Loco-manipulation"], "visual": "humanoid"},
+    {"id": "pi0", "title": "π₀ Deployment & Real-World Benchmarking", "organization": "TUM · AIR", "dates": "May – Dec 2025", "category": "robotics", "label": "Embodied AI", "type": "Lab project", "description": "Deployed π₀ on LeRobot SO-101 and Franka robots. Built custom real-world datasets and designed experiments to evaluate vision-language-action policies in real scenes.", "tags": ["Vision-language-action", "SO-101 / Franka", "Real-world evaluation"], "visual": "manipulation"},
+    {"id": "pose", "title": "Open-Vocabulary 6D Object Pose Estimation", "organization": "TUM · CAMP", "dates": "Apr – Aug 2025", "category": "vision", "label": "3D vision", "type": "Practical course", "description": "Built a zero-shot pipeline for unseen objects by combining Grounded-SAM-2 for open-vocabulary segmentation, InstantMesh / Trellis / Hunyuan3D for single-image 3D reconstruction, and Any6D for pose estimation.", "tags": ["Zero-shot perception", "Grounded-SAM-2", "Any6D"], "visual": "pose"},
+    {"id": "safe-rl", "title": "Safe Reinforcement Learning for Manipulation", "organization": "TUM · AIR · AI4DI", "dates": "Nov 2024 – Mar 2025", "category": "robotics", "label": "Robot learning", "type": "Guided research", "description": "Developed a safe RL-driven control model for a KUKA LBR iiwa 14 robotic arm. Integrated continual learning and domain randomization to address sim-to-real transfer in robotic manipulation.", "tags": ["Safe RL", "Sim-to-real", "ROS / Docker"], "visual": "safe-rl"},
+    {"id": "bitnet", "title": "Quantized Large Language Models", "organization": "KIT · cv:hci", "dates": "Apr – Aug 2024", "category": "learning", "label": "Machine learning", "type": "Seminar with practice", "description": "Explored 1-bit and 1.58-bit networks, applying quantization to BERT and LLaMA for text classification and evaluating model performance.", "tags": ["BitNet", "BERT / LLaMA", "Quantization"], "visual": "quantization"},
+    {"id": "vae", "title": "Variational Autoencoders for Image Generation", "organization": "KIT · ISAS", "dates": "Apr – Aug 2024", "category": "learning", "label": "Generative models", "type": "University internship", "description": "Explored and compared VAE, conditional VAE, and Gaussian Process Prior VAE architectures, with a focus on portrait generation.", "tags": ["VAE / CVAE", "Generative modeling", "Python"]},
+    {"id": "ik", "title": "Benchmarking Inverse Kinematics Algorithms", "organization": "KIT · IRL", "dates": "May 2023 – Feb 2024", "category": "robotics", "label": "Robot control", "type": "Bachelor's thesis", "description": "Benchmarked Cartesian-space controllers and open-source inverse kinematics algorithms for the Franka Emika robot. Worked with robotic manipulation platforms, controller systems, and MuJoCo.", "tags": ["Inverse kinematics", "Franka", "Python / C++"]},
+    {"id": "interactive-learning", "title": "Interactive Robot Learning", "organization": "KIT · IRL", "dates": "Apr – Sep 2023", "category": "robotics", "label": "Robot learning", "type": "University internship", "description": "Modeled Franka Emika robotic arms in MuJoCo and Blender, and explored learning from demonstration and movement primitives for robot interaction.", "tags": ["Learning from demonstration", "Movement primitives", "MuJoCo / Blender"]},
+    {"id": "outlier", "title": "An Experimental Platform for Outlier Data", "organization": "KIT · IPD Böhm", "dates": "Nov 2022 – Feb 2023", "category": "systems", "label": "Software systems", "type": "Software development practice", "description": "Developed a Django web application as an experimental framework for detecting and generating outlying data in high-dimensional databases.", "tags": ["Django", "SQLite", "Data analysis"]},
+    {"id": "mobile-robots", "title": "Mobile Robots Competition", "organization": "KIT · H²T", "dates": "Oct 2022 – Feb 2023", "category": "robotics", "label": "Mobile robotics", "type": "University internship", "description": "Programmed a LEGO robot to navigate a complex course, integrating multiple sensors and designing PID controllers for navigation.", "tags": ["Sensor integration", "PID control", "MicroPython"]},
+    {"id": "traffic", "title": "CNN-Based Traffic Surveys from Drone Video", "organization": "KIT · IFV", "dates": "May 2021 – Jan 2022", "category": "vision", "label": "Computer vision", "type": "Master's thesis project", "description": "Annotated drone videos to build an object-detection dataset. Trained Faster R-CNN and YOLO v3, v4, and v5 with transfer learning, and compared detection performance for traffic surveys.", "tags": ["Object detection", "Transfer learning", "Drone video"]}
+  ],
+  "education": [
+    {"year": "2026", "degree": "Master's studies · Robotics, Cognition, Intelligence", "school": "Technical University of Munich", "detail": "Average grade: 1.4"},
+    {"year": "2024", "degree": "B.Sc. · Computer Science", "school": "Karlsruhe Institute of Technology", "detail": "Final grade: 2.1 · Completed in three years"},
+    {"year": "2024", "degree": "Master's studies · Infrastructure and Mobility", "school": "Karlsruhe Institute of Technology", "detail": "Studied in parallel with the B.Sc. in Computer Science"},
+    {"year": "2018", "degree": "Bachelor's degree · Traffic Engineering", "school": "Hefei University of Technology", "detail": "Final grade: 85/100"}
+  ],
+  "skills": ["Python", "C++", "Java", "Linux", "ROS", "Docker", "SQL", "MATLAB", "Vue.js", "CAD"],
+  "languages": "English (advanced) · German (intermediate)"
+}
