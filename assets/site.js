@@ -19,3 +19,19 @@ if (filters && projects.length) {
     count.textContent = `${visible} ${visible === 1 ? 'project' : 'projects'}`;
   });
 }
+
+// Keep both approved portraits available without automatically rotating them.
+const portraitPicker = document.querySelector('.portrait-picker');
+const profilePhoto = document.querySelector('#profile-photo');
+if (portraitPicker && profilePhoto) {
+  portraitPicker.hidden = false;
+  portraitPicker.addEventListener('click', event => {
+    const button = event.target.closest('button[data-portrait-src]');
+    if (!button) return;
+    profilePhoto.src = button.dataset.portraitSrc;
+    profilePhoto.alt = button.dataset.portraitAlt;
+    portraitPicker.querySelectorAll('button').forEach(item => {
+      item.setAttribute('aria-pressed', String(item === button));
+    });
+  });
+}

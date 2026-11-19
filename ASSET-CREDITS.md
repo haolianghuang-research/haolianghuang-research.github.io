@@ -46,3 +46,7 @@ The `*-cover.webp` files are cropped and resized derivatives of the retained fig
 The three public November 2026 CV copies have the private telephone number removed. The original local CV documents are not modified.
 
 `mobile-robots-cover.svg` is an original conceptual diagram of sensor-guided PID navigation, used because no attributable project photograph was available.
+
+## Personal portrait gallery
+
+`assets/portrait-personal.webp` is the personal photograph supplied by Haoliang Huang for this homepage update on 19 November 2026. The web copy is resized and encoded without embedded metadata; appearance is unchanged. The existing `assets/portrait.jpg` remains available as the formal portrait. No location is inferred from the new photograph; “Based in Munich” describes the existing profile location.
