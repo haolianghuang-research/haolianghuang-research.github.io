@@ -1,6 +1,6 @@
 """Render static, accessible project pages using the shared portfolio style."""
 from html import escape as e
-from navigation import render_navigation
+from navigation import render_navigation, asset_url
 
 
 def render_section(s):
@@ -76,7 +76,7 @@ def render_all(root, content, details):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
-<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css"><link rel="stylesheet" href="../../assets/navigation.css"><script src="../../assets/navigation.js" defer></script><script src="../../assets/project-details.js" defer></script></head><body>
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}"><script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects', outline, p['title'])}
 <main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
 <div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}

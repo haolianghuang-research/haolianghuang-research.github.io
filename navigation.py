@@ -1,5 +1,13 @@
 """A compact primary navigation and a sliding outline for each document."""
 from html import escape as e
+from hashlib import sha256
+from pathlib import Path
+
+
+def asset_url(path):
+    """Revalidate changed CSS and JS while keeping public document URLs stable."""
+    digest = sha256((Path(__file__).parent / path).read_bytes()).hexdigest()[:10]
+    return f'{path}?v={digest}'
 
 
 def render_navigation(content, prefix='', current='about', outline=None, page_title=None):

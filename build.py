@@ -3,7 +3,7 @@ import json
 from html import escape as e
 from pathlib import Path
 from render_projects import render_all
-from navigation import render_navigation
+from navigation import render_navigation, asset_url
 
 ROOT = Path(__file__).resolve().parent
 c = json.loads((ROOT / 'content.json').read_text())
@@ -61,7 +61,7 @@ html = f'''<!doctype html>
 <meta name="author" content="Haoliang Huang"><link rel="canonical" href="{SITE}">
 <meta property="og:type" content="profile"><meta property="og:title" content="Haoliang Huang | Embodied AI &amp; Robotics"><meta property="og:description" content="Selected research, robot systems, competition projects, and CV."><meta property="og:url" content="{SITE}"><meta property="og:image" content="{SITE}assets/portrait-personal.webp">
 <meta name="twitter:card" content="summary"><meta name="theme-color" content="#173f58"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/styles.css"><link rel="stylesheet" href="assets/featured.css"><link rel="stylesheet" href="assets/navigation.css"><script src="assets/navigation.js" defer></script><script src="assets/site.js" defer></script>
+<link rel="stylesheet" href="{asset_url('assets/styles.css')}"><link rel="stylesheet" href="{asset_url('assets/featured.css')}"><link rel="stylesheet" href="{asset_url('assets/navigation.css')}"><script src="{asset_url('assets/navigation.js')}" defer></script><script src="{asset_url('assets/site.js')}" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 {render_navigation(c)}
 <main class="page" id="main">
