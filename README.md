@@ -14,6 +14,8 @@ Commit the JSON content, regenerated `index.html`, `projects/` pages, and `sitem
 
 Each project detail contains a task summary, workflow schematic, technical sections, selected figures, and related public resources. Put approved images under `assets/projects/`, add their dimensions and captions in the JSON, and retain attribution in [ASSET-CREDITS.md](ASSET-CREDITS.md). Original private reports, raw configurations, and the local evidence index are kept outside this public repository.
 
+`content.json` also defines the ordered `featured_projects` list. Those entries reference the project metadata in the main catalog or `additional_projects` and appear before awards, experience, and the longer project list. Featured detail pages use `status`, `strengths`, and an explicit contribution section. Current research, incomplete prototypes, and competition placements have distinct labels. Recorded results stay attached to their specific checkpoint, data split, and evaluation protocol.
+
 Replace `assets/Haoliang-Huang-CV.pdf` when updating the public CV. Keep private addresses and phone numbers out of this public repository. The current PDF is a public copy of the September 2026 CV; the original remains unchanged locally.
 
 ## Design credits

@@ -2,8 +2,8 @@
   "name": "Haoliang Huang",
   "email": "haoliang.huang.research@gmail.com",
   "github": "https://github.com/haolianghuang-research",
-  "intro": "I study Robotics, Cognition, Intelligence at the Technical University of Munich (TUM), with a background in Computer Science from the Karlsruhe Institute of Technology (KIT). My work spans robot learning, vision-language-action models, 3D perception, and autonomous driving.",
-  "focus": "I am interested in connecting perception, learning, and control to build robots that can act in the real world. My projects combine hands-on robot deployment with large-scale data pipelines, distributed training, and careful experimental evaluation.",
+  "intro": "I work on embodied AI, with a focus on world–action models, demonstration-conditioned transfer, and agentic robotics. I study Robotics, Cognition, Intelligence at the Technical University of Munich (TUM), following a Computer Science degree at the Karlsruhe Institute of Technology (KIT).",
+  "focus": "My projects span model architecture and multimodal data pipelines through distributed training, robot/simulation integration, and controlled evaluation. I am interested in representations and interfaces that make complex robot behavior easier to learn, inspect, and improve.",
   "experience": [
     {
       "title": "AI Intern · Intelligent Vehicle Dynamics Controls",
@@ -24,7 +24,7 @@
       "result": "4th / 32 teams",
       "title": "ManipArena Real-Robot Manipulation Challenge",
       "venue": "CVPR 2026 Workshop",
-      "description": "Developed an AI agent + VLA framework for general-purpose embodied manipulation.",
+      "description": "Built an agent + VLA manipulation system, combining learned control with visual planning, evidence verification, and unified robot action interfaces.",
       "detail_id": "maniparena"
     },
     {
@@ -32,7 +32,7 @@
       "result": "First prize",
       "title": "Category-Level Object Pose Estimation in the Wild",
       "venue": "ICCV 2025 Workshop",
-      "description": "Integrated GCEPose with DINOv3 and trained on Omni6DPose and PACE for category-level 6D object pose estimation.",
+      "description": "Integrated GCEPose and DINOv3 with geometric validation, category priors, and mixed PACE/Omni6DPose training.",
       "detail_id": "category-pose"
     },
     {
@@ -270,5 +270,112 @@
     "Vue.js",
     "CAD"
   ],
-  "languages": "English (advanced) · German (intermediate)"
+  "languages": "English (advanced) · German (intermediate)",
+  "research_interests": [
+    "Structured world–action models",
+    "Human-video guidance & in-context transfer",
+    "Agentic planning & robot reasoning",
+    "3D perception & visuomotor learning"
+  ],
+  "featured_projects": [
+    {
+      "id": "rolewam",
+      "title": "RoleWAM",
+      "status": "Ongoing research",
+      "summary": "Task-aware role representations learned alongside RGB and robot actions, with causal deployment and structured-representation experiments.",
+      "contribution": "Model-stream expansion, role attention, data contracts, distributed training, and paired evaluation.",
+      "skills": [
+        "Model architecture",
+        "Training systems",
+        "Robot evaluation"
+      ],
+      "evidence": {
+        "value": "50 tasks · 1,000 paired phases",
+        "label": "Completed gated-model evaluation"
+      }
+    },
+    {
+      "id": "ricl",
+      "title": "RICL · Built on Zero-WAM",
+      "status": "Ongoing research",
+      "summary": "Robot-grounded human-video context, reusable atomic clips, and Grid–Goal compatibility for demonstration transfer.",
+      "contribution": "HumanGen data pipeline, spatial/goal compatibility rules, low-memory runtime, and controlled transfer experiments.",
+      "skills": [
+        "Data design",
+        "In-context learning",
+        "Transfer experiments"
+      ],
+      "evidence": {
+        "value": "Exact / transfer / unrelated",
+        "label": "Matched-seed pilot and ongoing composition research"
+      }
+    },
+    {
+      "id": "agentic-planner",
+      "title": "CommonRoad Agentic Planner",
+      "status": "Ongoing research",
+      "summary": "Language-agent strategy connected to native motion planning, time-aligned prediction, and checked execution in reactive traffic.",
+      "contribution": "Agent/MCP contracts, bounded execution, independent audits, and reproducible evaluation campaigns.",
+      "skills": [
+        "Agent systems",
+        "Motion planning",
+        "Evaluation engineering"
+      ],
+      "evidence": {
+        "value": "100-scenario closed-loop studies",
+        "label": "Versioned results and per-attempt evidence"
+      }
+    },
+    {
+      "id": "d4rtvla",
+      "title": "D4rtVLA",
+      "status": "Unfinished research prototype",
+      "status_kind": "prototype",
+      "summary": "A geometry-to-action prototype injecting time-aligned OpenD4RT features into a flow-matching VLA policy.",
+      "contribution": "4D feature sidecars, object/view identities, cross-attention adapters, and paired offline ablations.",
+      "skills": [
+        "3D / 4D perception",
+        "Policy adaptation",
+        "Ablation design"
+      ],
+      "evidence": {
+        "value": "Implemented perception–policy bridge",
+        "label": "Causal streaming and closed-loop validation remain open"
+      }
+    },
+    {
+      "id": "maniparena",
+      "title": "ManipArena · AI Agent + VLA",
+      "status": "CVPR 2026 Workshop",
+      "status_kind": "award",
+      "summary": "A multi-task robot system combining a finetuned VLA with asynchronous subtask planning and evidence-based progress verification.",
+      "contribution": "Unified tabletop/mobile action interfaces, LoRA adaptation, and concurrent planner–verifier orchestration.",
+      "skills": [
+        "VLA deployment",
+        "Bimanual / mobile control",
+        "Agent orchestration"
+      ],
+      "evidence": {
+        "value": "4th place / 32 teams",
+        "label": "Real-Robot Manipulation Challenge"
+      }
+    },
+    {
+      "id": "category-pose",
+      "title": "Category-Level 6D Pose",
+      "status": "ICCV 2025 Workshop",
+      "status_kind": "award",
+      "summary": "A GCEPose/DINOv3 challenge system built around trustworthy geometry, category shape priors, and mixed-dataset training.",
+      "contribution": "PACE/Omni6DPose canonicalization, shape/semantic priors, data routing, and training experiments.",
+      "skills": [
+        "3D vision",
+        "Data geometry",
+        "Large-scale training"
+      ],
+      "evidence": {
+        "value": "First prize",
+        "label": "Category-Level Object Pose Estimation in the Wild"
+      }
+    }
+  ]
 }

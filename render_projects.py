@@ -30,6 +30,10 @@ def render_all(root, content, details):
     for slug, detail in details['pages'].items():
         p = catalog[slug]
         title = p['title']
+        status = f'<p class="detail-status">{e(detail["status"])}</p>' if detail.get('status') else ''
+        strengths = '<div class="detail-strengths">' + ''.join(f'<span>{e(x)}</span>' for x in detail.get('strengths', [])) + '</div>' if detail.get('strengths') else ''
+        back_target = '../../#featured' if detail.get('featured') else '../../#projects'
+        back_label = 'Selected research' if detail.get('featured') else 'All projects'
         canonical = f'https://haolianghuang-research.github.io/projects/{slug}/'
         facts = ''.join(f'<div><dt>{e(x["label"])}</dt><dd>{e(x["value"])}</dd></div>' for x in detail.get('facts', []))
         facts_class = 'project-facts facts-four' if len(detail.get('facts', [])) == 4 else 'project-facts'
@@ -67,13 +71,13 @@ def render_all(root, content, details):
   <meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
   <meta property="og:title" content="{e(title)} | Haoliang Huang"><meta property="og:description" content="{e(detail['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">
   <meta name="theme-color" content="#174c72"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css">
+  <link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css"><link rel="stylesheet" href="../../assets/featured.css">
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../">Haoliang Huang<span class="wordmark-dot">.</span></a><nav aria-label="Main navigation"><a href="../../#projects">Projects</a><a href="../../#experience">Experience</a><a href="../../#education">Education</a><a href="../../assets/Haoliang-Huang-CV.pdf">CV <span class="pdf-label">PDF</span></a></nav></div></header>
-<main id="main" class="detail-page"><div class="detail-hero"><a class="back-link" href="../../#projects">All projects</a><p class="eyebrow">{e(p['label'])} · {e(p['dates'])}</p><h1>{e(title)}</h1><p class="detail-lead">{e(detail['summary'])}</p><p class="detail-affiliation">{e(p['organization'])} · {e(p['type'])}</p><dl class="{facts_class}">{facts}</dl></div>
+<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../">Haoliang Huang<span class="wordmark-dot">.</span></a><nav aria-label="Main navigation"><a href="../../#featured">Research</a><a href="../../#projects">Projects</a><a href="../../#experience">Experience</a><a href="../../assets/Haoliang-Huang-CV.pdf">CV <span class="pdf-label">PDF</span></a></nav></div></header>
+<main id="main" class="detail-page"><div class="detail-hero"><a class="back-link" href="{back_target}">{back_label}</a><p class="eyebrow">{e(p['label'])} · {e(p['dates'])}</p>{status}<h1>{e(title)}</h1><p class="detail-lead">{e(detail['summary'])}</p><p class="detail-affiliation">{e(p['organization'])} · {e(p['type'])}</p>{strengths}<dl class="{facts_class}">{facts}</dl></div>
 <div class="detail-layout"><aside><nav aria-label="On this page"><p>In this project</p>{section_links}</nav></aside><article class="detail-content">{pipeline}{sections}{gallery}{references}<p class="source-note">{source_note}</p></article></div>
-<section class="detail-bottom"><a href="../../#projects">Explore all projects</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main>
+<section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main>
 <footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio</span><a href="../../">Home</a></div></footer>
 </body></html>'''
         destination = root / 'projects' / slug

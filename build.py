@@ -8,6 +8,24 @@ ROOT = Path(__file__).resolve().parent
 d = json.loads((ROOT / "content.json").read_text())
 details = json.loads((ROOT / "project-details.json").read_text())
 site = "https://haolianghuang-research.github.io/"
+catalog = {p['id']: p for p in d['projects']}
+catalog.update({p['id']: p for p in details.get('additional_projects', [])})
+featured_cards = ''
+for entry in d.get('featured_projects', []):
+    meta = catalog[entry['id']]
+    href = f"projects/{e(entry['id'])}/"
+    thumb = details['pages'][entry['id']].get('thumbnail')
+    media = f'<a class="featured-media" href="{href}" tabindex="-1" aria-hidden="true"><img src="assets/projects/{e(thumb["file"])}" alt="{e(thumb["alt"])}" width="660" height="400" loading="lazy"></a>' if thumb else ''
+    evidence = f'<p class="featured-evidence"><strong>{e(entry["evidence"]["value"])}</strong><span>{e(entry["evidence"]["label"])}</span></p>' if entry.get('evidence') else ''
+    tags = ''.join(f'<span>{e(tag)}</span>' for tag in entry.get('skills', []))
+    featured_cards += f'''<article class="featured-card">
+      {media}<div class="featured-body"><p class="feature-status {e(entry.get('status_kind', 'research'))}">{e(entry['status'])}</p>
+      <h3><a href="{href}">{e(entry.get('title', meta['title']))}</a></h3>
+      <p class="featured-summary">{e(entry['summary'])}</p>
+      <p class="featured-contribution"><span>My contribution</span>{e(entry['contribution'])}</p>
+      {evidence}<div class="feature-skills">{tags}</div><a class="project-more" href="{href}">Explore project<span class="visually-hidden">: {e(meta['title'])}</span></a></div>
+    </article>'''
+interests = ''.join(f'<span>{e(item)}</span>' for item in d.get('research_interests', ['Robot learning & manipulation', 'Vision-language-action models', '3D perception & reconstruction', 'Autonomous driving & foundation models']))
 
 awards = "".join(f'''<article class="award-item">
   <div class="award-top"><span>{e(a['year'])}</span><strong>{e(a['result'])}</strong></div>
@@ -41,8 +59,8 @@ html = f'''<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Haoliang Huang | Robotics, Embodied AI &amp; 3D Vision</title>
-  <meta name="description" content="Haoliang Huang's research portfolio: robot learning, vision-language-action models, 3D perception, autonomous driving, and foundation models. TUM and KIT.">
+  <title>Haoliang Huang | Embodied AI, World–Action Models &amp; Agentic Robotics</title>
+  <meta name="description" content="Haoliang Huang's selected research: RoleWAM, RICL with Zero-WAM, agentic driving, D4rtVLA, and award-winning robot manipulation and 6D pose systems.">
   <meta name="author" content="Haoliang Huang">
   <link rel="canonical" href="{site}">
   <meta property="og:type" content="profile">
@@ -56,18 +74,19 @@ html = f'''<!doctype html>
   <link rel="preload" href="assets/lato-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/project-details.css">
+  <link rel="stylesheet" href="assets/featured.css">
   <script src="assets/site.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header"><div class="header-inner">
     <a class="wordmark" href="#about">Haoliang Huang<span class="wordmark-dot">.</span></a>
-    <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="assets/Haoliang-Huang-CV.pdf">CV <span class="pdf-label">PDF</span></a></nav>
+    <nav aria-label="Main navigation"><a href="#featured">Research</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="assets/Haoliang-Huang-CV.pdf">CV <span class="pdf-label">PDF</span></a></nav>
   </div></header>
   <main class="page" id="main">
     <section class="bio" id="about" aria-labelledby="name">
       <div class="bio-text">
-        <p class="eyebrow">Robotics · Embodied AI · 3D Vision</p>
+        <p class="eyebrow">Embodied AI · World–Action Models · Agentic Robotics</p>
         <h1 id="name" class="name">Haoliang Huang</h1>
         <p class="intro">{e(d['intro'])}</p>
         <p>{e(d['focus'])}</p>
@@ -75,10 +94,15 @@ html = f'''<!doctype html>
       </div>
       <div class="bio-photo"><img src="assets/portrait.jpg" alt="Portrait of Haoliang Huang" width="1050" height="1050"><p>Munich, Germany<br><span>Technical University of Munich</span></p></div>
     </section>
+    <section class="section featured-section" id="featured" aria-labelledby="featured-heading">
+      <div class="section-title"><h2 id="featured-heading">Selected research &amp; competitions</h2></div>
+      <p class="featured-intro">Model design, demonstration transfer, and agentic systems—built through data, training, deployment, and controlled evaluation.</p>
+      <div class="featured-grid">{featured_cards}</div>
+    </section>
     <section id="research" class="research-summary" aria-labelledby="research-heading">
       <h2 id="research-heading">Research interests</h2>
       <p>Learning to perceive, reason, and act.</p>
-      <div class="interest-list"><span>Robot learning &amp; manipulation</span><span>Vision-language-action models</span><span>3D perception &amp; reconstruction</span><span>Autonomous driving &amp; foundation models</span></div>
+      <div class="interest-list">{interests}</div>
     </section>
     <section class="section" id="awards" aria-labelledby="awards-heading">
       <div class="section-title"><h2 id="awards-heading">Highlights &amp; awards</h2><span>2024–2026</span></div>
@@ -89,8 +113,8 @@ html = f'''<!doctype html>
       <div class="experience-list">{experience}</div>
     </section>
     <section class="section" id="projects" aria-labelledby="projects-heading">
-      <div class="section-title"><h2 id="projects-heading">Projects</h2><span id="project-count" aria-live="polite">12 projects</span></div>
-      <p class="section-description">Research projects, practical courses, and thesis work across robotics and AI.</p>
+      <div class="section-title"><h2 id="projects-heading">More projects</h2><span id="project-count" aria-live="polite">{len(d['projects'])} projects</span></div>
+      <p class="section-description">Further research projects, practical courses, and thesis work across robotics and AI.</p>
       <div class="filters" role="group" aria-label="Filter projects by research area" hidden><button type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="robotics" aria-pressed="false">Robotics</button><button type="button" data-filter="vision" aria-pressed="false">Computer vision</button><button type="button" data-filter="learning" aria-pressed="false">Machine learning</button><button type="button" data-filter="systems" aria-pressed="false">Software systems</button></div>
       <div class="projects">{projects}</div>
     </section>

@@ -820,15 +820,15 @@
       }
     },
     "category-pose": {
-      "summary": "A category-level 6D pose challenge system that combines GCEPose, category shape priors and DINOv3 features, with particular attention to mixed-dataset training and geometric data consistency.",
+      "summary": "First-prize ICCV 2025 challenge work integrating GCEPose with DINOv3 features and category shape priors. My main contributions were the cross-dataset geometry pipeline, shape/semantic prior generation, mixed-data loading and large-scale training experiments.",
       "facts": [
         {
           "label": "Recognition",
           "value": "First prize · ICCV 2025 Workshop challenge"
         },
         {
-          "label": "Task",
-          "value": "Category-level object pose estimation in the wild"
+          "label": "My focus",
+          "value": "Data geometry, category priors and mixed-dataset training"
         },
         {
           "label": "Training data",
@@ -860,50 +860,65 @@
       "sections": [
         {
           "id": "task",
-          "title": "Task and contribution",
+          "title": "Task: pose estimation beyond known instances",
           "paragraphs": [
-            "Category-level pose estimation must recover an object’s rotation, translation and size even when its exact instance was not seen during training. The challenge is particularly difficult with partial visibility, varied object shapes and inconsistent data conventions.",
-            "My challenge work integrated GCEPose with DINOv3-based semantic features and developed the preprocessing, category-prior generation and mixed-data training needed to use PACE and Omni6DPose together. The system received first prize in the ICCV 2025 Workshop challenge."
+            "Category-level 6D pose estimation asks a model to recover rotation, translation and object size for an instance it has not seen during training. Partial views, occlusion and variation within a category make this harder than matching a known CAD model. The ICCV 2025 challenge brought those issues together with heterogeneous real and synthetic data.",
+            "My submission built on GCEPose and combined category-level geometric priors with DINOv3 semantic features. The work received first prize in the Workshop Challenge on Category-Level Object Pose Estimation in the Wild. The underlying pose architecture is credited to the original authors; the challenge integration, data preparation and training workflow are the focus here."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I worked on making PACE and Omni6DPose usable in one training pipeline. This included filtering invalid samples, checking whether masked depth supported the object geometry, preparing reusable validation metadata, aligning NOCS coordinate conventions and scale, and handling dataset/category exclusions. These were substantive model-input problems: incorrect canonical coordinates can make a visually plausible sample provide the wrong pose target.",
+            "I also built the category-prior workflow. Instance mesh surfaces were sampled for DeepLinearShape training; reconstructed instance shapes and category models were associated with DINOv3 features; and category-average semantic descriptors were prepared for testing when exact instance identity was unknown.",
+            "For training, I implemented a mixed-dataset wrapper with unified indexing and dataset-specific routing, then used resampled subsets to keep large-scale experiments manageable. Optimizer scheduling, checkpoint selection and comparative validation completed the experimental workflow."
           ]
         },
         {
           "id": "architecture",
-          "title": "Architecture",
+          "title": "Architecture and method",
           "paragraphs": [
-            "The underlying GCEPose method follows a complete-then-aggregate principle: category-specific semantic shape priors help reconstruct global geometry and semantics from partial RGB-D observations, and a fusion module combines that context with observed features. This architecture is credited to the original GCEPose authors.",
-            "The challenge workflow used DeepLinearShape to fit linear shape models from uniformly sampled mesh surfaces. Reconstructed instances and category shape priors were associated with DINOv3 semantic features. Category-average features provided a descriptor when the exact instance identity was unavailable at test time.",
-            "The shape visualizations below come from my challenge presentation. They show an instance reconstruction and a category mean shape used in the prior-generation process; they are not photographs or final pose overlays."
+            "GCEPose follows a complete-then-aggregate strategy. Its Semantic Shape Reconstruction module uses category-specific 3D semantic prototypes and a learned deep linear shape model to infer global geometry and semantics from partial RGB-D observations. A Global Context Enhanced fusion module combines those reconstructed priors with features from the observed object.",
+            "The challenge workflow supplies geometric and semantic category information through DeepLinearShape and DINOv3. The reconstructed-instance and mean-category visualizations below illustrate those priors. They are intermediate representations, not final pose overlays or a claim that the base pose architecture was designed from scratch in this project."
           ]
         },
         {
           "id": "data",
-          "title": "Data preparation",
+          "title": "Data and geometric consistency",
           "paragraphs": [
-            "PACE and Omni6DPose require careful geometric normalization before joint training. The preprocessing checked whether masked depth was valid, compared back-projected points with object surfaces, applied the official exclusion list, and aligned normalized object coordinates (NOCS).",
-            "The archived notes describe filtering for sufficient valid masked depth and using surface samples to build category models. They also document practical problems: missing depth, disagreement between instance scale and NOCS coordinates, and duplicated category names. These issues can propagate directly into pose supervision."
+            "The two training sources were PACE and Omni6DPose. The archived preparation notes describe requiring sufficient valid masked depth, checking back-projected surface points, applying the exclusion list, and aligning normalized object coordinates before evaluation. Mesh surfaces were sampled uniformly to prepare instance inputs for category shape modeling.",
+            "The work exposed several failure modes: absent or inaccurate depth, disagreement between instance scale and NOCS geometry, and duplicate category labels. Coordinate transforms and scale correction were therefore treated as explicit preprocessing stages, rather than leaving the model to absorb inconsistent supervision."
           ]
         },
         {
           "id": "training",
-          "title": "Training and evaluation lessons",
+          "title": "Training and evaluation",
           "paragraphs": [
-            "A mixed-data wrapper routed each sample to its dataset-specific preprocessing. To make large datasets manageable, each epoch used a newly resampled subset at a fixed mixing ratio. The recorded setup combined Adam optimization with a triangular CyclicLR schedule spanning four-epoch cycles.",
-            "The challenge experience emphasized data consistency as much as model capacity. Longer training did not improve every validation subset: the presentation reports mixed trends across datasets and identifies coordinate-alignment errors as a limiting factor. Reliable canonical geometry and balanced evaluation were central lessons."
+            "Each epoch sampled a fresh subset at a fixed PACE/Omni6DPose mixing ratio, using approximately 10–20% of the full mixed data per epoch in the recorded setup. A triangular CyclicLR schedule spanned four epochs and was paired with Adam. This made checkpoint selection and iteration more frequent while preserving broad sampling over time.",
+            "Validation was tracked by dataset rather than relying only on one combined score. The presentation reports mixed trends during longer training: PACE performance could decline while other subsets improved, and NOCS alignment errors limited the system. That diagnosis motivated improvements in data consistency rather than an unsupported claim that more training always helped."
+          ]
+        },
+        {
+          "id": "takeaways",
+          "title": "What this project demonstrates",
+          "paragraphs": [
+            "This project combined model integration with the less visible engineering that determines whether a pose system can learn from heterogeneous data: geometric validation, canonicalization, category modeling, large-scale sample routing and controlled experimentation. Its central lesson was that stronger representations require trustworthy coordinate systems and supervision to become useful."
           ]
         }
       ],
       "gallery": [
         {
           "file": "iccv-slide17-image0.png",
-          "alt": "Colored point visualization of a reconstructed mug instance",
-          "caption": "Reconstructed mug instance from my challenge presentation, shown as a colored point representation.",
+          "alt": "Colored point representation of a reconstructed mug instance",
+          "caption": "Reconstructed mug instance from my ICCV challenge presentation, an intermediate representation used in the category-prior workflow.",
           "width": 1600,
           "height": 1200
         },
         {
           "file": "iccv-slide18-image0.png",
-          "alt": "Colored point visualization of a category-level mean camera shape",
-          "caption": "Category-level mean camera shape used as a global shape prior in the challenge workflow.",
+          "alt": "Colored point representation of a category-level camera mean shape",
+          "caption": "Category-level mean camera shape from my challenge presentation. Category priors provide global geometry when only a partial test observation is available.",
           "width": 1600,
           "height": 1200
         }
@@ -923,11 +938,18 @@
           "url": "https://wclop.github.io/"
         }
       ],
-      "source_note": "This challenge project is separate from the summer 2025 open-vocabulary pose course project. Method descriptions distinguish the original GCEPose architecture from the challenge integration and training workflow.",
+      "source_note": "Challenge integration and training work are distinguished from the original GCEPose architecture. Figures are intermediate representations from my challenge presentation.",
       "thumbnail": {
-        "file": "category-pose-thumbnail.webp",
+        "file": "category-pose-featured.webp",
         "alt": "Category-pose mug shape reconstruction"
-      }
+      },
+      "featured": true,
+      "status": "ICCV 2025 Workshop · First prize",
+      "strengths": [
+        "Geometric data pipelines",
+        "Category priors",
+        "Mixed-dataset training"
+      ]
     },
     "humanoid": {
       "summary": "A hierarchical learning project that adapts human motion to Booster T1 and connects reusable whole-body control with visual object interaction in simulation.",
@@ -1256,86 +1278,110 @@
       "source_note": "Based on the coauthored SCDA paper and its implementation. Reported numerical results belong to the study as a whole; they are not attributed to one author's individual work."
     },
     "maniparena": {
-      "summary": "An AI-agent and vision-language-action stack that separates visual task reasoning from continuous robot control for long-horizon bimanual and mobile manipulation.",
+      "summary": "Fourth place among 32 teams in the CVPR 2026 Workshop ManipArena challenge. I built a manipulation stack that combines a multi-task VLA policy with asynchronous visual task planning and evidence-based progress verification, bridging learned control with long-horizon robot behavior.",
       "facts": [
         {
+          "label": "Recognition",
+          "value": "4th place / 32 teams · CVPR 2026 Workshop"
+        },
+        {
+          "label": "My focus",
+          "value": "VLA adaptation, action representation, agent orchestration, and visual verification"
+        },
+        {
           "label": "Benchmark",
-          "value": "ManipArena · CVPR 2026 Workshop"
+          "value": "20 real-robot tasks across bimanual and mobile manipulation"
         },
         {
-          "label": "Tasks",
-          "value": "20 real-robot tasks"
-        },
-        {
-          "label": "Control model",
-          "value": "LoRA-adapted π₀.₅"
-        },
-        {
-          "label": "Competition result",
-          "value": "4th place / 32 teams"
+          "label": "Control foundation",
+          "value": "LoRA-adapted π₀.₅ / OpenPI"
         }
       ],
       "pipeline": [
         {
-          "title": "Plan the current subtask",
-          "text": "A visual-language agent interprets the instruction and observations to maintain a coarse task plan."
+          "title": "Plan the stage",
+          "text": "Use the task instruction, current images, and a mission-specific plan to choose the active subtask."
         },
         {
-          "title": "Generate continuous actions",
-          "text": "A finetuned π₀.₅ policy receives images, robot state, and task/subtask text."
+          "title": "Generate actions",
+          "text": "Condition one multi-task VLA checkpoint on images, robot state, and the current task/subtask text."
         },
         {
-          "title": "Verify progress",
-          "text": "Asynchronous visual evidence and task-specific guards control when the system advances to the next subtask."
+          "title": "Collect completion evidence",
+          "text": "Update a latest-observation queue, progress predictor, and compact evidence bank asynchronously."
+        },
+        {
+          "title": "Verify and advance",
+          "text": "Advance the plan only when completion checks agree; decode actions for tabletop or mobile control."
         }
       ],
       "sections": [
         {
           "id": "task",
-          "title": "Reasoning and control at different timescales",
+          "title": "A competition system for long-horizon manipulation",
           "paragraphs": [
-            "ManipArena tests real-robot manipulation across execution reasoning, semantic reasoning, and mobile manipulation. The project combines a high-level visual-language agent with a lower-level VLA policy: the agent determines what stage should happen next, while the policy determines how the robot should move.",
-            "The project placed fourth among 32 teams in the CVPR 2026 Workshop challenge. The system description also covers subsequent development of the reasoning and control stack."
+            "ManipArena combines execution reasoning, semantic reasoning, and mobile manipulation. A successful system must understand task order and scene conditions while also producing coordinated motion for two arms and, on mobile tasks, the head, lift, and base.",
+            "My project placed fourth among 32 teams in the workshop challenge. Its implementation also continued evolving after the competition. The architecture described here covers that broader system development, with the scored competition placement kept separate from later configuration choices."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "bullets": [
+            "Built a common training and inference representation for all 20 real tasks, preserving the distinct semantics of end-effector pose, gripper commands, head/lift motion, and base velocity.",
+            "Adapted the π₀.₅ policy with LoRA and integrated it with the three-camera observation stream and task-conditioned action interface.",
+            "Developed the asynchronous planner–predictor–verifier loop, task mission specifications, completion-evidence requirements, and guarded subtask transitions.",
+            "Integrated task-specific perception and action-side checks where generic progress recognition was insufficient, and built action-prediction diagnostics to inspect temporal and coordinate errors."
           ]
         },
         {
           "id": "architecture",
-          "title": "VLM planner, verifier, and VLA controller",
+          "title": "One policy, two decision timescales",
           "paragraphs": [
-            "At episode start, a visual-language model constructs or selects a coarse plan. Later observations enter an asynchronous, latest-only queue, allowing the controller to keep executing the cached subtask without building an increasing backlog of model calls.",
-            "A predictor proposes progress, an evidence bank retains useful observations, and a verifier checks completion before the system advances. Task-specific mission rules and selected SAM3/geometric guards help avoid premature transitions. The resulting instruction is expressed as the main task plus the current subtask and passed to one main OpenPI policy.",
-            "The control branch uses a π₀.₅ configuration with LoRA-adapted Gemma-based vision-language and action-expert components. The all-task configuration uses a 32-dimensional padded action space and a 32-step action horizon. The implementation also supports optional subtask-conditioning and text-guidance variants."
+            "The VLA branch uses OpenPI's π₀.₅ configuration with a LoRA-adapted Gemma vision-language branch and action expert. It receives front and two wrist-camera streams at a 224 × 224 model input size, together with robot state and task text. The all-task configuration uses a 32-dimensional padded action space and a 32-step action horizon.",
+            "The visual-language agent handles the active stage and its completion, while OpenPI predicts continuous robot action chunks. At episode start, the first planning call is synchronous so that the initial action has a defined task condition. Subsequent observations enter a latest-only queue; the controller continues with the cached valid subtask while the reasoning worker processes new evidence.",
+            "The default inference path uses one main policy checkpoint for both whole-task and subtask-conditioned actions. Optional text-guidance and second-stage configurations are separate experimental choices. Task registration also matters: fourteen tasks use subtask missions, while six pass their full instruction directly to the policy."
+          ]
+        },
+        {
+          "id": "verification",
+          "title": "Progress recognition grounded in evidence",
+          "paragraphs": [
+            "A progress predictor proposes the supported prefix of the current subtask's fine actions. A compact evidence bank retains useful image pairs, so a transient interaction can remain available after the scene changes. A verifier runs when completion is plausible, rather than necessarily on every camera frame.",
+            "Advancement requires agreement about the same active subtask, the required observed evidence, an actual verified completion, and sufficient confidence. Debouncing and per-frame evidence limits reduce accidental jumps through multiple stages. For example, bringing a bottle close to a cup is insufficient evidence of pouring: the mission checks the relevant tilt, transfer, release, and subsequent state.",
+            "Some tasks add SAM3 or geometric/action-side guards. These complement the learned policy and mission logic; they do not turn the system into an unrestricted universal manipulation planner."
           ]
         },
         {
           "id": "data",
-          "title": "A unified representation across tasks",
+          "title": "Data and action-space engineering",
           "paragraphs": [
-            "Training uses the ManipArena demonstrations in LeRobot format across all 20 real tasks, with front, left-wrist, and right-wrist camera streams. Images are transformed to the model's 224 × 224 visual input.",
-            "The original tabletop and mobile records contain 56- and 62-dimensional state/action vectors. The project extracts compact end-effector representations: 14-dimensional tabletop state, or 17 dimensions including head and lift for mobile tasks. Actions contain 14 tabletop dimensions or 20 mobile dimensions, padded to the common 32-dimensional model space. Decoding restores the appropriate dual-arm and mobile-control protocol."
+            "Training mixes the 20 ManipArena real-task demonstration datasets in LeRobot format. The raw tabletop and mobile records use different vector layouts. I map them into a common representation while preserving what each channel physically means.",
+            "Tabletop state and action use fourteen dual-arm end-effector/gripper channels. Mobile state adds head and lift information for seventeen dimensions; mobile action additionally includes three base-velocity controls for twenty dimensions. Both action layouts are padded to the model's 32-dimensional space.",
+            "End-effector pose and head/lift deltas are handled separately from absolute gripper and base-velocity commands. At inference, decoded outputs restore the appropriate tabletop or mobile control protocol. This interface work is essential for sharing a policy without silently changing the meaning of its actions."
           ]
         },
         {
           "id": "experiments",
-          "title": "Training and evaluation",
+          "title": "Training, diagnosis, and lessons",
           "paragraphs": [
-            "The all-task configuration finetunes the policy with LoRA, AdamW, and a cosine learning-rate schedule. Sharing an action representation allows one policy to serve tabletop and mobile tasks, while the high-level agent changes its active instruction as the task progresses.",
-            "Open-loop evaluation compares predicted action sequences with demonstration targets across the real-task suite. These diagnostics reveal temporal alignment and coordinate errors. Closed-loop task completion additionally depends on the planner, visual verification, action execution, and recovery behavior working together."
+            "The retained configuration finetunes with LoRA, AdamW, and a warmup-plus-cosine learning-rate schedule. Open-loop comparisons against demonstration actions provide diagnostics across the real-task suite; closed-loop task completion additionally depends on planning, perception, action execution, and recovery working together.",
+            "The competition and subsequent development strengthened my ability to connect a foundation model to a complete robot system: define a usable data contract, adapt the controller, manage reasoning latency, and make task transitions depend on observable evidence. The resulting system brings model training, concurrent software, and physical task semantics into one workflow."
           ]
         }
       ],
       "gallery": [
         {
           "file": "maniparena-task-overview.png",
-          "alt": "Twenty benchmark tasks grouped into execution reasoning, semantic reasoning, and mobile manipulation",
-          "caption": "ManipArena's 20 real-robot tasks. Benchmark image credit: ManipArena / X2Robot; this is the evaluation task suite, not a claim that every image depicts this project's policy.",
+          "alt": "Twenty ManipArena real-robot tasks grouped by reasoning and mobility requirements",
+          "caption": "The 20-task benchmark suite. Image credit: ManipArena / X2Robot. These examples define the task scope; they are benchmark imagery rather than photographs of this project's own scored trials.",
           "width": 2413,
           "height": 1414
         }
       ],
       "thumbnail": {
-        "file": "maniparena-thumbnail.webp",
-        "alt": "ManipArena real-robot task suite"
+        "file": "maniparena-featured.webp",
+        "alt": "ManipArena bimanual and mobile task suite"
       },
       "references": [
         {
@@ -1349,14 +1395,21 @@
         {
           "title": "π₀.₅: a Vision-Language-Action Model with Open-World Generalization",
           "url": "https://arxiv.org/abs/2504.16054",
-          "note": "Base policy"
+          "note": "Base policy architecture."
         },
         {
           "title": "OpenPI",
           "url": "https://github.com/Physical-Intelligence/openpi"
         }
       ],
-      "source_note": "Based on the project’s training/deployment summaries and model configuration, with ManipArena benchmark documentation. Includes post-competition implementation development."
+      "source_note": "Based on the project's retained training/deployment implementation and summaries. Competition placement is recorded in the CV; the detailed system description includes subsequent development.",
+      "featured": true,
+      "status": "CVPR 2026 Workshop · 4th / 32 teams",
+      "strengths": [
+        "VLA finetuning",
+        "Concurrent agent systems",
+        "Robot control interfaces"
+      ]
     },
     "commonroad": {
       "summary": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",
@@ -1458,6 +1511,668 @@
         }
       ],
       "source_note": "Based on my CommonRoad challenge approach presentation, the student planner implementation, and archived scenario/solution files. Course edition: 2024–2025."
+    },
+    "rolewam": {
+      "summary": "My ongoing research project on task-aware world-action models: learning to generate structured role representations alongside RGB and robot actions, then testing which representations help control without requiring future observations at deployment.",
+      "facts": [
+        {
+          "label": "Research direction",
+          "value": "Task-aware world-action modeling"
+        },
+        {
+          "label": "Foundation",
+          "value": "FastWAM · Wan 2.2 TI2V-5B"
+        },
+        {
+          "label": "Data",
+          "value": "RoboTwin · 3 cameras · 7 semantic roles"
+        },
+        {
+          "label": "Completed evaluation",
+          "value": "50 tasks · clean/randomized conditions · 10 matched seeds"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Structure the scene",
+          "text": "Align RGB, seven task-aware role labels, robot state, and actions in three-camera demonstration windows."
+        },
+        {
+          "title": "Learn joint dynamics",
+          "text": "Extend pretrained world/action experts with role-map flow matching, causal attention, and checkpoint-compatible initialization."
+        },
+        {
+          "title": "Act from current observations",
+          "text": "Generate role features and action chunks from the current RGB, language, and proprioception, with a cached action-only inference path."
+        },
+        {
+          "title": "Compare representations",
+          "text": "Evaluate role gates, compressed RoleState codecs, and persistent role encoders under explicit data and rollout contracts."
+        }
+      ],
+      "sections": [
+        {
+          "id": "task",
+          "title": "Research question",
+          "paragraphs": [
+            "A robot does not need to model every pixel with equal importance. The object being manipulated, the surface supporting it, the robot's gripper, and an irrelevant distractor play different roles in the task. RoleWAM investigates whether making these distinctions explicit during world-action learning can create a more useful control representation.",
+            "I built the project as a research extension to FastWAM, keeping the pretrained world/action foundation while adding task-aware role supervision. The goal is to study structured representations without giving the deployed policy privileged segmentation labels or future ground-truth observations."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I developed the model, data interface, training system, and evaluation loop."
+          ],
+          "bullets": [
+            "Implemented joint RGB–RoleMap–action modeling, split/gated role attention variants, independent modality noise schedules, and first-frame role denoising.",
+            "Built checkpoint migration that preserves existing RGB/action weights and initializes new role components without discarding the pretrained model.",
+            "Developed synchronized HDF5 data contracts, role-label validation, camera/time alignment, and compressed RoleState encoder/decoder experiments.",
+            "Engineered distributed training and checkpoint recovery, LoRA-based workstation experiments, cached causal inference, and paired task-by-task benchmark analysis."
+          ]
+        },
+        {
+          "id": "architecture",
+          "title": "Model architecture and deployment",
+          "paragraphs": [
+            "The foundation combines a frozen Wan video VAE, T5 instruction conditioning, a visual diffusion transformer, and an action expert. In the initial RoleWAM design, RGB and role videos are encoded separately by the same VAE: their 48-channel latents form a 96-channel visual stream. Expanded input/output projections preserve the original RGB weights, while the new role weights begin at zero. Later variants separate RGB and role tokens and control their interaction through learned gates.",
+            "RGB, RoleMap, and action prediction use flow-matching objectives with independently controlled noise schedules. The model learns both visual dynamics and continuous robot actions. At deployment, a role map starts from noise rather than being supplied by a segmentation oracle. The action-only path uses current-frame visual context and cached attention keys/values; optional joint inference additionally renders predicted RGB and role trajectories for diagnosis.",
+            "The deployed causal interface uses the current image, instruction, and proprioception. Training can supervise future visual states, but that does not permit the control branch to read future ground truth at inference. This separation is enforced in the attention and input contracts."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Task-aware data representation",
+          "paragraphs": [
+            "The RoboTwin data pipeline aligns head and two wrist cameras with fourteen-dimensional dual-arm actions. A training window contains 33 state steps and 32 actions; nine video frames are sampled at offsets 0, 4, …, 32. The camera views are arranged in a fixed spatial canvas and processed consistently for RGB and role supervision.",
+            "The seven labels distinguish background, robot arm, gripper/wrist-camera assembly, directly manipulated object, indirectly involved object, work surface, and distractor. Role IDs describe function in the task rather than merely object category. Dataset validation checks the schema and camera/time alignment, including task-specific distinctions between manipulated parts and surrounding objects."
+          ]
+        },
+        {
+          "id": "progress",
+          "title": "Ongoing representation experiments",
+          "paragraphs": [
+            "A separate RoleState branch compresses role-conditioned visual features and end-effector/gripper state into structured temporal tokens. I use reconstruction experiments to test what the representation retains before coupling it to action generation. Some reconstruction-only variants use privileged future RGB as an upper-bound experiment; these are not described as deployable causal models.",
+            "The latest role-encoder experiments investigate learned persistent parameters with separate key and query projections: one branch reconstructs clean role features, while the other reads the same learned matrix to produce a residual. These parameters are trained offline and frozen during inference. Despite historical experiment names, the current design does not update weights online or claim test-time adaptation. Training diagnostics and generated examples are available; a complete benchmark for this newest branch is still pending."
+          ]
+        },
+        {
+          "id": "experiments",
+          "title": "Benchmark results and engineering lessons",
+          "paragraphs": [
+            "A completed earlier gated RoleWAM variant was evaluated on all 50 RoboTwin tasks under clean and randomized conditions with ten matched external seeds: 1,000 binary rollout phases per model. It achieved 900/1,000 successes (90.0%), versus 893/1,000 (89.3%) for the FastWAM release.",
+            "The paired McNemar test gives p = 0.566, so the result supports maintaining baseline-level control capability while adding structured role modeling, not a proven overall performance improvement. Task-level gains and regressions remain important. This evaluation discipline lets me investigate which representation and attention choices help particular behaviors, while avoiding conclusions based on one favorable seed or a small aggregate difference."
+          ],
+          "table": {
+            "headers": [
+              "Frozen evaluated model",
+              "Successful phases",
+              "Protocol"
+            ],
+            "rows": [
+              [
+                "Gated RoleWAM",
+                "900 / 1,000 (90.0%)",
+                "50 tasks × 2 conditions × 10 matched seeds"
+              ],
+              [
+                "FastWAM release",
+                "893 / 1,000 (89.3%)",
+                "Same task/condition/seed pairs"
+              ]
+            ]
+          }
+        }
+      ],
+      "gallery": [
+        {
+          "file": "rolewam-current-rgb-gt-pred.png",
+          "alt": "Ground-truth and generated three-camera RGB views from a RoleWAM evaluation sample",
+          "caption": "Current role-encoder experiment, step 2,500: ground-truth RGB on the left and generated RGB on the right. A validation visualization, not a closed-loop success-rate result.",
+          "width": 640,
+          "height": 384
+        },
+        {
+          "file": "rolewam-current-rolemap-gt-pred.png",
+          "alt": "Ground-truth and generated task-role maps for the same simulated robot scene",
+          "caption": "The same evaluation sample represented as task roles, with ground truth on the left and prediction on the right. Colors follow the project's seven-role data contract.",
+          "width": 640,
+          "height": 384
+        }
+      ],
+      "thumbnail": {
+        "file": "rolewam-featured.webp",
+        "alt": "Task-aware scene roles generated by RoleWAM"
+      },
+      "references": [
+        {
+          "title": "RoleWAM model artifacts",
+          "url": "https://huggingface.co/Virlight/RoleWAM",
+          "note": "Published checkpoint collection; ongoing branches are described separately"
+        },
+        {
+          "title": "Fast-WAM: Do World Action Models Need Test-time Future Imagination?",
+          "url": "https://arxiv.org/abs/2603.16666",
+          "note": "Foundation model and research baseline"
+        },
+        {
+          "title": "FastWAM project and implementation",
+          "url": "https://yuantianyuan01.github.io/FastWAM/"
+        },
+        {
+          "title": "RoboTwin 2.0",
+          "url": "https://robotwin-platform.github.io/",
+          "note": "Simulation data generation and evaluation benchmark"
+        },
+        {
+          "title": "Wan 2.2",
+          "url": "https://github.com/Wan-Video/Wan2.2",
+          "note": "Pretrained video-model foundation"
+        }
+      ],
+      "source_note": "Based on my RoleWAM implementation, architecture notes, experiment records, and paired RoboTwin evaluation reports. The displayed current-branch predictions are separate from the earlier full-suite benchmark.",
+      "featured": true,
+      "status": "Ongoing research",
+      "strengths": [
+        "Model architecture",
+        "Distributed training",
+        "Paired robot evaluation"
+      ]
+    },
+    "ricl": {
+      "summary": "An ongoing robot in-context learning project built on Zero-WAM, studying whether structured human-video instructions and reusable atomic action clips can improve task transfer without collecting a bespoke robot demonstration for every new task.",
+      "facts": [
+        {
+          "label": "Research focus",
+          "value": "Robot in-context learning and compositional human-video guidance"
+        },
+        {
+          "label": "Backbone",
+          "value": "Released Zero-WAM · 10.8B mixture-of-Transformers world-action model"
+        },
+        {
+          "label": "Environment",
+          "value": "RoboTwin 2.0 · Bimanual manipulation"
+        },
+        {
+          "label": "My method",
+          "value": "Atomic clip composition · Robot-grounded Grid–Goal selection"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Ground the task",
+          "text": "Inspect the actual robot trajectory, synchronized camera views, task instruction, and success conditions."
+        },
+        {
+          "title": "Build compatible visual context",
+          "text": "Decompose the action, select reviewed human-video clips with compatible spatial and goal conditions, and compose a task prompt."
+        },
+        {
+          "title": "Condition the world-action model",
+          "text": "Encode the prompt and current observation, predict a robot future and action chunk, execute, and update with real observations."
+        }
+      ],
+      "sections": [
+        {
+          "id": "question",
+          "title": "The research question",
+          "paragraphs": [
+            "A human demonstration specifies more than an object name: it conveys action order, contact, movement, and the intended final state. My RICL project asks how much of that information can be reused when the target robot task changes. Instead of requiring one exact human demonstration for every scene, the longer-term objective is to construct appropriate visual guidance from reusable skills.",
+            "The project separates two questions: whether a complete video from a related task transfers useful information, and whether shorter, spatially compatible clips can be composed into stronger instructions. This distinction keeps a simple transfer baseline separate from the more ambitious compositional-learning objective."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I am building the robot-grounded data and experiment layer around the released Zero-WAM backbone: atomic action specifications, clip-composition recipes, Grid–Goal compatibility rules, reviewable data inventories, and controlled transfer evaluations. The neural backbone and its original training objectives are from the Zero-WAM authors; my work investigates how to construct and evaluate the context it receives.",
+            "I also adapted the evaluation runtime for two 24 GB GPUs through FSDP sharding, CPU placement of the text encoder and video VAE, and bounded observation history. Saved configurations distinguish these local resource choices from the released evaluation settings."
+          ]
+        },
+        {
+          "id": "model",
+          "title": "Model: video prediction coupled to action",
+          "paragraphs": [
+            "Zero-WAM uses separate video and action experts within a causal mixture-of-Transformers model. The inspected implementation has 30 main blocks, 3,072-dimensional hidden states, and 24 attention heads. A Wan video VAE produces 48-channel latents; spatial patches are projected into video tokens, while a shared 30-channel action representation is projected into action tokens. RoboTwin uses 16 active bimanual pose-and-gripper channels within that representation.",
+            "The human video acts as a cached visual context prefix. Given current robot observations and history, the video expert first predicts the next robot-video chunk; the action expert then predicts the aligned executable action chunk. After execution, actual camera observations replace the imagined future in the rolling cache. The baseline’s four future-chunk auxiliary heads provide training supervision and are not executed in the standard inference path."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Data: preserve robot supervision, vary the human context",
+          "paragraphs": [
+            "The data layer uses RoboTwin trajectories with robot actions and synchronized head/left-wrist/right-wrist views. The initial A–H study covers eight manipulation tasks, including moving objects onto pads, placing a fan or shoe, rotating a QR-code object, and placing cups and containers. A separate extension investigates the remaining 42 tasks.",
+            "For atomic composition, each phase selects a corresponding clip from a reviewed source pool. Selected native frames are concatenated before the complete sequence is encoded by the causal VAE; the documented trainer uses a 61-frame composed condition. The paired robot episode retains its original action supervision. Different appearances and source videos vary the visual instruction without inventing robot action labels."
+          ]
+        },
+        {
+          "id": "grid-goal",
+          "title": "Grid–Goal: compatibility beyond visual similarity",
+          "paragraphs": [
+            "Grid–Goal maps the visible tabletop through a homography into a 3 × 3 coordinate system, using the object’s actual support footprint. GRAB matches the starting cell; PLACE matches the destination cell and task-specific final orientation. MOVE first prioritizes matching endpoints, then permits compatible relative displacements with a direction difference up to 45° and a distance ratio from 0.5 to 2. Horizontal reflection transforms the media and spatial labels together.",
+            "This is explicit geometry-and-task-conditioned source selection, rather than a demonstrated learned embedding-retrieval system. The action vocabulary also distinguishes grasping, supported placement, free release, opening, pressing, striking, holding, and handover. Source timing, video hashes, object attributes, and stage-state conditions make the resulting recipes inspectable."
+          ]
+        },
+        {
+          "id": "experiments",
+          "title": "A controlled full-video transfer pilot",
+          "paragraphs": [
+            "On stamp_seal, I compared an exact target-task video, a related move_stapler_pad video, and an unrelated container-placement video, using the same ten environment seeds per condition. The completed run produced the following outcomes."
+          ],
+          "table": {
+            "headers": [
+              "Human-video condition",
+              "Successful episodes",
+              "Success rate"
+            ],
+            "rows": [
+              [
+                "Exact-full",
+                "6 / 10",
+                "60%"
+              ],
+              [
+                "Transfer-full",
+                "2 / 10",
+                "20%"
+              ],
+              [
+                "Unrelated-full",
+                "1 / 10",
+                "10%"
+              ]
+            ]
+          },
+          "bullets": [
+            "This is a small full-video replacement pilot; it does not establish a reliable advantage for atomic composition or dynamic switching.",
+            "The local protocol uses attention window 16 and a 3 cm stamp-placement tolerance, versus the upstream 1 cm condition; the results should not be merged with the published benchmark."
+          ]
+        },
+        {
+          "id": "progress",
+          "title": "Current progress and next experiments",
+          "paragraphs": [
+            "The data audits include 400 training and 160 evaluation scenes in the eight-task study, plus 169 proposed robot action segments from representative demonstrations of the remaining 42 tasks. Candidate availability and reviewed data coverage are tracked separately from robot rollout success. Conditioning images, full videos, and exported clips have separate acceptance stages.",
+            "The confirmed exact-grid, final-orientation, and mirror policy still needs a verified integration step in the frozen training selector before a new controlled post-training comparison. Further experiments target reverse-order and mismatched-context controls, stronger held-out-task evaluation, and execution-time clip switching. The aim is to test whether the model follows the composed task specification, rather than merely behaving plausibly."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "file": "zerowam-baseline-framework.webp",
+          "alt": "The original Zero-WAM world-action model framework",
+          "caption": "Backbone reference: the original Zero-WAM framework, reproduced from the Zero-WAM authors’ Apache-2.0 repository. RICL builds its context-construction and experiment layer around this released model.",
+          "width": 2000,
+          "height": 781
+        },
+        {
+          "file": "ricl-laptop-endpoint-audit.jpg",
+          "alt": "Robot laptop-opening demonstrations compared with spatial grid annotations",
+          "caption": "A saved Grid–Goal endpoint-audit sheet from my project: different RoboTwin laptop scenes are examined for starting location and achieved opening state. These are dataset demonstrations, not a policy success-rate plot.",
+          "width": 960,
+          "height": 1400
+        },
+        {
+          "file": "ricl-stamp-exact-smoke.png",
+          "alt": "Six observations from a stamp-placement simulation rollout with the exact human-video instruction",
+          "caption": "Frames from my exact-demo engineering smoke rollout on stamp_seal. This example illustrates the closed-loop evaluation; the separate ten-seed results are reported above.",
+          "width": 1920,
+          "height": 960
+        },
+        {
+          "file": "ricl-humangen-conditioning-first.png",
+          "alt": "AI-generated HumanGen starting condition with a horizontal bottle resting on a table",
+          "caption": "Reviewed AI-generated HumanGen starting condition for adjust_bottle. The bottle is horizontally supported on the tabletop. This still illustrates the data-preparation stage.",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "file": "ricl-humangen-conditioning-last.png",
+          "alt": "AI-generated HumanGen target condition with the bottle upright and lifted in the left hand",
+          "caption": "Reviewed AI-generated target condition for the same task: the bottle is upright and off the table in the left hand. The stills specify conditioning endpoints, rather than showing a motion sequence or robot rollout.",
+          "width": 1448,
+          "height": 1086
+        }
+      ],
+      "thumbnail": {
+        "file": "ricl-featured.webp",
+        "alt": "Zero-WAM-based stamp-placement simulation rollout"
+      },
+      "references": [
+        {
+          "title": "Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization",
+          "url": "https://arxiv.org/abs/2608.26103",
+          "note": "The backbone, original model objectives, and published baseline results are credited to its authors."
+        },
+        {
+          "title": "Zero-WAM reference implementation",
+          "url": "https://github.com/robbyant-research/Zero-WAM"
+        },
+        {
+          "title": "RoboTwin 2.0",
+          "url": "https://robotwin-platform.github.io/"
+        }
+      ],
+      "source_note": "Based on my retained RICL research specifications, Grid–Goal policies and audits, source-code inspection of the released backbone, and the completed September 2026 paired-seed transfer experiment. Ongoing work; reported local pilot outcomes use the explicitly stated protocol.",
+      "featured": true,
+      "status": "Ongoing research",
+      "strengths": [
+        "Demonstration data",
+        "In-context transfer",
+        "Evaluation infrastructure"
+      ]
+    },
+    "d4rtvla": {
+      "summary": "An unfinished research prototype exploring whether explicit 4D object tracking can give a vision-language-action policy better motion information for dynamic manipulation. I built the perception-to-policy feature bridge, temporal attention integration, data tooling and controlled offline experiments; reliable causal closed-loop deployment remains open.",
+      "facts": [
+        {
+          "label": "My focus",
+          "value": "4D-feature guidance and temporal policy-attention integration"
+        },
+        {
+          "label": "Core question",
+          "value": "Can 4D object features improve action generation?"
+        },
+        {
+          "label": "Policy",
+          "value": "DynamicVLA flow matching + OpenD4RT feature guidance"
+        },
+        {
+          "label": "Data",
+          "value": "DOM / DOM-Plus; YCBInEOAT and HO-3D tracking diagnostics"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Ground the interaction",
+          "text": "Instruction-aware object selection identifies source objects and destinations. SAM3 masks and explicit acceptance checks define which pixels may provide guidance."
+        },
+        {
+          "title": "Extract 4D features",
+          "text": "OpenD4RT queries track selected object pixels through recorded video windows, producing decoder features, trajectories and visibility information."
+        },
+        {
+          "title": "Align features with actions",
+          "text": "A learned adapter attaches view and object-role identities, then supplies time-aligned keys and values to the policy’s native cross-attention layers."
+        },
+        {
+          "title": "Test the hypothesis",
+          "text": "Paired training compares guidance on/off using matched samples, noise and initialization. Offline action error and tracking quality are measured separately."
+        }
+      ],
+      "sections": [
+        {
+          "id": "task",
+          "title": "Problem and research direction",
+          "paragraphs": [
+            "A dynamic manipulation policy must reason about objects that move while the robot is observing and acting. Images and language alone do not expose a persistent, explicit representation of which surface points belong to the target or how those points move over time. D4rtVLA explores whether a 4D reconstruction-and-tracking model can supply that missing structure.",
+            "The working hypothesis is to connect task-relevant object motion features to action generation without replacing the pretrained VLA policy. This remains a research question: an implemented conditioning path and lower errors in a small pilot do not by themselves establish better robot task success."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I developed the integration around the existing DynamicVLA and OpenD4RT models: instruction-conditioned object/mask preparation, accepted-feature sidecars, action-time alignment, multi-view and object-role embeddings, batch-local token padding, and the attention adapter. I also built reproducible dataset subsets, normalization and split checks, paired ablation tools, and visual tracking diagnostics.",
+            "A substantial part of the work was defining reliable interfaces between perception and control. Missing or rejected masks must not silently become valid conditioning tokens; source objects, destinations and candidate sources must retain distinct identities; and the same sampled point must stay aligned across pixel coordinates, decoder features and future 3D pseudo-labels."
+          ]
+        },
+        {
+          "id": "architecture",
+          "title": "Architecture: 4D features inside a flow-matching policy",
+          "paragraphs": [
+            "The policy retains DynamicVLA’s flow-matching action generator. A 16-layer action expert alternates eight joint self-attention layers with eight cross-attention layers. It predicts a 16-step action chunk, each step containing translation, rotation and gripper commands.",
+            "Frozen OpenD4RT decoder features have 1,280 channels. A shared learned projection, view embedding and role embedding turn them into policy tokens; each cross-attention layer has its own key/value projections. Action query t attends only to the object-point features aligned with that future step, rather than a flattened memory of every future time. A negative initial attention bias keeps the new memory nearly closed at initialization.",
+            "The extra features enter the existing cross-attention memory alongside visual, language and robot-state features. They do not create an additional action-attention block. OpenD4RT and segmentation are run offline to prepare detached sidecars, while the policy learns the adapter and action-conditioning path. The stored 3D trajectories are pseudo-labels, not ground-truth robot action supervision."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Datasets and reproducible experiments",
+          "paragraphs": [
+            "The prototype uses DOM dynamic-manipulation data and an extended DOM-Plus workflow. I prepared a 2,080-episode DOM subset with 1,664 training, 208 validation and 208 test episodes, consistent reindexing and training-only normalization. Its per-source-chunk split is an IID diagnostic split, not evidence of unseen-task generalization.",
+            "A later DOM-Plus setup uses a frozen 80-episode generation-complete snapshot with a task-stratified 64/8/8 assignment. Every raw frame remains a policy sample: frames without accepted guidance take the baseline path. Paired training shares each sample batch and flow-matching noise/time draw across both conditions, which isolates the effect of feature injection more carefully."
+          ]
+        },
+        {
+          "id": "evaluation",
+          "title": "What the experiments show",
+          "paragraphs": [
+            "Tracking and action generation are assessed separately. Saved YCBInEOAT and HO-3D diagnostics compare predicted object-pixel tracks with corresponding ground truth; they are evaluation of the tracking component, not robot rollouts. Offline policy evaluation excludes padded action steps and reports overall, translation, rotation and gripper L1/MSE.",
+            "Results were mixed. In one archived 31/4/4-episode train/validation/test comparison, guidance slightly improved validation action L1 but worsened held-out test action L1. Earlier smaller pilots therefore cannot support a broad improvement claim. Stricter accepted-mask schemas also superseded historical feature sets, making data-version consistency part of the evaluation problem."
+          ]
+        },
+        {
+          "id": "status",
+          "title": "Why it remains unfinished",
+          "paragraphs": [
+            "The current feature pipeline can use future frames from prerecorded clips. This makes it useful for offline feature-conditioning experiments, but it does not demonstrate a causal online policy. The implementation explicitly leaves streaming inference unimplemented until the guidance-aware worker can transport the required hidden states.",
+            "Remaining work includes generating useful guidance from information available at decision time, improving grounding and visibility calibration, repeating controlled comparisons over broader held-out tasks, and measuring closed-loop task success and latency. A related instruction-conditioned point-DETR prototype explores task grounding with Qwen features; it is a separate branch, not proof that the complete 4D-to-action system has been deployed."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "file": "d4rt-instruction-masks.png",
+          "alt": "Four recorded manipulation frames with source objects, destination and robot masks",
+          "caption": "Saved instruction-to-mask prototype: Qwen3-VL proposes task roles and SAM3 tracks the selected objects. This is a perception-stage diagnostic, not a policy-success result.",
+          "width": 960,
+          "height": 720
+        },
+        {
+          "file": "d4rt-ycb-tracking.png",
+          "alt": "OpenD4RT object-point tracking comparison in a YCBInEOAT robot sequence",
+          "caption": "Actual saved OpenD4RT diagnostic on YCBInEOAT. Predicted points are compared with corresponding target ground truth within a fixed-window tracking protocol.",
+          "width": 640,
+          "height": 480
+        },
+        {
+          "file": "d4rt-ho3d-tracking.png",
+          "alt": "HO-3D hand-held object with ground-truth and predicted object-pixel tracks",
+          "caption": "Actual saved HO-3D tracking diagnostic: ground truth in green, prediction in red and current-frame error segments in yellow. This is not a robot control experiment.",
+          "width": 640,
+          "height": 480
+        }
+      ],
+      "references": [
+        {
+          "title": "D4RT",
+          "url": "https://d4rt-paper.github.io/",
+          "note": "Original dynamic-scene reconstruction and tracking method."
+        },
+        {
+          "title": "OpenD4RT",
+          "url": "https://github.com/Lijiaxin0111/Open-d4rt",
+          "note": "Third-party PyTorch implementation used for feature extraction."
+        },
+        {
+          "title": "DynamicVLA",
+          "url": "https://github.com/hzxie/DynamicVLA",
+          "note": "Underlying flow-matching policy."
+        },
+        {
+          "title": "DOM dataset",
+          "url": "https://huggingface.co/datasets/hzxie/DOM"
+        }
+      ],
+      "source_note": "Unfinished prototype. Technical progress and offline diagnostics are separated from the remaining causal streaming and closed-loop evaluation work.",
+      "thumbnail": {
+        "file": "d4rtvla-featured.webp",
+        "alt": "Instruction-grounded source and destination masks in the D4rtVLA prototype"
+      },
+      "featured": true,
+      "status": "Unfinished research prototype",
+      "strengths": [
+        "4D-to-policy integration",
+        "Temporal attention",
+        "Controlled ablations"
+      ]
+    },
+    "agentic-planner": {
+      "summary": "An ongoing language-agent planning system for interactive driving in CommonRoad and SUMO. I built the tool-driven execution architecture, planning and prediction interfaces, bounded decision contracts, and independently audited evaluation pipeline that connect high-level reasoning to checked vehicle motion.",
+      "facts": [
+        {
+          "label": "System",
+          "value": "Language agent + native trajectory planners + physical execution checks"
+        },
+        {
+          "label": "Environment",
+          "value": "CommonRoad scenarios with reactive SUMO traffic"
+        },
+        {
+          "label": "Evaluation",
+          "value": "Versioned, closed-loop 100-scenario campaigns"
+        },
+        {
+          "label": "Status",
+          "value": "Active development · Frozen evaluations and newer engineering revisions"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Observe and reason",
+          "text": "Read the current road, vehicle, goal, and traffic evidence; choose an algorithm and bounded strategy."
+        },
+        {
+          "title": "Plan and rank",
+          "text": "Native planners generate trajectories; the configured objective selects a candidate."
+        },
+        {
+          "title": "Forecast and check",
+          "text": "Complete the selected forecast to three seconds, compare time-aligned traffic occupancy, and retain physical execution checks."
+        },
+        {
+          "title": "Execute and return evidence",
+          "text": "Advance one 0.1-second simulation step, observe reactive traffic, and interrupt delegation when new evidence requires reasoning."
+        }
+      ],
+      "sections": [
+        {
+          "id": "task",
+          "title": "The problem: reasoning that survives execution",
+          "paragraphs": [
+            "A driving agent has to reconcile route progress, interaction with other vehicles, feasible vehicle dynamics, and a goal with spatial and temporal constraints. A plausible verbal plan is only one part of that problem: it must produce an executable next motion and respond when the traffic changes.",
+            "This project investigates a hierarchy in which a language agent chooses strategies and interprets difficult interactions, while numerical planners and native validation handle trajectories and physical execution. The experiments use CommonRoad tasks with live SUMO traffic, so surrounding vehicles evolve in response to the simulation rather than simply following a hidden prerecorded future."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "bullets": [
+            "Built the agent–environment integration: persistent sessions, structured MCP tools, planning feedback, reference-path interfaces, and explicit action/state receipts.",
+            "Developed the decision contracts between high-level reasoning, planner choice, traffic-policy labels, candidate ranking, forward prediction, and bounded automatic execution.",
+            "Implemented versioned experimental orchestration, immutable source/input manifests, per-attempt records, independent execution audits, and fresh-initial-state retests after repairs.",
+            "Built replay and diagnosis tooling that ties visible vehicle motion to candidate scores, selected trajectories, warnings, strategy changes, and recorded outcomes."
+          ]
+        },
+        {
+          "id": "architecture",
+          "title": "Architecture and control boundaries",
+          "paragraphs": [
+            "The language model operates through a constrained tool interface. It can select available planning algorithms, adjust permitted objective or sampling parameters, reason about route/reference choices, and manage interaction policies. It does not directly invent steering commands or advance an unchecked trajectory.",
+            "The backend combines reactive planning with rule-based or sampled continuation candidates. It regenerates and validates motion using the current measured state. Candidate generation, ranking, forecasting, and execution are distinct stages, which makes it possible to locate a failure in the appropriate component instead of attributing every problem to the agent prompt.",
+            "In the selected-forecast development revision, the configured original objective ranks candidates first. Only the selected trajectory retains its complete native prefix and receives any missing tail needed for a three-second ego forecast. That forecast is compared with traffic occupancy in matching time intervals; constructing an extra long rollout for every candidate is not used as a substitute ranking rule."
+          ]
+        },
+        {
+          "id": "prediction",
+          "title": "Causal prediction and bounded delegation",
+          "paragraphs": [
+            "SPOT/SONIA supplies set-based traffic predictions from current measured actors and the public map. The system distinguishes observed positions, possible future occupancy, and checked motion prefixes. Missing forecast coverage is reported explicitly, with actors still represented by their observed identity and state.",
+            "A vehicle's wait label describes a traffic-policy relationship; it is separate from the ego vehicle's actual decision to slow, roll, stop, or approach a conflict area. Physical timing and trajectory checks still determine which movement can execute. These distinctions are important in merging, ordinary car following, and crossing traffic.",
+            "The agent can delegate a bounded interval of automatic execution, but the world is rechecked at each 0.1-second step. New hazards, stale state tokens, tracking problems, or the absence of a checked continuation return control with structured evidence. The forward-only studies disable physical rollback and replay, so an unfavorable state cannot be erased during a scored episode."
+          ]
+        },
+        {
+          "id": "evaluation",
+          "title": "Data, experiments, and results",
+          "paragraphs": [
+            "The task data consists of road networks, vehicle initial states, reactive traffic, and CommonRoad planning goals. It is an evaluation environment rather than a dataset used to train a new end-to-end driving network. Each campaign records the source version, inputs, model configuration, budget, and every attempt.",
+            "Two completed evaluation snapshots illustrate the work's scale and the importance of release-specific reporting. The later campaign used a different language-agent/configuration and several separately frozen repair revisions."
+          ],
+          "table": {
+            "headers": [
+              "Evaluation snapshot",
+              "Strict task successes",
+              "Protocol"
+            ],
+            "rows": [
+              [
+                "Frozen v0.7.0 study",
+                "96 / 100",
+                "Fresh initial states; zero rollback/replay; zero recorded actual contacts"
+              ],
+              [
+                "v0.7.14 repair campaign",
+                "78 / 100",
+                "100 fresh scenarios; fix.1–fix.4 tracked separately; four fault attempts retained and repaired/retested"
+              ]
+            ]
+          },
+          "bullets": [
+            "Strict success requires the native goal and validity checks, successful termination, and the independent execution/forecast audit—not merely visual progress toward the target.",
+            "Planning noncompletion, actual contact, infrastructure faults, and numerical trajectory cost are recorded separately. Results from different releases are not pooled into a best-case success rate.",
+            "The simulator pauses during language-model decisions. These studies evaluate closed-loop behavior and tooling, rather than demonstrating real-time on-road response latency."
+          ]
+        },
+        {
+          "id": "progress",
+          "title": "Current research and engineering focus",
+          "paragraphs": [
+            "Development continues on traffic-policy reasoning, forecast completeness, timing-aware interaction, planner recovery from the current state, and reliable model/tool transport. The published selected-forecast engineering revision has its own component and tool-loading validation; it does not inherit a full-suite result from an older release.",
+            "The central capability developed here is connecting an uncertain reasoning system to a stateful physical simulator through explicit contracts, useful feedback, and reproducible experiments. Native CommonRoad, SUMO, planner, and SPOT/SONIA components remain credited foundations; my work is the agentic integration and the execution/evaluation machinery around them."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "file": "agentic-planner-architecture.svg",
+          "alt": "Agent, trajectory planning, selected forecast, execution checks, and simulator feedback architecture",
+          "caption": "Architecture summary of the selected-forecast agentic planning workflow. Strategy reasoning, candidate ranking, future occupancy, and physical execution have separate responsibilities.",
+          "width": 1200,
+          "height": 640
+        },
+        {
+          "file": "agentic-planner-frozen100.png",
+          "alt": "Strict successes and planning nonpasses by driving task type in the frozen v0.7.0 100-scenario study",
+          "caption": "Replotted from the completed frozen v0.7.0 study: 96 strict task successes out of 100 scenarios. This is a release-specific result, separate from later model/configuration and engineering revisions.",
+          "width": 1847,
+          "height": 981
+        },
+        {
+          "file": "agentic-planner-replay-v060.png",
+          "alt": "Historical driving replay with vehicle geometry, reference path and candidate score panel",
+          "caption": "An earlier v0.6.0 replay illustrates the project's debugging interface: actual vehicle state, selected and alternative plans, reference path, and candidate scores. Its historical recovery protocol is separate from the later forward-only studies.",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "thumbnail": {
+        "file": "agentic-planner-architecture.svg",
+        "alt": "Agentic driving architecture with checked planning and feedback"
+      },
+      "references": [
+        {
+          "title": "CommonRoad",
+          "url": "https://commonroad.in.tum.de/",
+          "note": "Planning scenarios, trajectory validity, and evaluation foundations."
+        },
+        {
+          "title": "Eclipse SUMO",
+          "url": "https://eclipse.dev/sumo/",
+          "note": "Interactive traffic simulation."
+        }
+      ],
+      "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols.",
+      "featured": true,
+      "status": "Ongoing research",
+      "strengths": [
+        "Agent-tool design",
+        "Planning & prediction",
+        "Reproducible evaluation"
+      ]
     }
   },
   "additional_projects": [
@@ -1484,6 +2199,38 @@
       "organization": "Technical University of Munich",
       "dates": "2024–2025",
       "type": "AI programming prize challenge"
+    },
+    {
+      "id": "rolewam",
+      "title": "RoleWAM: Task-Aware World–Action Modeling",
+      "label": "World–action models",
+      "organization": "Independent research",
+      "dates": "2026",
+      "type": "Model and systems research"
+    },
+    {
+      "id": "ricl",
+      "title": "RICL: Demonstration Transfer with Zero-WAM",
+      "label": "Robot in-context learning",
+      "organization": "Independent research · RoboTwin",
+      "dates": "2026",
+      "type": "Data and transfer-learning research"
+    },
+    {
+      "id": "agentic-planner",
+      "title": "CommonRoad Agentic Planner",
+      "label": "Agentic robotics",
+      "organization": "CommonRoad / SUMO research project",
+      "dates": "2026",
+      "type": "Planning and evaluation systems"
+    },
+    {
+      "id": "d4rtvla",
+      "title": "D4rtVLA: 4D Features for Action Policies",
+      "label": "Geometry-guided robot learning",
+      "organization": "Exploratory research",
+      "dates": "2026",
+      "type": "Unfinished research prototype"
     }
   ]
 }

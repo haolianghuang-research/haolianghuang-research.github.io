@@ -21,3 +21,18 @@ Figures are selected excerpts, not complete source documents. Private source pat
 | CommonRoad | Lanelet map, archived ego trajectory, velocity profile | Newly plotted from the project's saved January 2025 solution and CommonRoad scenario `DEU_Flensburg-43_1_T-1`. Scenario authors: Edmond Irani Liu, Fabian Höltke, Moritz Klischat / TUM; original map source: OpenStreetMap and SUMO. CommonRoad Search's BSD 3-Clause notice retained in `assets/CommonRoad-LICENSE.txt`. |
 
 LEGO project: no reliably attributable project photograph was located; its workflow is illustrated through the method schematic.
+
+## Featured research additions
+
+| Project | Visuals | Source and credit |
+| --- | --- | --- |
+| RoleWAM | RGB and task-role ground truth/prediction pairs | Haoliang Huang's current role-encoder validation run, November 2026, step 2,500. These prediction examples are separate from the earlier gated-model 1,000-phase benchmark. |
+| RICL / Zero-WAM | Backbone architecture | Zero-WAM authors' reference implementation, Apache 2.0; notice retained in `assets/Zero-WAM-LICENSE.txt`. |
+| RICL | Grid-based endpoint audit and exact-demo smoke rollout | Haoliang Huang's robot-grounded spatial audit and retained simulation evaluation. The smoke contact sheet is separate from the ten-seed result table. |
+| RICL / HumanGen | Synthetic start/end conditioning stills | AI-generated images from Haoliang Huang's HumanGen data-preparation pipeline. Exact image identities are tied to independent static-pair reviews. Stills specify conditioning endpoints; no approved full-motion sequence or training-ready clip is implied. |
+| D4rtVLA | Instruction/role masks and YCBInEOAT/HO-3D tracking comparisons | Haoliang Huang's saved prototype diagnostics, using the credited datasets and pretrained methods. These are perception/tracking diagnostics, not closed-loop policy-success results. |
+| CommonRoad Agentic Planner | Architecture schematic | New SVG summary based on the project's selected-forecast execution contracts. |
+| CommonRoad Agentic Planner | Frozen 100-scenario results | Newly plotted from the completed v0.7.0 campaign's task-type counts. Later campaign results remain separately identified in the page. |
+| CommonRoad Agentic Planner | Historical v0.6.0 replay frame | The project's retained English presentation replay, illustrating vehicle motion and candidate-score diagnosis. The earlier recovery protocol is identified in the caption. |
+
+Featured-card WebP previews derive from the corresponding credited source figures. No private configuration, credential, or training-log screenshot is included.
