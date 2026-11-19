@@ -122,6 +122,7 @@ if (outline && contentsToggle && siteHeader) {
   }
   function scheduleUpdate() { if (!queued) { queued = true; requestAnimationFrame(updateCurrent); } }
   function updateOffset() {
+    document.documentElement.style.setProperty('--site-header-height', `${siteHeader.offsetHeight}px`);
     document.documentElement.style.setProperty('--header-offset', `${siteHeader.offsetHeight + 24}px`);
     scheduleUpdate();
   }
