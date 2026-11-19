@@ -2,14 +2,16 @@
 import json
 from html import escape as e
 from pathlib import Path
+from render_projects import render_all
 
 ROOT = Path(__file__).resolve().parent
 d = json.loads((ROOT / "content.json").read_text())
+details = json.loads((ROOT / "project-details.json").read_text())
 site = "https://haolianghuang-research.github.io/"
 
 awards = "".join(f'''<article class="award-item">
   <div class="award-top"><span>{e(a['year'])}</span><strong>{e(a['result'])}</strong></div>
-  <h3>{e(a['title'])}</h3><p class="meta">{e(a['venue'])}</p><p>{e(a['description'])}</p>
+  <h3><a href="projects/{e(a['detail_id'])}/">{e(a['title'])}</a></h3><p class="meta">{e(a['venue'])}</p><p>{e(a['description'])}</p>
 </article>''' for a in d["awards"])
 experience = "".join(f'''<article class="experience-item">
   <div class="item-heading"><h3>{e(a['title'])}</h3><span class="dates">{e(a['dates'])}</span></div>
@@ -17,12 +19,18 @@ experience = "".join(f'''<article class="experience-item">
 </article>''' for a in d["experience"])
 projects = ""
 for p in d["projects"]:
-    media = f'''<div class="project-media"><img src="assets/{e(p['visual'])}.svg" width="220" height="160" alt="Conceptual illustration: {e(p['title'])}" loading="lazy"></div>''' if p.get("visual") else ""
+    detail = details['pages'][p['id']]
+    href = f"projects/{e(p['id'])}/"
+    if detail.get('thumbnail'):
+        thumb = detail['thumbnail']
+        media = f'<div class="project-media actual-media"><a href="{href}" tabindex="-1" aria-hidden="true"><img src="assets/projects/{e(thumb["file"])}" width="220" height="160" alt="{e(thumb["alt"])}" loading="lazy"></a></div>'
+    else:
+        media = f'''<div class="project-media"><a href="{href}" tabindex="-1" aria-hidden="true"><img src="assets/{e(p['visual'])}.svg" width="220" height="160" alt="Conceptual illustration: {e(p['title'])}" loading="lazy"></a></div>''' if p.get("visual") else ""
     tags = "".join(f"<span>{e(t)}</span>" for t in p["tags"])
     projects += f'''<article class="project {'with-media' if media else 'compact'}" id="{e(p['id'])}" data-category="{e(p['category'])}">
   {media}<div class="project-body"><div class="project-meta"><span class="topic">{e(p['label'])}</span><span>{e(p['dates'])}</span></div>
-  <h3>{e(p['title'])}</h3><p class="organization">{e(p['organization'])} <span class="separator">/</span> {e(p['type'])}</p>
-  <p>{e(p['description'])}</p><div class="tags" aria-label="Technologies">{tags}</div></div>
+  <h3><a href="{href}">{e(p['title'])}</a></h3><p class="organization">{e(p['organization'])} <span class="separator">/</span> {e(p['type'])}</p>
+  <p>{e(p['description'])}</p><div class="tags" aria-label="Technologies">{tags}</div><a class="project-more" href="{href}">Project details<span class="visually-hidden">: {e(p['title'])}</span></a></div>
 </article>'''
 education = "".join(f'''<article class="education-item"><span class="education-year">{e(a['year'])}</span><div><h3>{e(a['degree'])}</h3><p>{e(a['school'])}</p><p class="meta">{e(a['detail'])}</p></div></article>''' for a in d["education"])
 skills = "".join(f"<span>{e(s)}</span>" for s in d["skills"])
@@ -47,6 +55,7 @@ html = f'''<!doctype html>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/lato-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/project-details.css">
   <script src="assets/site.js" defer></script>
 </head>
 <body>
@@ -99,4 +108,5 @@ html = f'''<!doctype html>
 </html>
 '''
 (ROOT / "index.html").write_text(html)
-print(f"Built index.html with {len(d['projects'])} projects, {len(d['experience'])} roles, and {len(d['awards'])} awards.")
+page_count = render_all(ROOT, d, details)
+print(f"Built homepage and {page_count} project detail pages.")
