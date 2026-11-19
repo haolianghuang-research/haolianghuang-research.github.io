@@ -50,3 +50,18 @@ The three public November 2026 CV copies have the private telephone number remov
 ## Personal portrait gallery
 
 `assets/portrait-personal.webp` is the personal photograph supplied by Haoliang Huang for this homepage update on 19 November 2026. The web copy is resized and encoded without embedded metadata; appearance is unchanged. The existing `assets/portrait.jpg` remains available as the formal portrait. No location is inferred from the new photograph; “Based in Munich” describes the existing profile location.
+
+## Final-report and presentation review, 19 November 2026
+
+The following figures were extracted from the retained final deliverables. Web copies preserve the figure content and omit source-document metadata. Source decks and reports remain private.
+
+| Web asset | Source and interpretation |
+| --- | --- |
+| `safe-rl-four-targets.webp` | Haoliang Huang, guided-research final presentation, 31 October 2025, slide 8. Four-target reach-and-balance setup. |
+| `safe-rl-retention-simulation.webp`, `safe-rl-retention-hardware.webp` | Same presentation, slide 13, embedded images 19 and 20. Current-target, other-target and combined inference comparisons. The selected-seed hardware protocol is stated alongside the figures. These are separate from the coauthored paper's grasping experiment. |
+| `vae-convolutional-architecture.webp` | Luca Pflittner, Haoliang Huang and Stefan Krieg, July 2024 final presentation, slide 38. Encoder–decoder structure used in the reproduction, based on the credited GPPVAE reference implementation. |
+| `pose-preprocessing-comparison.webp`, `pose-depth-evaluation.webp` | Huang, Hou and Ostonaev, final course presentation, 24 July 2025, slides 24 and 40. Project preprocessing comparison and depth errors on selected HouseCat6D scenes. |
+| `interactive-blender-components.webp`, `interactive-manipulation-cover.webp` | Haoliang Huang, 2023 practical-course presentation, slides 7 and 12. Blender component export and simulated Franka interaction. The cover is a project simulation, not a real-robot photograph. |
+| `iccv-depth-audit.webp`, `iccv-scale-audit.webp` | Haoliang Huang, ICCV 2025 challenge presentation, slides 20 and 21. Omni6DPose depth and PACE geometry/NOCS diagnostics, not final pose predictions. |
+
+Existing credited method figures and experiment images also appear beside the relevant text. Reading-deck figures from the original OpenD4RT and DynamicVLA papers were inspected as literature context and are not recast as D4rtVLA project results.

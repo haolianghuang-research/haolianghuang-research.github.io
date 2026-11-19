@@ -3,6 +3,11 @@ from html import escape as e
 from navigation import render_navigation, asset_url
 
 
+def render_figure(f):
+    img = '../../assets/projects/' + e(f['file'])
+    return f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" width="{f.get("width",1400)}" height="{f.get("height",900)}" loading="lazy"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
+
+
 def render_section(s):
     technical = s.get('technical', False)
     if technical:
@@ -21,6 +26,9 @@ def render_section(s):
         out += '</tbody></table></div>'
     if s.get('link'):
         out += f'<a class="text-link" href="{e(s["link"]["url"])}">{e(s["link"]["title"])}</a>'
+    if s.get('figures'):
+        layout = ' figure-pair' if s.get('figure_layout') == 'pair' else ''
+        out += f'<div class="section-figures{layout}">' + ''.join(render_figure(f) for f in s['figures']) + '</div>'
     return out + ('</div></details>' if technical else '</section>')
 
 
@@ -50,8 +58,7 @@ def render_all(root, content, details):
         if d.get('gallery'):
             gallery = '<section class="detail-section" id="visuals"><h2>Project visuals</h2><div class="project-gallery">'
             for f in d['gallery']:
-                img = '../../assets/projects/' + e(f['file'])
-                gallery += f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" width="{f.get("width",1400)}" height="{f.get("height",900)}" loading="lazy"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
+                gallery += render_figure(f)
             gallery += '</div></section>'
             section_links += '<a href="#visuals">Project visuals</a>'
         refs = ''

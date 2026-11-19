@@ -39,7 +39,8 @@
           "id": "task",
           "title": "The question",
           "paragraphs": [
-            "Low-bit networks promise to make large language models cheaper to run. This seminar project examined the mechanics behind that promise and investigated what happens when the approach is applied to a downstream text-classification model. My practical experiment trained BERT on the Toxic Comment Classification Challenge dataset."
+            "Low-bit networks promise to make large language models cheaper to run. This seminar project examined the mechanics behind that promise and investigated what happens when the approach is applied to a downstream text-classification model. My practical experiment trained BERT on the Toxic Comment Classification Challenge dataset.",
+            "The deliverables combine a seminar review with a practical BERT experiment. My focus was understanding the complete quantization-aware training process and checking where the expected low-bit arithmetic benefits were lost in an ordinary PyTorch implementation."
           ]
         },
         {
@@ -48,6 +49,15 @@
           "paragraphs": [
             "BitLinear replaces ordinary linear transformations inside the Transformer. In the binary formulation, centered weights are mapped to −1 or +1; the ternary formulation adds a zero state. Activations are quantized to an 8-bit integer range, and stored scaling factors restore the output magnitude after the low-precision computation. Normalization controls the input distribution.",
             "Training retains full-precision master weights while using quantized values in the forward calculation. A straight-through estimator allows gradients to pass through the otherwise nondifferentiable quantization operation. This makes quantization-aware training fundamentally different from simply compressing a finished checkpoint."
+          ],
+          "figures": [
+            {
+              "file": "bitnet-image38.png",
+              "alt": "Ternary weight matrix rewritten as additions and subtractions",
+              "caption": "An explanatory diagram from my July 2024 seminar presentation: ternary weights turn the idealized matrix product into additions, subtractions, and skipped zero terms. This is a method illustration, not a measured speedup.",
+              "width": 1848,
+              "height": 524
+            }
           ]
         },
         {
@@ -59,15 +69,7 @@
           ]
         }
       ],
-      "gallery": [
-        {
-          "file": "bitnet-image38.png",
-          "alt": "Ternary weight matrix rewritten as additions and subtractions",
-          "caption": "An explanatory diagram from my July 2024 seminar presentation: ternary weights turn the idealized matrix product into additions, subtractions, and skipped zero terms. This is a method illustration, not a measured speedup.",
-          "width": 1848,
-          "height": 524
-        }
-      ],
+      "gallery": [],
       "thumbnail": {
         "file": "bitnet-cover.webp",
         "alt": "Ternary-weight computation diagram from the BitNet seminar presentation",
@@ -83,7 +85,7 @@
           "url": "https://arxiv.org/abs/2402.17764"
         }
       ],
-      "source_note": "Based on my 2024 seminar report and presentation, including the report’s separate discussion of my BERT experiment.",
+      "source_note": "Reviewed against my July 2024 seminar report, especially section 5 describing the BERT experiment, and the 21-slide presentation. Efficiency plots from the original BitNet papers are literature results and are not used as measurements of my implementation.",
       "hero_image": {
         "file": "bitnet-cover.webp",
         "alt": "Ternary-weight computation diagram from the BitNet seminar presentation",
@@ -129,7 +131,8 @@
           "id": "task",
           "title": "From reconstruction to controlled generation",
           "paragraphs": [
-            "The project compared three related generative models and studied what each can control. A standard VAE learns a probabilistic image representation. A CVAE introduces labels to make generation conditional. A GPPVAE adds correlations between related examples, making it possible to reason about the same object under different views. The work combined a group report with retained implementations, checkpoints, training logs, and visualizations."
+            "The project compared three related generative models and studied what each can control. A standard VAE learns a probabilistic image representation. A CVAE introduces labels to make generation conditional. A GPPVAE adds correlations between related examples, making it possible to reason about the same object under different views. The work combined a group report with retained implementations, checkpoints, training logs, and visualizations.",
+            "The final report, Exploring VAEs, was written with Luca Pflittner and Stefan Krieg. It connects the ELBO and reparameterization derivations to practical models, then tests how label conditioning and a structured prior change what can be generated."
           ]
         },
         {
@@ -138,6 +141,15 @@
           "paragraphs": [
             "The MNIST exploration used a fully connected encoder and decoder, Gaussian mean and log-variance heads, a reparameterized latent sample, and a reconstruction-plus-KL objective. The conditional version concatenates a one-hot digit label with both the input and the latent code.",
             "For FacePlace, the retained convolutional implementation takes 128 × 128 RGB images. Five downsampling blocks, each built from two 3 × 3 convolutions, feed 256-dimensional latent mean and scale heads. The decoder projects the latent vector back into a spatial feature map and uses five upsampling blocks to reconstruct the image. The GPPVAE augments this encoder–decoder with learned identity and viewpoint embeddings and a Gaussian-process prior over the latent representations."
+          ],
+          "figures": [
+            {
+              "file": "vae-convolutional-architecture.webp",
+              "alt": "Convolutional VAE encoder and decoder with 128-pixel RGB input and a 256-dimensional latent space",
+              "caption": "Encoder–decoder structure reproduced in our July 2024 final presentation, slide 38: five convolutional downsampling stages, latent distribution heads and an upsampling decoder. The project builds on the GPPVAE reference implementation.",
+              "width": 1362,
+              "height": 804
+            }
           ]
         },
         {
@@ -146,17 +158,19 @@
           "paragraphs": [
             "MNIST provides a simple setting for visualizing the learned latent manifold. FacePlace supplies face images with identity and view labels for studying correlations and held-out viewpoints. The GP stage initializes the autoencoder from a pretrained VAE and then learns the structured latent relationships.",
             "We evaluated reconstructions visually and through mean squared error. The course report records a GPPVAE reconstruction error of about 0.029 in the experiment, while explicitly noting that the original paper’s results were not fully reproduced. Its practical strength was novel-view reconstruction of a known identity; the implementation did not establish unrestricted generation of entirely new identities."
+          ],
+          "figures": [
+            {
+              "file": "vae-mnist-cell13-0.png",
+              "alt": "MNIST digits decoded across a two-dimensional VAE latent grid",
+              "caption": "A saved output from my retained VAE notebook, showing how decoded MNIST digits change as two latent coordinates vary.",
+              "width": 870,
+              "height": 876
+            }
           ]
         }
       ],
       "gallery": [
-        {
-          "file": "vae-mnist-cell13-0.png",
-          "alt": "MNIST digits decoded across a two-dimensional VAE latent grid",
-          "caption": "A saved output from my retained VAE notebook, showing how decoded MNIST digits change as two latent coordinates vary.",
-          "width": 870,
-          "height": 876
-        },
         {
           "file": "vae-gpp-training.png",
           "alt": "GPPVAE training diagnostics and learned identity and viewpoint relationships",
@@ -181,7 +195,7 @@
           "note": "The face-model experiments build on this implementation."
         }
       ],
-      "source_note": "Based on the 2024 group report “Exploring VAEs”, my retained MNIST code and notebook, and the FacePlace training code and July 2024 experiment logs. Group work with Luca Pflittner and Stefan Krieg.",
+      "source_note": "Reviewed against our 26 July 2024 final report and presentation, together with retained notebooks and training diagnostics. The reported MSE belongs to this reproduction; the report explicitly states that the original paper’s results were not fully reached.",
       "hero_image": {
         "file": "vae-cover.webp",
         "alt": "MNIST digit generations across a learned VAE latent-space grid",
@@ -249,17 +263,19 @@
           "paragraphs": [
             "The study found that solver behavior depends strongly on the task. An analytical method could be extremely accurate when it found a solution while leaving more poses unsolved. Ranged IK offered a strong overall balance in the thesis’s tested conditions, but the tracking results also showed that the surrounding controller can dominate performance.",
             "Joint-limit handling was another important factor. Methods that returned out-of-range joint configurations required clipping before execution, which could change the end-effector error. The comparison therefore treats solver integration and controller behavior as part of the practical problem, rather than reducing the result to one universal ranking."
+          ],
+          "figures": [
+            {
+              "file": "ik-result-0.png",
+              "alt": "Bar chart comparing successful and unsuccessful movements for eight IK variants",
+              "caption": "A simulation position-test result from my thesis (Figure 5.7, printed page 56): the 26 tested movements are classified by position and orientation tolerances. This is one experiment, not an overall ranking.",
+              "width": 1216,
+              "height": 629
+            }
           ]
         }
       ],
       "gallery": [
-        {
-          "file": "ik-result-0.png",
-          "alt": "Bar chart comparing successful and unsuccessful movements for eight IK variants",
-          "caption": "A simulation position-test result from my thesis (Figure 5.7, printed page 56): the 26 tested movements are classified by position and orientation tolerances. This is one experiment, not an overall ranking.",
-          "width": 1216,
-          "height": 629
-        },
         {
           "file": "ik-workspace-0.jpeg",
           "alt": "The Franka robot laboratory workspace used in the thesis",
@@ -327,6 +343,15 @@
           "paragraphs": [
             "The project started by measuring the laboratory kitchen and reproducing its structure in MuJoCo. The documented model contains 34 bodies, 72 geometries, and seven joints, including two free joints. Cabinet doors and stove knobs use hinge joints; the removable tray and detachable objects use free joints. Collision geometry and mechanical stops constrain how components can move.",
             "The scene supports opening cabinet doors, rotating knobs, placing a cup at a water dispenser, and interacting with a removable shelf and sliding tray. I also wrote a Blender conversion script that reads the MuJoCo XML structure and exports movable components as separate assets for HoloLens interaction."
+          ],
+          "figures": [
+            {
+              "file": "interactive-blender-components.webp",
+              "alt": "Separated articulated kitchen components in Blender",
+              "caption": "Kitchen components exported separately in Blender for HoloLens interaction, from my 2023 practical-course presentation, slide 7. The corresponding MuJoCo model retains physical joints and collision geometry.",
+              "width": 788,
+              "height": 752
+            }
           ]
         },
         {
@@ -335,6 +360,15 @@
           "paragraphs": [
             "A dedicated MjKitchen class exposes joint states and object positions and orientations, including batch access to component poses. This makes the kitchen usable as an experimental environment rather than merely a visual model.",
             "Actions with a known target location can be implemented directly. Door opening is more constrained: a demonstration can first pull the handle and then switch to pushing when the arm approaches a singular configuration. Recorded trajectories are processed using the laboratory’s probabilistic movement-primitive implementation to produce smoother joint-space motion. The data is collected robot-motion demonstrations, rather than a named image dataset."
+          ],
+          "figures": [
+            {
+              "file": "interactive-open-door.gif",
+              "alt": "A simulated Franka robot opening a kitchen cabinet door",
+              "caption": "A saved door-opening demonstration from my 2023 project presentation.",
+              "width": 402,
+              "height": 478
+            }
           ]
         },
         {
@@ -342,7 +376,8 @@
           "title": "Practical lessons",
           "paragraphs": [
             "Smoothing is not automatically sufficient for successful interaction. A fitted trajectory can move the arm closer to a singularity, erase a necessary pause between action stages, or gradually release a gripper when a sharp state change is required. The report discusses collecting demonstrations with greater clearance, balancing the number of basis functions, and thresholding the gripper state.",
-            "The work brings together environment construction, interaction APIs, and demonstration-based motion processing as a foundation for further household-robot imitation-learning experiments."
+            "The work brings together environment construction, interaction APIs, and demonstration-based motion processing as a foundation for further household-robot imitation-learning experiments.",
+            "A test with a modified door-handle position did not generalize successfully. The report identifies this as an open issue: matching a demonstrated trajectory is harder when contact geometry changes, even if the movement primitive gives smooth motion."
           ]
         }
       ],
@@ -353,26 +388,19 @@
           "caption": "The kitchen model from my 2023 practical-course presentation, including cabinet doors, knobs, a sink, and an oven tray.",
           "width": 1412,
           "height": 1318
-        },
-        {
-          "file": "interactive-open-door.gif",
-          "alt": "A simulated Franka robot opening a kitchen cabinet door",
-          "caption": "A saved door-opening demonstration from my 2023 project presentation.",
-          "width": 402,
-          "height": 478
         }
       ],
       "thumbnail": {
-        "file": "interactive-learning-cover.webp",
-        "alt": "Modeled kitchen environment for Franka interactive learning experiments",
-        "caption": "Franka interaction · Simulated kitchen"
+        "file": "interactive-manipulation-cover.webp",
+        "alt": "Franka arm interacting with the articulated kitchen in MuJoCo",
+        "caption": "Franka manipulation · MuJoCo project scene"
       },
       "references": [],
       "source_note": "Based on my September 2023 practical-course report and the saved simulation assets and demonstrations used in my presentation.",
       "hero_image": {
-        "file": "interactive-learning-cover.webp",
-        "alt": "Modeled kitchen environment for Franka interactive learning experiments",
-        "caption": "Franka interaction · Simulated kitchen"
+        "file": "interactive-manipulation-cover.webp",
+        "alt": "Franka arm interacting with the articulated kitchen in MuJoCo",
+        "caption": "Franka manipulation · MuJoCo project scene"
       }
     },
     "outlier": {
@@ -424,6 +452,15 @@
           "paragraphs": [
             "The application follows Django’s model–view–template pattern: models and the ORM represent persistent state, views implement the interaction logic, and HTML templates display forms and results. User management and experiment management are separated into modules. The implementation documentation specifies MySQL, accessed through PyMySQL or mysqlclient.",
             "Runs move through states such as editing, pending, finished, and failed. Configuration pages derive valid subspace choices from the uploaded table and display the selected detector’s parameters. The frontend uses HTML, CSS, JavaScript, and Bootstrap, with dynamic parameter and form behavior."
+          ],
+          "figures": [
+            {
+              "file": "outlier-implementation-image9.png",
+              "alt": "Odex run-configuration form with subspace and ABOD parameter controls",
+              "caption": "The implemented experiment-configuration interface, from the same project document: subspace selection, optional ground truth, and detector parameters.",
+              "width": 772,
+              "height": 825
+            }
           ]
         },
         {
@@ -442,13 +479,6 @@
           "caption": "The implemented Odex dashboard shown in the team’s February 2023 implementation document. The visible account and runs are test examples.",
           "width": 951,
           "height": 548
-        },
-        {
-          "file": "outlier-implementation-image9.png",
-          "alt": "Odex run-configuration form with subspace and ABOD parameter controls",
-          "caption": "The implemented experiment-configuration interface, from the same project document: subspace selection, optional ground truth, and detector parameters.",
-          "width": 772,
-          "height": 825
         }
       ],
       "thumbnail": {
@@ -595,6 +625,15 @@
           "paragraphs": [
             "Detection was evaluated using precision–recall behavior, mAP, and F1 measures; traffic analysis was evaluated using per-class counting errors. A strong detector was not automatically the strongest complete counting system.",
             "In the thesis’s two-video comparison, YOLOv4 gave the best detection performance under the reported criterion, while YOLOX-l produced the lowest mean class-wise traffic-counting error, approximately 4.77%. This result belongs to the particular videos and aggregation used in the thesis, rather than a general ranking of detector families."
+          ],
+          "figures": [
+            {
+              "file": "traffic-counter-0.jpeg",
+              "alt": "The highway counting example with directional control regions",
+              "caption": "The project’s directional vehicle-counting illustration from my thesis (Figure 4-4, printed page 44).",
+              "width": 873,
+              "height": 464
+            }
           ]
         }
       ],
@@ -605,13 +644,6 @@
           "caption": "Project-generated tracking traces in the custom A40 evaluation video, reproduced from my thesis (Figure 4-3, printed page 42). Blue and red traces distinguish vehicle categories.",
           "width": 1158,
           "height": 641
-        },
-        {
-          "file": "traffic-counter-0.jpeg",
-          "alt": "The highway counting example with directional control regions",
-          "caption": "The project’s directional vehicle-counting illustration from my thesis (Figure 4-4, printed page 44).",
-          "width": 873,
-          "height": 464
         }
       ],
       "thumbnail": {
@@ -813,6 +845,15 @@
             "Grounded-SAM-2 combines language-conditioned object localization with SAM2 masks. We compared crop centering, padding and rembg background removal, finding a centered crop with approximately 30% padding useful in the tested examples. VGGT supplied predicted scene depth.",
             "The InstantMesh baseline combines Zero123++ multi-view diffusion with a sparse-view reconstruction model. Its generated views feed an implicit 3D representation from which a mesh can be extracted. We then replaced this stage with alternative generators, including TRELLIS, Hunyuan3D 2.5, CraftsMan and Hi3DGen, and inspected the resulting geometry.",
             "Any6D provided the downstream alignment and pose-estimation component. Its render-and-compare strategy evaluates hypotheses against RGB-D observations. We also examined uniform versus nonuniform scale alignment, because flexible scaling can hide structural mesh errors."
+          ],
+          "figures": [
+            {
+              "file": "pose-preprocessing-comparison.webp",
+              "alt": "Chamfer-distance comparison for object cropping, padding and background removal",
+              "caption": "Preprocessing comparison from our July 2025 final presentation, slide 24. The table compares padding and background removal in the tested reconstruction setup; the choice is specific to these experiments.",
+              "width": 1170,
+              "height": 732
+            }
           ]
         },
         {
@@ -829,6 +870,15 @@
           "paragraphs": [
             "Depth was assessed with MAE and RMSE; reconstructed shape with Chamfer distance after alignment; pose with ADD/ADD-S, rotation error and translation error. Keeping these measures separate helped diagnose whether a failure began in geometry generation or later pose alignment.",
             "The complete pipeline worked as an experimental framework, but pose ranking remained unstable: the scorer could favor an incorrect hypothesis or converge to a local minimum. Generated geometry also contained recognizable artifacts in some objects. These observations motivated further work on alignment and reliable hypothesis selection."
+          ],
+          "figures": [
+            {
+              "file": "pose-depth-evaluation.webp",
+              "alt": "VGGT depth MAE and RMSE for ten HouseCat6D scenes before and after normalization",
+              "caption": "Depth-evaluation table from the final presentation, slide 40. Raw and normalized depth errors are listed separately across the ten selected scenes.",
+              "width": 1800,
+              "height": 1116
+            }
           ]
         }
       ],
@@ -866,7 +916,7 @@
           "url": "https://arxiv.org/abs/2503.11651"
         }
       ],
-      "source_note": "Figures are real experiments from the team’s final presentation, not examples reproduced from the model papers. The underlying models and dataset are credited above.",
+      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes.",
       "thumbnail": {
         "file": "pose-cover.webp",
         "alt": "Input objects and generated 3D object reconstructions from pose experiments",
@@ -948,7 +998,24 @@
           "paragraphs": [
             "The two training sources were PACE and Omni6DPose. The archived preparation notes describe requiring sufficient valid masked depth, checking back-projected surface points, applying the exclusion list, and aligning normalized object coordinates before evaluation. Mesh surfaces were sampled uniformly to prepare instance inputs for category shape modeling.",
             "The work exposed several failure modes: absent or inaccurate depth, disagreement between instance scale and NOCS geometry, and duplicate category labels. Coordinate transforms and scale correction were therefore treated as explicit preprocessing stages, rather than leaving the model to absorb inconsistent supervision."
-          ]
+          ],
+          "figures": [
+            {
+              "file": "iccv-depth-audit.webp",
+              "alt": "Depth-map diagnostic with missing values in an Omni6DPose scene",
+              "caption": "Omni6DPose depth diagnostic from my ICCV 2025 presentation, slide 20. Invalid or missing depth must be handled before geometric supervision can be trusted.",
+              "width": 648,
+              "height": 517
+            },
+            {
+              "file": "iccv-scale-audit.webp",
+              "alt": "Misaligned colored point representations illustrating a PACE scale inconsistency",
+              "caption": "PACE geometry/NOCS consistency diagnostic from the same presentation, slide 21. This is an input-data audit, rather than a successful final pose prediction.",
+              "width": 609,
+              "height": 503
+            }
+          ],
+          "figure_layout": "pair"
         },
         {
           "id": "training",
@@ -997,7 +1064,7 @@
           "url": "https://wclop.github.io/"
         }
       ],
-      "source_note": "Challenge integration and training work are distinguished from the original GCEPose architecture. Figures are intermediate representations from my challenge presentation.",
+      "source_note": "Reviewed against my ICCV 2025 challenge/winners presentation, especially slides 15–26, and the retained challenge implementation. The page distinguishes reconstructed instances, category priors, dataset diagnostics and final competition recognition.",
       "thumbnail": {
         "file": "category-pose-cover.webp",
         "alt": "A reconstructed mug represented by colored 3D semantic shape points",
@@ -1077,6 +1144,22 @@
           "paragraphs": [
             "The low-level controller adapts ideas from TWIST and VisualMimic. A privileged teacher learns tracking with PPO; a student combines reinforcement learning with teacher-action imitation through DAgger. At the task level, a teacher can observe the object's position and velocity, whereas a visual student uses pretrained DINOv2 ViT-S/14 features and proprioceptive history.",
             "The high-level policy produces root/keypoint commands for a frozen low-level tracker, which maps them to motor actions. The T1 implementation uses eleven keypoints and a 36-dimensional high-level command. The visual encoder is frozen, and the implementation supports RGB and depth features. Reward terms cover reaching toward the object, contact force, forward progress, object tilt and drift, upright posture, foot lifting, and alternating gait."
+          ],
+          "figures": [
+            {
+              "file": "humanoid-hierarchy.png",
+              "alt": "Teacher–student keypoint generator driving a frozen whole-body tracker",
+              "caption": "Hierarchical command generation and frozen motion tracking, as presented by the team; methodological foundations: TWIST and VisualMimic.",
+              "width": 1208,
+              "height": 350
+            },
+            {
+              "file": "humanoid-depth-perception.png",
+              "alt": "Simulated RGB view, depth view, and encoded visual features",
+              "caption": "RGB/depth observations and visual representation from the high-level perception experiment.",
+              "width": 1086,
+              "height": 274
+            }
           ]
         },
         {
@@ -1084,7 +1167,8 @@
           "title": "Experiments and scope",
           "paragraphs": [
             "The end-term material demonstrates simulated T1 box interaction, compares the same reward setup on G1, and shows early visual-student training. It documents progress on the integrated camera/object environment, keypoint action space, frozen tracker, and contact rewards.",
-            "The February 2026 end-term results cover simulation. High-level teacher and visual-student optimization were still in progress, with complete real-robot interaction scheduled as a subsequent stage."
+            "The February 2026 end-term results cover simulation. High-level teacher and visual-student optimization were still in progress, with complete real-robot interaction scheduled as a subsequent stage.",
+            "A central engineering lesson was that motion-tracking quality depends on the coordinate system and robot-specific motion range as much as on the RL algorithm. The end-term work therefore combined reference-motion filtering, shared-yaw-frame error computation and a task policy that reuses the low-level tracker. These changes are described as team work in the final deliverable."
           ]
         }
       ],
@@ -1095,20 +1179,6 @@
           "caption": "Booster T1 box-interaction experiment in simulation. Frame extracted from the team's end-term demonstration.",
           "width": 1440,
           "height": 960
-        },
-        {
-          "file": "humanoid-depth-perception.png",
-          "alt": "Simulated RGB view, depth view, and encoded visual features",
-          "caption": "RGB/depth observations and visual representation from the high-level perception experiment.",
-          "width": 1086,
-          "height": 274
-        },
-        {
-          "file": "humanoid-hierarchy.png",
-          "alt": "Teacher–student keypoint generator driving a frozen whole-body tracker",
-          "caption": "Hierarchical command generation and frozen motion tracking, as presented by the team; methodological foundations: TWIST and VisualMimic.",
-          "width": 1208,
-          "height": 350
         }
       ],
       "thumbnail": {
@@ -1189,6 +1259,15 @@
           "paragraphs": [
             "π₀ is a vision-language-action model. It takes visual observations, language, and robot state as conditioning information and predicts a sequence of continuous actions. Its pretrained vision-language backbone provides visual and semantic representations; an action expert specializes that information for control.",
             "The architecture presented in the seminar combines SigLIP visual encoding, a Gemma language backbone, and a separate action expert. Continuous action generation uses conditional flow matching: start from a noisy action sequence, estimate a denoising direction conditioned on the observation, and iteratively obtain an executable action chunk. This links multimodal understanding to smooth, high-frequency action generation."
+          ],
+          "figures": [
+            {
+              "file": "pi0-6-image-1.jpeg",
+              "alt": "π₀ architecture with visual encoders, pretrained vision-language model, and action expert",
+              "caption": "π₀ vision-language backbone and flow-matching action expert, reproduced in the seminar. Architecture figure credit: Physical Intelligence and the π₀ authors.",
+              "width": 1536,
+              "height": 447
+            }
           ]
         },
         {
@@ -1197,33 +1276,27 @@
           "paragraphs": [
             "The project uses custom real-world robot demonstrations for task-specific adaptation and evaluation. The July 2025 presentation documents SO-101 data collection with a leader/follower setup: the operator demonstrates a motion while the system records observations and corresponding robot actions.",
             "The seminar also examines the original model’s multi-robot pretraining mixture, including Open X-Embodiment, Bridge, and DROID. That pretrained model provides the starting point for local deployment and task-specific demonstration collection."
+          ],
+          "figures": [
+            {
+              "file": "pi0-16-image-1.jpeg",
+              "alt": "SO-101 leader and follower robot arms at a data-collection workstation",
+              "caption": "The SO-101 demonstration-collection setup shown in the team's July 2025 seminar presentation.",
+              "width": 1596,
+              "height": 1120
+            }
           ]
         },
         {
           "id": "experiments",
           "title": "Evaluation questions",
           "paragraphs": [
-            "The practical questions concern behavior beyond a nominal demonstration: recovery after disturbances, sensitivity to tabletop position, ambiguous instructions, and the effects of an open-loop action horizon. The seminar proposes shorter action chunks and more varied demonstrations as possible directions for improving robustness.",
-            "The project’s practical contribution is model integration, demonstration collection, and real-world experimental design. The seminar identifies shorter action chunks and more varied demonstrations as directions for studying recovery and spatial generalization."
+            "The seminar examines three practical issues: whether a policy can recover after a disturbance, how behavior changes across tabletop positions, and how long open-loop action chunks affect error correction. It also asks which demonstrations support useful transfer and which may interfere with other skills.",
+            "The July 2025 deliverable documents the SO-101 reproduction and data-collection stage. It proposes shortening the action horizon and including more varied demonstrations for subsequent tests. These are experimental directions, rather than measured improvements reported by that presentation."
           ]
         }
       ],
-      "gallery": [
-        {
-          "file": "pi0-16-image-1.jpeg",
-          "alt": "SO-101 leader and follower robot arms at a data-collection workstation",
-          "caption": "The SO-101 demonstration-collection setup shown in the team's July 2025 seminar presentation.",
-          "width": 1596,
-          "height": 1120
-        },
-        {
-          "file": "pi0-6-image-1.jpeg",
-          "alt": "π₀ architecture with visual encoders, pretrained vision-language model, and action expert",
-          "caption": "π₀ vision-language backbone and flow-matching action expert, reproduced in the seminar. Architecture figure credit: Physical Intelligence and the π₀ authors.",
-          "width": 1536,
-          "height": 447
-        }
-      ],
+      "gallery": [],
       "thumbnail": {
         "file": "pi0-cover.webp",
         "alt": "SO-101 leader and follower robot arms on the project workbench",
@@ -1246,7 +1319,7 @@
           "note": "Robot-learning tooling"
         }
       ],
-      "source_note": "Based on the team's July 2025 π₀ seminar presentation and the subsequent deployment experience recorded in the CV. Baseline-model capabilities are distinguished from project-specific experiments.",
+      "source_note": "Reviewed against the July 2025 end-term seminar slides by Guangyuan Wang and Haoliang Huang. The slides document SO-101 data collection; later Franka deployment is recorded in the CV. Original π₀ pretraining results and proposed follow-up tests are kept separate from completed local experiments.",
       "hero_image": {
         "file": "pi0-cover.webp",
         "alt": "SO-101 leader and follower robot arms on the project workbench",
@@ -1254,7 +1327,7 @@
       }
     },
     "safe-rl": {
-      "summary": "Coauthored research on adapting robot policies after sim-to-real transfer while respecting safety costs and retaining the broadly useful behavior learned in randomized simulation.",
+      "summary": "Safe robot-policy adaptation on a KUKA arm: calibrating a simulation to the physical system, combining safety-constrained RL with continual learning, and evaluating improvement alongside retention of previous targets.",
       "facts": [
         {
           "label": "Research",
@@ -1269,22 +1342,22 @@
           "value": "Safe RL, domain randomization, EWC"
         },
         {
-          "label": "Tasks",
-          "value": "Reach-and-balance and grasping"
+          "label": "My experiment",
+          "value": "Four-target reach-and-balance; simulation and hardware"
         }
       ],
       "pipeline": [
         {
-          "title": "Pretrain robustly",
-          "text": "Learn an actor plus reward and cost critics in domain-randomized simulation."
+          "title": "Pretrain in simulation",
+          "text": "Learn with broad dynamics randomization and safety-aware policy updates."
         },
         {
-          "title": "Measure parameter importance",
-          "text": "Estimate a diagonal Fisher information matrix from policy rollouts."
+          "title": "Calibrate and adapt",
+          "text": "Align simulated timing and joint dynamics with the KUKA system before adaptation under stricter safety settings."
         },
         {
-          "title": "Adapt safely",
-          "text": "Optimize task performance and safety after transfer while regularizing important actor parameters."
+          "title": "Transfer and test retention",
+          "text": "Continue on the robot and evaluate both the current target and previously learned targets."
         }
       ],
       "sections": [
@@ -1294,6 +1367,23 @@
           "paragraphs": [
             "A policy trained across many simulated system variations can transfer robustly yet remain inefficient on the particular physical robot it encounters. Leaving it fixed also limits its ability to respond when dynamics or task conditions change. SCDA investigates deployment-time policy adaptation while controlling the risks of exploration and catastrophic forgetting.",
             "The coauthored study evaluates a KUKA LBR iiwa 14 manipulator on reach-and-balance and grasping tasks. Safety is represented explicitly through joint-limit and collision-related costs rather than being folded entirely into a single task reward."
+          ]
+        },
+        {
+          "id": "guided-research",
+          "title": "My guided-research implementation",
+          "paragraphs": [
+            "My October 2025 final presentation documents a three-stage implementation: broad domain-randomized pretraining, adaptation in a calibrated realistic simulation, and continued adaptation on the KUKA robot. I worked on aligning the digital twin with the physical system, including control timing and joint stiffness and damping, so that the transition between training and hardware used comparable dynamics and safety settings.",
+            "The reach-and-balance task uses four end-effector targets above the table. Reaching accuracy supplies the reward, while proximity to hazardous regions contributes a separate safety cost. The protocol tightens the safety settings after pretraining and uses a safety shield during hardware adaptation."
+          ],
+          "figures": [
+            {
+              "file": "safe-rl-four-targets.webp",
+              "alt": "KUKA arm and the four reach-and-balance target configurations",
+              "caption": "Four-target reach-and-balance setup from my guided-research final presentation, 31 October 2025. The table region motivates the explicit safety cost.",
+              "width": 1120,
+              "height": 324
+            }
           ]
         },
         {
@@ -1313,11 +1403,72 @@
           ]
         },
         {
-          "id": "experiments",
-          "title": "Evaluation and findings",
+          "id": "ablation-design",
+          "title": "Separating safety from memory",
           "paragraphs": [
-            "The paper compares zero-shot transfer, domain adaptation, safe domain adaptation, continual domain adaptation, and the combined SCDA method. Evaluation separates improvement on the currently adapted target from retention on other targets, making the adaptation–forgetting trade-off visible.",
-            "For grasping, the paper reports real-robot success rising from 20% for zero-shot transfer to 60% with SCDA, averaged over five seeds; the corresponding realistic-simulation comparison is 20% to 40%. These are team-level paper results. The method assumes deployment shifts are covered by the pretraining randomization range, and safety during the initial simulation-learning phase is not guaranteed."
+            "The experiment independently switches safety-constrained updates and EWC regularization on or off. This tests whether an apparent gain comes from safety optimization, retention of earlier behavior, or their combination. Realistic-simulation runs use five seeds. The hardware protocol selects a seed from that stage and keeps the adaptation schedule and safety settings fixed."
+          ],
+          "table": {
+            "headers": [
+              "Strategy",
+              "Safety updates",
+              "Continual-learning penalty"
+            ],
+            "rows": [
+              [
+                "CL0S0",
+                "Off",
+                "Off"
+              ],
+              [
+                "CL0S1",
+                "On",
+                "Off"
+              ],
+              [
+                "CL1S0",
+                "Off",
+                "On"
+              ],
+              [
+                "CL1S1 / SCDA",
+                "On",
+                "On"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "experiments",
+          "title": "Adaptation, safety and retention",
+          "paragraphs": [
+            "After each target-adaptation sequence, the protocol runs ten inference episodes per target. Evaluation separates the most recently trained target from the other three, revealing whether improvement on one task is accompanied by forgetting. Reward, safety cost and their combined score are reported separately.",
+            "The final presentation reports that the combined safety-and-continual-learning variant reached the cost budget before improving reward, and gave more stable combined performance across current and previous targets in these experiments. The figures below show the recorded comparisons. They describe the four-target setup rather than a guarantee for arbitrary contact-rich manipulation."
+          ],
+          "figures": [
+            {
+              "file": "safe-rl-retention-simulation.webp",
+              "alt": "Realistic-simulation results comparing current-target, other-target and combined performance",
+              "caption": "Realistic-simulation inference results from my final presentation, slide 13. “Current” is the most recently adapted target; “Others” measures retention.",
+              "width": 460,
+              "height": 788
+            },
+            {
+              "file": "safe-rl-retention-hardware.webp",
+              "alt": "KUKA hardware results comparing current-target, other-target and combined performance",
+              "caption": "Real-robot inference results from the same presentation and four-target protocol. These follow the selected-seed hardware procedure described above.",
+              "width": 460,
+              "height": 788
+            }
+          ],
+          "figure_layout": "pair"
+        },
+        {
+          "id": "related-study",
+          "title": "Related coauthored study",
+          "paragraphs": [
+            "The related SCDA paper studies both reaching and grasping and compares zero-shot transfer with several adaptation strategies. Its grasping table reports 20% to 60% success on the physical robot and 20% to 40% in realistic simulation after SCDA adaptation. These are the coauthored study’s results, separate from the four-target experiment in my final presentation.",
+            "The method relies on the deployment conditions being sufficiently represented by the simulation randomization. Further work is needed for more complex contact, longer task sequences and stronger safety guarantees."
           ]
         }
       ],
@@ -1357,7 +1508,7 @@
           "url": "https://github.com/tum-i6/VTPRL"
         }
       ],
-      "source_note": "Based on the coauthored SCDA paper and its implementation. Reported numerical results belong to the study as a whole; they are not attributed to one author's individual work.",
+      "source_note": "Based on my guided-research final presentation (31 October 2025), the coauthored SCDA paper and the retained implementation. Figures and results identify the individual guided-research protocol separately from the paper’s team experiments.",
       "hero_image": {
         "file": "safe-rl-cover.webp",
         "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",
@@ -1583,19 +1734,21 @@
           "title": "Experiments and lessons",
           "paragraphs": [
             "I used ablation-style comparisons to decide which heuristic and pruning ideas to retain. Some seemingly reasonable additions—such as stronger lane-connectivity pruning or simple reachability pruning—reduced the number of solved cases in the experiments described in the presentation.",
-            "The main lesson was to evaluate each addition against the actual scenario set and time budget. A more elaborate heuristic or larger primitive library can introduce corner cases or consume enough extra search time to offset its theoretical appeal. The final project received first prize in the course challenge."
+            "The main lesson was to evaluate each addition against the actual scenario set and time budget. A more elaborate heuristic or larger primitive library can introduce corner cases or consume enough extra search time to offset its theoretical appeal. The final project received first prize in the course challenge.",
+            "The final speech also records two plausible pruning ideas that reduced the number of solved scenarios: pruning on estimated remaining travel time, and filtering lane connections too aggressively. Testing components individually was important because a locally reasonable rule could remove a valid solution later in the search."
+          ],
+          "figures": [
+            {
+              "file": "commonroad-trajectory.png",
+              "alt": "Archived CommonRoad ego trajectory on a lanelet map, with its velocity over time",
+              "caption": "Replotted from the project's saved January 2025 solution for DEU_Flensburg-43_1_T-1. Left: local road geometry and the ego path; right: the saved velocity profile. Scenario geometry: CommonRoad / TUM, sourced from OpenStreetMap and SUMO. This figure visualizes an archived solution, rather than a new benchmark run.",
+              "width": 2102,
+              "height": 1001
+            }
           ]
         }
       ],
-      "gallery": [
-        {
-          "file": "commonroad-trajectory.png",
-          "alt": "Archived CommonRoad ego trajectory on a lanelet map, with its velocity over time",
-          "caption": "Replotted from the project's saved January 2025 solution for DEU_Flensburg-43_1_T-1. Left: local road geometry and the ego path; right: the saved velocity profile. Scenario geometry: CommonRoad / TUM, sourced from OpenStreetMap and SUMO. This figure visualizes an archived solution, rather than a new benchmark run.",
-          "width": 2102,
-          "height": 1001
-        }
-      ],
+      "gallery": [],
       "thumbnail": {
         "file": "commonroad-thumbnail.webp",
         "alt": "CommonRoad motion planning trajectory",
@@ -1608,7 +1761,7 @@
           "note": "Scenario format, benchmarks, and autonomous-driving planning tools."
         }
       ],
-      "source_note": "Based on my CommonRoad challenge approach presentation, the student planner implementation, and archived scenario/solution files. Course edition: 2024–2025.",
+      "source_note": "Reviewed against my CommonRoad winner presentation and accompanying speech, plus the archived search implementation and saved scenario solution. The trajectory figure visualizes that saved solution; it is not a fresh benchmark result.",
       "hero_image": {
         "file": "commonroad-thumbnail.webp",
         "alt": "CommonRoad motion planning trajectory",
@@ -2148,7 +2301,7 @@
           "url": "https://huggingface.co/datasets/hzxie/DOM"
         }
       ],
-      "source_note": "Based on my prototype implementation, saved perception and action diagnostics, and the subsequent decision to discontinue the InstructD4RT direction. No closed-loop policy improvement is claimed. Updated November 2026.",
+      "source_note": "Based on my prototype implementation, saved perception and action diagnostics, and the subsequent decision to discontinue the InstructD4RT direction. No closed-loop policy improvement is claimed. Updated November 2026. The retained OpenD4RT query-network and DynamicVLA/DOM reading decks were also checked as literature context; their baseline figures and reported results are not attributed to this prototype.",
       "thumbnail": {
         "file": "d4rtvla-cover.webp",
         "alt": "A robot manipulating a tool with tracked object points overlaid",

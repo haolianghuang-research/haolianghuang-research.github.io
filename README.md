@@ -28,6 +28,8 @@ The original portfolio foundation also credited [Jon Barron’s academic website
 
 Each page can define `thumbnail` and `hero_image` objects with `file`, `alt`, and `caption`. Cover images should show attributable project material; captions identify synthetic data, intermediate outputs, archived views, and conceptual illustrations. Set `technical: true` on a section to place implementation detail in an expandable block. The `related` list links connected project pages. Project category filters work without a build dependency; all projects remain visible when JavaScript is unavailable.
 
+Sections can also define a `figures` list using the same image fields plus intrinsic `width` and `height`. Images then appear alongside the method or result they explain. Set `figure_layout: "pair"` for two related comparisons; the pair stacks on small screens. Figures open at full size through ordinary accessible links. CSS and JavaScript asset URLs include content hashes so published updates refresh reliably.
+
 ## Site navigation
 
 `navigation.py` renders the four primary links and a document outline. The homepage outline lists every major section and the six selected projects; each project detail page supplies its own method, data, evaluation, and visual sections. `assets/navigation.css` provides the pinned left desktop panel and a native-dialog drawer that slides in from the left. At widths of at least 1480px, the outline opens alongside the content; narrower screens open it with **Contents**. Desktop collapse preference lasts for the browser session.

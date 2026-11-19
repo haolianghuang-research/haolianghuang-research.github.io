@@ -181,7 +181,7 @@
       "category": "robotics",
       "label": "AI · Robotics · RL",
       "type": "Guided research",
-      "description": "Developed a safe RL-driven control model for a KUKA LBR iiwa 14 robotic arm. Integrated continual learning and domain randomization to address sim-to-real transfer in robotic manipulation.",
+      "description": "Built a KUKA sim-to-real adaptation workflow with calibrated dynamics, safety-constrained RL and continual learning. Compared four training strategies and evaluated retention across four reaching targets.",
       "tags": [
         "Safe RL",
         "Sim-to-real",
@@ -243,7 +243,7 @@
       "category": "robotics",
       "label": "ML · Robotics",
       "type": "University internship",
-      "description": "Modeled Franka manipulation tasks in MuJoCo and Blender, exploring learning from demonstration and movement primitives for robot interaction.",
+      "description": "Built an articulated MuJoCo kitchen and Blender assets for HoloLens, then explored Franka door opening through demonstrations and probabilistic movement primitives.",
       "tags": [
         "Learning from demonstration",
         "Movement primitives",
