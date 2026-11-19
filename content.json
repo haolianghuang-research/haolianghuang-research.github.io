@@ -3,6 +3,21 @@
   "email": "haoliang.huang.research@gmail.com",
   "github": "https://github.com/haolianghuang-research",
   "intro": "I study how robots can use visual experience, language, and memory to learn new tasks. I am a master’s student in Robotics, Cognition, Intelligence at the Technical University of Munich, with a B.Sc. in Computer Science from KIT.",
+  "about_affiliations": {
+    "current": [
+      {"name": "TUM Cyber-Physical Systems (CPS)", "url": "#experience"},
+      {"name": "LMU TRESP Lab", "url": "projects/ricl/"},
+      {"name": "TUM Photogrammetry and Remote Sensing", "url": "projects/rolewam/"}
+    ],
+    "previous": [
+      {"name": "TUM AIR", "url": "projects/safe-rl/"},
+      {"name": "TUM CAMP", "url": "projects/semantic-reconstruction/"},
+      {"name": "KIT IRL", "url": "projects/ik/"},
+      {"name": "KIT ISAS", "url": "projects/vae/"},
+      {"name": "KIT cv:hci", "url": "projects/bitnet/"}
+    ],
+    "industry": {"name": "Huawei Munich Research Center (AEL)", "url": "#experience"}
+  },
   "focus": "My work spans VLA and world–action models, robot in-context learning, 3D vision, reinforcement learning, and distributed training. I build workflows for data generation and processing, and agentic systems that connect learned models to physical manipulation, planning, and simulation.",
   "experience": [
     {

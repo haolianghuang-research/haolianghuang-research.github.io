@@ -12,6 +12,19 @@ SITE = 'https://haolianghuang-research.github.io/'
 catalog = {p['id']: p for p in c['projects'] + d.get('additional_projects', [])}
 
 
+def affiliation_link(item):
+    return f'<a href="{e(item["url"])}">{e(item["name"])}</a>'
+
+
+def affiliation_list(items):
+    links = [affiliation_link(item) for item in items]
+    return ', '.join(links[:-1]) + ', and ' + links[-1] if len(links) > 1 else ''.join(links)
+
+
+affiliations = c['about_affiliations']
+about_labs = f'<p class="lab-affiliations">I currently work with {affiliation_list(affiliations["current"])}. My earlier research and course projects were based at {affiliation_list(affiliations["previous"])}. I also interned at {affiliation_link(affiliations["industry"])}, working on foundation models for vehicle dynamics.</p>'
+
+
 def image_media(slug, css='project-media'):
     p = catalog[slug]
     image = d['pages'][slug].get('thumbnail')
@@ -65,7 +78,7 @@ html = f'''<!doctype html>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 {render_navigation(c)}
 <main class="page" id="main">
-<section class="bio" id="about" aria-labelledby="name"><div class="bio-text"><p class="eyebrow">AI &amp; Robotics</p><h1 id="name">Haoliang Huang</h1><p class="research-line">Embodied AI, VLA &amp; World–Action Models<br>Agentic Manipulation</p><p class="intro">{e(c['intro'])}</p><p>{e(c['focus'])}</p><div class="bio-links"><a class="button button-primary" href="#cv">View CVs</a><a href="{e(c['github'])}">GitHub</a><a href="mailto:{e(c['email'])}">Email</a></div></div><figure class="bio-photo" aria-label="Photos of Haoliang Huang"><div class="portrait-image"><img id="profile-photo" src="assets/portrait-personal.webp" alt="Haoliang Huang wearing a black hat" width="1200" height="1599" fetchpriority="high"></div><figcaption><div class="portrait-caption">Based in Munich<span>TUM · LMU TRESP Lab</span></div><div class="portrait-picker" role="group" aria-label="Choose a portrait photo" hidden><button type="button" data-portrait-src="assets/portrait-personal.webp" data-portrait-alt="Haoliang Huang wearing a black hat" aria-label="Show personal photo" aria-pressed="true"><img src="assets/portrait-personal.webp" alt="" width="44" height="52"></button><button type="button" data-portrait-src="assets/portrait.jpg" data-portrait-alt="Formal portrait of Haoliang Huang" aria-label="Show formal portrait" aria-pressed="false"><img src="assets/portrait.jpg" alt="" width="44" height="52"></button></div></figcaption></figure></section>
+<section class="bio" id="about" aria-labelledby="name"><div class="bio-text"><p class="eyebrow">AI &amp; Robotics</p><h1 id="name">Haoliang Huang</h1><p class="research-line">Embodied AI, VLA &amp; World–Action Models<br>Agentic Manipulation</p><p class="intro">{e(c['intro'])}</p>{about_labs}<p>{e(c['focus'])}</p><div class="bio-links"><a class="button button-primary" href="#cv">View CVs</a><a href="{e(c['github'])}">GitHub</a><a href="mailto:{e(c['email'])}">Email</a></div></div><figure class="bio-photo" aria-label="Photos of Haoliang Huang"><div class="portrait-image"><img id="profile-photo" src="assets/portrait-personal.webp" alt="Haoliang Huang wearing a black hat" width="1200" height="1599" fetchpriority="high"></div><figcaption><div class="portrait-caption">Based in Munich<span>TUM · LMU TRESP Lab</span></div><div class="portrait-picker" role="group" aria-label="Choose a portrait photo" hidden><button type="button" data-portrait-src="assets/portrait-personal.webp" data-portrait-alt="Haoliang Huang wearing a black hat" aria-label="Show personal photo" aria-pressed="true"><img src="assets/portrait-personal.webp" alt="" width="44" height="52"></button><button type="button" data-portrait-src="assets/portrait.jpg" data-portrait-alt="Formal portrait of Haoliang Huang" aria-label="Show formal portrait" aria-pressed="false"><img src="assets/portrait.jpg" alt="" width="44" height="52"></button></div></figcaption></figure></section>
 <section class="awards-section" id="awards" aria-label="Selected awards"><div class="awards-grid">{awards}</div></section>
 <section class="section featured-section" id="featured" aria-labelledby="featured-heading"><div class="section-title"><div><p class="eyebrow">Selected work</p><h2 id="featured-heading">Research &amp; competitions</h2></div></div><p class="section-description">From visual representations and demonstration data to models that act. Six projects across ongoing research, completed systems, and lessons from exploration.</p><div class="featured-grid">{featured}</div></section>
 <section class="research-summary" aria-labelledby="research-heading"><div><p class="eyebrow">Research interests</p><h2 id="research-heading">Learning to perceive,<br>reason, and act.</h2></div><ul class="interest-list">{interests}</ul></section>
