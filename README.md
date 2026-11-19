@@ -27,3 +27,7 @@ The original SVG illustrations are conceptual diagrams. Project detail pages als
 ## Images and detail pages
 
 Each page can define `thumbnail` and `hero_image` objects with `file`, `alt`, and `caption`. Cover images should show attributable project material; captions identify synthetic data, intermediate outputs, archived views, and conceptual illustrations. Set `technical: true` on a section to place implementation detail in an expandable block. The `related` list links connected project pages. Project category filters work without a build dependency; all projects remain visible when JavaScript is unavailable.
+
+## Site navigation
+
+`navigation.py` renders the shared eight-section contents bar for the homepage and every project page. `assets/navigation.css` supplies the sticky desktop bar and mobile disclosure menu; `assets/navigation.js` tracks the current section, manages menu closing and keyboard behavior, and adjusts anchor offsets to the header height. Homepage section IDs must match the shared navigation entries.
