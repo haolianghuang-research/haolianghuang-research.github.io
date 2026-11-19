@@ -22,7 +22,7 @@ def affiliation_list(items):
 
 
 affiliations = c['about_affiliations']
-about_labs = f'<p class="lab-affiliations">I currently work with {affiliation_list(affiliations["current"])}. My earlier research and course projects were based at {affiliation_list(affiliations["previous"])}. I also interned at {affiliation_link(affiliations["industry"])}, working on foundation models for vehicle dynamics.</p>'
+about_labs = f'<p class="lab-affiliations">I currently conduct research with {affiliation_list(affiliations["current"])}.</p>'
 
 
 def image_media(slug, css='project-media'):
