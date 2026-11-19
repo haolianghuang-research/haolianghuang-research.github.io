@@ -20,9 +20,9 @@ The `cv_downloads` list links three public November 2026 PDFs: the full English 
 
 ## Design credits
 
-Adapted from [Jon Barron's academic website](https://github.com/jonbarron/jonbarron.github.io), whose README permits personal reuse. The layout, image-led project cards, responsive typography, and project-detail navigation are customized for this portfolio. Original source reference: `jonbarron/jonbarron.github.io`, `master`, retrieved 2026-11-18. No original research text, papers, analytics, photographs, or domain settings from that website are included.
+The current visual design adapts [Academic Portfolio by Kody](https://github.com/kody1126/academic-portfolio) (MIT): system typography, the large profile heading, rounded portrait frame, blue CV action, and image-led project cards. The upstream copyright and permission notice are retained in [assets/Academic-Portfolio-LICENSE.txt](assets/Academic-Portfolio-LICENSE.txt). All photographs, project content, and CVs are Haoliang Huang’s existing reviewed material; none of the template author’s personal content is copied.
 
-The original SVG illustrations are conceptual diagrams. Project detail pages also use real figures extracted from project reports, experiment notebooks, and presentations, with provenance in their captions. Workflow schematics summarize the documented methods. The portrait is extracted from Haoliang Huang's CV. Lato font files are distributed under the SIL Open Font License; see `assets/OFL-Lato.txt`.
+The original portfolio foundation also credited [Jon Barron’s academic website](https://github.com/jonbarron/jonbarron.github.io). Retained figures and illustrations are documented in [ASSET-CREDITS.md](ASSET-CREDITS.md). The stored Lato font files retain their SIL Open Font License; the current visual design uses system fonts.
 
 ## Images and detail pages
 
@@ -30,4 +30,6 @@ Each page can define `thumbnail` and `hero_image` objects with `file`, `alt`, an
 
 ## Site navigation
 
-`navigation.py` renders the shared eight-section contents bar for the homepage and every project page. `assets/navigation.css` supplies the sticky desktop bar and mobile disclosure menu; `assets/navigation.js` tracks the current section, manages menu closing and keyboard behavior, and adjusts anchor offsets to the header height. Homepage section IDs must match the shared navigation entries.
+`navigation.py` renders the four primary links and a document outline. The homepage outline lists every major section and the six selected projects; each project detail page supplies its own method, data, evaluation, and visual sections. `assets/navigation.css` provides the pinned desktop panel and sliding native-dialog drawer. At widths of at least 1480px, the outline opens alongside the content; narrower screens open it with **Contents**. Desktop collapse preference lasts for the browser session.
+
+`assets/navigation.js` maintains the current section, reading progress, keyboard closing, native modal focus behavior, and the header offset used for anchor jumps. Project cards use stable `research-<slug>` anchors; regular project and CV URLs are preserved. Optional technical sections open when their anchors are followed. The navigation has a static no-JavaScript fallback.

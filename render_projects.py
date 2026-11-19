@@ -40,8 +40,11 @@ def render_all(root, content, details):
         method = ''
         if d.get('pipeline'):
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
-            method = f'<section class="pipeline-section" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
+            method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
+        outline = [{"id":"overview","title":"Overview"}]
+        if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
+        outline.extend({"id":s["id"],"title":s["title"]} for s in d["sections"])
         sections = ''.join(render_section(s) for s in d['sections'])
         gallery = ''
         if d.get('gallery'):
@@ -65,6 +68,8 @@ def render_all(root, content, details):
                 q = catalog[related_slug]
                 related += f'<a href="../{e(related_slug)}/"><span>{e(q["label"])}</span><strong>{e(q["title"])}</strong></a>'
             related += '</div></section>'
+        if gallery: outline.append({'id':'visuals','title':'Project visuals'})
+        if refs: outline.append({'id':'references','title':'Related resources'})
         back_target = '../../#featured' if d.get('featured') else '../../#projects'
         og_image = f'<meta property="og:image" content="https://haolianghuang-research.github.io/assets/projects/{e(image["file"])}">' if image else ''
         html = f'''<!doctype html>
@@ -72,9 +77,9 @@ def render_all(root, content, details):
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
 <meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css"><link rel="stylesheet" href="../../assets/navigation.css"><script src="../../assets/navigation.js" defer></script><script src="../../assets/project-details.js" defer></script></head><body>
-<a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects')}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
-<div class="detail-layout"><aside><nav aria-label="On this page"><p>In this project</p>{section_links}</nav></aside><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+<a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects', outline, p['title'])}
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
+<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)

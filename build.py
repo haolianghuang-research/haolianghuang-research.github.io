@@ -31,7 +31,7 @@ for f in c['featured_projects']:
     slug = f['id']
     tags = ''.join(f'<span>{e(t)}</span>' for t in f.get('skills', []))
     result = f'<p class="featured-evidence"><strong>{e(f["evidence"]["value"])}</strong><span>{e(f["evidence"]["label"])}</span></p>' if f.get('evidence') else ''
-    featured += f'''<article class="featured-card">{image_media(slug, 'featured-media')}
+    featured += f'''<article class="featured-card" id="research-{e(slug)}">{image_media(slug, 'featured-media')}
       <div class="featured-body"><p class="feature-status {e(f.get('status_kind','research'))}">{e(f['status'])}</p>
       <h3><a href="projects/{e(slug)}/">{e(f['title'])}</a></h3><p class="featured-summary">{e(f['summary'])}</p>
       <p class="featured-contribution"><span>My work</span>{e(f['contribution'])}</p>{result}
@@ -61,11 +61,11 @@ html = f'''<!doctype html>
 <meta name="author" content="Haoliang Huang"><link rel="canonical" href="{SITE}">
 <meta property="og:type" content="profile"><meta property="og:title" content="Haoliang Huang | Embodied AI &amp; Robotics"><meta property="og:description" content="Selected research, robot systems, competition projects, and CV."><meta property="og:url" content="{SITE}"><meta property="og:image" content="{SITE}assets/portrait.jpg">
 <meta name="twitter:card" content="summary"><meta name="theme-color" content="#173f58"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/lato-regular.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="assets/styles.css"><link rel="stylesheet" href="assets/featured.css"><link rel="stylesheet" href="assets/navigation.css"><script src="assets/navigation.js" defer></script><script src="assets/site.js" defer></script>
+<link rel="stylesheet" href="assets/styles.css"><link rel="stylesheet" href="assets/featured.css"><link rel="stylesheet" href="assets/navigation.css"><script src="assets/navigation.js" defer></script><script src="assets/site.js" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 {render_navigation(c)}
 <main class="page" id="main">
-<section class="bio" id="about" aria-labelledby="name"><div class="bio-text"><p class="eyebrow">AI &amp; Robotics</p><h1 id="name">Haoliang Huang</h1><p class="research-line">Embodied AI, VLA &amp; World–Action Models<br>Agentic Manipulation</p><p class="intro">{e(c['intro'])}</p><p>{e(c['focus'])}</p><div class="bio-links"><a href="mailto:{e(c['email'])}">Email</a><a href="{e(c['github'])}">GitHub</a><a href="#cv">Download CV</a></div></div><figure class="bio-photo"><img src="assets/portrait.jpg" alt="Portrait of Haoliang Huang" width="1050" height="1050"><figcaption>Munich, Germany<span>TUM · LMU TRESP Lab</span></figcaption></figure></section>
+<section class="bio" id="about" aria-labelledby="name"><div class="bio-text"><p class="eyebrow">AI &amp; Robotics</p><h1 id="name">Haoliang Huang</h1><p class="research-line">Embodied AI, VLA &amp; World–Action Models<br>Agentic Manipulation</p><p class="intro">{e(c['intro'])}</p><p>{e(c['focus'])}</p><div class="bio-links"><a class="button button-primary" href="#cv">View CVs</a><a href="{e(c['github'])}">GitHub</a><a href="mailto:{e(c['email'])}">Email</a></div></div><figure class="bio-photo"><div class="portrait-image"><img src="assets/portrait.jpg" alt="Portrait of Haoliang Huang" width="1050" height="1050"></div><figcaption>Munich, Germany<span>TUM · LMU TRESP Lab</span></figcaption></figure></section>
 <section class="awards-section" id="awards" aria-label="Selected awards"><div class="awards-grid">{awards}</div></section>
 <section class="section featured-section" id="featured" aria-labelledby="featured-heading"><div class="section-title"><div><p class="eyebrow">Selected work</p><h2 id="featured-heading">Research &amp; competitions</h2></div></div><p class="section-description">From visual representations and demonstration data to models that act. Six projects across ongoing research, completed systems, and lessons from exploration.</p><div class="featured-grid">{featured}</div></section>
 <section class="research-summary" aria-labelledby="research-heading"><div><p class="eyebrow">Research interests</p><h2 id="research-heading">Learning to perceive,<br>reason, and act.</h2></div><ul class="interest-list">{interests}</ul></section>
@@ -75,6 +75,6 @@ html = f'''<!doctype html>
 <section class="section skills-section" id="skills" aria-labelledby="skills-heading"><div><h2 id="skills-heading">Technical skills</h2><div class="skills">{skills}</div></div><div><h2>Languages</h2><p>{e(c['languages'])}</p></div></section>
 <section class="section cv-section" id="cv" aria-labelledby="cv-heading"><div class="section-title"><div><p class="eyebrow">November 2026</p><h2 id="cv-heading">Curriculum vitae</h2></div></div><p class="section-description">A complete research and project CV, plus focused English and Chinese versions for embodied AI and robotics roles.</p><div class="cv-downloads">{cvs}</div></section>
 <section class="contact-section" id="contact" aria-labelledby="contact-heading"><div><p class="eyebrow">Research &amp; collaboration</p><h2 id="contact-heading">Let’s talk robotics.</h2></div><a href="mailto:{e(c['email'])}">{e(c['email'])}</a></section>
-</main><footer class="footer"><div><span>© 2026 Haoliang Huang · Updated November 2026</span><span>Adapted from <a href="https://github.com/jonbarron/jonbarron.github.io">Jon Barron’s academic website</a>.</span><a href="#about">Back to top</a></div></footer></body></html>'''
+</main><footer class="footer"><div><span>© 2026 Haoliang Huang · Updated November 2026</span><span>Design adapted from <a href="https://github.com/kody1126/academic-portfolio">Academic Portfolio</a>.</span><a href="#about">Back to top</a></div></footer></body></html>'''
 (ROOT/'index.html').write_text(html)
 print(f'Built homepage and {render_all(ROOT,c,d)} project pages.')
