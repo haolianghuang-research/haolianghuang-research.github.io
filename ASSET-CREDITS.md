@@ -36,3 +36,13 @@ LEGO project: no reliably attributable project photograph was located; its workf
 | CommonRoad Agentic Planner | Historical v0.6.0 replay frame | The project's retained English presentation replay, illustrating vehicle motion and candidate-score diagnosis. The earlier recovery protocol is identified in the caption. |
 
 Featured-card WebP previews derive from the corresponding credited source figures. No private configuration, credential, or training-log screenshot is included.
+
+## November 2026 card refresh
+
+The `*-cover.webp` files are cropped and resized derivatives of the retained figures above. No new robot or benchmark outcomes were generated. RoleWAM pairs an RGB observation with its role labels; ManipArena pairs two scenes from the official benchmark overview (not claimed submission rollouts). RICL pairs AI-generated start/end conditioning stills and labels them as such. The driving cover crops the archived v0.6.0 replay and remains labeled as an archive. The category-pose cover is an intermediate reconstructed shape, not a final pose estimate.
+
+`rule-prediction-cover.svg` is an original code-native conceptual schematic of event-time modeling. Its curve is illustrative and is explicitly not an empirical prediction or performance result.
+
+The three public November 2026 CV copies have the private telephone number removed. The original local CV documents are not modified.
+
+`mobile-robots-cover.svg` is an original conceptual diagram of sensor-guided PID navigation, used because no attributable project photograph was available.

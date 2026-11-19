@@ -69,8 +69,9 @@
         }
       ],
       "thumbnail": {
-        "file": "bitnet-thumbnail.webp",
-        "alt": "Ternary matrix multiplication illustration"
+        "file": "bitnet-cover.webp",
+        "alt": "Ternary-weight computation diagram from the BitNet seminar presentation",
+        "caption": "BitNet · Method illustration"
       },
       "references": [
         {
@@ -82,7 +83,12 @@
           "url": "https://arxiv.org/abs/2402.17764"
         }
       ],
-      "source_note": "Based on my 2024 seminar report and presentation, including the report’s separate discussion of my BERT experiment."
+      "source_note": "Based on my 2024 seminar report and presentation, including the report’s separate discussion of my BERT experiment.",
+      "hero_image": {
+        "file": "bitnet-cover.webp",
+        "alt": "Ternary-weight computation diagram from the BitNet seminar presentation",
+        "caption": "BitNet · Method illustration"
+      }
     },
     "vae": {
       "summary": "A practical comparison of VAE, conditional VAE, and Gaussian-process-prior VAE models, moving from handwritten-digit latent spaces to identity- and viewpoint-aware face reconstruction.",
@@ -160,8 +166,9 @@
         }
       ],
       "thumbnail": {
-        "file": "vae-thumbnail.webp",
-        "alt": "Decoded MNIST latent-space grid"
+        "file": "vae-cover.webp",
+        "alt": "MNIST digit generations across a learned VAE latent-space grid",
+        "caption": "VAE · Generated MNIST samples"
       },
       "references": [
         {
@@ -174,7 +181,12 @@
           "note": "The face-model experiments build on this implementation."
         }
       ],
-      "source_note": "Based on the 2024 group report “Exploring VAEs”, my retained MNIST code and notebook, and the FacePlace training code and July 2024 experiment logs. Group work with Luca Pflittner and Stefan Krieg."
+      "source_note": "Based on the 2024 group report “Exploring VAEs”, my retained MNIST code and notebook, and the FacePlace training code and July 2024 experiment logs. Group work with Luca Pflittner and Stefan Krieg.",
+      "hero_image": {
+        "file": "vae-cover.webp",
+        "alt": "MNIST digit generations across a learned VAE latent-space grid",
+        "caption": "VAE · Generated MNIST samples"
+      }
     },
     "ik": {
       "summary": "A benchmarking suite for choosing Cartesian-space inverse-kinematics methods for the Franka Emika Panda, evaluating numerical solutions, workspace coverage, and motion execution in simulation and on hardware.",
@@ -257,8 +269,9 @@
         }
       ],
       "thumbnail": {
-        "file": "ik-thumbnail.webp",
-        "alt": "IK movement benchmark result"
+        "file": "ik-cover.webp",
+        "alt": "Franka robot arms in the real experimental workspace",
+        "caption": "Franka Emika · Experimental workspace"
       },
       "references": [
         {
@@ -266,7 +279,12 @@
           "url": "https://facebookresearch.github.io/fairo/polymetis/"
         }
       ],
-      "source_note": "Based on my bachelor’s thesis “Benchmarking Cartesian Space Controllers for Franka Emika Robot” and the retained analytical-IK integration."
+      "source_note": "Based on my bachelor’s thesis “Benchmarking Cartesian Space Controllers for Franka Emika Robot” and the retained analytical-IK integration.",
+      "hero_image": {
+        "file": "ik-cover.webp",
+        "alt": "Franka robot arms in the real experimental workspace",
+        "caption": "Franka Emika · Experimental workspace"
+      }
     },
     "interactive-learning": {
       "summary": "Building an interactive kitchen simulation for robot manipulation, with a measured MuJoCo model, Blender assets for HoloLens, demonstration-based door opening, and movement-primitive trajectory processing.",
@@ -345,11 +363,17 @@
         }
       ],
       "thumbnail": {
-        "file": "interactive-learning-thumbnail.webp",
-        "alt": "Interactive kitchen simulation model"
+        "file": "interactive-learning-cover.webp",
+        "alt": "Modeled kitchen environment for Franka interactive learning experiments",
+        "caption": "Franka interaction · Simulated kitchen"
       },
       "references": [],
-      "source_note": "Based on my September 2023 practical-course report and the saved simulation assets and demonstrations used in my presentation."
+      "source_note": "Based on my September 2023 practical-course report and the saved simulation assets and demonstrations used in my presentation.",
+      "hero_image": {
+        "file": "interactive-learning-cover.webp",
+        "alt": "Modeled kitchen environment for Franka interactive learning experiments",
+        "caption": "Franka interaction · Simulated kitchen"
+      }
     },
     "outlier": {
       "summary": "Odex is a team-built web platform for configuring and comparing outlier-detection experiments on high-dimensional tabular data, turning reusable detector workflows into an accessible browser interface.",
@@ -428,11 +452,17 @@
         }
       ],
       "thumbnail": {
-        "file": "outlier-thumbnail.webp",
-        "alt": "Odex experiment-management dashboard"
+        "file": "outlier-cover.webp",
+        "alt": "Odex experiment dashboard with run status and execution records",
+        "caption": "Odex · Experiment dashboard"
       },
       "references": [],
-      "source_note": "Based on the team’s January 2023 design document, February 2023 implementation document, and retained experiment-support code. Team members: Ao Zuo, Christoph Usbeck, Daonan Zhang, Haoliang Huang, and Yuqi Cao."
+      "source_note": "Based on the team’s January 2023 design document, February 2023 implementation document, and retained experiment-support code. Team members: Ao Zuo, Christoph Usbeck, Daonan Zhang, Haoliang Huang, and Yuqi Cao.",
+      "hero_image": {
+        "file": "outlier-cover.webp",
+        "alt": "Odex experiment dashboard with run status and execution records",
+        "caption": "Odex · Experiment dashboard"
+      }
     },
     "mobile-robots": {
       "summary": "Programming a LEGO Mindstorms EV3 robot to navigate a multi-stage course through sensor feedback, calibrated motion control, and explicit task logic.",
@@ -496,7 +526,17 @@
       ],
       "gallery": [],
       "references": [],
-      "source_note": "Based on retained EV3 MicroPython programs and course notes. The archived notes also contain material from earlier cohorts, whose robots and competition results are not presented as my own."
+      "source_note": "Based on retained EV3 MicroPython programs and course notes. The archived notes also contain material from earlier cohorts, whose robots and competition results are not presented as my own.",
+      "thumbnail": {
+        "file": "mobile-robots-cover.svg",
+        "alt": "Conceptual mobile robot following a curved route with sensor-guided PID navigation",
+        "caption": "Mobile navigation · Conceptual schematic"
+      },
+      "hero_image": {
+        "file": "mobile-robots-cover.svg",
+        "alt": "Conceptual mobile robot following a curved route with sensor-guided PID navigation",
+        "caption": "Mobile navigation · Conceptual schematic"
+      }
     },
     "traffic": {
       "summary": "An end-to-end drone-video traffic-analysis pipeline combining fine-tuned object detectors, a lane-aware vehicle tracker, and directional counting, evaluated on a custom annotated highway dataset.",
@@ -575,8 +615,9 @@
         }
       ],
       "thumbnail": {
-        "file": "traffic-thumbnail.webp",
-        "alt": "Drone-video vehicle tracking"
+        "file": "traffic-cover.webp",
+        "alt": "Vehicles tracked on a highway in aerial video",
+        "caption": "Drone video · Vehicle tracking"
       },
       "references": [
         {
@@ -584,7 +625,12 @@
           "url": "https://github.com/ultralytics/yolov5"
         }
       ],
-      "source_note": "Based on my thesis “Automatisierte Auswertung von Drohnenvideos zur Erhebung von Verkehr”, including the detector evaluation, tracker design, and counting experiments. Figures are extracted from the project’s own implementation/results sections."
+      "source_note": "Based on my thesis “Automatisierte Auswertung von Drohnenvideos zur Erhebung von Verkehr”, including the detector evaluation, tracker design, and counting experiments. Figures are extracted from the project’s own implementation/results sections.",
+      "hero_image": {
+        "file": "traffic-cover.webp",
+        "alt": "Vehicles tracked on a highway in aerial video",
+        "caption": "Drone video · Vehicle tracking"
+      }
     },
     "semantic-reconstruction": {
       "summary": "Exploring how geometric completion and learned instance features can turn partial RGB-D observations into more complete, structured 3D representations, with an emphasis on scalable training and evaluation.",
@@ -630,7 +676,8 @@
           "title": "Task and research focus",
           "paragraphs": [
             "A single view exposes only part of an object. Geometry completion aims to infer missing surfaces; a useful scene representation must also preserve which object or part each point belongs to. This project explored that intersection through existing reconstruction models, additional feature learning, and experiments on large rendered datasets.",
-            "My work combined method integration and selected model refinement with the engineering needed to run data generation, distributed training and large-scale experiments. The project builds on pretrained research models rather than treating those models as original inventions."
+            "My work combined method integration and selected model refinement with the engineering needed to run data generation, distributed training and large-scale experiments. The project builds on pretrained research models rather than treating those models as original inventions.",
+            "The project included collaboration with a Carnegie Mellon University researcher from the RaySt3R author team. My work focused on model integration and refinement, distributed training on Slurm, large-scale experiments, and data-generation workflows."
           ]
         },
         {
@@ -702,8 +749,14 @@
       ],
       "source_note": "Based on the team’s model implementation, dataset loaders, training configuration, and saved experiment notebooks. Reconstruction backbones are credited in the related resources.",
       "thumbnail": {
-        "file": "semantic-reconstruction-thumbnail.webp",
-        "alt": "Tabletop input from the project segmentation experiment"
+        "file": "semantic-reconstruction-cover.webp",
+        "alt": "RGB scene of household objects used in the semantic reconstruction project",
+        "caption": "YCB-Video scene · Project notebook"
+      },
+      "hero_image": {
+        "file": "semantic-reconstruction-cover.webp",
+        "alt": "RGB scene of household objects used in the semantic reconstruction project",
+        "caption": "YCB-Video scene · Project notebook"
       }
     },
     "pose": {
@@ -815,8 +868,14 @@
       ],
       "source_note": "Figures are real experiments from the team’s final presentation, not examples reproduced from the model papers. The underlying models and dataset are credited above.",
       "thumbnail": {
-        "file": "pose-thumbnail.webp",
-        "alt": "HouseCat6D RGB and depth comparison"
+        "file": "pose-cover.webp",
+        "alt": "Input objects and generated 3D object reconstructions from pose experiments",
+        "caption": "Object reconstruction · Project experiments"
+      },
+      "hero_image": {
+        "file": "pose-cover.webp",
+        "alt": "Input objects and generated 3D object reconstructions from pose experiments",
+        "caption": "Object reconstruction · Project experiments"
       }
     },
     "category-pose": {
@@ -940,8 +999,9 @@
       ],
       "source_note": "Challenge integration and training work are distinguished from the original GCEPose architecture. Figures are intermediate representations from my challenge presentation.",
       "thumbnail": {
-        "file": "category-pose-featured.webp",
-        "alt": "Category-pose mug shape reconstruction"
+        "file": "category-pose-cover.webp",
+        "alt": "A reconstructed mug represented by colored 3D semantic shape points",
+        "caption": "Reconstructed 3D shape prior · Intermediate result"
       },
       "featured": true,
       "status": "ICCV 2025 Workshop · First prize",
@@ -949,7 +1009,16 @@
         "Geometric data pipelines",
         "Category priors",
         "Mixed-dataset training"
-      ]
+      ],
+      "related": [
+        "pose",
+        "semantic-reconstruction"
+      ],
+      "hero_image": {
+        "file": "category-pose-cover.webp",
+        "alt": "A reconstructed mug represented by colored 3D semantic shape points",
+        "caption": "Reconstructed 3D shape prior · Intermediate result"
+      }
     },
     "humanoid": {
       "summary": "A hierarchical learning project that adapts human motion to Booster T1 and connects reusable whole-body control with visual object interaction in simulation.",
@@ -1043,8 +1112,9 @@
         }
       ],
       "thumbnail": {
-        "file": "humanoid-thumbnail.webp",
-        "alt": "Booster T1 interacting with a box in simulation"
+        "file": "humanoid-cover.webp",
+        "alt": "Booster T1 humanoid in a simulated locomotion and manipulation environment",
+        "caption": "Booster T1 · Simulation"
       },
       "references": [
         {
@@ -1063,7 +1133,12 @@
           "note": "Human-to-robot motion retargeting"
         }
       ],
-      "source_note": "Based on the team's mid-term and end-term presentations and the Booster T1 implementation. Images show the team's simulation experiments; contributions are described at team level."
+      "source_note": "Based on the team's mid-term and end-term presentations and the Booster T1 implementation. Images show the team's simulation experiments; contributions are described at team level.",
+      "hero_image": {
+        "file": "humanoid-cover.webp",
+        "alt": "Booster T1 humanoid in a simulated locomotion and manipulation environment",
+        "caption": "Booster T1 · Simulation"
+      }
     },
     "pi0": {
       "summary": "Practical deployment of vision-language-action policies on real robot arms, with custom demonstration collection and evaluation of how pretrained policies behave in physical scenes.",
@@ -1150,8 +1225,9 @@
         }
       ],
       "thumbnail": {
-        "file": "pi0-thumbnail.webp",
-        "alt": "SO-101 real-world demonstration-collection setup"
+        "file": "pi0-cover.webp",
+        "alt": "SO-101 leader and follower robot arms on the project workbench",
+        "caption": "SO-101 · Real-robot setup"
       },
       "references": [
         {
@@ -1170,7 +1246,12 @@
           "note": "Robot-learning tooling"
         }
       ],
-      "source_note": "Based on the team's July 2025 π₀ seminar presentation and the subsequent deployment experience recorded in the CV. Baseline-model capabilities are distinguished from project-specific experiments."
+      "source_note": "Based on the team's July 2025 π₀ seminar presentation and the subsequent deployment experience recorded in the CV. Baseline-model capabilities are distinguished from project-specific experiments.",
+      "hero_image": {
+        "file": "pi0-cover.webp",
+        "alt": "SO-101 leader and follower robot arms on the project workbench",
+        "caption": "SO-101 · Real-robot setup"
+      }
     },
     "safe-rl": {
       "summary": "Coauthored research on adapting robot policies after sim-to-real transfer while respecting safety costs and retaining the broadly useful behavior learned in randomized simulation.",
@@ -1257,8 +1338,9 @@
         }
       ],
       "thumbnail": {
-        "file": "safe-rl-thumbnail.webp",
-        "alt": "Simulation and real KUKA reach-and-balance experiment"
+        "file": "safe-rl-cover.webp",
+        "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",
+        "caption": "KUKA manipulation · Simulation and real setup"
       },
       "references": [
         {
@@ -1275,7 +1357,12 @@
           "url": "https://github.com/tum-i6/VTPRL"
         }
       ],
-      "source_note": "Based on the coauthored SCDA paper and its implementation. Reported numerical results belong to the study as a whole; they are not attributed to one author's individual work."
+      "source_note": "Based on the coauthored SCDA paper and its implementation. Reported numerical results belong to the study as a whole; they are not attributed to one author's individual work.",
+      "hero_image": {
+        "file": "safe-rl-cover.webp",
+        "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",
+        "caption": "KUKA manipulation · Simulation and real setup"
+      }
     },
     "maniparena": {
       "summary": "Fourth place among 32 teams in the CVPR 2026 Workshop ManipArena challenge. I built a manipulation stack that combines a multi-task VLA policy with asynchronous visual task planning and evidence-based progress verification, bridging learned control with long-horizon robot behavior.",
@@ -1380,8 +1467,9 @@
         }
       ],
       "thumbnail": {
-        "file": "maniparena-featured.webp",
-        "alt": "ManipArena bimanual and mobile task suite"
+        "file": "maniparena-cover.webp",
+        "alt": "Two ManipArena benchmark scenes: pouring water and pairing gloves and socks",
+        "caption": "ManipArena benchmark · Real-robot scenes"
       },
       "references": [
         {
@@ -1409,7 +1497,16 @@
         "VLA finetuning",
         "Concurrent agent systems",
         "Robot control interfaces"
-      ]
+      ],
+      "related": [
+        "rolewam",
+        "pi0"
+      ],
+      "hero_image": {
+        "file": "maniparena-cover.webp",
+        "alt": "Two ManipArena benchmark scenes: pouring water and pairing gloves and socks",
+        "caption": "ManipArena benchmark · Real-robot scenes"
+      }
     },
     "commonroad": {
       "summary": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",
@@ -1501,7 +1598,8 @@
       ],
       "thumbnail": {
         "file": "commonroad-thumbnail.webp",
-        "alt": "CommonRoad motion planning trajectory"
+        "alt": "CommonRoad motion planning trajectory",
+        "caption": "Project method / result visualization"
       },
       "references": [
         {
@@ -1510,10 +1608,15 @@
           "note": "Scenario format, benchmarks, and autonomous-driving planning tools."
         }
       ],
-      "source_note": "Based on my CommonRoad challenge approach presentation, the student planner implementation, and archived scenario/solution files. Course edition: 2024–2025."
+      "source_note": "Based on my CommonRoad challenge approach presentation, the student planner implementation, and archived scenario/solution files. Course edition: 2024–2025.",
+      "hero_image": {
+        "file": "commonroad-thumbnail.webp",
+        "alt": "CommonRoad motion planning trajectory",
+        "caption": "Project method / result visualization"
+      }
     },
     "rolewam": {
-      "summary": "My ongoing research project on task-aware world-action models: learning to generate structured role representations alongside RGB and robot actions, then testing which representations help control without requiring future observations at deployment.",
+      "summary": "Developing a joint attention module that connects visual inputs, task-role maps, and robot actions on FastWAM / Wan2.2, while exploring how RoboTTT’s memory mechanism could support longer-horizon manipulation.",
       "facts": [
         {
           "label": "Research direction",
@@ -1528,26 +1631,26 @@
           "value": "RoboTwin · 3 cameras · 7 semantic roles"
         },
         {
-          "label": "Completed evaluation",
-          "value": "50 tasks · clean/randomized conditions · 10 matched seeds"
+          "label": "Research setting",
+          "value": "TUM Photogrammetry and Remote Sensing · Advisor: Weihang Li"
         }
       ],
       "pipeline": [
         {
-          "title": "Structure the scene",
-          "text": "Align RGB, seven task-aware role labels, robot state, and actions in three-camera demonstration windows."
+          "title": "Observe",
+          "text": "Language, RGB cameras, and robot state."
         },
         {
-          "title": "Learn joint dynamics",
-          "text": "Extend pretrained world/action experts with role-map flow matching, causal attention, and checkpoint-compatible initialization."
+          "title": "Represent roles",
+          "text": "Task-specific roles for objects, robot parts, and surfaces."
         },
         {
-          "title": "Act from current observations",
-          "text": "Generate role features and action chunks from the current RGB, language, and proprioception, with a cached action-only inference path."
+          "title": "Connect",
+          "text": "Joint attention across visual, role, and action representations."
         },
         {
-          "title": "Compare representations",
-          "text": "Evaluate role gates, compressed RoleState codecs, and persistent role encoders under explicit data and rollout contracts."
+          "title": "Study memory",
+          "text": "Explore retained context for longer manipulation sequences."
         }
       ],
       "sections": [
@@ -1563,10 +1666,10 @@
           "id": "contribution",
           "title": "My contribution",
           "paragraphs": [
-            "I developed the model, data interface, training system, and evaluation loop."
+            "My work spans model adaptation, structured visual supervision, and the training and evaluation system. The current emphasis is the joint attention module and its connection to memory."
           ],
           "bullets": [
-            "Implemented joint RGB–RoleMap–action modeling, split/gated role attention variants, independent modality noise schedules, and first-frame role denoising.",
+            "Developing a joint attention module linking RGB visual inputs, task-role maps (RoleMap), and action representations; comparing ways to make task-relevant information available to the policy.",
             "Built checkpoint migration that preserves existing RGB/action weights and initializes new role components without discarding the pretrained model.",
             "Developed synchronized HDF5 data contracts, role-label validation, camera/time alignment, and compressed RoleState encoder/decoder experiments.",
             "Engineered distributed training and checkpoint recovery, LoRA-based workstation experiments, cached causal inference, and paired task-by-task benchmark analysis."
@@ -1574,9 +1677,10 @@
         },
         {
           "id": "architecture",
-          "title": "Model architecture and deployment",
+          "title": "Model: visual inputs, roles, and actions",
           "paragraphs": [
-            "The foundation combines a frozen Wan video VAE, T5 instruction conditioning, a visual diffusion transformer, and an action expert. In the initial RoleWAM design, RGB and role videos are encoded separately by the same VAE: their 48-channel latents form a 96-channel visual stream. Expanded input/output projections preserve the original RGB weights, while the new role weights begin at zero. Later variants separate RGB and role tokens and control their interaction through learned gates.",
+            "RoleWAM builds on FastWAM / Wan2.2-TI2V-5B. The foundation combines a frozen Wan video VAE, T5 language conditioning, a visual diffusion transformer, and an action expert. I am developing a joint attention module to connect the visual, RoleMap, and action representations. The goal is to expose the functional roles of objects and robot parts during action generation.",
+            "Earlier variants encoded RGB and RoleMap videos using the same VAE and expanded the visual stream from 48 to 96 latent channels. New projections preserved pretrained RGB weights; later experiments separated the modality tokens. These are implementation variants in the research history, rather than a claim that the current architecture has already been finalized.",
             "RGB, RoleMap, and action prediction use flow-matching objectives with independently controlled noise schedules. The model learns both visual dynamics and continuous robot actions. At deployment, a role map starts from noise rather than being supplied by a segmentation oracle. The action-only path uses current-frame visual context and cached attention keys/values; optional joint inference additionally renders predicted RGB and role trajectories for diagnosis.",
             "The deployed causal interface uses the current image, instruction, and proprioception. Training can supervise future visual states, but that does not permit the control branch to read future ground truth at inference. This separation is enforced in the attention and input contracts."
           ]
@@ -1587,12 +1691,14 @@
           "paragraphs": [
             "The RoboTwin data pipeline aligns head and two wrist cameras with fourteen-dimensional dual-arm actions. A training window contains 33 state steps and 32 actions; nine video frames are sampled at offsets 0, 4, …, 32. The camera views are arranged in a fixed spatial canvas and processed consistently for RGB and role supervision.",
             "The seven labels distinguish background, robot arm, gripper/wrist-camera assembly, directly manipulated object, indirectly involved object, work surface, and distractor. Role IDs describe function in the task rather than merely object category. Dataset validation checks the schema and camera/time alignment, including task-specific distinctions between manipulated parts and surrounding objects."
-          ]
+          ],
+          "technical": true
         },
         {
           "id": "progress",
-          "title": "Ongoing representation experiments",
+          "title": "Current direction: memory for manipulation",
           "paragraphs": [
+            "I am studying how to combine the joint attention module with RoboTTT’s memory mechanism. This is ongoing research: I am investigating which task-role information should be retained across observations and how it could help action decisions over longer interactions. A completed memory-integrated policy or a measured improvement is not claimed.",
             "A separate RoleState branch compresses role-conditioned visual features and end-effector/gripper state into structured temporal tokens. I use reconstruction experiments to test what the representation retains before coupling it to action generation. Some reconstruction-only variants use privileged future RGB as an upper-bound experiment; these are not described as deployable causal models.",
             "The latest role-encoder experiments investigate learned persistent parameters with separate key and query projections: one branch reconstructs clean role features, while the other reads the same learned matrix to produce a residual. These parameters are trained offline and frozen during inference. Despite historical experiment names, the current design does not update weights online or claim test-time adaptation. Training diagnostics and generated examples are available; a complete benchmark for this newest branch is still pending."
           ]
@@ -1642,8 +1748,9 @@
         }
       ],
       "thumbnail": {
-        "file": "rolewam-featured.webp",
-        "alt": "Task-aware scene roles generated by RoleWAM"
+        "file": "rolewam-cover.webp",
+        "alt": "RoboTwin RGB observation beside the corresponding task-role labels",
+        "caption": "RGB and RoleMap · Training example"
       },
       "references": [
         {
@@ -1669,19 +1776,34 @@
           "title": "Wan 2.2",
           "url": "https://github.com/Wan-Video/Wan2.2",
           "note": "Pretrained video-model foundation"
+        },
+        {
+          "title": "RoboTTT · Context Scaling for Robot Policies",
+          "url": "https://research.nvidia.com/labs/gear/robottt/",
+          "note": "Related work informing the ongoing memory-integration direction."
         }
       ],
-      "source_note": "Based on my RoleWAM implementation, architecture notes, experiment records, and paired RoboTwin evaluation reports. The displayed current-branch predictions are separate from the earlier full-suite benchmark.",
+      "source_note": "Based on my retained implementation, training diagnostics, paired evaluation records, and current research direction. The earlier gated-model benchmark and newest memory experiments are identified separately. Updated November 2026.",
       "featured": true,
-      "status": "Ongoing research",
+      "status": "Ongoing research · September 2026–Present",
       "strengths": [
         "Model architecture",
         "Distributed training",
         "Paired robot evaluation"
-      ]
+      ],
+      "related": [
+        "d4rtvla",
+        "maniparena",
+        "ricl"
+      ],
+      "hero_image": {
+        "file": "rolewam-cover.webp",
+        "alt": "RoboTwin RGB observation beside the corresponding task-role labels",
+        "caption": "RGB and RoleMap · Training example"
+      }
     },
     "ricl": {
-      "summary": "An ongoing robot in-context learning project built on Zero-WAM, studying whether structured human-video instructions and reusable atomic action clips can improve task transfer without collecting a bespoke robot demonstration for every new task.",
+      "summary": "Studying robot in-context learning with the released Zero-WAM backbone: using human demonstration videos to guide new tasks, and building agent workflows for demonstration-video and action-clip data generation and processing.",
       "facts": [
         {
           "label": "Research focus",
@@ -1696,22 +1818,26 @@
           "value": "RoboTwin 2.0 · Bimanual manipulation"
         },
         {
-          "label": "My method",
-          "value": "Atomic clip composition · Robot-grounded Grid–Goal selection"
+          "label": "Research setting",
+          "value": "LMU Munich · TRESP Lab · Sikuan Yan and Dr. Yunpu Ma"
         }
       ],
       "pipeline": [
         {
-          "title": "Ground the task",
-          "text": "Inspect the actual robot trajectory, synchronized camera views, task instruction, and success conditions."
+          "title": "Specify",
+          "text": "Define the task, action phases, and required start/end states."
         },
         {
-          "title": "Build compatible visual context",
-          "text": "Decompose the action, select reviewed human-video clips with compatible spatial and goal conditions, and compose a task prompt."
+          "title": "Generate & review",
+          "text": "Agent workflows produce and check demonstration material."
         },
         {
-          "title": "Condition the world-action model",
-          "text": "Encode the prompt and current observation, predict a robot future and action chunk, execute, and update with real observations."
+          "title": "Compose context",
+          "text": "Select compatible human-video and action clips."
+        },
+        {
+          "title": "Evaluate transfer",
+          "text": "Run the same robot task under controlled context conditions."
         }
       ],
       "sections": [
@@ -1719,6 +1845,7 @@
           "id": "question",
           "title": "The research question",
           "paragraphs": [
+            "At TRESP Lab, I first explored transferring skill and memory mechanisms from LLM agents to VLA policies in August 2026. The limitations of that approach motivated a shift to RICL / Zero-WAM in September, focusing on what a robot can learn directly from demonstration context.",
             "A human demonstration specifies more than an object name: it conveys action order, contact, movement, and the intended final state. My RICL project asks how much of that information can be reused when the target robot task changes. Instead of requiring one exact human demonstration for every scene, the longer-term objective is to construct appropriate visual guidance from reusable skills.",
             "The project separates two questions: whether a complete video from a related task transfers useful information, and whether shorter, spatially compatible clips can be composed into stronger instructions. This distinction keeps a simple transfer baseline separate from the more ambitious compositional-learning objective."
           ]
@@ -1727,8 +1854,8 @@
           "id": "contribution",
           "title": "My contribution",
           "paragraphs": [
-            "I am building the robot-grounded data and experiment layer around the released Zero-WAM backbone: atomic action specifications, clip-composition recipes, Grid–Goal compatibility rules, reviewable data inventories, and controlled transfer evaluations. The neural backbone and its original training objectives are from the Zero-WAM authors; my work investigates how to construct and evaluate the context it receives.",
-            "I also adapted the evaluation runtime for two 24 GB GPUs through FSDP sharding, CPU placement of the text encoder and video VAE, and bounded observation history. Saved configurations distinguish these local resource choices from the released evaluation settings."
+            "I build agent workflows for making and processing the demonstration-video and action-clip data used in these experiments. The workflow turns a task specification into conditioning images, candidate human-demonstration videos, reviewed atomic clips, and traceable context-composition recipes. Each stage keeps its source identity and review status so that a plausible-looking example does not silently become accepted training data.",
+            "My neural-model work uses the authors’ released Zero-WAM backbone. My research contribution is the context-construction and data workflow around it: robot-grounded selection rules, reusable action clips, data checks, and controlled evaluations of how the supplied context changes robot behavior."
           ]
         },
         {
@@ -1744,6 +1871,7 @@
           "title": "Data: preserve robot supervision, vary the human context",
           "paragraphs": [
             "The data layer uses RoboTwin trajectories with robot actions and synchronized head/left-wrist/right-wrist views. The initial A–H study covers eight manipulation tasks, including moving objects onto pads, placing a fan or shoe, rotating a QR-code object, and placing cups and containers. A separate extension investigates the remaining 42 tasks.",
+            "Generation, processing, and review are separate agent-assisted stages. Conditioning stills specify the desired start and end states; full videos are checked for the required physical task; exported clips are checked again for their own action boundaries. Robot trajectories retain their original action labels when the visual context is varied.",
             "For atomic composition, each phase selects a corresponding clip from a reviewed source pool. Selected native frames are concatenated before the complete sequence is encoded by the causal VAE; the documented trainer uses a 61-frame composed condition. The paired robot episode retains its original action supervision. Different appearances and source videos vary the visual instruction without inventing robot action labels."
           ]
         },
@@ -1753,7 +1881,8 @@
           "paragraphs": [
             "Grid–Goal maps the visible tabletop through a homography into a 3 × 3 coordinate system, using the object’s actual support footprint. GRAB matches the starting cell; PLACE matches the destination cell and task-specific final orientation. MOVE first prioritizes matching endpoints, then permits compatible relative displacements with a direction difference up to 45° and a distance ratio from 0.5 to 2. Horizontal reflection transforms the media and spatial labels together.",
             "This is explicit geometry-and-task-conditioned source selection, rather than a demonstrated learned embedding-retrieval system. The action vocabulary also distinguishes grasping, supported placement, free release, opening, pressing, striking, holding, and handover. Source timing, video hashes, object attributes, and stage-state conditions make the resulting recipes inspectable."
-          ]
+          ],
+          "technical": true
         },
         {
           "id": "experiments",
@@ -1797,6 +1926,13 @@
             "The data audits include 400 training and 160 evaluation scenes in the eight-task study, plus 169 proposed robot action segments from representative demonstrations of the remaining 42 tasks. Candidate availability and reviewed data coverage are tracked separately from robot rollout success. Conditioning images, full videos, and exported clips have separate acceptance stages.",
             "The confirmed exact-grid, final-orientation, and mirror policy still needs a verified integration step in the frozen training selector before a new controlled post-training comparison. Further experiments target reverse-order and mismatched-context controls, stronger held-out-task evaluation, and execution-time clip switching. The aim is to test whether the model follows the composed task specification, rather than merely behaving plausibly."
           ]
+        },
+        {
+          "id": "embodied-rsi",
+          "title": "Early exploration: Embodied RSI",
+          "paragraphs": [
+            "For the RoboDojo competition Agent Track, I am studying the algorithms used in the track and beginning preliminary research into Embodied RSI. This work is at an early learning and exploration stage; it is not presented as a completed self-improving robot system."
+          ]
         }
       ],
       "gallery": [
@@ -1837,8 +1973,9 @@
         }
       ],
       "thumbnail": {
-        "file": "ricl-featured.webp",
-        "alt": "Zero-WAM-based stamp-placement simulation rollout"
+        "file": "ricl-cover.webp",
+        "alt": "AI-generated demonstration-conditioning images of a bottle before and after lifting",
+        "caption": "AI-generated conditioning stills · Data workflow"
       },
       "references": [
         {
@@ -1855,21 +1992,30 @@
           "url": "https://robotwin-platform.github.io/"
         }
       ],
-      "source_note": "Based on my retained RICL research specifications, Grid–Goal policies and audits, source-code inspection of the released backbone, and the completed September 2026 paired-seed transfer experiment. Ongoing work; reported local pilot outcomes use the explicitly stated protocol.",
+      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026.",
       "featured": true,
-      "status": "Ongoing research",
+      "status": "Ongoing research · August 2026–Present",
       "strengths": [
         "Demonstration data",
         "In-context transfer",
         "Evaluation infrastructure"
-      ]
+      ],
+      "related": [
+        "rolewam",
+        "maniparena"
+      ],
+      "hero_image": {
+        "file": "ricl-cover.webp",
+        "alt": "AI-generated demonstration-conditioning images of a bottle before and after lifting",
+        "caption": "AI-generated conditioning stills · Data workflow"
+      }
     },
     "d4rtvla": {
-      "summary": "An unfinished research prototype exploring whether explicit 4D object tracking can give a vision-language-action policy better motion information for dynamic manipulation. I built the perception-to-policy feature bridge, temporal attention integration, data tooling and controlled offline experiments; reliable causal closed-loop deployment remains open.",
+      "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",
       "facts": [
         {
-          "label": "My focus",
-          "value": "4D-feature guidance and temporal policy-attention integration"
+          "label": "Research setting",
+          "value": "TUM Photogrammetry and Remote Sensing · Advisor: Weihang Li"
         },
         {
           "label": "Core question",
@@ -1886,20 +2032,20 @@
       ],
       "pipeline": [
         {
-          "title": "Ground the interaction",
-          "text": "Instruction-aware object selection identifies source objects and destinations. SAM3 masks and explicit acceptance checks define which pixels may provide guidance."
+          "title": "Reconstruct",
+          "text": "Start from OpenD4RT’s 4D visual representation."
         },
         {
-          "title": "Extract 4D features",
-          "text": "OpenD4RT queries track selected object pixels through recorded video windows, producing decoder features, trajectories and visibility information."
+          "title": "Predict",
+          "text": "Adapt it to predict future key-object features."
         },
         {
-          "title": "Align features with actions",
-          "text": "A learned adapter attaches view and object-role identities, then supplies time-aligned keys and values to the policy’s native cross-attention layers."
+          "title": "Condition actions",
+          "text": "Study a feature interface to DynamicVLA."
         },
         {
-          "title": "Test the hypothesis",
-          "text": "Paired training compares guidance on/off using matched samples, noise and initialization. Offline action error and tracking quality are measured separately."
+          "title": "Ground & assess",
+          "text": "Explore InstructD4RT; stop after generalization limitations."
         }
       ],
       "sections": [
@@ -1908,6 +2054,7 @@
           "title": "Problem and research direction",
           "paragraphs": [
             "A dynamic manipulation policy must reason about objects that move while the robot is observing and acting. Images and language alone do not expose a persistent, explicit representation of which surface points belong to the target or how those points move over time. D4rtVLA explores whether a 4D reconstruction-and-tracking model can supply that missing structure.",
+            "The main idea was to adapt and train OpenD4RT beyond reconstruction: predict the future features of important objects in a world-model-like way, then make those features available to the VLA policy for action generation. This predictive objective was the central research direction, not only an offline feature-extraction pipeline.",
             "The working hypothesis is to connect task-relevant object motion features to action generation without replacing the pretrained VLA policy. This remains a research question: an implemented conditioning path and lower errors in a small pilot do not by themselves establish better robot task success."
           ]
         },
@@ -1915,6 +2062,7 @@
           "id": "contribution",
           "title": "My contribution",
           "paragraphs": [
+            "I adapted and trained the OpenD4RT-based future key-object feature predictor and investigated its interface with a VLA action generator. Later, I borrowed the instruction-grounding idea from InstructSAM to build InstructD4RT, with the intention of combining it with D4rtVLA.",
             "I developed the integration around the existing DynamicVLA and OpenD4RT models: instruction-conditioned object/mask preparation, accepted-feature sidecars, action-time alignment, multi-view and object-role embeddings, batch-local token padding, and the attention adapter. I also built reproducible dataset subsets, normalization and split checks, paired ablation tools, and visual tracking diagnostics.",
             "A substantial part of the work was defining reliable interfaces between perception and control. Missing or rejected masks must not silently become valid conditioning tokens; source objects, destinations and candidate sources must retain distinct identities; and the same sampled point must stay aligned across pixel coordinates, decoder features and future 3D pseudo-labels."
           ]
@@ -1923,8 +2071,9 @@
           "id": "architecture",
           "title": "Architecture: 4D features inside a flow-matching policy",
           "paragraphs": [
+            "The project had two related development stages: future key-object feature prediction using an adapted OpenD4RT model, and policy-side conditioning experiments using a DynamicVLA adapter. The offline sidecar implementation described below is one prototype path; it should not be confused with a completed online future-prediction policy.",
             "The policy retains DynamicVLA’s flow-matching action generator. A 16-layer action expert alternates eight joint self-attention layers with eight cross-attention layers. It predicts a 16-step action chunk, each step containing translation, rotation and gripper commands.",
-            "Frozen OpenD4RT decoder features have 1,280 channels. A shared learned projection, view embedding and role embedding turn them into policy tokens; each cross-attention layer has its own key/value projections. Action query t attends only to the object-point features aligned with that future step, rather than a flattened memory of every future time. A negative initial attention bias keeps the new memory nearly closed at initialization.",
+            "In the offline adapter prototype, OpenD4RT decoder features have 1,280 channels. A shared learned projection, view embedding and role embedding turn them into policy tokens; each cross-attention layer has its own key/value projections. Action query t attends only to the object-point features aligned with that future step, rather than a flattened memory of every future time. A negative initial attention bias keeps the new memory nearly closed at initialization.",
             "The extra features enter the existing cross-attention memory alongside visual, language and robot-state features. They do not create an additional action-attention block. OpenD4RT and segmentation are run offline to prepare detached sidecars, while the policy learns the adapter and action-conditioning path. The stored 3D trajectories are pseudo-labels, not ground-truth robot action supervision."
           ]
         },
@@ -1934,7 +2083,8 @@
           "paragraphs": [
             "The prototype uses DOM dynamic-manipulation data and an extended DOM-Plus workflow. I prepared a 2,080-episode DOM subset with 1,664 training, 208 validation and 208 test episodes, consistent reindexing and training-only normalization. Its per-source-chunk split is an IID diagnostic split, not evidence of unseen-task generalization.",
             "A later DOM-Plus setup uses a frozen 80-episode generation-complete snapshot with a task-stratified 64/8/8 assignment. Every raw frame remains a policy sample: frames without accepted guidance take the baseline path. Paired training shares each sample batch and flow-matching noise/time draw across both conditions, which isolates the effect of feature injection more carefully."
-          ]
+          ],
+          "technical": true
         },
         {
           "id": "evaluation",
@@ -1946,10 +2096,11 @@
         },
         {
           "id": "status",
-          "title": "Why it remains unfinished",
+          "title": "InstructD4RT and the decision to stop",
           "paragraphs": [
-            "The current feature pipeline can use future frames from prerecorded clips. This makes it useful for offline feature-conditioning experiments, but it does not demonstrate a causal online policy. The implementation explicitly leaves streaming inference unimplemented until the guidance-aware worker can transport the required hidden states.",
-            "Remaining work includes generating useful guidance from information available at decision time, improving grounding and visibility calibration, repeating controlled comparisons over broader held-out tasks, and measuring closed-loop task success and latency. A related instruction-conditioned point-DETR prototype explores task grounding with Qwen features; it is a separate branch, not proof that the complete 4D-to-action system has been deployed."
+            "The later InstructD4RT branch borrowed from InstructSAM to make key-object grounding depend on the instruction. It was intended to provide task-relevant information for the D4rtVLA pipeline. I stopped the direction after finding that InstructD4RT did not generalize sufficiently. The project is therefore a discontinued research prototype, not an active project awaiting deployment.",
+            "There were also engineering and evaluation limits: the offline feature pipeline could use future frames from prerecorded clips, streaming inference was not completed, and the retained ablations did not establish a consistent held-out action-prediction advantage. The useful outcome was a clearer understanding of the grounding and generalization requirements for connecting 4D perception to robot action.",
+            "This work followed the ManipArena competition within the same TUM research setting. In September 2026, I moved to RoleWAM, investigating task-role representations and joint attention rather than continuing this prototype."
           ]
         }
       ],
@@ -1997,25 +2148,35 @@
           "url": "https://huggingface.co/datasets/hzxie/DOM"
         }
       ],
-      "source_note": "Unfinished prototype. Technical progress and offline diagnostics are separated from the remaining causal streaming and closed-loop evaluation work.",
+      "source_note": "Based on my prototype implementation, saved perception and action diagnostics, and the subsequent decision to discontinue the InstructD4RT direction. No closed-loop policy improvement is claimed. Updated November 2026.",
       "thumbnail": {
-        "file": "d4rtvla-featured.webp",
-        "alt": "Instruction-grounded source and destination masks in the D4rtVLA prototype"
+        "file": "d4rtvla-cover.webp",
+        "alt": "A robot manipulating a tool with tracked object points overlaid",
+        "caption": "OpenD4RT tracking diagnostic · YCBInEOAT"
       },
       "featured": true,
-      "status": "Unfinished research prototype",
+      "status": "Discontinued prototype · June–August 2026",
       "strengths": [
         "4D-to-policy integration",
         "Temporal attention",
         "Controlled ablations"
-      ]
+      ],
+      "related": [
+        "rolewam",
+        "maniparena"
+      ],
+      "hero_image": {
+        "file": "d4rtvla-cover.webp",
+        "alt": "A robot manipulating a tool with tracked object points overlaid",
+        "caption": "OpenD4RT tracking diagnostic · YCBInEOAT"
+      }
     },
     "agentic-planner": {
-      "summary": "An ongoing language-agent planning system for interactive driving in CommonRoad and SUMO. I built the tool-driven execution architecture, planning and prediction interfaces, bounded decision contracts, and independently audited evaluation pipeline that connect high-level reasoning to checked vehicle motion.",
+      "summary": "Building a GPT-6.1 agentic planner that connects language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks in closed-loop CommonRoad/SUMO simulation.",
       "facts": [
         {
-          "label": "System",
-          "value": "Language agent + native trajectory planners + physical execution checks"
+          "label": "Agent and tools",
+          "value": "GPT-6.1 · MCP · Numerical trajectory planning"
         },
         {
           "label": "Environment",
@@ -2026,8 +2187,8 @@
           "value": "Versioned, closed-loop 100-scenario campaigns"
         },
         {
-          "label": "Status",
-          "value": "Active development · Frozen evaluations and newer engineering revisions"
+          "label": "Research setting",
+          "value": "TUM CPS · Youran Wang and Prof. Matthias Althoff"
         }
       ],
       "pipeline": [
@@ -2053,6 +2214,7 @@
           "id": "task",
           "title": "The problem: reasoning that survives execution",
           "paragraphs": [
+            "This is part of my student research assistant work at TUM’s Chair of Cyber-Physical Systems, starting in October 2026, under Youran Wang and Prof. Matthias Althoff. The current agent uses GPT-6.1; archived release-specific studies below include earlier model and configuration choices.",
             "A driving agent has to reconcile route progress, interaction with other vehicles, feasible vehicle dynamics, and a goal with spatial and temporal constraints. A plausible verbal plan is only one part of that problem: it must produce an executable next motion and respond when the traffic changes.",
             "This project investigates a hierarchy in which a language agent chooses strategies and interprets difficult interactions, while numerical planners and native validation handle trajectories and physical execution. The experiments use CommonRoad tasks with live SUMO traffic, so surrounding vehicles evolve in response to the simulation rather than simply following a hidden prerecorded future."
           ]
@@ -2064,7 +2226,8 @@
             "Built the agent–environment integration: persistent sessions, structured MCP tools, planning feedback, reference-path interfaces, and explicit action/state receipts.",
             "Developed the decision contracts between high-level reasoning, planner choice, traffic-policy labels, candidate ranking, forward prediction, and bounded automatic execution.",
             "Implemented versioned experimental orchestration, immutable source/input manifests, per-attempt records, independent execution audits, and fresh-initial-state retests after repairs.",
-            "Built replay and diagnosis tooling that ties visible vehicle motion to candidate scores, selected trajectories, warnings, strategy changes, and recorded outcomes."
+            "Built replay and diagnosis tooling that ties visible vehicle motion to candidate scores, selected trajectories, warnings, strategy changes, and recorded outcomes.",
+            "Alongside the planner, developing a Transformer with a logistic-hazard decoder to predict time to traffic-rule violations, with multi-seed validation and feature ablations."
           ]
         },
         {
@@ -2124,6 +2287,18 @@
             "Development continues on traffic-policy reasoning, forecast completeness, timing-aware interaction, planner recovery from the current state, and reliable model/tool transport. The published selected-forecast engineering revision has its own component and tool-loading validation; it does not inherit a full-suite result from an older release.",
             "The central capability developed here is connecting an uncertain reasoning system to a stateful physical simulator through explicit contracts, useful feedback, and reproducible experiments. Native CommonRoad, SUMO, planner, and SPOT/SONIA components remain credited foundations; my work is the agentic integration and the execution/evaluation machinery around them."
           ]
+        },
+        {
+          "id": "rule-prediction",
+          "title": "Related work: neural traffic-rule prediction",
+          "paragraphs": [
+            "My HiWi work also includes predicting when a traffic-rule violation may occur. A Transformer processes grouped histories of vehicle dynamics and logical robustness features, together with a road-network representation; a logistic-hazard decoder estimates the event-time distribution rather than only a yes/no label.",
+            "The workflow covers highD, inD, and MONA data, hyperparameter search with Optuna TPE, and validation across five seeds. A retained feature-ablation study contains six rules × nine configurations × five seeds, totaling 270 checkpoints. It compares the contribution of rule-robustness histories, vehicle-state features, and road context. Those results are validation results; an independent test evaluation is not claimed."
+          ],
+          "link": {
+            "url": "../rule-prediction/",
+            "title": "Read the neural rule-prediction project"
+          }
         }
       ],
       "gallery": [
@@ -2150,8 +2325,9 @@
         }
       ],
       "thumbnail": {
-        "file": "agentic-planner-architecture.svg",
-        "alt": "Agentic driving architecture with checked planning and feedback"
+        "file": "agentic-planner-cover.webp",
+        "alt": "Lanelet road geometry, ego vehicle, traffic, and selected path from an archived CommonRoad replay",
+        "caption": "CommonRoad simulation · Archived replay"
       },
       "references": [
         {
@@ -2167,27 +2343,142 @@
       ],
       "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols.",
       "featured": true,
-      "status": "Ongoing research",
+      "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
       "strengths": [
         "Agent-tool design",
         "Planning & prediction",
         "Reproducible evaluation"
-      ]
+      ],
+      "related": [
+        "rule-prediction",
+        "commonroad"
+      ],
+      "hero_image": {
+        "file": "agentic-planner-cover.webp",
+        "alt": "Lanelet road geometry, ego vehicle, traffic, and selected path from an archived CommonRoad replay",
+        "caption": "CommonRoad simulation · Archived replay"
+      }
+    },
+    "rule-prediction": {
+      "summary": "Learning when a traffic-rule violation may occur from vehicle histories, logical robustness features, and road-network context, using a Transformer with a logistic-hazard decoder.",
+      "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
+      "facts": [
+        {
+          "label": "Model",
+          "value": "Grouped sequence Transformer + logistic-hazard decoder"
+        },
+        {
+          "label": "Data sources",
+          "value": "highD · inD · MONA"
+        },
+        {
+          "label": "Study",
+          "value": "6 rules · 9 feature settings · 5 seeds"
+        },
+        {
+          "label": "Advisors",
+          "value": "Youran Wang · Prof. Matthias Althoff"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Extract histories",
+          "text": "Vehicle states, rule robustness, and road geometry."
+        },
+        {
+          "title": "Encode context",
+          "text": "Separate feature groups and road-network encoding."
+        },
+        {
+          "title": "Predict event time",
+          "text": "Transformer plus logistic-hazard decoder."
+        },
+        {
+          "title": "Validate",
+          "text": "Censored-data metrics, five seeds, and feature ablations."
+        }
+      ],
+      "sections": [
+        {
+          "id": "problem",
+          "title": "Predict time, not only a violation label",
+          "paragraphs": [
+            "A safety monitor can check whether a traffic rule is already violated. Prediction asks a different question: given the recent motion and scene, when is a violation likely to happen? Event-time modeling also needs to account for censored examples, where no violation is observed within the available interval.",
+            "This work is part of my TUM CPS HiWi role and complements the CommonRoad agentic-planning project. The neural predictor and the numerical execution checks are distinct components; this page does not imply that every experiment is already integrated into the driving agent."
+          ]
+        },
+        {
+          "id": "model",
+          "title": "Transformer and logistic-hazard model",
+          "paragraphs": [
+            "The model groups the time-varying inputs by their meaning: logical robustness features and vehicle dynamics are encoded with their respective branches, while road segments supply environmental context. A sequence Transformer aggregates the observation history, and a logistic-hazard decoder predicts discrete event-time hazards.",
+            "The retained configuration uses an observation history of up to 32 steps, a 64-dimensional Transformer representation, two attention heads, and a road-network encoder. These describe one selected experimental configuration, rather than a universal architecture claim."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My work on the research workflow",
+          "bullets": [
+            "Developing and evaluating the grouped sequence model and event-time prediction setup.",
+            "Using Optuna TPE for hyperparameter search, with checkpoint selection based on validation metrics.",
+            "Comparing explicit feature groups through controlled masks while retaining the model branches and input shapes.",
+            "Preparing multi-seed results, selected-checkpoint inventories, and paired feature-ablation summaries."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Data and validation",
+          "paragraphs": [
+            "The broader workflow uses highD, inD, and MONA traffic data. Temporal histories and traffic-rule robustness features are prepared for event prediction; data-source and rule-specific configurations determine the concrete split and endpoint.",
+            "The retained ablation study fixes a selected model configuration and compares six rules under nine feature settings and five common seeds. All 270 selected checkpoints are indexed. AUC, integrated Brier score, and rule-aware average precision are used to inspect discrimination and time-dependent prediction quality."
+          ]
+        },
+        {
+          "id": "findings",
+          "title": "What the feature study supports",
+          "paragraphs": [
+            "In the fixed validation setup, the complete input achieved the highest overall mean composite score. Removing both logical-robustness feature groups produced the largest aggregate loss. This supports the value of rule-related history in that experiment; it does not establish a statistically significant winner for every individual rule.",
+            "The study reports seed variation and paired differences. The reported checkpoints and rankings are validation-based, and no independent test evaluation is claimed."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "CommonRoad",
+          "url": "https://commonroad.in.tum.de/",
+          "note": "Scenario, vehicle, and traffic-rule ecosystem."
+        }
+      ],
+      "gallery": [],
+      "source_note": "Based on the retained model configuration, completed feature-ablation report, and selected-checkpoint inventory. Public summary omits private datasets, paths, configurations, and credentials. Updated November 2026.",
+      "related": [
+        "agentic-planner"
+      ],
+      "thumbnail": {
+        "file": "rule-prediction-cover.svg",
+        "alt": "Conceptual model diagram showing vehicle histories, a Transformer, and time-to-violation prediction",
+        "caption": "Model schematic · Conceptual illustration"
+      },
+      "hero_image": {
+        "file": "rule-prediction-cover.svg",
+        "alt": "Conceptual model diagram showing vehicle histories, a Transformer, and time-to-violation prediction",
+        "caption": "Model schematic · Conceptual illustration"
+      }
     }
   },
   "additional_projects": [
     {
       "id": "maniparena",
       "title": "AI Agent + VLA for ManipArena",
-      "label": "Embodied AI",
-      "organization": "CVPR 2026 Workshop · ManipArena Challenge",
-      "dates": "2026",
+      "label": "AI · VLA · Agent",
+      "organization": "TUM · Photogrammetry and Remote Sensing · CVPR Workshop",
+      "dates": "Apr – May 2026",
       "type": "Competition project"
     },
     {
       "id": "category-pose",
       "title": "Category-Level 6D Object Pose Estimation",
-      "label": "3D vision",
+      "label": "AI · 3D CV",
       "organization": "ICCV 2025 Workshop · WCLOP Challenge",
       "dates": "2025",
       "type": "Competition project"
@@ -2203,34 +2494,34 @@
     {
       "id": "rolewam",
       "title": "RoleWAM: Task-Aware World–Action Modeling",
-      "label": "World–action models",
-      "organization": "Independent research",
-      "dates": "2026",
+      "label": "AI · VLA · WAM",
+      "organization": "TUM · Photogrammetry and Remote Sensing",
+      "dates": "Sep 2026 – Present",
       "type": "Model and systems research"
     },
     {
       "id": "ricl",
       "title": "RICL: Demonstration Transfer with Zero-WAM",
-      "label": "Robot in-context learning",
-      "organization": "Independent research · RoboTwin",
-      "dates": "2026",
+      "label": "AI · VLA · WAM · Agent",
+      "organization": "LMU Munich · TRESP Lab",
+      "dates": "Aug 2026 – Present",
       "type": "Data and transfer-learning research"
     },
     {
       "id": "agentic-planner",
       "title": "CommonRoad Agentic Planner",
-      "label": "Agentic robotics",
-      "organization": "CommonRoad / SUMO research project",
-      "dates": "2026",
+      "label": "AI · Autonomous driving · Agent",
+      "organization": "TUM · Cyber-Physical Systems",
+      "dates": "Oct 2026 – Present",
       "type": "Planning and evaluation systems"
     },
     {
       "id": "d4rtvla",
-      "title": "D4rtVLA: 4D Features for Action Policies",
-      "label": "Geometry-guided robot learning",
-      "organization": "Exploratory research",
-      "dates": "2026",
-      "type": "Unfinished research prototype"
+      "title": "D4rtVLA / InstructD4RT",
+      "label": "AI · VLA · 4D CV",
+      "organization": "TUM · Photogrammetry and Remote Sensing",
+      "dates": "Jun – Aug 2026",
+      "type": "Discontinued research prototype"
     }
   ]
 }

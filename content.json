@@ -2,20 +2,69 @@
   "name": "Haoliang Huang",
   "email": "haoliang.huang.research@gmail.com",
   "github": "https://github.com/haolianghuang-research",
-  "intro": "I work on embodied AI, with a focus on world–action models, demonstration-conditioned transfer, and agentic robotics. I study Robotics, Cognition, Intelligence at the Technical University of Munich (TUM), following a Computer Science degree at the Karlsruhe Institute of Technology (KIT).",
-  "focus": "My projects span model architecture and multimodal data pipelines through distributed training, robot/simulation integration, and controlled evaluation. I am interested in representations and interfaces that make complex robot behavior easier to learn, inspect, and improve.",
+  "intro": "I study how robots can use visual experience, language, and memory to learn new tasks. I am a master’s student in Robotics, Cognition, Intelligence at the Technical University of Munich, with a B.Sc. in Computer Science from KIT.",
+  "focus": "My work spans VLA and world–action models, robot in-context learning, 3D vision, reinforcement learning, and distributed training. I build workflows for data generation and processing, and agentic systems that connect learned models to physical manipulation, planning, and simulation.",
   "experience": [
     {
+      "title": "Student Research Assistant · Agentic Driving & Rule Prediction",
+      "fields": [
+        "AI",
+        "Autonomous Driving",
+        "Agent"
+      ],
+      "organization": "Technical University of Munich · Cyber-Physical Systems",
+      "dates": "Oct 2026 – Present",
+      "description": "Developing a GPT-6.1 agentic planner for CommonRoad/SUMO, connecting language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks. Also working on Transformer-based neural prediction of time to traffic-rule violations.",
+      "detail_id": "agentic-planner",
+      "advisors": "Youran Wang · Prof. Matthias Althoff"
+    },
+    {
+      "title": "Research · Robot In-Context Learning & Embodied RSI",
+      "fields": [
+        "AI",
+        "VLA",
+        "WAM",
+        "Agent"
+      ],
+      "organization": "LMU Munich · TRESP Lab",
+      "dates": "Aug 2026 – Present",
+      "description": "After exploring the transfer of LLM-agent skills and memory to VLA policies in August, shifted to RICL / Zero-WAM in September. Building agent workflows for demonstration-video and action-clip data generation and processing. Beginning Embodied RSI research by studying algorithms for the RoboDojo competition Agent Track.",
+      "detail_id": "ricl",
+      "advisors": "Sikuan Yan · Dr. Yunpu Ma"
+    },
+    {
+      "title": "Research · ManipArena, D4rtVLA & RoleWAM",
+      "fields": [
+        "AI",
+        "VLA",
+        "WAM"
+      ],
+      "organization": "Technical University of Munich · Photogrammetry and Remote Sensing",
+      "dates": "Apr 2026 – Present",
+      "description": "A continuous research experience: the CVPR ManipArena challenge in April–May, the D4rtVLA prototype in June–August, and RoleWAM from September. Current work develops joint attention across visual inputs, task-role maps, and actions, and explores integration with RoboTTT’s memory mechanism.",
+      "detail_id": "rolewam",
+      "advisors": "Weihang Li"
+    },
+    {
       "title": "AI Intern · Intelligent Vehicle Dynamics Controls",
+      "fields": [
+        "AI",
+        "Foundation Model"
+      ],
       "organization": "Huawei Munich Research Center · AEL",
-      "dates": "Mar – Sep 2026",
-      "description": "Designed and implemented a CAN-based foundation model for vehicle chassis dynamics using large-scale CAN-bus time-series data, with modular interfaces for future vision-language integration. Contributed to large-scale data processing and distributed training on GPU clusters."
+      "dates": "Mar – Aug 2026",
+      "description": "Designed a CAN-based foundation model architecture to estimate tire–road friction coefficients and other hard-to-measure vehicle dynamics parameters, with initial development on small-scale CAN-bus time-series datasets. Prepared and processed large-scale CAN-bus datasets for subsequent foundation-model training."
     },
     {
       "title": "Student Research Assistant · Cyber-Physical Systems",
+      "fields": [
+        "AI",
+        "Autonomous Driving"
+      ],
       "organization": "Technical University of Munich · CPS",
       "dates": "Mar 2025 – Feb 2026",
-      "description": "Worked on CommonRoad competition management, competition algorithm design, autonomous-driving AI systems, and data processing."
+      "description": "Worked on CommonRoad competition management, algorithm design, autonomous-driving AI systems, and data processing.",
+      "detail_id": "commonroad"
     }
   ],
   "awards": [
@@ -46,12 +95,27 @@
   ],
   "projects": [
     {
+      "id": "rule-prediction",
+      "title": "Neural Traffic-Rule Violation Prediction",
+      "label": "AI · Autonomous driving",
+      "organization": "Technical University of Munich · Cyber-Physical Systems",
+      "dates": "Oct 2026 – Present",
+      "type": "Student research assistant project",
+      "category": "learning",
+      "description": "Predicting time to traffic-rule violations with a Transformer and logistic-hazard decoder, using logical robustness, vehicle histories, and road context.",
+      "tags": [
+        "Transformer",
+        "Survival prediction",
+        "CommonRoad"
+      ]
+    },
+    {
       "id": "semantic-reconstruction",
       "title": "Semantic-Aware 3D Reconstruction",
       "organization": "TUM · CAMP",
       "dates": "Nov 2025 – Apr 2026",
       "category": "vision",
-      "label": "3D vision",
+      "label": "AI · 3D CV",
       "type": "Research project",
       "description": "Integrated and benchmarked RaySt3R, VGGT, and VolSplat for semantic-aware 3D reconstruction. Contributed to model components and refinement, and led Slurm-based distributed training, large-scale HPC experiments, and scalable data generation pipelines.",
       "tags": [
@@ -67,7 +131,7 @@
       "organization": "TUM · AIR",
       "dates": "Oct 2025 – Feb 2026",
       "category": "robotics",
-      "label": "Robot learning",
+      "label": "AI · Robotics · RL",
       "type": "Practical course",
       "description": "Adapted human-motion tracking to Booster T1 and built a hierarchical teacher–student pipeline for whole-body box interaction in simulation. Combined GMR retargeting, PPO, DAgger, and visual features with a reusable low-level tracker.",
       "tags": [
@@ -83,7 +147,7 @@
       "organization": "TUM · AIR",
       "dates": "May – Dec 2025",
       "category": "robotics",
-      "label": "Embodied AI",
+      "label": "AI · VLA",
       "type": "Lab project",
       "description": "Deployed π₀ on LeRobot SO-101 and Franka robots. Built custom real-world datasets and designed experiments to evaluate vision-language-action policies in real scenes.",
       "tags": [
@@ -99,7 +163,7 @@
       "organization": "TUM · CAMP",
       "dates": "Apr – Aug 2025",
       "category": "vision",
-      "label": "3D vision",
+      "label": "AI · 3D CV",
       "type": "Practical course",
       "description": "Built a zero-shot pipeline for unseen objects by combining Grounded-SAM-2 for open-vocabulary segmentation, InstantMesh / Trellis / Hunyuan3D for single-image 3D reconstruction, and Any6D for pose estimation.",
       "tags": [
@@ -115,7 +179,7 @@
       "organization": "TUM · AIR · AI4DI",
       "dates": "Nov 2024 – Mar 2025",
       "category": "robotics",
-      "label": "Robot learning",
+      "label": "AI · Robotics · RL",
       "type": "Guided research",
       "description": "Developed a safe RL-driven control model for a KUKA LBR iiwa 14 robotic arm. Integrated continual learning and domain randomization to address sim-to-real transfer in robotic manipulation.",
       "tags": [
@@ -131,7 +195,7 @@
       "organization": "KIT · cv:hci",
       "dates": "Apr – Aug 2024",
       "category": "learning",
-      "label": "Machine learning",
+      "label": "AI · NLP",
       "type": "Seminar with practice",
       "description": "Investigated 1-bit and 1.58-bit Transformer layers and trained a quantized BERT model on Toxic Comment Classification data. Compared the practical training and inference costs with the theoretical efficiency of low-bit computation.",
       "tags": [
@@ -147,7 +211,7 @@
       "organization": "KIT · ISAS",
       "dates": "Apr – Aug 2024",
       "category": "learning",
-      "label": "Generative models",
+      "label": "AI · Generative models",
       "type": "University internship",
       "description": "Compared VAE, CVAE, and Gaussian-process-prior VAE models on MNIST and FacePlace, studying latent-space structure, conditional generation, and identity/viewpoint-aware reconstruction.",
       "tags": [
@@ -162,7 +226,7 @@
       "organization": "KIT · IRL",
       "dates": "May 2023 – Feb 2024",
       "category": "robotics",
-      "label": "Robot control",
+      "label": "Robotics",
       "type": "Bachelor's thesis",
       "description": "Benchmarked Cartesian-space controllers and open-source inverse kinematics algorithms for the Franka Emika robot. Worked with robotic manipulation platforms, controller systems, and MuJoCo.",
       "tags": [
@@ -177,9 +241,9 @@
       "organization": "KIT · IRL",
       "dates": "Apr – Sep 2023",
       "category": "robotics",
-      "label": "Robot learning",
+      "label": "ML · Robotics",
       "type": "University internship",
-      "description": "Built an articulated kitchen model in MuJoCo and Blender, exposed interaction APIs, and explored demonstration-based door opening and probabilistic movement-primitive trajectory smoothing.",
+      "description": "Modeled Franka manipulation tasks in MuJoCo and Blender, exploring learning from demonstration and movement primitives for robot interaction.",
       "tags": [
         "Learning from demonstration",
         "Movement primitives",
@@ -207,7 +271,7 @@
       "organization": "KIT · H²T",
       "dates": "Oct 2022 – Feb 2023",
       "category": "robotics",
-      "label": "Mobile robotics",
+      "label": "Robotics",
       "type": "University internship",
       "description": "Programmed a LEGO robot to navigate a complex course, integrating multiple sensors and designing PID controllers for navigation.",
       "tags": [
@@ -222,7 +286,7 @@
       "organization": "KIT · IFV",
       "dates": "May 2021 – Jan 2022",
       "category": "vision",
-      "label": "Computer vision",
+      "label": "AI · 2D CV",
       "type": "Master's thesis project",
       "description": "Fine-tuned YOLO detector families using VisDrone and evaluated them on custom annotated drone videos. Built a lane-aware tracker and directional vehicle counter to compare complete traffic-analysis pipelines.",
       "tags": [
@@ -234,16 +298,16 @@
   ],
   "education": [
     {
-      "year": "2026",
-      "degree": "Master's studies · Robotics, Cognition, Intelligence",
+      "year": "Expected 2027",
+      "degree": "M.Sc. · Robotics, Cognition, Intelligence",
       "school": "Technical University of Munich",
-      "detail": "Average grade: 1.4"
+      "detail": "TUM School of Computation, Information and Technology · Grade: 1.4 · Expected Sep 2027"
     },
     {
       "year": "2024",
       "degree": "B.Sc. · Computer Science",
       "school": "Karlsruhe Institute of Technology",
-      "detail": "Final grade: 2.1 · Completed in three years"
+      "detail": "Final grade: 2.1"
     },
     {
       "year": "2024",
@@ -261,87 +325,83 @@
   "skills": [
     "Python",
     "C++",
-    "Java",
-    "Linux",
+    "PyTorch",
     "ROS",
+    "MuJoCo",
     "Docker",
-    "SQL",
-    "MATLAB",
-    "Vue.js",
-    "CAD"
+    "Linux",
+    "Slurm",
+    "VLA / WAM",
+    "Diffusion models",
+    "Reinforcement learning",
+    "Agent workflows",
+    "Robot data pipelines",
+    "Distributed GPU training",
+    "LoRA",
+    "3D vision"
   ],
   "languages": "English (advanced) · German (intermediate)",
   "research_interests": [
-    "Structured world–action models",
-    "Human-video guidance & in-context transfer",
-    "Agentic planning & robot reasoning",
-    "3D perception & visuomotor learning"
+    "Vision–language–action models",
+    "World–action models",
+    "Agentic manipulation",
+    "Robot in-context learning",
+    "3D / 4D perception",
+    "Diffusion models & reinforcement learning"
   ],
   "featured_projects": [
     {
       "id": "rolewam",
       "title": "RoleWAM",
-      "status": "Ongoing research",
-      "summary": "Task-aware role representations learned alongside RGB and robot actions, with causal deployment and structured-representation experiments.",
-      "contribution": "Model-stream expansion, role attention, data contracts, distributed training, and paired evaluation.",
+      "status": "Ongoing · Sep 2026–Present",
+      "summary": "Joint attention for visual inputs, task-role maps, and robot actions, with ongoing research into RoboTTT-inspired memory.",
+      "contribution": "Developing the attention module, task-role representation, and training and evaluation workflow.",
       "skills": [
-        "Model architecture",
-        "Training systems",
-        "Robot evaluation"
+        "Joint attention",
+        "World–action models",
+        "Memory"
       ],
-      "evidence": {
-        "value": "50 tasks · 1,000 paired phases",
-        "label": "Completed gated-model evaluation"
-      }
+      "evidence": null
     },
     {
       "id": "ricl",
-      "title": "RICL · Built on Zero-WAM",
-      "status": "Ongoing research",
-      "summary": "Robot-grounded human-video context, reusable atomic clips, and Grid–Goal compatibility for demonstration transfer.",
-      "contribution": "HumanGen data pipeline, spatial/goal compatibility rules, low-memory runtime, and controlled transfer experiments.",
+      "title": "RICL / Zero-WAM",
+      "status": "Ongoing · Aug 2026–Present",
+      "summary": "Human demonstration videos as context for new robot tasks, supported by agent workflows for data generation and processing.",
+      "contribution": "Designing reusable demonstration clips, robot-grounded data workflows, and controlled context-transfer experiments.",
       "skills": [
-        "Data design",
-        "In-context learning",
-        "Transfer experiments"
+        "Robot in-context learning",
+        "Agent workflows",
+        "Data generation"
       ],
-      "evidence": {
-        "value": "Exact / transfer / unrelated",
-        "label": "Matched-seed pilot and ongoing composition research"
-      }
+      "evidence": null
     },
     {
       "id": "agentic-planner",
-      "title": "CommonRoad Agentic Planner",
-      "status": "Ongoing research",
-      "summary": "Language-agent strategy connected to native motion planning, time-aligned prediction, and checked execution in reactive traffic.",
-      "contribution": "Agent/MCP contracts, bounded execution, independent audits, and reproducible evaluation campaigns.",
+      "title": "Agentic Driving & Rule Prediction",
+      "status": "TUM CPS · Oct 2026–Present",
+      "summary": "A GPT-6.1 agent connected to motion planners, traffic prediction, and checked execution in CommonRoad/SUMO.",
+      "contribution": "Building the agent–tool interface and evaluation system; also developing neural traffic-rule prediction.",
       "skills": [
         "Agent systems",
-        "Motion planning",
-        "Evaluation engineering"
+        "Autonomous driving",
+        "Neural prediction"
       ],
-      "evidence": {
-        "value": "100-scenario closed-loop studies",
-        "label": "Versioned results and per-attempt evidence"
-      }
+      "evidence": null
     },
     {
       "id": "d4rtvla",
-      "title": "D4rtVLA",
-      "status": "Unfinished research prototype",
+      "title": "D4rtVLA / InstructD4RT",
+      "status": "Discontinued · Jun–Aug 2026",
       "status_kind": "prototype",
-      "summary": "A geometry-to-action prototype injecting time-aligned OpenD4RT features into a flow-matching VLA policy.",
-      "contribution": "4D feature sidecars, object/view identities, cross-attention adapters, and paired offline ablations.",
+      "summary": "Adapting OpenD4RT to predict future key-object features for VLA action generation, followed by instruction-conditioned grounding.",
+      "contribution": "Trained the future-feature prediction path and built InstructD4RT; discontinued the direction after finding limited generalization.",
       "skills": [
-        "3D / 4D perception",
-        "Policy adaptation",
-        "Ablation design"
+        "4D perception",
+        "Future-feature prediction",
+        "VLA"
       ],
-      "evidence": {
-        "value": "Implemented perception–policy bridge",
-        "label": "Causal streaming and closed-loop validation remain open"
-      }
+      "evidence": null
     },
     {
       "id": "maniparena",
@@ -376,6 +436,23 @@
         "value": "First prize",
         "label": "Category-Level Object Pose Estimation in the Wild"
       }
+    }
+  ],
+  "cv_downloads": [
+    {
+      "file": "Haoliang-Huang-CV.pdf",
+      "title": "Full CV",
+      "detail": "English · 4 pages"
+    },
+    {
+      "file": "Haoliang-Huang-Robotics-CV.pdf",
+      "title": "AI & Robotics CV",
+      "detail": "English · 2 pages"
+    },
+    {
+      "file": "Haoliang-Huang-Robotics-CV-ZH.pdf",
+      "title": "机器人方向简历",
+      "detail": "中文 · 2 页"
     }
   ]
 }

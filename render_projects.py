@@ -1,89 +1,84 @@
-"""Render the portfolio's project detail pages with the shared site style."""
+"""Render static, accessible project pages using the shared portfolio style."""
 from html import escape as e
-from pathlib import Path
 
 
-def rich_text(value):
-    """Content is plain text; references are explicit separate links."""
-    return e(value)
-
-
-def render_section(section):
-    result = f'<section class="detail-section" id="{e(section["id"])}"><h2>{e(section["title"])}</h2>'
-    for paragraph in section.get("paragraphs", []):
-        result += f'<p>{rich_text(paragraph)}</p>'
-    if section.get("bullets"):
-        result += '<ul>' + ''.join(f'<li>{rich_text(item)}</li>' for item in section["bullets"]) + '</ul>'
-    if section.get("table"):
-        table = section["table"]
-        result += '<div class="table-scroll"><table><thead><tr>' + ''.join(f'<th scope="col">{e(x)}</th>' for x in table["headers"]) + '</tr></thead><tbody>'
-        for row in table["rows"]:
-            result += '<tr>' + ''.join(f'<td>{e(str(x))}</td>' for x in row) + '</tr>'
-        result += '</tbody></table></div>'
-    return result + '</section>'
+def render_section(s):
+    technical = s.get('technical', False)
+    if technical:
+        out = f'<details class="detail-section technical-detail" id="{e(s["id"])}"><summary>{e(s["title"])}</summary><div class="technical-body">'
+    else:
+        out = f'<section class="detail-section" id="{e(s["id"])}"><h2>{e(s["title"])}</h2>'
+    out += ''.join(f'<p>{e(p)}</p>' for p in s.get('paragraphs', []))
+    if s.get('bullets'):
+        out += '<ul>' + ''.join(f'<li>{e(p)}</li>' for p in s['bullets']) + '</ul>'
+    if s.get('table'):
+        t = s['table']
+        out += '<div class="table-scroll" tabindex="0" role="region" aria-label="' + e(s['title']) + ' data table"><table><thead><tr>'
+        out += ''.join(f'<th scope="col">{e(x)}</th>' for x in t['headers']) + '</tr></thead><tbody>'
+        for row in t['rows']:
+            out += '<tr>' + ''.join(f'<td>{e(str(x))}</td>' for x in row) + '</tr>'
+        out += '</tbody></table></div>'
+    if s.get('link'):
+        out += f'<a class="text-link" href="{e(s["link"]["url"])}">{e(s["link"]["title"])}</a>'
+    return out + ('</div></details>' if technical else '</section>')
 
 
 def render_all(root, content, details):
-    catalog = {p['id']: p for p in content['projects']}
-    catalog.update({p['id']: p for p in details.get('additional_projects', [])})
-    rendered = []
-    for slug, detail in details['pages'].items():
+    catalog = {p['id']:p for p in content['projects'] + details.get('additional_projects', [])}
+    urls = []
+    for slug, d in details['pages'].items():
         p = catalog[slug]
-        title = p['title']
-        status = f'<p class="detail-status">{e(detail["status"])}</p>' if detail.get('status') else ''
-        strengths = '<div class="detail-strengths">' + ''.join(f'<span>{e(x)}</span>' for x in detail.get('strengths', [])) + '</div>' if detail.get('strengths') else ''
-        back_target = '../../#featured' if detail.get('featured') else '../../#projects'
-        back_label = 'Selected research' if detail.get('featured') else 'All projects'
         canonical = f'https://haolianghuang-research.github.io/projects/{slug}/'
-        facts = ''.join(f'<div><dt>{e(x["label"])}</dt><dd>{e(x["value"])}</dd></div>' for x in detail.get('facts', []))
-        facts_class = 'project-facts facts-four' if len(detail.get('facts', [])) == 4 else 'project-facts'
-        pipeline = ''
-        if detail.get('pipeline'):
-            pipeline = '<section class="pipeline-section" aria-labelledby="pipeline-title"><h2 id="pipeline-title">Method at a glance</h2><ol class="method-pipeline">'
-            for node in detail['pipeline']:
-                pipeline += f'<li><strong>{e(node["title"])}</strong><span>{e(node["text"])}</span></li>'
-            pipeline += '</ol><p class="diagram-caption">Schematic summary of the project workflow.</p></section>'
-        sections = ''.join(render_section(section) for section in detail['sections'])
+        status = f'<p class="detail-status">{e(d["status"])}</p>' if d.get('status') else ''
+        image = d.get('hero_image') or d.get('thumbnail')
+        hero_image = ''
+        if image:
+            hero_image = f'<figure class="detail-cover"><img src="../../assets/projects/{e(image["file"])}" alt="{e(image["alt"])}" width="1000" height="625"><figcaption>{e(image.get("caption","Project visualization"))}</figcaption></figure>'
+        facts = ''.join(f'<div><dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd></div>' for f in d.get('facts', []))
+        facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
+        method = ''
+        if d.get('pipeline'):
+            nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
+            method = f'<section class="pipeline-section" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
+        section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
+        sections = ''.join(render_section(s) for s in d['sections'])
         gallery = ''
-        if detail.get('gallery'):
+        if d.get('gallery'):
             gallery = '<section class="detail-section" id="visuals"><h2>Project visuals</h2><div class="project-gallery">'
-            for f in detail['gallery']:
-                img = f'../../assets/projects/{e(f["file"])}'
-                gallery += f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" loading="lazy" width="{f.get("width", 1400)}" height="{f.get("height", 900)}"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
+            for f in d['gallery']:
+                img = '../../assets/projects/' + e(f['file'])
+                gallery += f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" width="{f.get("width",1400)}" height="{f.get("height",900)}" loading="lazy"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
             gallery += '</div></section>'
-        references = ''
-        if detail.get('references'):
-            references = '<section class="detail-section references" id="references"><h2>Related resources</h2><ul>'
-            for ref in detail['references']:
-                references += f'<li><a href="{e(ref["url"])}">{e(ref["title"])}</a>'
-                if ref.get('note'): references += f'<span>{e(ref["note"])}</span>'
-                references += '</li>'
-            references += '</ul></section>'
-        source_note = e(detail.get('source_note', 'Based on the project report and implementation.'))
-        section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in detail['sections'])
-        if gallery: section_links += '<a href="#visuals">Project visuals</a>'
-        if references: section_links += '<a href="#references">Related resources</a>'
+            section_links += '<a href="#visuals">Project visuals</a>'
+        refs = ''
+        if d.get('references'):
+            refs = '<section class="detail-section references" id="references"><h2>Related resources</h2><ul>'
+            for r in d['references']:
+                refs += f'<li><a href="{e(r["url"])}">{e(r["title"])}</a>' + (f'<span>{e(r["note"])}</span>' if r.get('note') else '') + '</li>'
+            refs += '</ul></section>'
+            section_links += '<a href="#references">Related resources</a>'
+        related = ''
+        if d.get('related'):
+            related = '<section class="related-projects"><p class="eyebrow">Continue exploring</p><h2>Connected projects</h2><div>'
+            for related_slug in d['related']:
+                q = catalog[related_slug]
+                related += f'<a href="../{e(related_slug)}/"><span>{e(q["label"])}</span><strong>{e(q["title"])}</strong></a>'
+            related += '</div></section>'
+        back_target = '../../#featured' if d.get('featured') else '../../#projects'
+        og_image = f'<meta property="og:image" content="https://haolianghuang-research.github.io/assets/projects/{e(image["file"])}">' if image else ''
         html = f'''<!doctype html>
-<html lang="en"><head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{e(title)} | Haoliang Huang</title>
-  <meta name="description" content="{e(detail['summary'])}">
-  <meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
-  <meta property="og:title" content="{e(title)} | Haoliang Huang"><meta property="og:description" content="{e(detail['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">
-  <meta name="theme-color" content="#174c72"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css"><link rel="stylesheet" href="../../assets/featured.css">
-</head><body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="header-inner"><a class="wordmark" href="../../">Haoliang Huang<span class="wordmark-dot">.</span></a><nav aria-label="Main navigation"><a href="../../#featured">Research</a><a href="../../#projects">Projects</a><a href="../../#experience">Experience</a><a href="../../assets/Haoliang-Huang-CV.pdf">CV <span class="pdf-label">PDF</span></a></nav></div></header>
-<main id="main" class="detail-page"><div class="detail-hero"><a class="back-link" href="{back_target}">{back_label}</a><p class="eyebrow">{e(p['label'])} · {e(p['dates'])}</p>{status}<h1>{e(title)}</h1><p class="detail-lead">{e(detail['summary'])}</p><p class="detail-affiliation">{e(p['organization'])} · {e(p['type'])}</p>{strengths}<dl class="{facts_class}">{facts}</dl></div>
-<div class="detail-layout"><aside><nav aria-label="On this page"><p>In this project</p>{section_links}</nav></aside><article class="detail-content">{pipeline}{sections}{gallery}{references}<p class="source-note">{source_note}</p></article></div>
-<section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main>
-<footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio</span><a href="../../">Home</a></div></footer>
-</body></html>'''
-        destination = root / 'projects' / slug
-        destination.mkdir(parents=True, exist_ok=True)
-        (destination / 'index.html').write_text(html)
-        rendered.append(canonical)
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{e(url)}</loc></url>' for url in ['https://haolianghuang-research.github.io/'] + rendered) + '</urlset>\n'
-    (root / 'sitemap.xml').write_text(sitemap)
-    return len(rendered)
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
+<meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><link rel="stylesheet" href="../../assets/project-details.css"><script src="../../assets/project-details.js" defer></script></head><body>
+<a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="header-inner"><a class="wordmark" href="../../">Haoliang Huang<span>.</span></a><nav aria-label="Main navigation"><a href="../../#featured">Research</a><a href="../../#projects">Projects</a><a href="../../#experience">Experience</a><a href="../../#cv">CV</a></nav></div></header>
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
+<div class="detail-layout"><aside><nav aria-label="On this page"><p>In this project</p>{section_links}</nav></aside><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+<section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
+        destination = root/'projects'/slug
+        destination.mkdir(parents=True,exist_ok=True)
+        (destination/'index.html').write_text(html)
+        urls.append(canonical)
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{e(u)}</loc></url>' for u in ['https://haolianghuang-research.github.io/']+urls) + '</urlset>\n'
+    (root/'sitemap.xml').write_text(xml)
+    return len(urls)
