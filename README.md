@@ -30,6 +30,6 @@ Each page can define `thumbnail` and `hero_image` objects with `file`, `alt`, an
 
 ## Site navigation
 
-`navigation.py` renders the four primary links and a document outline. The homepage outline lists every major section and the six selected projects; each project detail page supplies its own method, data, evaluation, and visual sections. `assets/navigation.css` provides the pinned desktop panel and sliding native-dialog drawer. At widths of at least 1480px, the outline opens alongside the content; narrower screens open it with **Contents**. Desktop collapse preference lasts for the browser session.
+`navigation.py` renders the four primary links and a document outline. The homepage outline lists every major section and the six selected projects; each project detail page supplies its own method, data, evaluation, and visual sections. `assets/navigation.css` provides the pinned left desktop panel and a native-dialog drawer that slides in from the left. At widths of at least 1480px, the outline opens alongside the content; narrower screens open it with **Contents**. Desktop collapse preference lasts for the browser session.
 
 `assets/navigation.js` maintains the current section, reading progress, keyboard closing, native modal focus behavior, and the header offset used for anchor jumps. Project cards use stable `research-<slug>` anchors; regular project and CV URLs are preserved. Optional technical sections open when their anchors are followed. The navigation has a static no-JavaScript fallback.

@@ -39,7 +39,7 @@ if (outline && contentsToggle && siteHeader) {
       outline.showModal();
     }
     if (!reducedMotion.matches) outline.animate([
-      {transform:'translateX(30px)',opacity:0},
+      {transform:'translateX(-30px)',opacity:0},
       {transform:'translateX(0)',opacity:1}
     ], {duration:220,easing:'cubic-bezier(.22,1,.36,1)'});
     syncLayout();
