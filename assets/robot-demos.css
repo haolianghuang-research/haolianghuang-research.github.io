@@ -1,0 +1,15 @@
+.project-videos .portrait-video { background:#17191d; }
+.project-videos .portrait-video video {
+  width:auto;
+  max-width:100%;
+  max-height:620px;
+  height:auto;
+  aspect-ratio:auto;
+  margin-inline:auto;
+  background:#17191d;
+}
+.project-videos .portrait-video figcaption { background:#fff; }
+.video-download { display:inline-block; margin-left:16px; color:var(--blue); font-weight:600; }
+@media (max-width:640px) {
+  .video-download { display:block; margin:8px 0 0; }
+}

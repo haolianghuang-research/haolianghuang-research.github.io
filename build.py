@@ -72,8 +72,11 @@ for p in c['projects']:
     tags = ''.join(f'<span>{e(t)}</span>' for t in p['tags'][:3])
     actions = f'<a class="project-more" href="projects/{e(p["id"])}/">Project details<span class="visually-hidden">: {e(p["title"])}</span></a>'
     website = d['pages'][p['id']].get('project_website')
+    demo = d['pages'][p['id']].get('demo_link')
     if website:
         actions = f'<div class="project-links">{actions}<a class="project-website" href="{e(website["url"])}" target="_blank" rel="noopener" aria-label="Project website: {e(p["title"])}">Project website</a></div>'
+    elif demo:
+        actions = f'<div class="project-links">{actions}<a class="project-website" href="projects/{e(p["id"])}/#{e(demo["section"])}" aria-label="Watch Franka demo: {e(p["title"])}">Watch demo</a></div>'
     projects += f'''<article class="project" id="{e(p['id'])}" data-category="{e(p['category'])}">{image_media(p['id'])}
     <div class="project-body"><div class="card-meta-row"><p class="project-meta">{e(p['label'])}</p>{project_logo(p['id'])}</div><h3><a href="projects/{e(p['id'])}/">{e(p['title'])}</a></h3>
     <p class="meta">{e(p['dates'])}</p><p class="organization">{e(p['organization'])}</p><p>{e(p['description'])}</p><div class="tags">{tags}</div>{actions}</div></article>'''

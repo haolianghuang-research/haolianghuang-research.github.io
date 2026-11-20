@@ -191,13 +191,13 @@
     },
     {
       "id": "pi0",
-      "title": "π₀ Deployment & Real-World Benchmarking",
+      "title": "π₀ / π₀.₅ Deployment & Real-World Benchmarking",
       "organization": "TUM · AIR",
       "dates": "May – Dec 2025",
       "category": "robotics",
       "label": "AI · VLA",
       "type": "Lab project",
-      "description": "Deployed π₀ on LeRobot SO-101 and Franka robots. Built custom real-world datasets and designed experiments to evaluate vision-language-action policies in real scenes.",
+      "description": "Deployed π₀ on LeRobot SO-101 and π₀.₅ on Franka. Collected real-world demonstrations and evaluated manipulation behavior on physical robots, including block stacking.",
       "tags": [
         "Vision-language-action",
         "SO-101 / Franka",

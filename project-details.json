@@ -1669,7 +1669,7 @@
       ]
     },
     "pi0": {
-      "summary": "Practical deployment of vision-language-action policies on real robot arms, with custom demonstration collection and evaluation of how pretrained policies behave in physical scenes.",
+      "summary": "Real-robot deployment of π₀ on SO-101 and π₀.₅ on Franka, from collecting demonstrations to executing and inspecting manipulation behavior on physical hardware.",
       "facts": [
         {
           "label": "Robots",
@@ -1677,7 +1677,7 @@
         },
         {
           "label": "Policy",
-          "value": "π₀ vision-language-action model"
+          "value": "π₀ / π₀.₅ vision-language-action policies"
         },
         {
           "label": "Generation",
@@ -1708,7 +1708,43 @@
           "title": "From a general policy to a working robot",
           "paragraphs": [
             "This project focuses on the practical steps between a pretrained robot foundation model and a physical experiment: configuring observations, collecting demonstrations, interfacing model actions with the robot, and evaluating the resulting behavior. The deployment work spans LeRobot SO-101 and Franka platforms.",
-            "A July 2025 seminar presentation by Guangyuan Wang and Haoliang Huang documents the initial SO-101 reproduction and demonstration-collection setup. The project builds on π₀ rather than proposing a replacement for its original model architecture."
+            "A July 2025 seminar presentation by Guangyuan Wang and Haoliang Huang documents the initial SO-101 reproduction and demonstration-collection setup. Subsequent deployment work brought π₀.₅ to Franka, including the block-stacking demonstration shown below."
+          ]
+        },
+        {
+          "id": "franka-deployment",
+          "title": "π₀.₅ on Franka: real-robot deployment",
+          "paragraphs": [
+            "I deployed π₀.₅ on Franka for physical tabletop manipulation. The recording shows the arm picking up a pink block, placing it on a wooden block, and then adding a red block to the stack."
+          ],
+          "videos": [
+            {
+              "file": "pi05-franka-block-stacking.mp4",
+              "poster": "pi05-franka-video-poster.webp",
+              "title": "π₀.₅ Franka block-stacking deployment",
+              "caption": "π₀.₅ on Franka · Full real-robot recording, 1 min 42 s.",
+              "width": 720,
+              "height": 1280,
+              "download": true
+            }
+          ]
+        },
+        {
+          "id": "so101-demo",
+          "title": "SO-101: real-robot demonstration",
+          "paragraphs": [
+            "The SO-101 recording shows tabletop block manipulation with the leader/follower hardware used in the project. Together, the two recordings document deployment on different robot platforms."
+          ],
+          "videos": [
+            {
+              "file": "pi0-so101-real-robot-demo.mp4",
+              "poster": "pi0-so101-video-poster.webp",
+              "title": "π₀ SO-101 real-robot manipulation demo",
+              "caption": "SO-101 · Full tabletop-manipulation recording, approximately 17 s.",
+              "width": 1280,
+              "height": 720,
+              "download": true
+            }
           ]
         },
         {
@@ -1756,9 +1792,9 @@
       ],
       "gallery": [],
       "thumbnail": {
-        "file": "pi0-cover.webp",
-        "alt": "SO-101 leader and follower robot arms on the project workbench",
-        "caption": "SO-101 · Real-robot setup"
+        "file": "pi05-franka-stacking-cover.webp",
+        "alt": "Three frames from the real Franka deployment showing a pink block being grasped, placed on a wooden block and topped with a red block",
+        "caption": "π₀.₅ on Franka · Grasp, place and stack"
       },
       "references": [
         {
@@ -1777,11 +1813,11 @@
           "note": "Robot-learning tooling"
         }
       ],
-      "source_note": "Reviewed against the July 2025 end-term seminar slides by Guangyuan Wang and Haoliang Huang. The slides document SO-101 data collection; later Franka deployment is recorded in the CV. Original π₀ pretraining results and proposed follow-up tests are kept separate from completed local experiments.",
+      "source_note": "Reviewed against the July 2025 end-term seminar slides by Guangyuan Wang and Haoliang Huang and the retained Franka and SO-101 deployment recordings. The seminar documents the initial π₀/SO-101 work; the Franka recording documents the subsequent π₀.₅ deployment. The card combines frames at 36, 60 and 96 seconds from the Franka clip. Both full video streams retain their source frames and timing; the SO-101 room-audio track is omitted. Original model pretraining results and proposed evaluation directions remain separate from the local deployment demonstrations.",
       "hero_image": {
-        "file": "pi0-cover.webp",
-        "alt": "SO-101 leader and follower robot arms on the project workbench",
-        "caption": "SO-101 · Real-robot setup"
+        "file": "pi05-franka-stacking-cover.webp",
+        "alt": "Three frames from the real Franka deployment showing a pink block being grasped, placed on a wooden block and topped with a red block",
+        "caption": "π₀.₅ on Franka · Grasp, place and stack"
       },
       "documents": [
         {
@@ -1794,7 +1830,11 @@
           "bytes": 1352721,
           "public_copy": false
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "franka-deployment",
+        "label": "Watch Franka demo"
+      }
     },
     "safe-rl": {
       "summary": "Safe robot-policy adaptation on a KUKA arm: calibrating a simulation to the physical system, combining safety-constrained RL with continual learning, and evaluating improvement alongside retention of previous targets.",

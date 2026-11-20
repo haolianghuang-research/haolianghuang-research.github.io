@@ -62,7 +62,10 @@ def render_section(s):
         for v in s['videos']:
             src = '../../assets/projects/' + e(v['file'])
             poster = '../../assets/projects/' + e(v['poster'])
-            out += f'<figure><video controls playsinline preload="none" poster="{poster}" width="1920" height="1080" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}</figcaption></figure>'
+            width, height = v.get('width', 1920), v.get('height', 1080)
+            video_class = ' class="portrait-video"' if height > width else ''
+            download = f'<a class="video-download" href="{src}" download aria-label="Download video: {e(v["title"])}">Download video</a>' if v.get('download') else ''
+            out += f'<figure{video_class}><video controls playsinline preload="none" poster="{poster}" width="{width}" height="{height}" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}{download}</figcaption></figure>'
         out += '</div>'
     return out + ('</div></details>' if technical else '</section>')
 
@@ -87,8 +90,13 @@ def render_all(root, content, details):
         document_count = len(d.get('documents', []))
         document_shortcut = f'<p class="document-shortcut"><a href="#documents">View original documents</a><span>{document_count} PDF{"s" if document_count != 1 else ""}</span></p>' if documents else ''
         website = d.get('project_website')
+        demo = d.get('demo_link')
         website_link = f'<div class="detail-project-links"><a class="button button-primary" href="{e(website["url"])}" target="_blank" rel="noopener">{e(website["label"])}</a></div>' if website else ''
-        website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website else ''
+        if demo and not website:
+            website_link = f'<div class="detail-project-links"><a class="button button-primary" href="#{e(demo["section"])}">{e(demo["label"])}</a></div>'
+        website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website or demo else ''
+        if demo:
+            website_assets += f'<link rel="stylesheet" href="../../{asset_url("assets/robot-demos.css")}">'
         method = ''
         if d.get('pipeline') and not system:
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
