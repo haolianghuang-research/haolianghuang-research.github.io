@@ -140,3 +140,18 @@ The retained Studio archive has five versions (1.0, 2.0, 3.0, 3.1 and 4.0). Thes
 - `pi0-so101-real-robot-demo.mp4`: complete 1280 × 720 H.264 video stream from the adjacent retained `pi0-Lerobot-SM101.mp4`. The filename's SM101 spelling is retained here for source identification; the documented project hardware is SO-101. Room audio and file metadata are omitted; the source video frames and timing are unchanged. `pi0-so101-video-poster.webp` is the frame at 6 seconds.
 
 These are physical-robot deployment demonstrations. They supplement the earlier seminar slides; they are not the original model authors’ videos or an aggregate benchmark success-rate measurement. Source-file export timestamps are not used to infer the experiment date.
+
+## Additional project demonstrations, 20 November 2026
+
+| Video assets in `assets/projects/` | Original source and scope |
+| --- | --- |
+| `humanoid-t1-teacher.mp4`, `humanoid-g1-comparison.mp4` | The team's *SMLR Final Presentation*, slide 26, embedded `media8.mp4` and `media9.mp4`. Booster T1 teacher-policy simulation and the separately labeled Unitree G1 reference comparison. These are simulated rollouts, not hardware deployment. |
+| `interactive-movement-primitive-a.mp4`, `interactive-movement-primitive-b.mp4` | Haoliang Huang, *ALR Practice Presentation*, slide 15, embedded `image24.gif` and `image25.gif`. Franka cabinet-opening trajectories in the articulated MuJoCo kitchen. |
+| `ik-position-test-simulation.mp4`, `ik-orientation-test-simulation.mp4` | Haoliang Huang, *Final Presentation of Bachelor Thesis*, slides 33 and 44, embedded `image71.gif` and `image81.gif`. Position-reaching and orientation-reaching trial recordings in simulation. |
+| `pose-vggt-scene-reconstruction.mp4`, `pose-instantmesh-scene-reconstruction.mp4` | Huang, Hou and Ostonaev, *Visual Grounded Open-Vocabulary Object Pose Estimation*, slide 17, embedded `image15.gif` and `image17.gif`. The team's HouseCat6D reconstruction comparison with VGGT and InstantMesh. Model and dataset credits remain with their original authors. These derived videos and their posters are distributed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), consistent with the [original project website](https://virlight.github.io/At3dcv2025_Any_6D/). |
+| `d4rt-ho3d-object-tracking.mp4` | Retained OpenD4RT HO-3D diagnostic run `MC6/tracking_2d.mp4`. Original object-pixel ground truth, predictions, per-frame errors and metric overlays are preserved. Dataset: HO-3D; model: released OpenD4RT checkpoint. |
+| `d4rt-ycbineoat-object-tracking.mp4` | Retained OpenD4RT YCBInEOAT diagnostic run `mustard0/tracking_2d.mp4`. Original point-prediction and annotated-geometry overlays are preserved. Dataset: YCBInEOAT. This is a geometry diagnostic from the discontinued prototype, not an end-to-end VLA action rollout. |
+
+Each corresponding `*-poster.webp` is a still extracted from that same video. Existing MP4 streams are remuxed for web playback without changing frames or timing. Animated GIFs are converted to a single-cycle H.264 MP4 at their source timing; image compression and format change, with no generated frames or altered motion. Metadata and audio are omitted from the public video copies.
+
+Safe RL embeds the original [SCDA supplementary video](https://www.youtube.com/watch?v=8LFlxN383Ig), published by Josip Josifovski and linked on the [SCDA project website](https://safe-cda.github.io/). It remains hosted by the original publisher and is credited as the coauthored study's supplementary material. Existing Agentic Planner replays retain their historical v0.6.0 labels and receive a direct watch link.

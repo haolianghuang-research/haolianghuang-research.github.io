@@ -58,7 +58,8 @@ def render_section(s):
         layout = ' figure-pair' if s.get('figure_layout') == 'pair' else ''
         out += f'<div class="section-figures{layout}">' + ''.join(render_figure(f) for f in s['figures']) + '</div>'
     if s.get('videos'):
-        out += '<div class="section-figures project-videos">'
+        video_layout = ' video-pair' if s.get('video_layout') == 'pair' else ''
+        out += f'<div class="section-figures project-videos{video_layout}">'
         for v in s['videos']:
             src = '../../assets/projects/' + e(v['file'])
             poster = '../../assets/projects/' + e(v['poster'])
@@ -67,6 +68,9 @@ def render_section(s):
             download = f'<a class="video-download" href="{src}" download aria-label="Download video: {e(v["title"])}">Download video</a>' if v.get('download') else ''
             out += f'<figure{video_class}><video controls playsinline preload="none" poster="{poster}" width="{width}" height="{height}" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}{download}</figcaption></figure>'
         out += '</div>'
+    if s.get('video_embed'):
+        v = s['video_embed']
+        out += f'<div class="section-figures"><figure class="project-video-embed"><div class="video-embed-player"><iframe src="{e(v["url"])}" title="{e(v["title"])}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><figcaption>{e(v["caption"])} <a class="video-download" href="{e(v["watch_url"])}" target="_blank" rel="noopener">Watch on YouTube</a></figcaption></figure></div>'
     return out + ('</div></details>' if technical else '</section>')
 
 
@@ -91,11 +95,14 @@ def render_all(root, content, details):
         document_shortcut = f'<p class="document-shortcut"><a href="#documents">View original documents</a><span>{document_count} PDF{"s" if document_count != 1 else ""}</span></p>' if documents else ''
         website = d.get('project_website')
         demo = d.get('demo_link')
-        website_link = f'<div class="detail-project-links"><a class="button button-primary" href="{e(website["url"])}" target="_blank" rel="noopener">{e(website["label"])}</a></div>' if website else ''
-        if demo and not website:
-            website_link = f'<div class="detail-project-links"><a class="button button-primary" href="#{e(demo["section"])}">{e(demo["label"])}</a></div>'
+        website_link = f'<a class="button button-primary" href="#{e(demo["section"])}">{e(demo["label"])}</a>' if demo else ''
+        if website:
+            button_style = 'button-secondary' if demo else 'button-primary'
+            website_link += f'<a class="button {button_style}" href="{e(website["url"])}" target="_blank" rel="noopener">{e(website["label"])}</a>'
+        if website_link:
+            website_link = f'<div class="detail-project-links">{website_link}</div>'
         website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website or demo else ''
-        if demo:
+        if any(s.get('videos') or s.get('video_embed') for s in d['sections']):
             website_assets += f'<link rel="stylesheet" href="../../{asset_url("assets/robot-demos.css")}">'
         method = ''
         if d.get('pipeline') and not system:

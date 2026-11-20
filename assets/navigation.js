@@ -28,7 +28,7 @@ if (outline && contentsToggle && siteHeader) {
     document.body.toggleAttribute('data-outline-pinned', wide.matches && outline.open);
     scheduleUpdate();
   }
-  function openContents() {
+  function openContents(preservePosition = true) {
     if (outline.open) return;
     const readingY = scrollY;
     outline.classList.toggle('is-pinned', wide.matches);
@@ -44,7 +44,10 @@ if (outline && contentsToggle && siteHeader) {
     ], {duration:220,easing:'cubic-bezier(.22,1,.36,1)'});
     syncLayout();
     // Preserve the page position when the browser anchors a newly opened dialog.
-    requestAnimationFrame(() => { scrollTo({top:readingY,behavior:'auto'}); scheduleUpdate(); });
+    requestAnimationFrame(() => {
+      if (preservePosition) scrollTo({top:readingY,behavior:'auto'});
+      scheduleUpdate();
+    });
   }
   function closeContents(restoreFocus = false, remember = true) {
     if (remember) rememberPinned(false);
@@ -131,6 +134,7 @@ if (outline && contentsToggle && siteHeader) {
   addEventListener('hashchange',scheduleUpdate);
   addEventListener('load',scheduleUpdate);
   addEventListener('resize',scheduleUpdate);
-  if (wide.matches && wantsPinned()) openContents();
+  // Let the browser apply an incoming fragment after the initial layout change.
+  if (wide.matches && wantsPinned()) openContents(false);
   updateOffset();
 }

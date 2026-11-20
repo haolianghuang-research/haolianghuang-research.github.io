@@ -6,7 +6,8 @@
   margin-top:auto;
   padding-top:24px;
 }
-.project-body .project-links .project-more { margin:0; padding:0; }
+.project-body .project-links .project-more,
+.featured-body .project-links .project-more { margin:0; padding:0; }
 .project-website {
   display:inline-flex;
   align-items:center;
@@ -21,3 +22,4 @@
 }
 .project-website:hover { border-color:var(--blue); background:#f1f7ff; }
 .detail-project-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:25px; }
+.detail-project-links .button-secondary { color:var(--blue); border:1px solid #d2dce7; background:#fff; }

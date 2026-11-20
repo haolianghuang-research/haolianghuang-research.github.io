@@ -49,6 +49,17 @@ def image_media(slug, css='project-media'):
     return f'''<a class="{css}" href="projects/{e(slug)}/" tabindex="-1" aria-hidden="true"><img src="{e(src)}" alt="{e(alt)}" width="1000" height="625" loading="lazy"><span class="media-caption">{e(caption)}</span></a>'''
 
 
+def project_actions(slug, title, label='Project details'):
+    links = f'<a class="project-more" href="projects/{e(slug)}/">{e(label)}<span class="visually-hidden">: {e(title)}</span></a>'
+    page = d['pages'][slug]
+    demo, website = page.get('demo_link'), page.get('project_website')
+    if demo:
+        links += f'<a class="project-website" href="projects/{e(slug)}/#{e(demo["section"])}" aria-label="Watch demo: {e(title)}">Watch demo</a>'
+    if website:
+        links += f'<a class="project-website" href="{e(website["url"])}" target="_blank" rel="noopener" aria-label="Project website: {e(title)}">Project website</a>'
+    return f'<div class="project-links">{links}</div>' if demo or website else links
+
+
 featured = ''
 for f in c['featured_projects']:
     slug = f['id']
@@ -58,7 +69,7 @@ for f in c['featured_projects']:
       <div class="featured-body"><div class="card-meta-row"><p class="feature-status {e(f.get('status_kind','research'))}">{e(f['status'])}</p>{project_logo(slug)}</div>
       <h3><a href="projects/{e(slug)}/">{e(f['title'])}</a></h3><p class="featured-summary">{e(f['summary'])}</p>
       <p class="featured-contribution"><span>My work</span>{e(f['contribution'])}</p>{result}
-      <div class="feature-skills">{tags}</div><a class="project-more" href="projects/{e(slug)}/">Read the project<span class="visually-hidden">: {e(f['title'])}</span></a></div></article>'''
+      <div class="feature-skills">{tags}</div>{project_actions(slug, f['title'], 'Read the project')}</div></article>'''
 
 awards = ''.join(f'''<article class="award-item"><p class="award-result">{e(a['result'])}</p><h3><a href="projects/{e(a['detail_id'])}/">{e(a['title'])}</a></h3><p class="meta">{e(a['venue'])} · {e(a['year'])}</p></article>''' for a in c['awards'])
 experience = ''
@@ -70,13 +81,7 @@ for item in c['experience']:
 projects = ''
 for p in c['projects']:
     tags = ''.join(f'<span>{e(t)}</span>' for t in p['tags'][:3])
-    actions = f'<a class="project-more" href="projects/{e(p["id"])}/">Project details<span class="visually-hidden">: {e(p["title"])}</span></a>'
-    website = d['pages'][p['id']].get('project_website')
-    demo = d['pages'][p['id']].get('demo_link')
-    if website:
-        actions = f'<div class="project-links">{actions}<a class="project-website" href="{e(website["url"])}" target="_blank" rel="noopener" aria-label="Project website: {e(p["title"])}">Project website</a></div>'
-    elif demo:
-        actions = f'<div class="project-links">{actions}<a class="project-website" href="projects/{e(p["id"])}/#{e(demo["section"])}" aria-label="Watch Franka demo: {e(p["title"])}">Watch demo</a></div>'
+    actions = project_actions(p['id'], p['title'])
     projects += f'''<article class="project" id="{e(p['id'])}" data-category="{e(p['category'])}">{image_media(p['id'])}
     <div class="project-body"><div class="card-meta-row"><p class="project-meta">{e(p['label'])}</p>{project_logo(p['id'])}</div><h3><a href="projects/{e(p['id'])}/">{e(p['title'])}</a></h3>
     <p class="meta">{e(p['dates'])}</p><p class="organization">{e(p['organization'])}</p><p>{e(p['description'])}</p><div class="tags">{tags}</div>{actions}</div></article>'''

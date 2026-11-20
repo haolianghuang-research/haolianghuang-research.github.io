@@ -290,6 +290,34 @@
           ]
         },
         {
+          "id": "benchmark-demos",
+          "title": "Benchmark trials in motion",
+          "paragraphs": [
+            "My thesis defense records repeatable MuJoCo trials for position and orientation targets. These clips show the test motions used to evaluate Cartesian-space controllers."
+          ],
+          "video_layout": "pair",
+          "videos": [
+            {
+              "file": "ik-position-test-simulation.mp4",
+              "poster": "ik-position-test-simulation-poster.webp",
+              "width": 402,
+              "height": 478,
+              "title": "Franka inverse-kinematics position-test simulation",
+              "caption": "Position-reaching trial with fixed orientation · Simulation recording from thesis-defense slide 33.",
+              "download": true
+            },
+            {
+              "file": "ik-orientation-test-simulation.mp4",
+              "poster": "ik-orientation-test-simulation-poster.webp",
+              "width": 402,
+              "height": 478,
+              "title": "Franka inverse-kinematics orientation-test simulation",
+              "caption": "Orientation-reaching trial with fixed position · Simulation recording from thesis-defense slide 44.",
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "tasks",
           "title": "A task-generated evaluation dataset",
           "paragraphs": [
@@ -427,7 +455,7 @@
           "url": "https://facebookresearch.github.io/fairo/polymetis/"
         }
       ],
-      "source_note": "Based on my written bachelor’s thesis and the 75-slide final defense, especially slides 16–17, 27–31, 33–44 and 54–71. Solver-only tests, simulation and physical-robot execution are identified separately; hardware runs did not cover every method under every condition.",
+      "source_note": "Based on my written bachelor’s thesis and the 75-slide final defense, especially slides 16–17, 27–31, 33–44 and 54–71. Solver-only tests, simulation and physical-robot execution are identified separately; hardware runs did not cover every method under every condition. The added videos preserve the position- and orientation-trial animations on thesis-defense slides 33 and 44.",
       "hero_image": {
         "file": "ik-cover.webp",
         "alt": "Franka robot arms in the real experimental workspace",
@@ -454,7 +482,11 @@
           "bytes": 7410099,
           "public_copy": false
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "benchmark-demos",
+        "label": "Watch project videos"
+      }
     },
     "interactive-learning": {
       "summary": "Building an interactive kitchen simulation for robot manipulation, with a measured MuJoCo model, Blender assets for HoloLens, demonstration-based door opening, and movement-primitive trajectory processing.",
@@ -509,6 +541,34 @@
           ]
         },
         {
+          "id": "simulation-demos",
+          "title": "Franka cabinet-opening demonstrations",
+          "paragraphs": [
+            "These clips from my practical-course presentation show the Franka arm opening cabinet doors in the articulated MuJoCo kitchen using movement-primitive trajectories."
+          ],
+          "video_layout": "pair",
+          "videos": [
+            {
+              "file": "interactive-movement-primitive-a.mp4",
+              "poster": "interactive-movement-primitive-a-poster.webp",
+              "width": 402,
+              "height": 478,
+              "title": "Franka movement-primitive cabinet opening, example 1",
+              "caption": "MuJoCo simulation · Movement-primitive cabinet opening, example 1. Presentation, slide 15.",
+              "download": true
+            },
+            {
+              "file": "interactive-movement-primitive-b.mp4",
+              "poster": "interactive-movement-primitive-b-poster.webp",
+              "width": 402,
+              "height": 478,
+              "title": "Franka movement-primitive cabinet opening, example 2",
+              "caption": "MuJoCo simulation · Movement-primitive cabinet opening, example 2. Presentation, slide 15.",
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "methods",
           "title": "From scene geometry to action",
           "paragraphs": [
@@ -550,7 +610,7 @@
         "caption": "Franka manipulation · MuJoCo project scene"
       },
       "references": [],
-      "source_note": "Based on my September 2023 practical-course report and the saved simulation assets and demonstrations used in my presentation.",
+      "source_note": "Based on my September 2023 practical-course report and the saved simulation assets and demonstrations used in my presentation. The two cabinet-opening videos preserve the animation timing of the movement-primitive GIFs on presentation slide 15.",
       "hero_image": {
         "file": "interactive-manipulation-cover.webp",
         "alt": "Franka arm interacting with the articulated kitchen in MuJoCo",
@@ -577,7 +637,11 @@
           "bytes": 1273141,
           "public_copy": false
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "simulation-demos",
+        "label": "Watch project videos"
+      }
     },
     "outlier": {
       "summary": "Odex is a team-built web platform for configuring and comparing outlier-detection experiments on high-dimensional tabular data, turning reusable detector workflows into an accessible browser interface.",
@@ -1226,6 +1290,34 @@
           ]
         },
         {
+          "id": "reconstruction-demos",
+          "title": "3D reconstruction demonstrations",
+          "paragraphs": [
+            "Side-by-side reconstructions from our HouseCat6D experiment, shown in slide 17 of the team’s final presentation. The clips compare VGGT and InstantMesh and visualize the reconstruction stage preceding 6D pose alignment."
+          ],
+          "video_layout": "pair",
+          "videos": [
+            {
+              "file": "pose-vggt-scene-reconstruction.mp4",
+              "poster": "pose-vggt-scene-reconstruction-poster.webp",
+              "width": 400,
+              "height": 258,
+              "title": "VGGT HouseCat6D reconstruction visualization",
+              "caption": "VGGT · Team reconstruction experiment on HouseCat6D. Original presentation, slide 17.",
+              "download": true
+            },
+            {
+              "file": "pose-instantmesh-scene-reconstruction.mp4",
+              "poster": "pose-instantmesh-scene-reconstruction-poster.webp",
+              "width": 400,
+              "height": 246,
+              "title": "InstantMesh HouseCat6D reconstruction visualization",
+              "caption": "InstantMesh · Reconstruction comparison from the same project experiment.",
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "my-contribution",
           "title": "My contribution",
           "paragraphs": [
@@ -1324,7 +1416,7 @@
           "url": "https://arxiv.org/abs/2503.11651"
         }
       ],
-      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes. The accompanying seven-page Challenge 1 report supports the separately labeled visual-grounding exercise. The cover pairs an RGB crop with the corresponding Hunyuan3D 2.5 mesh from the team’s comparison, cropped and recomposed from slide 34 (CC BY-SA 4.0). This illustrates image-to-mesh reconstruction, not a measured 6D-pose result.",
+      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes. The accompanying seven-page Challenge 1 report supports the separately labeled visual-grounding exercise. The cover pairs an RGB crop with the corresponding Hunyuan3D 2.5 mesh from the team’s comparison, cropped and recomposed from slide 34 (CC BY-SA 4.0). This illustrates image-to-mesh reconstruction, not a measured 6D-pose result. The VGGT and InstantMesh videos are converted from the team’s own reconstruction animations on slide 17, preserving their timing.",
       "thumbnail": {
         "file": "pose-rgb-to-mesh-cover.webp",
         "alt": "Green teapot RGB input alongside its generated textured 3D reconstruction from our Hunyuan3D 2.5 comparison",
@@ -1360,6 +1452,10 @@
       "project_website": {
         "url": "https://virlight.github.io/At3dcv2025_Any_6D/",
         "label": "Original project website"
+      },
+      "demo_link": {
+        "section": "reconstruction-demos",
+        "label": "Watch project videos"
       }
     },
     "category-pose": {
@@ -1577,6 +1673,34 @@
           ]
         },
         {
+          "id": "simulation-demos",
+          "title": "Humanoid policy demonstrations",
+          "paragraphs": [
+            "The team’s final presentation includes these teacher-policy rollouts in simulation: Booster T1 and the Unitree G1 reference comparison. They show whole-body movement near the manipulation target."
+          ],
+          "video_layout": "pair",
+          "videos": [
+            {
+              "file": "humanoid-t1-teacher.mp4",
+              "poster": "humanoid-t1-teacher-poster.webp",
+              "width": 1440,
+              "height": 960,
+              "title": "Booster T1 teacher-policy simulation",
+              "caption": "Booster T1 · Teacher-policy rollout in simulation. Final presentation, slide 26.",
+              "download": true
+            },
+            {
+              "file": "humanoid-g1-comparison.mp4",
+              "poster": "humanoid-g1-comparison-poster.webp",
+              "width": 1440,
+              "height": 960,
+              "title": "Unitree G1 reference-policy simulation",
+              "caption": "Unitree G1 · Reference comparison in simulation from the same slide.",
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "methods",
           "title": "Motion data and robot adaptation",
           "paragraphs": [
@@ -1649,7 +1773,7 @@
           "note": "Human-to-robot motion retargeting"
         }
       ],
-      "source_note": "Based on the team's mid-term and end-term presentations and the Booster T1 implementation. Images show the team's simulation experiments; contributions are described at team level.",
+      "source_note": "Based on the team's mid-term and end-term presentations and the Booster T1 implementation. Images show the team's simulation experiments; contributions are described at team level. Video excerpts are the original embedded simulation clips from final-presentation slide 26; the G1 reference comparison is labeled separately from the Booster T1 rollout.",
       "hero_image": {
         "file": "humanoid-cover.webp",
         "alt": "Booster T1 humanoid in a simulated locomotion and manipulation environment",
@@ -1666,7 +1790,11 @@
           "bytes": 1869775,
           "public_copy": false
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "simulation-demos",
+        "label": "Watch project videos"
+      }
     },
     "pi0": {
       "summary": "Real-robot deployment of π₀ on SO-101 and π₀.₅ on Franka, from collecting demonstrations to executing and inspecting manipulation behavior on physical hardware.",
@@ -1880,6 +2008,19 @@
           ]
         },
         {
+          "id": "study-video",
+          "title": "SCDA: supplementary research video",
+          "paragraphs": [
+            "The supplementary video accompanying our coauthored SCDA study presents the research and robot experiments. My personal four-target guided-research implementation is described in the following sections."
+          ],
+          "video_embed": {
+            "url": "https://www.youtube.com/embed/8LFlxN383Ig",
+            "watch_url": "https://www.youtube.com/watch?v=8LFlxN383Ig",
+            "title": "SCDA supplementary video: safe continual domain adaptation after sim2real transfer",
+            "caption": "Supplementary video from the coauthored SCDA project, published by Josip Josifovski and linked from the original project website."
+          }
+        },
+        {
           "id": "guided-research",
           "title": "My guided-research implementation",
           "paragraphs": [
@@ -2029,7 +2170,7 @@
           "url": "https://github.com/tum-i6/VTPRL"
         }
       ],
-      "source_note": "Reviewed against my 17-page guided-research final report, especially pages 8–15, the final presentation, the related coauthored SCDA paper and the retained implementation. The compact reaching protocol, calibrated runtime and selected-seed hardware results are separate from the paper’s team grasping study.",
+      "source_note": "Reviewed against my 17-page guided-research final report, especially pages 8–15, the final presentation, the related coauthored SCDA paper and the retained implementation. The compact reaching protocol, calibrated runtime and selected-seed hardware results are separate from the paper’s team grasping study. The embedded supplementary video is the original SCDA project’s public video; its publication status is unchanged.",
       "hero_image": {
         "file": "safe-rl-cover.webp",
         "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",
@@ -2070,6 +2211,10 @@
       "project_website": {
         "url": "https://safe-cda.github.io/",
         "label": "SCDA website & robot demos"
+      },
+      "demo_link": {
+        "section": "study-video",
+        "label": "Watch research video"
       }
     },
     "maniparena": {
@@ -2980,6 +3125,34 @@
           ]
         },
         {
+          "id": "tracking-demos",
+          "title": "4D tracking diagnostics",
+          "paragraphs": [
+            "These diagnostic runs compare the released OpenD4RT model’s predicted object points with ground truth on HO-3D and YCBInEOAT. They illustrate the tracking and geometry stage investigated by the discontinued prototype."
+          ],
+          "video_layout": "pair",
+          "videos": [
+            {
+              "file": "d4rt-ho3d-object-tracking.mp4",
+              "poster": "d4rt-ho3d-object-tracking-poster.webp",
+              "width": 640,
+              "height": 480,
+              "title": "OpenD4RT object-point tracking on HO-3D MC6",
+              "caption": "HO-3D MC6 · Ground-truth object points in green, predictions in red and per-frame error segments in yellow.",
+              "download": true
+            },
+            {
+              "file": "d4rt-ycbineoat-object-tracking.mp4",
+              "poster": "d4rt-ycbineoat-object-tracking-poster.webp",
+              "width": 640,
+              "height": 480,
+              "title": "OpenD4RT object-point tracking on YCBInEOAT mustard0",
+              "caption": "YCBInEOAT mustard0 · Predicted point tracks compared with annotated object geometry; diagnostic overlays retained.",
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "contribution",
           "title": "My contribution",
           "paragraphs": [
@@ -3069,7 +3242,7 @@
           "url": "https://huggingface.co/datasets/hzxie/DOM"
         }
       ],
-      "source_note": "Based on my prototype implementation, saved perception and action diagnostics, and the subsequent decision to discontinue the InstructD4RT direction. No closed-loop policy improvement is claimed. Updated November 2026. The retained OpenD4RT query-network and DynamicVLA/DOM reading decks were also checked as literature context; their baseline figures and reported results are not attributed to this prototype. The early research chronology was also checked against the shared Dart-VLA meeting notes from June 2026.",
+      "source_note": "Based on my prototype implementation, saved perception and action diagnostics, and the subsequent decision to discontinue the InstructD4RT direction. No closed-loop policy improvement is claimed. Updated November 2026. The retained OpenD4RT query-network and DynamicVLA/DOM reading decks were also checked as literature context; their baseline figures and reported results are not attributed to this prototype. The early research chronology was also checked against the shared Dart-VLA meeting notes from June 2026. Tracking videos come from the retained HO-3D MC6 and YCBInEOAT mustard0 diagnostic runs and retain their original overlays and timing.",
       "thumbnail": {
         "file": "d4rtvla-cover.webp",
         "alt": "A robot manipulating a tool with tracked object points overlaid",
@@ -3114,7 +3287,11 @@
           "public_copy": false,
           "note": "Literature-reading slides, separate from the prototype’s own experimental results."
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "tracking-demos",
+        "label": "Watch project videos"
+      }
     },
     "agentic-planner": {
       "summary": "Building a GPT-6.1 agentic planner that connects language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks in closed-loop CommonRoad/SUMO simulation.",
@@ -3345,7 +3522,11 @@
           "bytes": 899309,
           "public_copy": false
         }
-      ]
+      ],
+      "demo_link": {
+        "section": "presentation-demo",
+        "label": "Watch planning replays"
+      }
     },
     "rule-prediction": {
       "summary": "Designing and comparing neural architectures for traffic-rule event-time prediction, with grouped sequence features, survival-model decoders and systematic hyperparameter search.",

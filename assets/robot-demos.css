@@ -1,3 +1,6 @@
+.project-videos video { aspect-ratio:auto; }
+.project-videos.video-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; align-items:start; }
+.project-videos.video-pair .portrait-video video { width:100%; }
 .project-videos .portrait-video { background:#17191d; }
 .project-videos .portrait-video video {
   width:auto;
@@ -10,6 +13,9 @@
 }
 .project-videos .portrait-video figcaption { background:#fff; }
 .video-download { display:inline-block; margin-left:16px; color:var(--blue); font-weight:600; }
+.video-embed-player { aspect-ratio:16/9; background:#17191d; }
+.video-embed-player iframe { display:block; width:100%; height:100%; border:0; }
 @media (max-width:640px) {
+  .project-videos.video-pair { grid-template-columns:1fr; gap:24px; }
   .video-download { display:block; margin:8px 0 0; }
 }
