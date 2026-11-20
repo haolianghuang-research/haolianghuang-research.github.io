@@ -2226,7 +2226,7 @@
         },
         {
           "label": "My focus",
-          "value": "VLA adaptation, action representation, agent orchestration, and visual verification"
+          "value": "π₀.₅ adaptation, subtask/Text-CFG variants, shared action representations and agent orchestration"
         },
         {
           "label": "Benchmark",
@@ -2269,9 +2269,78 @@
           "title": "My contribution",
           "bullets": [
             "Built a common training and inference representation for all 20 real tasks, preserving the distinct semantics of end-effector pose, gripper commands, head/lift motion, and base velocity.",
-            "Adapted the π₀.₅ policy with LoRA and integrated it with the three-camera observation stream and task-conditioned action interface.",
+            "Adapted π₀.₅ with LoRA, implemented subtask-aware training and Text-CFG variants, and integrated three-camera observations with the task-conditioned action interface.",
             "Developed the asynchronous planner–predictor–verifier loop, task mission specifications, completion-evidence requirements, and guarded subtask transitions.",
             "Integrated task-specific perception and action-side checks where generic progress recognition was insufficient, and built action-prediction diagnostics to inspect temporal and coordinate errors."
+          ]
+        },
+        {
+          "id": "pi05-adaptation",
+          "title": "How I adapted π₀.₅ for ManipArena",
+          "paragraphs": [
+            "The policy work extends the pretrained π₀.₅ model through task data, action representations and language conditioning. I connected these changes to a robot interface that supports both tabletop and mobile manipulation."
+          ],
+          "table": {
+            "headers": [
+              "Step",
+              "Project modification",
+              "Role in the system"
+            ],
+            "rows": [
+              [
+                "Multi-task data",
+                "Mix 20 real-task LeRobot datasets with front and two wrist-camera streams.",
+                "Train a shared policy across the competition task suite."
+              ],
+              [
+                "Shared control space",
+                "Map tabletop and mobile state/actions to a consistent representation; pad model actions to 32 dimensions.",
+                "Preserve the different meanings of pose deltas, gripper commands and base velocities."
+              ],
+              [
+                "Model adaptation",
+                "LoRA finetuning of the vision-language branch and action expert.",
+                "Adapt pretrained representations and continuous-action prediction to the task data."
+              ],
+              [
+                "Subtask-aware second stage",
+                "Use main-task-plus-subtask prompts and constrain annotated action chunks to the current subtask.",
+                "Associate similar-looking scenes with the appropriate stage-specific action."
+              ],
+              [
+                "Text-CFG variant",
+                "Train paired text conditions with dropout and support classifier-free guidance at inference.",
+                "Control how strongly the active subtask conditions action generation."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "text-cfg",
+          "title": "Text-CFG and subtask-conditioned action generation",
+          "paragraphs": [
+            "I implemented Text-CFG variants of the policy adaptation. In the subtask-aware setup, the conditional prompt is “main task (subtask)”, while the baseline, or unconditional, text condition is “main task”. Camera observations and robot state remain available in both branches.",
+            "Text-condition dropout during training teaches the model both forms of conditioning. When Text-CFG is enabled at inference, the two flow predictions are combined through classifier-free guidance, making subtask conditioning an explicit part of action generation.",
+            "The second-stage Text-CFG data path retains all 20 tasks and frames without subtask annotations, alongside subtask-labeled data. This preserves whole-task training coverage while adding stage-specific conditions."
+          ],
+          "figures": [
+            {
+              "file": "maniparena-pi05-adaptation.svg",
+              "alt": "Training and inference workflow for multi-task π₀.₅ adaptation, optional subtask training and Text-CFG",
+              "caption": "Project implementation schematic based on the Google Doc training and inference summaries. Subtask-aware training and Text-CFG are supported variants; the retained API default uses the ordinary all-task checkpoint with Text-CFG disabled.",
+              "width": 1600,
+              "height": 1070
+            }
+          ]
+        },
+        {
+          "id": "policy-configuration",
+          "title": "Training variants and retained inference defaults",
+          "technical": true,
+          "paragraphs": [
+            "The notes distinguish two second-stage data paths: the subtask-only setup selects annotated frames from the 14 active tracker tasks, while the Text-CFG variant retains all 20 tasks and unannotated frames. Annotated action chunks are truncated or clamped at subtask boundaries.",
+            "The documented Text-CFG defaults are a 0.1 text-dropout probability, guidance scale 1.5 and 10 sampling steps. These are configuration values, not measured success-rate improvements.",
+            "The retained API defaults disable Text-CFG and load a single all-task policy checkpoint. Appending a VLM-provided subtask still supplies an ordinary text condition in that path. A Text-CFG-enabled configuration activates the guidance branch; it does not imply switching between a main and a second-stage checkpoint during execution."
           ]
         },
         {
@@ -2419,7 +2488,7 @@
           "url": "https://github.com/Physical-Intelligence/openpi"
         }
       ],
-      "source_note": "Reviewed against my retained CVPR2026-Workshop technical report, the HTML training/deployment reports, the 20-task atlas, and the VLA/VLM diagnosis notes. The task registry, optional training paths and final inference defaults are described separately. Atlas images are task references, not evidence of scored-trial success. Competition placement and subsequent system development remain distinct.",
+      "source_note": "Reviewed against my retained CVPR2026-Workshop technical report, the HTML training/deployment reports, the 20-task atlas, and the VLA/VLM diagnosis notes. The task registry, optional training paths and final inference defaults are described separately. Atlas images are task references, not evidence of scored-trial success. Competition placement and subsequent system development remain distinct. The task, VLA-training and Agent-inference tabs of my Google Doc were reviewed directly. The Text-CFG and second-stage training extensions are described as implemented variants, with the retained default inference path identified separately.",
       "featured": true,
       "status": "CVPR 2026 Workshop · 4th / 32 teams",
       "strengths": [
@@ -2440,7 +2509,7 @@
         "file": "maniparena-system-architecture.svg",
         "title": "System architecture",
         "intro": "A visual-language Agent tracks the active task stage while one π₀.₅ policy generates robot actions. Their shared state is the cached current subtask.",
-        "caption": "Implementation schematic of the retained system. The first planning call is synchronous; progress monitoring then runs asynchronously. Fourteen tasks enable subtask tracking, while six use the whole-task instruction directly.",
+        "caption": "Implementation schematic of the retained system. The first planning call is synchronous; progress monitoring then runs asynchronously. Fourteen tasks enable subtask tracking, while six use the whole-task instruction directly. Subtask-aware training and Text-CFG are supported policy variants; Text-CFG is disabled in the retained default inference configuration.",
         "views": [
           {
             "id": "system",
@@ -2502,7 +2571,7 @@
               },
               {
                 "title": "Predict an action chunk",
-                "text": "The LoRA-adapted π₀.₅ model and action expert generate continuous robot actions."
+                "text": "The LoRA-adapted π₀.₅ model and action expert generate continuous actions; the Text-CFG branch can guide generation when explicitly enabled."
               },
               {
                 "title": "Decode and execute",

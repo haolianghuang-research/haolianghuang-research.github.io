@@ -542,7 +542,7 @@
       "status": "CVPR 2026 Workshop",
       "status_kind": "award",
       "summary": "A multi-task robot system combining a finetuned VLA with asynchronous subtask planning and evidence-based progress verification.",
-      "contribution": "Unified tabletop/mobile action interfaces, LoRA adaptation, and concurrent planner–verifier orchestration.",
+      "contribution": "Unified tabletop/mobile action interfaces, LoRA adaptation with subtask/Text-CFG variants, and concurrent planner–verifier orchestration.",
       "skills": [
         "VLA deployment",
         "Bimanual / mobile control",

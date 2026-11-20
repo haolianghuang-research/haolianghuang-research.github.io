@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1070" viewBox="0 0 1600 1070" role="img" aria-labelledby="title desc">
+<title id="title">ManipArena: π₀.₅ adaptation, subtask training and Text-CFG</title>
+<desc id="desc">Twenty task datasets share a common action representation and LoRA-adapted policy. Optional second-stage training pairs main-task-plus-subtask and main-task-only text conditions. Text-CFG combines their flow predictions during guided inference. The retained default deployment uses a single all-task checkpoint with Text-CFG disabled.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#718499" stroke-width="1.5"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#24344b}.title{font-size:37px;font-weight:700}.subtitle{font-size:25px;fill:#697a90}.heading{font-size:27px;font-weight:700}.body{font-size:25px}.small{font-size:23px;fill:#60728a}.label{font-size:23px;font-weight:700;fill:#68508c}.line{stroke:#718499;stroke-width:3;fill:none;marker-end:url(#arrow)}</style>
+<rect width="1600" height="1070" fill="#fff"/>
+<text x="42" y="62" class="title">What I changed around π₀.₅</text>
+<text x="42" y="106" class="subtitle">A shared multi-task policy, subtask-aware training and an optional Text-CFG variant.</text>
+<rect x="30" y="147" width="1540" height="207" rx="20" fill="#eef4fc" stroke="#ccdced"/>
+<text x="55" y="191" class="heading">Multi-task adaptation</text>
+<g fill="#fff" stroke="#cedceb"><rect x="55" y="216" width="400" height="109" rx="13"/><rect x="589" y="216" width="400" height="109" rx="13"/><rect x="1123" y="216" width="420" height="109" rx="13"/></g>
+<text x="76" y="253" class="heading">20 task datasets</text><text x="76" y="294" class="body">Real-robot demonstrations</text>
+<text x="610" y="253" class="heading">Shared action space</text><text x="610" y="294" class="body">Tabletop + mobile → 32D</text>
+<text x="1144" y="253" class="heading">LoRA-adapted π₀.₅</text><text x="1144" y="294" class="body">VLM + action expert</text>
+<path d="M457 271H585" class="line"/><path d="M991 271H1119" class="line"/>
+<rect x="30" y="388" width="1540" height="259" rx="20" fill="#f4effa" stroke="#dfd1ee"/>
+<text x="55" y="433" class="heading">Subtask-aware training · optional second stage</text>
+<g fill="#fff" stroke="#dbcde9"><rect x="55" y="458" width="495" height="70" rx="12"/><rect x="55" y="547" width="495" height="70" rx="12"/><rect x="744" y="458" width="365" height="159" rx="13"/><rect x="1223" y="458" width="320" height="159" rx="13"/></g>
+<text x="77" y="501" class="body">Conditional: main task (subtask)</text>
+<text x="77" y="590" class="body">Baseline condition: main task</text>
+<text x="767" y="504" class="heading">Text-condition dropout</text><text x="767" y="547" class="body">Learn both text conditions</text><text x="767" y="586" class="small">Shared images + robot state</text>
+<text x="1245" y="504" class="heading">Subtask boundaries</text><text x="1245" y="547" class="body">Keep action chunks</text><text x="1245" y="585" class="body">inside the active stage</text>
+<path d="M552 493H654V537H740" class="line"/><path d="M552 582H654V537" fill="none" stroke="#718499" stroke-width="3"/><path d="M1111 537H1219" class="line"/>
+<rect x="30" y="681" width="1540" height="249" rx="20" fill="#eaf5f2" stroke="#c6dfd8"/>
+<text x="55" y="726" class="heading">Text-CFG inference · when explicitly enabled</text>
+<g fill="#fff" stroke="#c9ded8"><rect x="55" y="752" width="495" height="62" rx="12"/><rect x="55" y="835" width="495" height="62" rx="12"/><rect x="744" y="770" width="365" height="109" rx="13"/><rect x="1223" y="770" width="320" height="109" rx="13"/></g>
+<text x="77" y="791" class="body">Flow prediction with subtask text</text>
+<text x="77" y="874" class="body">Flow prediction with main-task text</text>
+<text x="767" y="814" class="heading">Classifier-free guidance</text><text x="767" y="855" class="body">Combine the two predictions</text>
+<text x="1245" y="814" class="heading">Guided actions</text><text x="1245" y="855" class="body">Decode for the robot</text>
+<path d="M552 783H654V825H740" class="line"/><path d="M552 866H654V825" fill="none" stroke="#718499" stroke-width="3"/><path d="M1111 825H1219" class="line"/>
+<text x="43" y="987" class="small">Retained default: one all-task checkpoint; the Text-CFG branch is disabled unless explicitly enabled.</text>
+<text x="43" y="1025" class="small">Implementation schematic from the project notes · Optional variants are separate from the scored competition result.</text>
+</svg>

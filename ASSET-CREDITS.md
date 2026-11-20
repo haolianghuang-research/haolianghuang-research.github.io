@@ -162,3 +162,11 @@ Safe RL embeds the original [SCDA supplementary video](https://www.youtube.com/w
 - `assets/projects/huawei-can-workflow.svg`: newly drawn conceptual diagram summarizing the public scope of the user's internship: CAN time-series preparation, temporal-model research, and vehicle-dynamics estimation. Curves are schematic illustrations, not measured signals. The figure does not reproduce an internal model architecture or experimental result.
 - The Huawei experience overview was checked against the retained March–August 2026 internship timeline and the CAN-modeling and data-analysis repository descriptions. It summarizes responsibilities and general methods. The source reports, employer data, internal configurations and experiment files are not included in the website assets.
 - Award cards reuse the previously credited CVPR 2026, ICCV 2025 and TUM marks to identify the corresponding competition venues. HiWi employment and the LMU / TUM research collaborations are explicitly labeled separately.
+
+## ManipArena policy adaptation and Text-CFG, 20 November 2026
+
+- The author's Google Doc *cvpr2026-maniparena-report* was read in the signed-in Chrome session. Its three tabs—task descriptions, VLA training, and VLA/Agent inference—were inspected separately. The training and inference notes agree on the implemented subtask-aware / Text-CFG variants and on Text-CFG being disabled in the retained API defaults.
+- `assets/projects/maniparena-pi05-adaptation.svg`: new explanatory diagram of the documented multi-task action interface, LoRA adaptation, optional subtask-aware second stage, and Text-CFG inference. It is an implementation schematic, not a measured result or a figure from the original π₀.₅ model paper.
+- The training-context block in `maniparena-system-architecture.svg` now identifies optional CFG and subtask-aware variants. The surrounding text keeps training variants, retained runtime defaults and competition placement separate. No success-rate gain is attributed to CFG without an experiment.
+
+Native Google Docs and their permissions are unchanged. Private exports used for source review remain outside the public repository; the existing public project report is still available in the document archive.

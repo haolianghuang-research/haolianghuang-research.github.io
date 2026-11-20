@@ -111,8 +111,8 @@
 <text x="441" y="925" class="ma-box-title">Shared action format</text>
 <text x="441" y="954" class="ma-small">Tabletop + mobile robots</text>
 <rect x="810" y="895" width="310" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
-<text x="826" y="925" class="ma-box-title">LoRA adaptation</text>
-<text x="826" y="954" class="ma-small">Fine-tune π₀.₅</text>
+<text x="826" y="925" class="ma-box-title">LoRA + optional CFG</text>
+<text x="826" y="954" class="ma-small">Subtask-aware variants</text>
 <rect x="1175" y="895" width="372" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
 <text x="1191" y="925" class="ma-box-title">One policy checkpoint</text>
 <text x="1191" y="954" class="ma-small">Shared across the task suite</text>
