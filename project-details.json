@@ -90,7 +90,29 @@
         "file": "bitnet-cover.webp",
         "alt": "Ternary-weight computation diagram from the BitNet seminar presentation",
         "caption": "BitNet · Method illustration"
-      }
+      },
+      "documents": [
+        {
+          "file": "bitnet/seminar-report.pdf",
+          "title": "Quantized LLM seminar report",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 5,
+          "bytes": 120814,
+          "public_copy": false
+        },
+        {
+          "file": "bitnet/seminar-presentation.pdf",
+          "title": "Quantized LLM seminar presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 21,
+          "bytes": 1955639,
+          "public_copy": false
+        }
+      ]
     },
     "vae": {
       "summary": "A practical comparison of VAE, conditional VAE, and Gaussian-process-prior VAE models, moving from handwritten-digit latent spaces to identity- and viewpoint-aware face reconstruction.",
@@ -200,7 +222,29 @@
         "file": "vae-cover.webp",
         "alt": "MNIST digit generations across a learned VAE latent-space grid",
         "caption": "VAE · Generated MNIST samples"
-      }
+      },
+      "documents": [
+        {
+          "file": "vae/final-project-report.pdf",
+          "title": "Exploring VAEs: final project report",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 29,
+          "bytes": 4831422,
+          "public_copy": false
+        },
+        {
+          "file": "vae/final-project-presentation.pdf",
+          "title": "Final VAE project presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 43,
+          "bytes": 4913284,
+          "public_copy": false
+        }
+      ]
     },
     "ik": {
       "summary": "A benchmarking suite for choosing Cartesian-space inverse-kinematics methods for the Franka Emika Panda, evaluating numerical solutions, workspace coverage, and motion execution in simulation and on hardware.",
@@ -388,7 +432,29 @@
         "file": "ik-cover.webp",
         "alt": "Franka robot arms in the real experimental workspace",
         "caption": "Franka Emika · Experimental workspace"
-      }
+      },
+      "documents": [
+        {
+          "file": "ik/bachelor-thesis.pdf",
+          "title": "Bachelor’s thesis: Cartesian-space controller benchmarking",
+          "kind": "Thesis",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 132,
+          "bytes": 14740474,
+          "public_copy": false
+        },
+        {
+          "file": "ik/bachelor-defense.pdf",
+          "title": "Bachelor’s thesis defense",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 75,
+          "bytes": 7410099,
+          "public_copy": false
+        }
+      ]
     },
     "interactive-learning": {
       "summary": "Building an interactive kitchen simulation for robot manipulation, with a measured MuJoCo model, Blender assets for HoloLens, demonstration-based door opening, and movement-primitive trajectory processing.",
@@ -489,7 +555,29 @@
         "file": "interactive-manipulation-cover.webp",
         "alt": "Franka arm interacting with the articulated kitchen in MuJoCo",
         "caption": "Franka manipulation · MuJoCo project scene"
-      }
+      },
+      "documents": [
+        {
+          "file": "interactive-learning/practical-course-report.pdf",
+          "title": "Practical-course report",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 8,
+          "bytes": 71045,
+          "public_copy": false
+        },
+        {
+          "file": "interactive-learning/practical-course-presentation.pdf",
+          "title": "Practical-course presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 17,
+          "bytes": 1273141,
+          "public_copy": false
+        }
+      ]
     },
     "outlier": {
       "summary": "Odex is a team-built web platform for configuring and comparing outlier-detection experiments on high-dimensional tabular data, turning reusable detector workflows into an accessible browser interface.",
@@ -613,7 +701,29 @@
         "file": "outlier-cover.webp",
         "alt": "Odex experiment dashboard with run status and execution records",
         "caption": "Odex · Experiment dashboard"
-      }
+      },
+      "documents": [
+        {
+          "file": "outlier/final-project-presentation.pdf",
+          "title": "Odex final project presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 22,
+          "bytes": 1607625,
+          "public_copy": false
+        },
+        {
+          "file": "outlier/test-phase-presentation.pdf",
+          "title": "Odex test-phase presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 23,
+          "bytes": 1663646,
+          "public_copy": false
+        }
+      ]
     },
     "mobile-robots": {
       "summary": "Programming a LEGO Mindstorms EV3 robot to navigate a multi-stage course through sensor feedback, calibrated motion control, and explicit task logic.",
@@ -815,7 +925,29 @@
         "file": "traffic-cover.webp",
         "alt": "Vehicles tracked on a highway in aerial video",
         "caption": "Drone video · Vehicle tracking"
-      }
+      },
+      "documents": [
+        {
+          "file": "traffic/traffic-analysis-thesis.pdf",
+          "title": "Master’s thesis: drone-video traffic surveys",
+          "kind": "Thesis",
+          "language": "German",
+          "format": "Original PDF",
+          "pages": 94,
+          "bytes": 7685120,
+          "public_copy": true
+        },
+        {
+          "file": "traffic/thesis-defense.pdf",
+          "title": "Traffic-analysis thesis defense",
+          "kind": "Slides",
+          "language": "German",
+          "format": "PDF export of original slides",
+          "pages": 24,
+          "bytes": 2301771,
+          "public_copy": true
+        }
+      ]
     },
     "semantic-reconstruction": {
       "summary": "Extending RaySt3R from geometric completion toward instance-aware 3D reconstruction, with multi-view training, a geometry-conditioned part-feature head, cross-view supervision and scalable data pipelines.",
@@ -1138,7 +1270,29 @@
         "file": "pose-cover.webp",
         "alt": "Input objects and generated 3D object reconstructions from pose experiments",
         "caption": "Object reconstruction · Project experiments"
-      }
+      },
+      "documents": [
+        {
+          "file": "pose/visual-grounding-course-report.pdf",
+          "title": "Related course exercise: visual grounding",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 7,
+          "bytes": 110896,
+          "public_copy": false
+        },
+        {
+          "file": "pose/final-project-presentation.pdf",
+          "title": "Final course-project presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 65,
+          "bytes": 4807335,
+          "public_copy": false
+        }
+      ]
     },
     "category-pose": {
       "summary": "First-prize ICCV 2025 challenge work integrating GCEPose with DINOv3 features and category shape priors. My main contributions were the cross-dataset geometry pipeline, shape/semantic prior generation, mixed-data loading and large-scale training experiments.",
@@ -1297,7 +1451,19 @@
         "file": "category-pose-cover.webp",
         "alt": "A reconstructed mug represented by colored 3D semantic shape points",
         "caption": "Reconstructed 3D shape prior · Intermediate result"
-      }
+      },
+      "documents": [
+        {
+          "file": "category-pose/workshop-challenge-presentation.pdf",
+          "title": "ICCV workshop and challenge presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 26,
+          "bytes": 2015699,
+          "public_copy": false
+        }
+      ]
     },
     "humanoid": {
       "summary": "A hierarchical learning project that adapts human motion to Booster T1 and connects reusable whole-body control with visual object interaction in simulation.",
@@ -1420,7 +1586,19 @@
         "file": "humanoid-cover.webp",
         "alt": "Booster T1 humanoid in a simulated locomotion and manipulation environment",
         "caption": "Booster T1 · Simulation"
-      }
+      },
+      "documents": [
+        {
+          "file": "humanoid/final-project-presentation.pdf",
+          "title": "Final humanoid project presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 29,
+          "bytes": 1869775,
+          "public_copy": false
+        }
+      ]
     },
     "pi0": {
       "summary": "Practical deployment of vision-language-action policies on real robot arms, with custom demonstration collection and evaluation of how pretrained policies behave in physical scenes.",
@@ -1536,7 +1714,19 @@
         "file": "pi0-cover.webp",
         "alt": "SO-101 leader and follower robot arms on the project workbench",
         "caption": "SO-101 · Real-robot setup"
-      }
+      },
+      "documents": [
+        {
+          "file": "pi0/final-seminar-presentation.pdf",
+          "title": "Final seminar presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 17,
+          "bytes": 1352721,
+          "public_copy": false
+        }
+      ]
     },
     "safe-rl": {
       "summary": "Safe robot-policy adaptation on a KUKA arm: calibrating a simulation to the physical system, combining safety-constrained RL with continual learning, and evaluating improvement alongside retention of previous targets.",
@@ -1736,7 +1926,39 @@
         "file": "safe-rl-cover.webp",
         "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",
         "caption": "KUKA manipulation · Simulation and real setup"
-      }
+      },
+      "documents": [
+        {
+          "file": "safe-rl/guided-research-report.pdf",
+          "title": "Final guided-research report",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 17,
+          "bytes": 1919364,
+          "public_copy": true
+        },
+        {
+          "file": "safe-rl/final-presentation.pdf",
+          "title": "Final guided-research presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 15,
+          "bytes": 990555,
+          "public_copy": true
+        },
+        {
+          "file": "safe-rl/scda-paper.pdf",
+          "title": "Related coauthored SCDA paper",
+          "kind": "Paper",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 8,
+          "bytes": 735060,
+          "public_copy": false
+        }
+      ]
     },
     "maniparena": {
       "summary": "Fourth place among 32 teams in the CVPR 2026 Workshop ManipArena challenge. I built a manipulation stack that combines a multi-task VLA policy with asynchronous visual task planning and evidence-based progress verification, bridging learned control with long-horizon robot behavior.",
@@ -2036,7 +2258,39 @@
             ]
           }
         ]
-      }
+      },
+      "documents": [
+        {
+          "file": "maniparena/system-technical-report.pdf",
+          "title": "ManipArena task, training and system report",
+          "kind": "Technical report",
+          "language": "Chinese",
+          "format": "PDF export of original report",
+          "pages": 30,
+          "bytes": 650014,
+          "public_copy": false
+        },
+        {
+          "file": "maniparena/vla-diagnosis-notes.pdf",
+          "title": "VLA diagnosis and research notes",
+          "kind": "Research notes",
+          "language": "Chinese",
+          "format": "Original PDF",
+          "pages": 7,
+          "bytes": 613032,
+          "public_copy": false
+        },
+        {
+          "file": "maniparena/vlm-diagnosis-notes.pdf",
+          "title": "VLM diagnosis and research notes",
+          "kind": "Research notes",
+          "language": "Chinese",
+          "format": "Original PDF",
+          "pages": 2,
+          "bytes": 439643,
+          "public_copy": false
+        }
+      ]
     },
     "commonroad": {
       "summary": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",
@@ -2145,7 +2399,29 @@
         "file": "commonroad-thumbnail.webp",
         "alt": "CommonRoad motion planning trajectory",
         "caption": "Project method / result visualization"
-      }
+      },
+      "documents": [
+        {
+          "file": "commonroad/approach-speech.pdf",
+          "title": "Approach and presentation speech",
+          "kind": "Report",
+          "language": "English",
+          "format": "Original PDF",
+          "pages": 2,
+          "bytes": 60070,
+          "public_copy": false
+        },
+        {
+          "file": "commonroad/winner-presentation.pdf",
+          "title": "CommonRoad winner presentation",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 4,
+          "bytes": 431491,
+          "public_copy": false
+        }
+      ]
     },
     "rolewam": {
       "summary": "Developing a joint attention module that connects visual inputs, task-role maps, and robot actions on FastWAM / Wan2.2, while exploring how RoboTTT’s memory mechanism could support longer-horizon manipulation.",
@@ -2701,7 +2977,31 @@
         "file": "d4rtvla-cover.webp",
         "alt": "A robot manipulating a tool with tracked object points overlaid",
         "caption": "OpenD4RT tracking diagnostic · YCBInEOAT"
-      }
+      },
+      "documents": [
+        {
+          "file": "d4rtvla/d4rt-reading-presentation.pdf",
+          "title": "D4RT query-network reading slides",
+          "kind": "Reading notes",
+          "language": "Chinese / English",
+          "format": "PDF export of original slides",
+          "pages": 15,
+          "bytes": 1713672,
+          "public_copy": false,
+          "note": "Literature-reading slides, separate from the prototype’s own experimental results."
+        },
+        {
+          "file": "d4rtvla/dynamicvla-reading-presentation.pdf",
+          "title": "DynamicVLA and DOM reading slides",
+          "kind": "Reading notes",
+          "language": "Chinese / English",
+          "format": "PDF export of original slides",
+          "pages": 21,
+          "bytes": 2979492,
+          "public_copy": false,
+          "note": "Literature-reading slides, separate from the prototype’s own experimental results."
+        }
+      ]
     },
     "agentic-planner": {
       "summary": "Building a GPT-6.1 agentic planner that connects language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks in closed-loop CommonRoad/SUMO simulation.",
@@ -2920,7 +3220,19 @@
         "file": "agentic-planner-cover.webp",
         "alt": "Lanelet road geometry, ego vehicle, traffic, and selected path from an archived CommonRoad replay",
         "caption": "CommonRoad simulation · Archived replay"
-      }
+      },
+      "documents": [
+        {
+          "file": "agentic-planner/project-presentation-v060.pdf",
+          "title": "Agentic Planner presentation: v0.6.0",
+          "kind": "Slides",
+          "language": "English",
+          "format": "PDF export of original slides",
+          "pages": 3,
+          "bytes": 899309,
+          "public_copy": false
+        }
+      ]
     },
     "rule-prediction": {
       "summary": "Designing and comparing neural architectures for traffic-rule event-time prediction, with grouped sequence features, survival-model decoders and systematic hyperparameter search.",

@@ -1,0 +1,25 @@
+.document-shortcut { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:-12px 0 34px; font-size:14px; }
+.document-shortcut a { font-weight:600; color:var(--accent,#1768bc); border-bottom:1px solid #b6c9e5; }
+.document-shortcut span { color:var(--muted); font-size:13px; }
+.project-documents .documents-intro { font-size:16px; line-height:1.8; color:#64646c; margin-bottom:25px; }
+.document-list { display:grid; gap:14px; }
+.document-card { display:flex; align-items:center; justify-content:space-between; gap:22px; padding:23px; border:1px solid var(--line); border-radius:17px; background:#fff; }
+.document-heading { display:flex; align-items:flex-start; gap:17px; min-width:0; }
+.document-format { flex:none; display:grid; place-items:center; width:43px; height:51px; border-radius:10px; color:#356599; background:#eef3fa; font-size:12px; font-weight:700; letter-spacing:.04em; }
+.project-documents .document-kind { font-size:12px; line-height:1.7; color:#73737d; margin:0 0 5px; }
+.document-card h3 { font-size:18px; font-weight:600; letter-spacing:-.02em; line-height:1.5; margin:0 0 8px; color:var(--ink); }
+.project-documents .document-meta { font-size:13px; line-height:1.7; color:#74747c; margin:0; }
+.project-documents .document-note { font-size:13px; line-height:1.7; color:#74747c; margin:7px 0 0; }
+.document-actions { flex:none; display:flex; align-items:center; gap:9px; }
+.document-actions a { white-space:nowrap; padding:10px 13px; border-radius:10px; font-size:14px; line-height:1.5; font-weight:500; color:#245d9f; background:#f0f5fc; }
+.document-actions a:last-child { background:#f4f4f7; color:#53535b; }
+.document-actions a:hover { background:#e3edf9; }
+.document-actions a:focus-visible { outline:3px solid #84b1eb; outline-offset:3px; }
+@media(max-width:700px) {
+ .document-card { align-items:stretch; flex-direction:column; gap:17px; padding:20px; }
+ .document-heading { gap:13px; }
+ .document-card h3 { font-size:17px; }
+ .document-actions { padding-left:56px; flex-wrap:wrap; }
+ .document-actions a { padding:10px 15px; }
+ .document-shortcut { margin-bottom:30px; }
+}

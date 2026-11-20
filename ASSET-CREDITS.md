@@ -1,6 +1,6 @@
 # Project visual credits
 
-Figures are selected excerpts, not complete source documents. Private source paths, student IDs, signatures, credentials, and raw training configurations are excluded from this repository. Preview WebP files are resized versions of the corresponding credited figures.
+Figure assets are selected excerpts. Reviewed public copies of complete project documents are also available under `assets/reports/`, as described below. Student identifiers, signatures, credentials, and private raw training configurations are excluded. Preview WebP files are resized versions of the corresponding credited figures.
 
 | Project | Visuals | Source and credit |
 | --- | --- | --- |
@@ -53,7 +53,7 @@ The three public November 2026 CV copies have the private telephone number remov
 
 ## Final-report and presentation review, 19 November 2026
 
-The following figures were extracted from the retained final deliverables. Web copies preserve the figure content and omit source-document metadata. Source decks and reports remain private.
+The following figures were extracted from the retained final deliverables. Web copies preserve the figure content and omit source-document metadata. Unmodified local source files remain private; reviewed public document copies were added on 20 November 2026.
 
 | Web asset | Source and interpretation |
 | --- | --- |
@@ -92,7 +92,7 @@ TUM and LMU card marks reuse the credited assets above. Conference marks identif
 
 ## Additional OneDrive final-presentation review, 20 November 2026
 
-Six further source files were read from the synchronized OneDrive course folders: the IK final defense, Odex final and test-phase presentations, the personal KUKA guided-research final report, the course Challenge 1 report, and the traffic-analysis defense. Original documents remain outside this public repository.
+Six further source files were read from the synchronized OneDrive course folders: the IK final defense, Odex final and test-phase presentations, the personal KUKA guided-research final report, the course Challenge 1 report, and the traffic-analysis defense. Unmodified local originals remain outside this public repository; public document copies are listed in the archive below.
 
 | Asset | Source and interpretation |
 | --- | --- |
@@ -101,7 +101,7 @@ Six further source files were read from the synchronized OneDrive course folders
 | `traffic-defense-counting-table.webp` | Haoliang Huang, traffic-analysis thesis, Table 4-6 on PDF page 50 / printed page 46, rendered directly from the PDF for legibility. The same comparison appears on slide 19 of *Vortrag Demo*. |
 | `traffic-defense-class-confusion.webp`, `traffic-defense-duplicate-detections.webp` | Haoliang Huang, *Vortrag Demo*, slide 20. Class-confusion and multiple-detection examples used to explain counting errors. |
 
-Odex testing figures are summarized as a dated team-level table; KUKA runtime and evaluation details come from the personal report. The visual-grounding course exercise is labeled separately from the final 6D-pose system. No source cover, student identifier, signature, account screenshot or full report is included.
+Odex testing figures are summarized as a dated team-level table; KUKA runtime and evaluation details come from the personal report. The visual-grounding course exercise is labeled separately from the final 6D-pose system. The excerpt images omit personal identifiers and account information. Complete public document copies are provided separately in `assets/reports/`.
 # User-specified project sources, 20 November 2026
 
 - `maniparena-atlas-*.webp`: selected task reference images from the retained `maniparena-english-task-subtask-atlas.zip` in the user's CVPR2026-Workshop folder. The atlas depicts benchmark task setups; these frames are not presented as scored-trial results. Task and system descriptions were checked against the accompanying technical report, HTML reports and VLA/VLM diagnosis notes. Benchmark/task imagery credit: ManipArena / X2Robot.
@@ -111,3 +111,9 @@ Odex testing figures are summarized as a dated team-level table; KUKA runtime an
 - `rayst3r-project-extensions.svg`: code-based explanatory schematic, redrawn for this portfolio from the team's modified RaySt3R branch (RayQuery, PartAdaptor, PartHead, feature losses and joint input/novel-view supervision). This is a model diagram, not a saved reconstruction output. Original backbone credit remains with the RaySt3R authors.
 - `rule-prediction-study-design.svg`: explanatory schematic of the architecture comparison and hyperparameter search documented in the retained November 2026 manuscript. The displayed numerical values are validation results; the separate six-rule feature-ablation study has a different scope.
 - `maniparena-system-architecture.svg`: explanatory diagram redrawn from the retained ManipArena technical report and final C3/OpenPI system description. It separates episode-start planning, cached task state, asynchronous progress/evidence/verification, shared VLA control, physical execution, and the demonstration-to-checkpoint training context. The diagram and its three website views describe the implementation; they do not show a live robot run or a measured timing result.
+
+## Original document archive, 20 November 2026
+
+The project pages link 28 complete public PDFs across 15 projects: retained course reports and theses, final presentations, competition presentations, research notes and the related coauthored SCDA paper. Existing PDFs retain their page content; PPTX and DOCX sources are provided as labeled static PDF exports. Source languages, author credits, slide order and page counts are preserved. Automatic dates use their stored source values. Source video posters and first frames of animated GIFs represent embedded media in the static slide PDFs.
+
+Four public copies have student identifiers removed: the Safe RL report and presentation, and the traffic thesis and defense. Document metadata and embedded-file payloads are cleared; unmodified originals remain in the user's local archive. Original model, dataset, university, collaborator and paper credits remain as shown in the documents. D4RT and DynamicVLA reading slides are labeled as literature context, separate from the prototype's results.

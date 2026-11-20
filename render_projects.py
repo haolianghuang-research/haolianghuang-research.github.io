@@ -19,6 +19,23 @@ def render_system_diagram(root, info):
     return f'''<section class="system-architecture" id="system-architecture" data-architecture-focus="system" aria-labelledby="system-architecture-heading"><div class="architecture-heading"><div><p class="eyebrow">System at a glance</p><h2 id="system-architecture-heading">{e(info['title'])}</h2></div><a class="text-link architecture-fullsize" href="../../assets/projects/{e(info['file'])}">Open full-size diagram</a></div><p class="architecture-intro">{e(info['intro'])}</p><div class="architecture-controls" role="group" aria-label="Choose an architecture view" hidden>{controls}</div><figure class="architecture-canvas">{svg}<figcaption>{e(info['caption'])}</figcaption></figure><div class="architecture-legend" aria-label="Diagram colors"><span class="architecture-key-agent">Agent reasoning</span><span class="architecture-key-control">VLA and action loop</span><span class="architecture-key-shared">Shared subtask state</span></div><div class="architecture-panels">{panels}</div></section>'''
 
 
+def render_documents(documents):
+    if not documents:
+        return ''
+    cards = ''
+    for item in documents:
+        href = '../../assets/reports/' + e(item['file'])
+        download_name = e(item['file'].replace('/', '-'))
+        size = f'{item["bytes"] / 1024 / 1024:.1f} MB' if item['bytes'] >= 1024 * 1024 else f'{round(item["bytes"] / 1024)} KB'
+        pages = f'{item["pages"]} page' + ('s' if item['pages'] != 1 else '')
+        format_label = 'Original PDF' if item['format'] == 'Original PDF' else 'PDF export'
+        note = f'<p class="document-note">{e(item["note"])}</p>' if item.get('note') else ''
+        if item.get('public_copy'):
+            note += '<p class="document-note">Public copy: personal identifiers removed.</p>'
+        cards += f'''<article class="document-card"><div class="document-heading"><span class="document-format" aria-hidden="true">PDF</span><div><p class="document-kind">{e(item['kind'])} · {e(format_label)}</p><h3>{e(item['title'])}</h3><p class="document-meta">{e(pages)} · {e(size)} · {e(item['language'])}</p>{note}</div></div><div class="document-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf" aria-label="View PDF: {e(item['title'])}">View PDF</a><a href="{href}" download="{download_name}" type="application/pdf" aria-label="Download PDF: {e(item['title'])}">Download</a></div></article>'''
+    return f'''<section class="detail-section project-documents" id="documents" aria-labelledby="documents-heading"><h2 id="documents-heading">Original documents</h2><p class="documents-intro">Project reports, theses and retained presentations in their original language. Presentations are provided as static PDF exports; personal identifiers are removed where necessary.</p><div class="document-list">{cards}</div></section>'''
+
+
 def render_section(s):
     technical = s.get('technical', False)
     if technical:
@@ -65,6 +82,10 @@ def render_all(root, content, details):
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
         system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
+        documents = render_documents(d.get('documents', []))
+        document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
+        document_count = len(d.get('documents', []))
+        document_shortcut = f'<p class="document-shortcut"><a href="#documents">View original documents</a><span>{document_count} PDF{"s" if document_count != 1 else ""}</span></p>' if documents else ''
         method = ''
         if d.get('pipeline') and not system:
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
@@ -97,6 +118,7 @@ def render_all(root, content, details):
                 related += f'<a href="../{e(related_slug)}/"><span>{e(q["label"])}</span><strong>{e(q["title"])}</strong></a>'
             related += '</div></section>'
         if gallery: outline.append({'id':'visuals','title':'Project visuals'})
+        if documents: outline.append({'id':'documents','title':'Original documents'})
         if refs: outline.append({'id':'references','title':'Related resources'})
         back_target = '../../#featured' if d.get('featured') else '../../#projects'
         og_image = f'<meta property="og:image" content="https://haolianghuang-research.github.io/assets/projects/{e(image["file"])}">' if image else ''
@@ -104,10 +126,10 @@ def render_all(root, content, details):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
-<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects', outline, p['title'])}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
-{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>{document_shortcut}
+{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)
