@@ -258,6 +258,76 @@
           ]
         },
         {
+          "id": "experiment-design",
+          "title": "Six complementary experiments",
+          "paragraphs": [
+            "My final thesis defense separates solver computation, point-to-point execution and trajectory tracking. Each experiment tests a different requirement, from finding a valid joint configuration to following a demonstration on the physical robot."
+          ],
+          "table": {
+            "headers": [
+              "Experiment",
+              "Evaluation inputs",
+              "Main question"
+            ],
+            "rows": [
+              [
+                "Random target poses",
+                "10,000 generated poses",
+                "How accurate and fast is the solver?"
+              ],
+              [
+                "Workspace reachability",
+                "66,785 target/orientation combinations across five directions",
+                "Where can each method produce usable solutions?"
+              ],
+              [
+                "Position reaching",
+                "26 targets in a 3 × 3 × 3 arrangement",
+                "Can a computed solution be executed accurately?"
+              ],
+              [
+                "Orientation reaching",
+                "51 orientations at a fixed position",
+                "How do orientation precision and coverage interact?"
+              ],
+              [
+                "Circular tracking",
+                "Reference speeds of 10, 50 and 100 mm/s",
+                "How does tracking change with commanded speed?"
+              ],
+              [
+                "Human demonstration tracking",
+                "30 Hz circling and 10 Hz cabinet-door trajectories",
+                "Can the controller follow smooth motion, pauses and abrupt changes?"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "workspace-coverage",
+          "title": "Workspace coverage and solver accuracy",
+          "paragraphs": [
+            "The reachability experiment samples five gripper directions and plots position error throughout the workspace. These maps reveal spatial structure that an average error hides: some methods have a compact region of accurate solutions, while others trade a larger usable region for higher residual error. This comparison helps explain why the choice of IK method depends on the intended motion."
+          ],
+          "figures": [
+            {
+              "file": "ik-defense-ranged-workspace.webp",
+              "alt": "Ranged IK workspace position-error visualization",
+              "caption": "Ranged IK reachability visualization from my final defense, slide 29. The displayed position-error scale runs from red near 0 mm to blue near 500 mm.",
+              "width": 1288,
+              "height": 1440
+            },
+            {
+              "file": "ik-defense-polymetis-workspace.webp",
+              "alt": "Polymetis online IK workspace position-error visualization",
+              "caption": "Polymetis Online IK under the same workspace protocol and color scale, from the same slide. Coverage and error are inspected together.",
+              "width": 1542,
+              "height": 1448
+            }
+          ],
+          "figure_layout": "pair"
+        },
+        {
           "id": "findings",
           "title": "What the benchmark showed",
           "paragraphs": [
@@ -271,6 +341,24 @@
               "caption": "A simulation position-test result from my thesis (Figure 5.7, printed page 56): the 26 tested movements are classified by position and orientation tolerances. This is one experiment, not an overall ranking.",
               "width": 1216,
               "height": 629
+            }
+          ]
+        },
+        {
+          "id": "tracking-runtime",
+          "title": "Tracking, timing and hardware constraints",
+          "paragraphs": [
+            "For demonstration tracking, I compared a smooth circling motion recorded at 30 Hz with a cabinet-door motion recorded at 10 Hz. The latter includes sudden accelerations and pauses. Dynamic Time Warping aligns the reference and executed trajectories before measuring position and orientation errors; Cartesian velocity provides a separate view of the controller’s behavior.",
+            "The defense also distinguishes a correct IK solution from a usable sequence of robot actions. Abrupt changes between solution branches can obstruct motion or create large joint movements. Hardware tests stopped problematic runs, and some analytical motions were executed in segments. The available physical-robot comparisons therefore depend on successful execution as well as numerical accuracy.",
+            "The resulting recommendations are task dependent. Polymetis Online IK was a useful option for the tested tracking tasks, while Ranged IK offered a balanced choice across several settings. The surrounding controller and timing remained important sources of tracking error."
+          ],
+          "figures": [
+            {
+              "file": "ik-defense-cabinet-tracking-velocity.webp",
+              "alt": "Measured Cartesian velocities during the cabinet-door demonstration in simulation and on the robot",
+              "caption": "Cabinet-door tracking velocity from my final defense, slide 62. Blue denotes simulation and orange the physical robot; the figure records execution behavior for the 10 Hz demonstration.",
+              "width": 1800,
+              "height": 868
             }
           ]
         }
@@ -295,7 +383,7 @@
           "url": "https://facebookresearch.github.io/fairo/polymetis/"
         }
       ],
-      "source_note": "Based on my bachelor’s thesis “Benchmarking Cartesian Space Controllers for Franka Emika Robot” and the retained analytical-IK integration.",
+      "source_note": "Based on my written bachelor’s thesis and the 75-slide final defense, especially slides 16–17, 27–31, 33–44 and 54–71. Solver-only tests, simulation and physical-robot execution are identified separately; hardware runs did not cover every method under every condition.",
       "hero_image": {
         "file": "ik-cover.webp",
         "alt": "Franka robot arms in the real experimental workspace",
@@ -470,6 +558,39 @@
             "The results interface records the selected data, feature subspaces, method, parameters, and detected outliers. Where a ground-truth file is supplied, it can show confusion counts, precision, recall, accuracy, and ROC curves. The experiment workflow also supports adding generated data, comparing outcomes, and downloading results as CSV.",
             "I contributed as a member of the software-development team. The design and implementation documents cover interface design, framework integration, and the practical work of connecting browser forms to the Django backend."
           ]
+        },
+        {
+          "id": "delivery-validation",
+          "title": "Software delivery and validation",
+          "paragraphs": [
+            "The final presentation describes the practical motivation for the queue: many computationally expensive detector runs across several datasets become difficult to track and can interfere with interactive work. Odex keeps the uploaded data, chosen feature subspaces, detector configuration and result history together, with optional ground truth or generated data attached to a run.",
+            "The team’s testing workflow combines Django TestCase unit tests with Selenium and StaticLiveServerTestCase browser integration tests. The test-phase report covers input validation, pagination, URL behavior and security checks. It also records fixes for invalid detector parameters, missing error messages and numerical edge cases such as division by zero.",
+            "The March 2023 final presentation records 276 unit tests and 19 integration tests. All 19 integration tests passed locally, while 17 passed in the CI environment at that snapshot. The earlier test-phase deck records a different CI result, so the counts below refer specifically to the final presentation. These are team-level software-delivery results."
+          ],
+          "table": {
+            "headers": [
+              "Final presentation snapshot",
+              "Recorded scope"
+            ],
+            "rows": [
+              [
+                "Unit-test suite",
+                "276 test cases"
+              ],
+              [
+                "Browser integration suite",
+                "19 test cases"
+              ],
+              [
+                "Local integration result",
+                "19 of 19 passed"
+              ],
+              [
+                "CI integration result",
+                "17 of 19 passed"
+              ]
+            ]
+          }
         }
       ],
       "gallery": [
@@ -487,7 +608,7 @@
         "caption": "Odex · Experiment dashboard"
       },
       "references": [],
-      "source_note": "Based on the team’s January 2023 design document, February 2023 implementation document, and retained experiment-support code. Team members: Ao Zuo, Christoph Usbeck, Daonan Zhang, Haoliang Huang, and Yuqi Cao.",
+      "source_note": "Based on the team’s design/implementation documents, final presentation (31 March 2023) and test-phase presentation (23 March 2023). The five-author project includes Ao Zuo, Christoph Usbeck, Daonan Zhang, Haoliang Huang and Yuqi Cao. Test counts describe the retained delivery snapshot.",
       "hero_image": {
         "file": "outlier-cover.webp",
         "alt": "Odex experiment dashboard with run status and execution records",
@@ -633,8 +754,40 @@
               "caption": "The project’s directional vehicle-counting illustration from my thesis (Figure 4-4, printed page 44).",
               "width": 873,
               "height": 464
+            },
+            {
+              "file": "traffic-defense-counting-table.webp",
+              "alt": "Mean car and heavy-vehicle counting errors for four detector pipelines across the two test videos",
+              "caption": "The two-video, per-class counting comparison discussed in my defense (slide 19), rendered from thesis Table 4-6. “Kfz” and “SV” are the car and heavy-vehicle categories used in the evaluation; 0.0477 is the reported mean counting error for YOLOX-l.",
+              "width": 1496,
+              "height": 480
             }
           ]
+        },
+        {
+          "id": "counting-error-analysis",
+          "title": "Why counting needs its own error analysis",
+          "paragraphs": [
+            "My thesis defense distinguishes total counting error, errors for each vehicle class, and separate overcounts and undercounts. A correct total can hide mistakes when errors cancel across classes or directions. This is why the evaluation goes beyond a single detector score.",
+            "The presentation’s examples show class confusion and multiple detections on the same vehicle. The tracker and control-region logic determine how those frame-level errors affect the final traffic survey. The practical lesson was to evaluate the full detection–tracking–counting chain, including road geometry, temporal association and class consistency."
+          ],
+          "figures": [
+            {
+              "file": "traffic-defense-class-confusion.webp",
+              "alt": "Two blue car detections in a highway traffic-analysis example",
+              "caption": "A vehicle-class confusion example from my thesis defense, slide 20. The example motivates evaluating the car and heavy-vehicle counts separately.",
+              "width": 323,
+              "height": 196
+            },
+            {
+              "file": "traffic-defense-duplicate-detections.webp",
+              "alt": "Two overlapping red truck detections on a highway vehicle",
+              "caption": "Multiple detections on one vehicle, from the same defense slide. Temporal association and counting rules affect whether this becomes an overcount.",
+              "width": 254,
+              "height": 152
+            }
+          ],
+          "figure_layout": "pair"
         }
       ],
       "gallery": [
@@ -657,7 +810,7 @@
           "url": "https://github.com/ultralytics/yolov5"
         }
       ],
-      "source_note": "Based on my thesis “Automatisierte Auswertung von Drohnenvideos zur Erhebung von Verkehr”, including the detector evaluation, tracker design, and counting experiments. Figures are extracted from the project’s own implementation/results sections.",
+      "source_note": "Based on my written traffic-analysis thesis and the 24-slide defense, especially slides 8–20. The defense’s rounded summary statements are not used as additional benchmark scores. The numerical comparison remains tied to the thesis’s two annotated videos and class-wise counting definition.",
       "hero_image": {
         "file": "traffic-cover.webp",
         "alt": "Vehicles tracked on a highway in aerial video",
@@ -880,6 +1033,15 @@
               "height": 1116
             }
           ]
+        },
+        {
+          "id": "grounding-coursework",
+          "title": "Related course work: visual grounding",
+          "paragraphs": [
+            "A separate scene-analysis exercise in the same course examined open-vocabulary localization before the final 6D-pose project. Its report documents a selected set of 73 course images, resized to 2048 pixels for SAM2 segmentation. The masks were cached so that retrieval and verification settings could be compared without rerunning segmentation.",
+            "The workflow ranks mask candidates with multi-scale CLIP features and context-padded crops, then checks the shortlist with a vision-language model. The tested GPT-4.1 setup receives both a close-up crop and an annotated full-scene view. A local 8B LLaVA-NeXT configuration provides an additional comparison.",
+            "The report identifies several failure modes: prompt-relative CLIP scores can be misleading as absolute confidence, padded boxes can include neighboring objects, and an early ranking stage can discard partially visible targets before verification. This exercise concerns 2D grounding and candidate verification; its results are separate from the Any6D pose evaluation above."
+          ]
         }
       ],
       "gallery": [
@@ -916,7 +1078,7 @@
           "url": "https://arxiv.org/abs/2503.11651"
         }
       ],
-      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes.",
+      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes. The accompanying seven-page Challenge 1 report supports the separately labeled visual-grounding exercise.",
       "thumbnail": {
         "file": "pose-cover.webp",
         "alt": "Input objects and generated 3D object reconstructions from pose experiments",
@@ -1403,10 +1565,20 @@
           ]
         },
         {
+          "id": "robot-runtime",
+          "title": "Robot runtime and simulation calibration",
+          "paragraphs": [
+            "My final report documents separate Docker environments for training and robot execution. The simulation side combines Unity, DART physics and PyTorch through a Gym-like interface. The robot side hosts ROS nodes for action streaming, runtime checks and data logging through the iiwa control stack.",
+            "To calibrate the realistic-simulation stage, I recorded the physical robot’s position, velocity and acceleration during back-and-forth joint motions. These measurements informed joint damping, torque saturation, control timing and latency settings. Matching the response and timing made the staging environment more representative of the hardware adaptation loop.",
+            "The compact reaching benchmark uses a 100 ms control period and 10-second episodes. Commands pass through rate limits, velocity/torque saturation, workspace and joint-bound checks, with emergency-stop handling. The learned task controls two joint velocities on the KUKA platform; higher-dimensional contact-rich and vision-based manipulation remain follow-up directions."
+          ]
+        },
+        {
           "id": "ablation-design",
           "title": "Separating safety from memory",
           "paragraphs": [
-            "The experiment independently switches safety-constrained updates and EWC regularization on or off. This tests whether an apparent gain comes from safety optimization, retention of earlier behavior, or their combination. Realistic-simulation runs use five seeds. The hardware protocol selects a seed from that stage and keeps the adaptation schedule and safety settings fixed."
+            "The experiment independently switches safety-constrained updates and EWC regularization on or off. This tests whether an apparent gain comes from safety optimization, retention of earlier behavior, or their combination. Realistic-simulation runs use five seeds. The hardware protocol selects a seed from that stage and keeps the adaptation schedule and safety settings fixed.",
+            "The report sets the adaptation safety-cost budget to one tenth of the pretraining budget. Four target-order sequences rotate which pose is trained last, so each target is evaluated once as Current and three times as Others under the same settings."
           ],
           "table": {
             "headers": [
@@ -1443,7 +1615,8 @@
           "title": "Adaptation, safety and retention",
           "paragraphs": [
             "After each target-adaptation sequence, the protocol runs ten inference episodes per target. Evaluation separates the most recently trained target from the other three, revealing whether improvement on one task is accompanied by forgetting. Reward, safety cost and their combined score are reported separately.",
-            "The final presentation reports that the combined safety-and-continual-learning variant reached the cost budget before improving reward, and gave more stable combined performance across current and previous targets in these experiments. The figures below show the recorded comparisons. They describe the four-target setup rather than a guarantee for arbitrary contact-rich manipulation."
+            "The final presentation reports that the combined safety-and-continual-learning variant reached the cost budget before improving reward, and gave more stable combined performance across current and previous targets in these experiments. The figures below show the recorded comparisons. They describe the four-target setup rather than a guarantee for arbitrary contact-rich manipulation.",
+            "The report specifies how to read the uncertainty: realistic-simulation plots include variation across seeds and evaluation episodes, while the selected-seed physical-robot plots show episode variation. This keeps repeated hardware evaluation distinct from an independent multi-seed hardware study."
           ],
           "figures": [
             {
@@ -1508,7 +1681,7 @@
           "url": "https://github.com/tum-i6/VTPRL"
         }
       ],
-      "source_note": "Based on my guided-research final presentation (31 October 2025), the coauthored SCDA paper and the retained implementation. Figures and results identify the individual guided-research protocol separately from the paper’s team experiments.",
+      "source_note": "Reviewed against my 17-page guided-research final report, especially pages 8–15, the final presentation, the related coauthored SCDA paper and the retained implementation. The compact reaching protocol, calibrated runtime and selected-seed hardware results are separate from the paper’s team grasping study.",
       "hero_image": {
         "file": "safe-rl-cover.webp",
         "alt": "Simulated and real KUKA robot environments for safe reinforcement learning",

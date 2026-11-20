@@ -89,3 +89,16 @@ Every selected-research and archive card carries a small university or conferenc
 | `assets/organizations/iccv2025.png` | ICCV 2025 Honolulu wordmark extracted from the [official poster template](https://media.eventhosts.cc/Conferences/ICCV2025/iccv25_poster_template.pptx), image 1, reduced proportionally. |
 
 TUM and LMU card marks reuse the credited assets above. Conference marks identify the competition venue; university marks identify the project institution.
+
+## Additional OneDrive final-presentation review, 20 November 2026
+
+Six further source files were read from the synchronized OneDrive course folders: the IK final defense, Odex final and test-phase presentations, the personal KUKA guided-research final report, the course Challenge 1 report, and the traffic-analysis defense. Original documents remain outside this public repository.
+
+| Asset | Source and interpretation |
+| --- | --- |
+| `ik-defense-ranged-workspace.webp`, `ik-defense-polymetis-workspace.webp` | Haoliang Huang, *Final Presentation of Bachelor Thesis*, slide 29. Workspace position-error views for Ranged IK and Polymetis Online IK. |
+| `ik-defense-cabinet-tracking-velocity.webp` | Same defense, slide 62. Cartesian velocity during the cabinet-door demonstration, comparing simulation and physical-robot execution. |
+| `traffic-defense-counting-table.webp` | Haoliang Huang, traffic-analysis thesis, Table 4-6 on PDF page 50 / printed page 46, rendered directly from the PDF for legibility. The same comparison appears on slide 19 of *Vortrag Demo*. |
+| `traffic-defense-class-confusion.webp`, `traffic-defense-duplicate-detections.webp` | Haoliang Huang, *Vortrag Demo*, slide 20. Class-confusion and multiple-detection examples used to explain counting errors. |
+
+Odex testing figures are summarized as a dated team-level table; KUKA runtime and evaluation details come from the personal report. The visual-grounding course exercise is labeled separately from the final 6D-pose system. No source cover, student identifier, signature, account screenshot or full report is included.
