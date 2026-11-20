@@ -29,8 +29,10 @@ def affiliation_link(item):
     return f'<a href="{e(item["url"])}"><span class="affiliation-prefix">{mark}{e(first)}</span> {e(rest)}</a>'
 
 
-affiliation_links = [affiliation_link(item) for item in c['about_affiliations']['current']]
-about_labs = '<p class="lab-affiliations">I currently conduct research with ' + ', '.join(affiliation_links[:-1]) + ', and ' + affiliation_links[-1] + '.</p>'
+about_labs = ''.join(
+    f'<p class="lab-affiliations">At {affiliation_link(item)}, {e(item["research"])}</p>'
+    for item in c['about_affiliations']['current']
+)
 
 
 def image_media(slug, css='project-media'):

@@ -36,15 +36,18 @@
     "current": [
       {
         "name": "TUM Cyber-Physical Systems (CPS)", "url": "#experience",
-        "logo": "tum"
+        "logo": "tum",
+        "research": "I work on autonomous driving, focusing on agentic planning and neural traffic-rule prediction."
       },
       {
         "name": "LMU TRESP Lab", "url": "projects/ricl/",
-        "logo": "lmu"
+        "logo": "lmu",
+        "research": "I focus on integrating memory mechanisms with robotics, as part of the lab’s broader research on large language models, post-training and model memory."
       },
       {
         "name": "TUM Photogrammetry and Remote Sensing", "url": "projects/rolewam/",
-        "logo": "tum"
+        "logo": "tum",
+        "research": "I work on embodied AI at the intersection of 3D computer vision and robotics."
       }
     ]
   },
