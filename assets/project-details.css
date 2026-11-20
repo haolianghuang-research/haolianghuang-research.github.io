@@ -30,3 +30,10 @@
 @media (max-width:640px) { .section-figures.figure-pair { grid-template-columns:1fr; } .section-figures { gap:18px; margin-top:22px; } .section-figures figcaption { padding:14px 16px; } }
 @media (max-width:1200px) { .detail-page { margin-inline:auto; } }
 @media (max-width:640px) { .detail-page { margin-inline:auto; padding-top:23px; } .detail-heading h1 { font-size:35px; } }
+
+/* Summary resources and demonstration lead the project narrative. */
+.detail-hero-overview { display:block; max-width:960px; margin-inline:auto; text-align:center; }
+.detail-hero-overview .detail-project-links { justify-content:center; }
+.project-overview-demo { max-width:860px; margin:45px auto 40px; }
+.project-overview-demo h2 { font-size:27px; line-height:1.35; letter-spacing:-.035em; margin-bottom:18px; }
+@media (max-width:640px) { .project-overview-demo { margin-top:32px; } .project-overview-demo h2 { font-size:25px; } }

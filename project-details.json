@@ -3171,6 +3171,24 @@
           ]
         },
         {
+          "id": "composition-example",
+          "title": "A second composition: bimanual task context",
+          "paragraphs": [
+            "For the place_bread_basket study, I assembled a bimanual grasp segment from place_burger_fries with a placement segment from place_cans_plasticbox. The example exposes the cross-task composition directly, including the change of objects and scene at the boundary."
+          ],
+          "videos": [
+            {
+              "file": "ricl-bread-basket-composed-context.mp4",
+              "poster": "ricl-bread-basket-composed-poster.webp",
+              "title": "Composed human-video context for place_bread_basket",
+              "caption": "Saved two-source composition from my RICL experiments. The source clips preserve their original content and timing. This is an illustration of the demonstration condition, with no downstream success-rate claim.",
+              "width": 1108,
+              "height": 828,
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "grid-goal",
           "title": "Grid–Goal: compatibility beyond visual similarity",
           "paragraphs": [
@@ -3288,7 +3306,7 @@
           "url": "https://robotwin-platform.github.io/"
         }
       ],
-      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs and the complete materials archive are provided unchanged; web figures preserve the original vector artwork.",
+      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs and the complete materials archive are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors.",
       "featured": true,
       "status": "Ongoing research · August 2026–Present",
       "strengths": [
@@ -3338,6 +3356,25 @@
           "description": "Both reports, standalone vector diagrams, editable source and the evidence index.",
           "bytes": 1741078
         }
+      },
+      "overview_demo": {
+        "id": "project-demo",
+        "title": "Composed human-video demo",
+        "overview": true,
+        "paragraphs": [
+          "A saved example from my context-construction experiments: grasping, movement and pressing clips from three different tasks are assembled into one visual condition for stamp_seal."
+        ],
+        "videos": [
+          {
+            "file": "ricl-stamp-seal-composed-context.mp4",
+            "poster": "ricl-stamp-seal-composed-poster.webp",
+            "title": "Composed human-video context for stamp_seal",
+            "caption": "Three-source HumanGen composition: grasp/lift from place_object_scale, movement from move_stapler_pad and pressing from press_stapler. Visible changes in object and scene mark clip boundaries. This video illustrates context construction; robot evaluation is reported separately.",
+            "width": 1108,
+            "height": 828,
+            "download": true
+          }
+        ]
       }
     },
     "d4rtvla": {
