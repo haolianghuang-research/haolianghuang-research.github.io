@@ -14,7 +14,7 @@ Commit the JSON content, regenerated `index.html`, `projects/` pages, and `sitem
 
 Each project detail contains a task summary, workflow schematic, technical sections, selected figures, and related public resources. Put approved images under `assets/projects/`, add their dimensions and captions in the JSON, and retain attribution in [ASSET-CREDITS.md](ASSET-CREDITS.md). Original private reports, raw configurations, and the local evidence index are kept outside this public repository.
 
-`about_affiliations.current` defines the three current research affiliations, their project links and the logo images shown in the About section. Official logo assets live in `assets/organizations/`; source attribution is retained in `ASSET-CREDITS.md`. The affiliation cards use a three-column desktop row and stack on smaller screens.
+`about_affiliations.current` defines the three current research affiliations, their project links and logo images. The About section keeps the complete prose introduction, with a small 16px-high mark inline beside each team name. When a team supplies both university and lab marks, the lab mark is used. Official logo assets live in `assets/organizations/`; source attribution is retained in `ASSET-CREDITS.md`.
 
 `content.json` also defines the ordered `featured_projects` list. Those entries reference the project metadata in the main catalog or `additional_projects` and appear after the compact award highlights and before experience and the project archive. Featured detail pages use `status`, `strengths`, and an explicit contribution section. Ongoing research, discontinued prototypes, and competition placements have distinct labels. Recorded results stay attached to their specific checkpoint, data split, and evaluation protocol.
 

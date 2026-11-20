@@ -12,13 +12,15 @@ SITE = 'https://haolianghuang-research.github.io/'
 catalog = {p['id']: p for p in c['projects'] + d.get('additional_projects', [])}
 
 
-def affiliation_card(item):
-    logos = ''.join(f'<span class="affiliation-logo affiliation-logo-{e(logo["style"])}"><img src="assets/organizations/{e(logo["file"])}" width="{logo["width"]}" height="{logo["height"]}" alt=""></span>' for logo in item['logos'])
-    return f'<li><a class="affiliation-card" href="{e(item["url"])}" aria-label="Current research affiliation: {e(item["name"])}"><span class="affiliation-logos" aria-hidden="true">{logos}</span><span class="affiliation-copy"><strong>{e(item["label"])}</strong><span>{e(item["institution"])}</span></span></a></li>'
+def affiliation_link(item):
+    logo = item['logos'][-1]
+    first, _, rest = item['name'].partition(' ')
+    mark = f'<span class="affiliation-logo affiliation-logo-{e(logo["style"])}" aria-hidden="true"><img src="assets/organizations/{e(logo["file"])}" width="{logo["width"]}" height="{logo["height"]}" alt=""></span>'
+    return f'<a href="{e(item["url"])}"><span class="affiliation-prefix">{mark}{e(first)}</span> {e(rest)}</a>'
 
 
-affiliation_cards = ''.join(affiliation_card(item) for item in c['about_affiliations']['current'])
-about_labs = f'<div class="lab-affiliations"><p class="affiliations-label">Current research teams</p><ul class="affiliation-list">{affiliation_cards}</ul></div>'
+affiliation_links = [affiliation_link(item) for item in c['about_affiliations']['current']]
+about_labs = '<p class="lab-affiliations">I currently conduct research with ' + ', '.join(affiliation_links[:-1]) + ', and ' + affiliation_links[-1] + '.</p>'
 
 
 def image_media(slug, css='project-media'):
