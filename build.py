@@ -55,13 +55,15 @@ def project_actions(slug, title, label='Project details'):
     links = f'<a class="project-more" href="projects/{e(slug)}/">{e(label)}<span class="visually-hidden">: {e(title)}</span></a>'
     page = d['pages'][slug]
     demo, website = page.get('demo_link'), page.get('project_website')
-    report = page.get('retrospective', {}).get('card_link')
+    report_info = page.get('retrospective', {})
+    report = report_info.get('card_link')
+    report_anchor = 'documents' if report_info.get('scope') == 'module' else 'project-report'
     if demo:
         links += f'<a class="project-website" href="projects/{e(slug)}/#{e(demo["section"])}" aria-label="Watch demo: {e(title)}">Watch demo</a>'
     if website:
         links += f'<a class="project-website" href="{e(website["url"])}" target="_blank" rel="noopener" aria-label="Project website: {e(title)}">Project website</a>'
     if report:
-        links += f'<a class="project-website" href="projects/{e(slug)}/#project-report">{e(report)}</a>'
+        links += f'<a class="project-website" href="projects/{e(slug)}/#{report_anchor}">{e(report)}</a>'
     return f'<div class="project-links">{links}</div>' if demo or website or report else links
 
 

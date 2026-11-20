@@ -211,3 +211,8 @@ Native Google Docs and their permissions are unchanged. Private exports used for
 ## RICL resource scope and document hierarchy, 20 November 2026
 
 The bilingual engineering PDFs and ZIP are explicitly labeled as reports and supporting material for the dataset-construction Agent system within RICL / Zero-WAM. They are not labeled as a complete report of the overall ongoing research project. Their original file contents remain unchanged. Top resource links identify this module in both languages; the expanded report cards sit with the Agent architecture discussion. Composed dataset examples appear in the data section, while the paired human-condition / simulation-rollout example appears in the evaluation discussion. Existing media files and anchor IDs are preserved.
+
+
+## Summary resources and original-document archive, 20 November 2026
+
+Resource scope is explicit in the project metadata. Full-project summaries retain direct header links; the ManipArena bilingual retrospective is a project-level summary. The RICL dataset-construction Agent report is module-level material: both PDFs and their unchanged supporting ZIP appear in the bottom **Original documents** archive, reached from the header and the corresponding Agent architecture section. Its existing `#project-report` anchor remains an alias for the archive, preserving earlier links. Dataset and evaluation videos remain in their relevant body sections. No source documents or media were altered by this navigation change.

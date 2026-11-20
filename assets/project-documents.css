@@ -23,3 +23,5 @@
  .document-actions a { padding:10px 15px; }
  .document-shortcut { margin-bottom:30px; }
 }
+
+.document-anchor { display:block; height:0; }

@@ -2641,7 +2641,8 @@
             "pages": 11,
             "bytes": 4622301
           }
-        ]
+        ],
+        "scope": "project"
       }
     },
     "commonroad": {
@@ -3034,7 +3035,11 @@
               "width": 595,
               "height": 570
             }
-          ]
+          ],
+          "link": {
+            "url": "#documents",
+            "title": "Read the Dataset Agent system reports and supporting material"
+          }
         },
         {
           "id": "review-and-recovery",
@@ -3415,10 +3420,10 @@
           "resource_label": "Dataset Agent materials"
         },
         "outline_title": "Dataset Agent report",
-        "after_section": "agentic-architecture"
+        "scope": "module",
+        "archive_intro": "Module reports and supporting files for the dataset-construction Agent system within RICL / Zero-WAM. The English and Chinese reports cover this engineering module: generation, review, repair, provenance and operations."
       },
-      "hero_layout": "text",
-      "resource_note": "Module reports: the dataset-construction Agent system within RICL / Zero-WAM."
+      "hero_layout": "text"
     },
     "d4rtvla": {
       "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",

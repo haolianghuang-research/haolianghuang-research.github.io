@@ -36,8 +36,8 @@ def render_retrospective(info):
     return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">{e(eyebrow)}</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div>{package}</section>'''
 
 
-def render_documents(documents):
-    if not documents:
+def render_documents(documents, package=None, description=None, aliases=()):
+    if not documents and not package:
         return ''
     cards = ''
     for item in documents:
@@ -50,7 +50,13 @@ def render_documents(documents):
         if item.get('public_copy'):
             note += '<p class="document-note">Public copy: personal identifiers removed.</p>'
         cards += f'''<article class="document-card"><div class="document-heading"><span class="document-format" aria-hidden="true">PDF</span><div><p class="document-kind">{e(item['kind'])} · {e(format_label)}</p><h3>{e(item['title'])}</h3><p class="document-meta">{e(pages)} · {e(size)} · {e(item['language'])}</p>{note}</div></div><div class="document-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf" aria-label="View PDF: {e(item['title'])}">View PDF</a><a href="{href}" download="{download_name}" type="application/pdf" aria-label="Download PDF: {e(item['title'])}">Download</a></div></article>'''
-    return f'''<section class="detail-section project-documents" id="documents" aria-labelledby="documents-heading"><h2 id="documents-heading">Original documents</h2><p class="documents-intro">Project reports, theses and retained presentations in their original language. Presentations are provided as static PDF exports; personal identifiers are removed where necessary.</p><div class="document-list">{cards}</div></section>'''
+    if package:
+        href = '../../assets/reports/' + e(package['file'])
+        size = f'{package["bytes"] / 1024 / 1024:.1f} MB'
+        cards += f'''<article class="document-card"><div class="document-heading"><span class="document-format" aria-hidden="true">ZIP</span><div><p class="document-kind">Supporting archive</p><h3>{e(package['title'])}</h3><p class="document-meta">{e(size)}</p><p class="document-note">{e(package['description'])}</p></div></div><div class="document-actions"><a href="{href}" download type="application/zip" aria-label="Download archive: {e(package['title'])}">Download</a></div></article>'''
+    intro = description or 'Project reports, theses and retained presentations in their original language. Presentations are provided as static PDF exports; personal identifiers are removed where necessary.'
+    anchors = ''.join(f'<span class="document-anchor" id="{e(alias)}" aria-hidden="true"></span>' for alias in aliases)
+    return f'''<section class="detail-section project-documents" id="documents" aria-labelledby="documents-heading">{anchors}<h2 id="documents-heading">Original documents</h2><p class="documents-intro">{e(intro)}</p><div class="document-list">{cards}</div></section>'''
 
 
 def render_section(s):
@@ -114,14 +120,33 @@ def render_all(root, content, details):
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
         overview_demo = render_section(d['overview_demo']) if d.get('overview_demo') else ''
         intro_sections = ''.join(render_section(section) for section in d.get('intro_sections', []))
-        report = render_retrospective(d['retrospective']) if d.get('retrospective') else ''
+        report_info = d.get('retrospective')
+        project_report = report_info if report_info and report_info.get('scope', 'project') == 'project' else None
+        module_report = report_info if report_info and report_info.get('scope') == 'module' else None
+        report = render_retrospective(project_report) if project_report else ''
         hero_class = ' detail-hero-overview' if overview_demo or d.get('hero_layout') == 'text' else ''
-        report_after = d.get('retrospective', {}).get('after_section')
+        report_after = project_report.get('after_section') if project_report else None
         report_at_top = report if not report_after else ''
-        report_outline = d.get('retrospective', {}).get('outline_title', 'Illustrated report')
+        report_outline = project_report.get('outline_title', 'Illustrated report') if project_report else ''
         resource_note = f'<p class="detail-resource-note">{e(d["resource_note"])}</p>' if d.get('resource_note') else ''
         report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
-        documents = render_documents(d.get('documents', []))
+        archived_documents = list(d.get('documents', []))
+        archived_package = None
+        archive_intro = None
+        archive_aliases = ()
+        if module_report:
+            for edition in module_report['editions']:
+                archived_documents.append({
+                    'file':edition['file'], 'title':edition['title'], 'language':edition['language'],
+                    'kind':'Dataset-construction Agent system · module report', 'format':'Original PDF',
+                    'pages':edition['pages'], 'bytes':edition['bytes'], 'note':edition['description']
+                })
+            package = module_report.get('companion_package')
+            if package:
+                archived_package = {**package, 'title':'Dataset Agent system: source, diagrams and evidence bundle'}
+            archive_intro = module_report.get('archive_intro')
+            archive_aliases = ('project-report',)
+        documents = render_documents(archived_documents, archived_package, archive_intro, archive_aliases)
         document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
         website = d.get('project_website')
         demo = d.get('demo_link') or ({'section':d['overview_demo']['id'], 'label':d['overview_demo'].get('resource_label','Watch demo')} if overview_demo else None)
@@ -132,19 +157,19 @@ def render_all(root, content, details):
         for section in d.get('intro_sections', []):
             if section.get('resource_label'):
                 website_link += f'<a class="button button-secondary" href="#{e(section["id"])}">{e(section["resource_label"])}</a>'
-        if d.get('retrospective'):
-            for edition in d['retrospective']['editions']:
+        if project_report:
+            for edition in project_report['editions']:
                 href = '../../assets/reports/' + e(edition['file'])
                 label = edition.get('resource_label') or ('中文报告' if edition['lang'].startswith('zh') else 'English report')
                 button_style = 'button-primary' if edition.get('primary') else 'button-secondary'
                 website_link += f'<a class="button {button_style}" href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">{e(label)}</a>'
-            package = d['retrospective'].get('companion_package')
+            package = project_report.get('companion_package')
             if package:
                 href = '../../assets/reports/' + e(package['file'])
                 label = package.get('resource_label', 'Materials')
                 website_link += f'<a class="button button-secondary" href="{href}" download type="application/zip">{e(label)}</a>'
         if documents:
-            website_link += '<a class="button button-secondary" href="#documents">Reports &amp; slides</a>'
+            website_link += '<a class="button button-secondary" href="#documents">Original documents</a>'
         if website_link:
             website_link = f'<nav class="detail-project-links" aria-label="Project resources">{website_link}</nav>'
         website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website_link else ''
