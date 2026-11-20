@@ -1226,6 +1226,13 @@
           ]
         },
         {
+          "id": "my-contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I focused on image-to-mesh generation: comparing multi-view and end-to-end generators, studying preprocessing, and inspecting reconstructed geometry for downstream pose alignment. We co-designed the complete pipeline and reviewed each other’s components; my teammates led depth estimation and pose evaluation."
+          ]
+        },
+        {
           "id": "architecture",
           "title": "Approach and model architecture",
           "paragraphs": [
@@ -1296,6 +1303,11 @@
       ],
       "references": [
         {
+          "title": "Original team project website",
+          "url": "https://virlight.github.io/At3dcv2025_Any_6D/",
+          "note": "Project overview, component comparisons, team contributions and original slides. Cover adapted from our Hunyuan3D 2.5 comparison (slide 34); cropped and recomposed under CC BY-SA 4.0."
+        },
+        {
           "title": "HouseCat6D dataset",
           "url": "https://sites.google.com/view/housecat6d/dataset"
         },
@@ -1312,16 +1324,16 @@
           "url": "https://arxiv.org/abs/2503.11651"
         }
       ],
-      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes. The accompanying seven-page Challenge 1 report supports the separately labeled visual-grounding exercise.",
+      "source_note": "Reviewed against our 65-slide final course presentation (24 July 2025), the proposal and individual challenge report. Figures show the team’s actual experiments on selected HouseCat6D scenes. Proposed alternatives and original model-paper results are not presented as completed project outcomes. The accompanying seven-page Challenge 1 report supports the separately labeled visual-grounding exercise. The cover pairs an RGB crop with the corresponding Hunyuan3D 2.5 mesh from the team’s comparison, cropped and recomposed from slide 34 (CC BY-SA 4.0). This illustrates image-to-mesh reconstruction, not a measured 6D-pose result.",
       "thumbnail": {
-        "file": "pose-cover.webp",
-        "alt": "Input objects and generated 3D object reconstructions from pose experiments",
-        "caption": "Object reconstruction · Project experiments"
+        "file": "pose-rgb-to-mesh-cover.webp",
+        "alt": "Green teapot RGB input alongside its generated textured 3D reconstruction from our Hunyuan3D 2.5 comparison",
+        "caption": "RGB to 3D · Team reconstruction experiments"
       },
       "hero_image": {
-        "file": "pose-cover.webp",
-        "alt": "Input objects and generated 3D object reconstructions from pose experiments",
-        "caption": "Object reconstruction · Project experiments"
+        "file": "pose-rgb-to-mesh-cover.webp",
+        "alt": "Green teapot RGB input alongside its generated textured 3D reconstruction from our Hunyuan3D 2.5 comparison",
+        "caption": "RGB to 3D · Team reconstruction experiments"
       },
       "documents": [
         {
@@ -1344,7 +1356,11 @@
           "bytes": 4807335,
           "public_copy": false
         }
-      ]
+      ],
+      "project_website": {
+        "url": "https://virlight.github.io/At3dcv2025_Any_6D/",
+        "label": "Original project website"
+      }
     },
     "category-pose": {
       "summary": "First-prize ICCV 2025 challenge work integrating GCEPose with DINOv3 features and category shape priors. My main contributions were the cross-dataset geometry pipeline, shape/semantic prior generation, mixed-data loading and large-scale training experiments.",
@@ -2010,7 +2026,11 @@
           "bytes": 735060,
           "public_copy": false
         }
-      ]
+      ],
+      "project_website": {
+        "url": "https://safe-cda.github.io/",
+        "label": "SCDA website & robot demos"
+      }
     },
     "maniparena": {
       "summary": "Fourth place among 32 teams in the CVPR 2026 Workshop ManipArena challenge. I built a manipulation stack that combines a multi-task VLA policy with asynchronous visual task planning and evidence-based progress verification, bridging learned control with long-horizon robot behavior.",

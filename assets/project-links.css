@@ -1,0 +1,23 @@
+.project-links {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px 20px;
+  margin-top:auto;
+  padding-top:24px;
+}
+.project-body .project-links .project-more { margin:0; padding:0; }
+.project-website {
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:6px 13px;
+  border:1px solid #d2dce7;
+  border-radius:999px;
+  background:#fff;
+  color:var(--blue);
+  font-size:13px;
+  font-weight:600;
+}
+.project-website:hover { border-color:var(--blue); background:#f1f7ff; }
+.detail-project-links { display:flex; flex-wrap:wrap; gap:14px; margin-top:25px; }

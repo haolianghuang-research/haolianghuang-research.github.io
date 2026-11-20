@@ -70,9 +70,13 @@ for item in c['experience']:
 projects = ''
 for p in c['projects']:
     tags = ''.join(f'<span>{e(t)}</span>' for t in p['tags'][:3])
+    actions = f'<a class="project-more" href="projects/{e(p["id"])}/">Project details<span class="visually-hidden">: {e(p["title"])}</span></a>'
+    website = d['pages'][p['id']].get('project_website')
+    if website:
+        actions = f'<div class="project-links">{actions}<a class="project-website" href="{e(website["url"])}" target="_blank" rel="noopener" aria-label="Project website: {e(p["title"])}">Project website</a></div>'
     projects += f'''<article class="project" id="{e(p['id'])}" data-category="{e(p['category'])}">{image_media(p['id'])}
     <div class="project-body"><div class="card-meta-row"><p class="project-meta">{e(p['label'])}</p>{project_logo(p['id'])}</div><h3><a href="projects/{e(p['id'])}/">{e(p['title'])}</a></h3>
-    <p class="meta">{e(p['dates'])}</p><p class="organization">{e(p['organization'])}</p><p>{e(p['description'])}</p><div class="tags">{tags}</div><a class="project-more" href="projects/{e(p['id'])}/">Project details<span class="visually-hidden">: {e(p['title'])}</span></a></div></article>'''
+    <p class="meta">{e(p['dates'])}</p><p class="organization">{e(p['organization'])}</p><p>{e(p['description'])}</p><div class="tags">{tags}</div>{actions}</div></article>'''
 education = ''.join(f'''<article class="education-item"><p class="education-year">{e(a['year'])}</p><h3>{e(a['degree'])}</h3><p>{e(a['school'])}</p><p class="meta">{e(a['detail'])}</p></article>''' for a in c['education'])
 skills = ''.join(f'<span>{e(s)}</span>' for s in c['skills'])
 interests = ''.join(f'<li>{e(s)}</li>' for s in c['research_interests'])
@@ -85,6 +89,7 @@ html = f'''<!doctype html>
 <meta property="og:type" content="profile"><meta property="og:title" content="Haoliang Huang | Embodied AI &amp; Robotics"><meta property="og:description" content="Selected research, robot systems, competition projects, and CV."><meta property="og:url" content="{SITE}"><meta property="og:image" content="{SITE}assets/portrait-personal.webp">
 <meta name="twitter:card" content="summary"><meta name="theme-color" content="#173f58"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{asset_url('assets/styles.css')}"><link rel="stylesheet" href="{asset_url('assets/featured.css')}"><link rel="stylesheet" href="{asset_url('assets/navigation.css')}"><script src="{asset_url('assets/navigation.js')}" defer></script><script src="{asset_url('assets/site.js')}" defer></script>
+<link rel="stylesheet" href="{asset_url('assets/project-links.css')}">
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 {render_navigation(c)}
 <main class="page" id="main">
