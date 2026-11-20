@@ -14,6 +14,8 @@ Commit the JSON content, regenerated `index.html`, `projects/` pages, and `sitem
 
 Each project detail contains a task summary, workflow schematic, technical sections, selected figures, and related public resources. Put approved images under `assets/projects/`, add their dimensions and captions in the JSON, and retain attribution in [ASSET-CREDITS.md](ASSET-CREDITS.md). Original private reports, raw configurations, and the local evidence index are kept outside this public repository.
 
+`about_affiliations.current` defines the three current research affiliations, their project links and the logo images shown in the About section. Official logo assets live in `assets/organizations/`; source attribution is retained in `ASSET-CREDITS.md`. The affiliation cards use a three-column desktop row and stack on smaller screens.
+
 `content.json` also defines the ordered `featured_projects` list. Those entries reference the project metadata in the main catalog or `additional_projects` and appear after the compact award highlights and before experience and the project archive. Featured detail pages use `status`, `strengths`, and an explicit contribution section. Ongoing research, discontinued prototypes, and competition placements have distinct labels. Recorded results stay attached to their specific checkpoint, data split, and evaluation protocol.
 
 The `cv_downloads` list links three public November 2026 PDFs: the full English CV, the focused AI & Robotics English CV, and its Chinese version. Keep private addresses and phone numbers out of the public repository. These copies have the private phone number physically removed; the original local documents remain unchanged.

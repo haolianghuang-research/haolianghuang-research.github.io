@@ -65,3 +65,15 @@ The following figures were extracted from the retained final deliverables. Web c
 | `iccv-depth-audit.webp`, `iccv-scale-audit.webp` | Haoliang Huang, ICCV 2025 challenge presentation, slides 20 and 21. Omni6DPose depth and PACE geometry/NOCS diagnostics, not final pose predictions. |
 
 Existing credited method figures and experiment images also appear beside the relevant text. Reading-deck figures from the original OpenD4RT and DynamicVLA papers were inspected as literature context and are not recast as D4rtVLA project results.
+
+## Current research affiliation logos, 20 November 2026
+
+The About section pairs the current research groups with their university/lab identifiers. The two TUM groups share the university wordmark and retain separate group names.
+
+| Asset | Official source |
+| --- | --- |
+| `assets/organizations/tum.svg` | [TUM website wordmark](https://www.tum.de/typo3conf/ext/in2template/Resources/Public/Images/Backend/tum-logo.svg), unchanged white SVG displayed on a blue field. |
+| `assets/organizations/lmu.png` | [LMU logo used by TRESP Lab](https://tresp-lab.github.io/assets/img/LMU1.png), transparent margins trimmed. |
+| `assets/organizations/tresp.png` | [TRESP Lab navbar logo](https://tresp-lab.github.io/assets/img/logo-5.png), transparent margins trimmed and reduced for web display. |
+
+Logo artwork and original proportions are preserved. University and lab marks belong to their respective organizations.
