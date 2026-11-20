@@ -2616,7 +2616,33 @@
           "bytes": 439643,
           "public_copy": false
         }
-      ]
+      ],
+      "retrospective": {
+        "title": "How we built the ManipArena system",
+        "description": "A bilingual, illustrated retrospective of our competition engineering: multi-task π₀.₅ adaptation, subtask conditioning and Text-CFG, asynchronous agent control, evidence-based completion checks, and what we learned from replay comparisons and failed refinements.",
+        "editions": [
+          {
+            "file": "maniparena/competition-retrospective-en-2026-11.pdf",
+            "cover": "maniparena-retrospective-en-cover.webp",
+            "title": "English report",
+            "language": "English",
+            "lang": "en",
+            "description": "System design, policy adaptation, tracker experiments and lessons.",
+            "pages": 11,
+            "bytes": 4289143
+          },
+          {
+            "file": "maniparena/competition-retrospective-zh-2026-11.pdf",
+            "cover": "maniparena-retrospective-zh-cover.webp",
+            "title": "中文报告",
+            "language": "中文",
+            "lang": "zh-Hans",
+            "description": "任务方案、模型适配、Agent 调试、实验对比与经验总结。",
+            "pages": 11,
+            "bytes": 4622301
+          }
+        ]
+      }
     },
     "commonroad": {
       "summary": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",

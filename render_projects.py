@@ -19,6 +19,16 @@ def render_system_diagram(root, info):
     return f'''<section class="system-architecture" id="system-architecture" data-architecture-focus="system" aria-labelledby="system-architecture-heading"><div class="architecture-heading"><div><p class="eyebrow">System at a glance</p><h2 id="system-architecture-heading">{e(info['title'])}</h2></div><a class="text-link architecture-fullsize" href="../../assets/projects/{e(info['file'])}">Open full-size diagram</a></div><p class="architecture-intro">{e(info['intro'])}</p><div class="architecture-controls" role="group" aria-label="Choose an architecture view" hidden>{controls}</div><figure class="architecture-canvas">{svg}<figcaption>{e(info['caption'])}</figcaption></figure><div class="architecture-legend" aria-label="Diagram colors"><span class="architecture-key-agent">Agent reasoning</span><span class="architecture-key-control">VLA and action loop</span><span class="architecture-key-shared">Shared subtask state</span></div><div class="architecture-panels">{panels}</div></section>'''
 
 
+def render_retrospective(info):
+    cards = ''
+    for item in info['editions']:
+        href = '../../assets/reports/' + e(item['file'])
+        cover = '../../assets/projects/' + e(item['cover'])
+        size = f'{item["bytes"] / 1024 / 1024:.1f} MB'
+        cards += f'''<article class="retrospective-card"><a class="retrospective-cover" href="{href}#view=FitH" target="_blank" rel="noopener" aria-label="Read {e(item['title'])}"><img src="{cover}" alt="{e(item['title'])} cover" width="420" height="594" loading="lazy"></a><div><p class="retrospective-edition">{e(item['language'])} · {item['pages']} pages · {size}</p><h3 lang="{e(item['lang'])}">{e(item['title'])}</h3><p class="retrospective-description">{e(item['description'])}</p><div class="retrospective-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">Read PDF</a><a href="{href}" download type="application/pdf">Download</a></div></div></article>'''
+    return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">Illustrated project report · November 2026</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div></section>'''
+
+
 def render_documents(documents):
     if not documents:
         return ''
@@ -89,6 +99,8 @@ def render_all(root, content, details):
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
         system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
+        report = render_retrospective(d['retrospective']) if d.get('retrospective') else ''
+        report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
         documents = render_documents(d.get('documents', []))
         document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
         document_count = len(d.get('documents', []))
@@ -110,6 +122,7 @@ def render_all(root, content, details):
             method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
         outline = [{"id":"overview","title":"Overview"}]
+        if report: outline.append({'id':'project-report','title':'Illustrated report'})
         if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
         outline.extend({"id":s["id"],"title":s["title"]} for s in d["sections"])
@@ -146,10 +159,10 @@ def render_all(root, content, details):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
-<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
 <main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>{document_shortcut}
-{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+{report}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)
