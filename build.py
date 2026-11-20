@@ -12,10 +12,20 @@ SITE = 'https://haolianghuang-research.github.io/'
 catalog = {p['id']: p for p in c['projects'] + d.get('additional_projects', [])}
 
 
+def logo_mark(logo_id):
+    logo = c['organization_logos'][logo_id]
+    return f'<span class="affiliation-logo affiliation-logo-{e(logo["style"])}" aria-hidden="true"><img src="assets/organizations/{e(logo["file"])}" width="{logo["width"]}" height="{logo["height"]}" alt=""></span>'
+
+
+def project_logo(slug):
+    logo_id = c['project_logos'][slug]
+    name = c['organization_logos'][logo_id]['name']
+    return f'<span class="project-card-logo" role="img" aria-label="{e(name)}" title="{e(name)}">{logo_mark(logo_id)}</span>'
+
+
 def affiliation_link(item):
-    logo = item['logos'][-1]
     first, _, rest = item['name'].partition(' ')
-    mark = f'<span class="affiliation-logo affiliation-logo-{e(logo["style"])}" aria-hidden="true"><img src="assets/organizations/{e(logo["file"])}" width="{logo["width"]}" height="{logo["height"]}" alt=""></span>'
+    mark = logo_mark(item['logo'])
     return f'<a href="{e(item["url"])}"><span class="affiliation-prefix">{mark}{e(first)}</span> {e(rest)}</a>'
 
 
@@ -43,7 +53,7 @@ for f in c['featured_projects']:
     tags = ''.join(f'<span>{e(t)}</span>' for t in f.get('skills', []))
     result = f'<p class="featured-evidence"><strong>{e(f["evidence"]["value"])}</strong><span>{e(f["evidence"]["label"])}</span></p>' if f.get('evidence') else ''
     featured += f'''<article class="featured-card" id="research-{e(slug)}">{image_media(slug, 'featured-media')}
-      <div class="featured-body"><p class="feature-status {e(f.get('status_kind','research'))}">{e(f['status'])}</p>
+      <div class="featured-body"><div class="card-meta-row"><p class="feature-status {e(f.get('status_kind','research'))}">{e(f['status'])}</p>{project_logo(slug)}</div>
       <h3><a href="projects/{e(slug)}/">{e(f['title'])}</a></h3><p class="featured-summary">{e(f['summary'])}</p>
       <p class="featured-contribution"><span>My work</span>{e(f['contribution'])}</p>{result}
       <div class="feature-skills">{tags}</div><a class="project-more" href="projects/{e(slug)}/">Read the project<span class="visually-hidden">: {e(f['title'])}</span></a></div></article>'''
@@ -59,7 +69,7 @@ projects = ''
 for p in c['projects']:
     tags = ''.join(f'<span>{e(t)}</span>' for t in p['tags'][:3])
     projects += f'''<article class="project" id="{e(p['id'])}" data-category="{e(p['category'])}">{image_media(p['id'])}
-    <div class="project-body"><p class="project-meta">{e(p['label'])}</p><h3><a href="projects/{e(p['id'])}/">{e(p['title'])}</a></h3>
+    <div class="project-body"><div class="card-meta-row"><p class="project-meta">{e(p['label'])}</p>{project_logo(p['id'])}</div><h3><a href="projects/{e(p['id'])}/">{e(p['title'])}</a></h3>
     <p class="meta">{e(p['dates'])}</p><p class="organization">{e(p['organization'])}</p><p>{e(p['description'])}</p><div class="tags">{tags}</div><a class="project-more" href="projects/{e(p['id'])}/">Project details<span class="visually-hidden">: {e(p['title'])}</span></a></div></article>'''
 education = ''.join(f'''<article class="education-item"><p class="education-year">{e(a['year'])}</p><h3>{e(a['degree'])}</h3><p>{e(a['school'])}</p><p class="meta">{e(a['detail'])}</p></article>''' for a in c['education'])
 skills = ''.join(f'<span>{e(s)}</span>' for s in c['skills'])

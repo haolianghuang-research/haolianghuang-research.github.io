@@ -3,25 +3,48 @@
   "email": "haoliang.huang.research@gmail.com",
   "github": "https://github.com/haolianghuang-research",
   "intro": "I study how robots can use visual experience, language, and memory to learn new tasks. I am a master’s student in Robotics, Cognition, Intelligence at the Technical University of Munich, with a B.Sc. in Computer Science from KIT.",
+  "organization_logos": {
+    "tum": {"file": "tum.svg", "style": "tum", "width": 73, "height": 38, "name": "Technical University of Munich"},
+    "lmu": {"file": "lmu.png", "style": "lmu", "width": 269, "height": 130, "name": "LMU Munich"},
+    "kit": {"file": "kit.svg", "style": "kit", "width": 196, "height": 90, "name": "Karlsruhe Institute of Technology"},
+    "cvpr2026": {"file": "cvpr2026.png", "style": "cvpr", "width": 330, "height": 80, "name": "CVPR 2026 Workshop competition"},
+    "iccv2025": {"file": "iccv2025.png", "style": "iccv", "width": 400, "height": 110, "name": "ICCV 2025 Workshop competition"}
+  },
+  "project_logos": {
+    "rolewam": "tum",
+    "ricl": "lmu",
+    "agentic-planner": "tum",
+    "d4rtvla": "tum",
+    "maniparena": "cvpr2026",
+    "category-pose": "iccv2025",
+    "rule-prediction": "tum",
+    "semantic-reconstruction": "tum",
+    "humanoid": "tum",
+    "pi0": "tum",
+    "pose": "tum",
+    "safe-rl": "tum",
+    "bitnet": "kit",
+    "vae": "kit",
+    "ik": "kit",
+    "interactive-learning": "kit",
+    "outlier": "kit",
+    "mobile-robots": "kit",
+    "traffic": "kit",
+    "commonroad": "tum"
+  },
   "about_affiliations": {
     "current": [
       {
         "name": "TUM Cyber-Physical Systems (CPS)", "url": "#experience",
-        "label": "Cyber-Physical Systems (CPS)", "institution": "TUM",
-        "logos": [{"file": "tum.svg", "style": "tum", "width": 73, "height": 38}]
+        "logo": "tum"
       },
       {
         "name": "LMU TRESP Lab", "url": "projects/ricl/",
-        "label": "TRESP Lab", "institution": "LMU Munich",
-        "logos": [
-          {"file": "lmu.png", "style": "lmu", "width": 269, "height": 130},
-          {"file": "tresp.png", "style": "tresp", "width": 192, "height": 168}
-        ]
+        "logo": "lmu"
       },
       {
         "name": "TUM Photogrammetry and Remote Sensing", "url": "projects/rolewam/",
-        "label": "Photogrammetry & Remote Sensing", "institution": "TUM",
-        "logos": [{"file": "tum.svg", "style": "tum", "width": 73, "height": 38}]
+        "logo": "tum"
       }
     ]
   },

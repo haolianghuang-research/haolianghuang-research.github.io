@@ -77,3 +77,15 @@ The About section pairs the current research groups with their university/lab id
 | `assets/organizations/tresp.png` | [TRESP Lab navbar logo](https://tresp-lab.github.io/assets/img/logo-5.png), transparent margins trimmed and reduced for web display. |
 
 Logo artwork and original proportions are preserved. University and lab marks belong to their respective organizations.
+
+## Project-card logo additions
+
+Every selected-research and archive card carries a small university or conference mark beside its existing metadata. The About paragraph uses LMU’s green university wordmark for the LMU affiliation. The text and project figures remain in place.
+
+| Asset | Source |
+| --- | --- |
+| `assets/organizations/kit.svg` | Retained KIT wordmark from the CV assets; [Karlsruhe Institute of Technology](https://www.kit.edu/). |
+| `assets/organizations/cvpr2026.png` | Retained CVPR 2026 Denver wordmark from the CV assets; [CVPR 2026 conference archive](https://cvpr.thecvf.com/Conferences/2026). |
+| `assets/organizations/iccv2025.png` | ICCV 2025 Honolulu wordmark extracted from the [official poster template](https://media.eventhosts.cc/Conferences/ICCV2025/iccv25_poster_template.pptx), image 1, reduced proportionally. |
+
+TUM and LMU card marks reuse the credited assets above. Conference marks identify the competition venue; university marks identify the project institution.
