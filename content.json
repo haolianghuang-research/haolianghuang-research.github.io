@@ -501,12 +501,12 @@
       "id": "ricl",
       "title": "RICL / Zero-WAM",
       "status": "Ongoing · Aug 2026–Present",
-      "summary": "Human demonstration videos as context for new robot tasks, supported by agent workflows for data generation and processing.",
-      "contribution": "Designing reusable demonstration clips, robot-grounded data workflows, and controlled context-transfer experiments.",
+      "summary": "Human-video context for new robot tasks, supported by a closed-loop agentic data system with independent review, targeted repair and content/GPU supervision.",
+      "contribution": "Designed and implemented the agent architecture, persistent orchestration and provenance checks; building reusable clips and controlled context-transfer experiments.",
       "skills": [
+        "Agent architecture",
         "Robot in-context learning",
-        "Agent workflows",
-        "Data generation"
+        "Data systems"
       ],
       "evidence": null
     },

@@ -26,7 +26,14 @@ def render_retrospective(info):
         cover = '../../assets/projects/' + e(item['cover'])
         size = f'{item["bytes"] / 1024 / 1024:.1f} MB'
         cards += f'''<article class="retrospective-card"><a class="retrospective-cover" href="{href}#view=FitH" target="_blank" rel="noopener" aria-label="Read {e(item['title'])}"><img src="{cover}" alt="{e(item['title'])} cover" width="420" height="594" loading="lazy"></a><div><p class="retrospective-edition">{e(item['language'])} · {item['pages']} pages · {size}</p><h3 lang="{e(item['lang'])}">{e(item['title'])}</h3><p class="retrospective-description">{e(item['description'])}</p><div class="retrospective-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">Read PDF</a><a href="{href}" download type="application/pdf">Download</a></div></div></article>'''
-    return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">Illustrated project report · November 2026</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div></section>'''
+    package = ''
+    if info.get('companion_package'):
+        item = info['companion_package']
+        href = '../../assets/reports/' + e(item['file'])
+        size = f'{item["bytes"] / 1024 / 1024:.1f} MB'
+        package = f'''<div class="retrospective-package"><a href="{href}" download type="application/zip">{e(item['label'])}</a><p>{e(item['description'])}<span>ZIP · {e(size)}</span></p></div>'''
+    eyebrow = info.get('eyebrow', 'Illustrated project report · November 2026')
+    return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">{e(eyebrow)}</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div>{package}</section>'''
 
 
 def render_documents(documents):
