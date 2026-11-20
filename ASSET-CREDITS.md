@@ -45,7 +45,7 @@ The `*-cover.webp` files are cropped and resized derivatives of the retained fig
 
 The three public November 2026 CV copies have the private telephone number removed. The original local CV documents are not modified.
 
-`mobile-robots-cover.svg` is an original conceptual diagram of sensor-guided PID navigation, used because no attributable project photograph was available.
+`mobile-robots-cover.svg` is a retained conceptual diagram of sensor-guided PID navigation. The project now uses the student's original CAD views as its cover, as documented below.
 
 ## Personal portrait gallery
 
@@ -115,6 +115,15 @@ Odex testing figures are summarized as a dated team-level table; KUKA runtime an
 
 ## Original document archive, 20 November 2026
 
-The project pages link 28 complete public PDFs across 15 projects: retained course reports and theses, final presentations, competition presentations, research notes and the related coauthored SCDA paper. Existing PDFs retain their page content; PPTX and DOCX sources are provided as labeled static PDF exports. Source languages, author credits, slide order and page counts are preserved. Automatic dates use their stored source values. Source video posters and first frames of animated GIFs represent embedded media in the static slide PDFs.
+The project pages link 30 complete public PDFs across 16 projects: retained course reports, personal exercises and theses, final presentations, competition presentations, research notes and the related coauthored SCDA paper. Existing PDFs retain their page content; PPTX and DOCX sources are provided as labeled static PDF exports. Source languages, author credits, slide order and page counts are preserved. Automatic dates use their stored source values. Source video posters and first frames of animated GIFs represent embedded media in the static slide PDFs.
 
-Four public copies have student identifiers removed: the Safe RL report and presentation, and the traffic thesis and defense. Document metadata and embedded-file payloads are cleared; unmodified originals remain in the user's local archive. Original model, dataset, university, collaborator and paper credits remain as shown in the documents. D4RT and DynamicVLA reading slides are labeled as literature context, separate from the prototype's results.
+Six public copies have student identifiers removed: the Safe RL report and presentation, the traffic thesis and defense, and the two LEGO personal exercises. Document metadata and embedded-file payloads are cleared; unmodified originals remain in the user's local archive. Original model, dataset, university, collaborator and paper credits remain as shown in the documents. D4RT and DynamicVLA reading slides are labeled as literature context, separate from the prototype's results.
+
+## LEGO Mindstorms personal project sources, 20 November 2026
+
+- `lego-personal-cad-cover.webp`: one perspective view cropped from the CAD image embedded on page 4 of Haoliang Huang's first personal exercise submission. The original image contains two alternative sensor arrangements; this cover selects one complete view without reconstructing or adding parts.
+- `lego-personal-cad-views.webp`: the original multi-view CAD plate from the same personal submission, page 4.
+- `lego-personal-state-machine.webp`: the handwritten control design from the second personal exercise, 13 November 2022. The header containing the student identifier is outside this figure crop.
+- `assets/reports/mobile-robots/personal-exercise-1.pdf` and `personal-exercise-2.pdf`: complete public copies of the four-page and one-page original German handwritten submissions. Student identifiers are removed from the visible page images and OCR text.
+
+The retained Studio archive has five versions (1.0, 2.0, 3.0, 3.1 and 4.0). These are design records. The compiled Word notes on earlier course cohorts are kept private; their robot photographs, rankings and timings are not attributed to this student.

@@ -726,7 +726,7 @@
       ]
     },
     "mobile-robots": {
-      "summary": "Programming a LEGO Mindstorms EV3 robot to navigate a multi-stage course through sensor feedback, calibrated motion control, and explicit task logic.",
+      "summary": "Designing and programming a LEGO Mindstorms EV3 mobile robot for a multi-stage course, combining CAD-based mechanical design, sensor integration, feedback control and explicit task-state logic.",
       "facts": [
         {
           "label": "Platform",
@@ -769,11 +769,38 @@
           ]
         },
         {
+          "id": "mechanical-design",
+          "title": "Mechanical design and sensor placement",
+          "paragraphs": [
+            "My first course exercise connects mechanical choices to the course tasks: line tracking, obstacle handling, bridge traversal and color search. The sketches consider chassis stability, sensor placement and a mechanism for moving a box.",
+            "The retained BrickLink Studio archive contains five design versions, from 1.0 to 4.0. The original multi-view CAD studies below come from my personal exercise submission and show alternative robot and sensor arrangements."
+          ],
+          "figures": [
+            {
+              "file": "lego-personal-cad-views.webp",
+              "width": 1644,
+              "height": 1098,
+              "alt": "Original multi-view LEGO EV3 CAD studies from Haoliang Huang’s first course exercise",
+              "caption": "My original CAD studies, preserved on page 4 of the first personal exercise submission. These are design views prepared in BrickLink Studio."
+            }
+          ]
+        },
+        {
           "id": "control",
           "title": "Feedback and state transitions",
           "paragraphs": [
             "Line tracking converts the difference between measured reflection and a calibrated threshold into a turning correction. The code contains proportional, integral, and derivative terms and experimental variants with different gains. The correction is applied as a difference between the left and right wheel speeds.",
-            "Sensor conditions select the next action. A touch event can interrupt tracking and enter an obstacle state, while a gyroscope-based heading check helps recover from a large deviation. Color-search routines classify RGB readings and use gyroscope feedback to maintain straight travel. Ultrasonic measurements are also used to relate commanded movement to physical distance."
+            "Sensor conditions select the next action. A touch event can interrupt tracking and enter an obstacle state, while a gyroscope-based heading check helps recover from a large deviation. Color-search routines classify RGB readings and use gyroscope feedback to maintain straight travel. Ultrasonic measurements are also used to relate commanded movement to physical distance.",
+            "My second exercise sketches a state machine for line following and recovery. Reflected-light categories select motion states such as straight travel, left or right correction, and reversal. The written transitions make the intended robot behavior explicit before implementation."
+          ],
+          "figures": [
+            {
+              "file": "lego-personal-state-machine.webp",
+              "width": 1788,
+              "height": 2043,
+              "alt": "Original handwritten line-following and recovery state machine with sensor-driven transitions",
+              "caption": "Original state-machine design from my second personal exercise, 13 November 2022. The handwritten German notes connect sensor conditions to motor actions."
+            }
           ]
         },
         {
@@ -787,17 +814,41 @@
       ],
       "gallery": [],
       "references": [],
-      "source_note": "Based on retained EV3 MicroPython programs and course notes. The archived notes also contain material from earlier cohorts, whose robots and competition results are not presented as my own.",
+      "source_note": "Reviewed against my two personal handwritten exercises from October–November 2022, five retained BrickLink Studio model versions, and the EV3 MicroPython implementation. The CAD views and state diagram on this page come from my personal submissions. The compiled course research notes also discuss the 2018/19 cohort; those teams’ robots, rankings and timings are kept separate from my own work.",
       "thumbnail": {
-        "file": "mobile-robots-cover.svg",
-        "alt": "Conceptual mobile robot following a curved route with sensor-guided PID navigation",
-        "caption": "Mobile navigation · Conceptual schematic"
+        "file": "lego-personal-cad-cover.webp",
+        "alt": "Perspective CAD view of the LEGO EV3 robot from Haoliang Huang’s own course exercise",
+        "caption": "Original CAD design · Personal course exercise"
       },
       "hero_image": {
-        "file": "mobile-robots-cover.svg",
-        "alt": "Conceptual mobile robot following a curved route with sensor-guided PID navigation",
-        "caption": "Mobile navigation · Conceptual schematic"
-      }
+        "file": "lego-personal-cad-cover.webp",
+        "alt": "Perspective CAD view of the LEGO EV3 robot from Haoliang Huang’s own course exercise",
+        "caption": "Original CAD design · Personal course exercise"
+      },
+      "documents": [
+        {
+          "file": "mobile-robots/personal-exercise-1.pdf",
+          "title": "Exercise 1: mechanical concept and CAD studies",
+          "kind": "Course exercise",
+          "language": "German",
+          "format": "Original PDF",
+          "pages": 4,
+          "bytes": 3341430,
+          "public_copy": true,
+          "note": "Original handwritten course submission."
+        },
+        {
+          "file": "mobile-robots/personal-exercise-2.pdf",
+          "title": "Exercise 2: line-following state machine",
+          "kind": "Course exercise",
+          "language": "German",
+          "format": "Original PDF",
+          "pages": 1,
+          "bytes": 646606,
+          "public_copy": true,
+          "note": "Original handwritten course submission."
+        }
+      ]
     },
     "traffic": {
       "summary": "An end-to-end drone-video traffic-analysis pipeline combining fine-tuned object detectors, a lane-aware vehicle tracker, and directional counting, evaluated on a custom annotated highway dataset.",

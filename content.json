@@ -37,7 +37,7 @@
       {
         "name": "TUM Cyber-Physical Systems (CPS)", "url": "#experience",
         "logo": "tum",
-        "research": "I work on autonomous driving, focusing on agentic planning and neural traffic-rule prediction."
+        "research": "I focus on path and motion planning for autonomous driving, including agentic planning and traffic-rule-aware decision-making."
       },
       {
         "name": "LMU TRESP Lab", "url": "projects/ricl/",
@@ -320,8 +320,8 @@
       "dates": "Oct 2022 – Feb 2023",
       "category": "robotics",
       "label": "Robotics",
-      "type": "University internship",
-      "description": "Programmed a LEGO robot to navigate a complex course, integrating multiple sensors and designing PID controllers for navigation.",
+      "type": "Practical course",
+      "description": "Designed and programmed a LEGO Mindstorms EV3 robot for a multi-stage course, combining mechanical CAD studies, sensor integration, PID control and state-machine logic.",
       "tags": [
         "Sensor integration",
         "PID control",
