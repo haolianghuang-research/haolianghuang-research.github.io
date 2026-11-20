@@ -77,6 +77,10 @@ def render_section(s):
         out += f'<div class="section-figures{layout}">' + ''.join(render_figure(f) for f in s['figures']) + '</div>'
     if s.get('videos'):
         video_layout = ' video-pair' if s.get('video_layout') == 'pair' else ''
+        comparison = ' data-video-comparison' if s.get('comparison') else ''
+        if comparison:
+            out += f'<div class="video-comparison"{comparison}>'
+            out += '<div class="comparison-controls"><button type="button" data-play-comparison>Play both</button><span>Each clip keeps its original export timing.</span></div>'
         out += f'<div class="section-figures project-videos{video_layout}">'
         for v in s['videos']:
             src = '../../assets/projects/' + e(v['file'])
@@ -84,8 +88,9 @@ def render_section(s):
             width, height = v.get('width', 1920), v.get('height', 1080)
             video_class = ' class="portrait-video"' if height > width else ''
             download = f'<a class="video-download" href="{src}" download aria-label="Download video: {e(v["title"])}">Download video</a>' if v.get('download') else ''
-            out += f'<figure{video_class}><video controls playsinline preload="none" poster="{poster}" width="{width}" height="{height}" style="aspect-ratio:{width}/{height}" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}{download}</figcaption></figure>'
-        out += '</div>'
+            heading = f'<h3 class="video-heading">{e(v["heading"])}</h3>' if v.get('heading') else ''
+            out += f'<figure{video_class}>{heading}<video controls playsinline preload="none" poster="{poster}" width="{width}" height="{height}" style="aspect-ratio:{width}/{height}" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}{download}</figcaption></figure>'
+        out += '</div>' + ('</div>' if comparison else '')
     if s.get('video_embed'):
         v = s['video_embed']
         out += f'<div class="section-figures"><figure class="project-video-embed"><div class="video-embed-player"><iframe src="{e(v["url"])}" title="{e(v["title"])}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><figcaption>{e(v["caption"])} <a class="video-download" href="{e(v["watch_url"])}" target="_blank" rel="noopener">Watch on YouTube</a></figcaption></figure></div>'
@@ -108,17 +113,21 @@ def render_all(root, content, details):
         system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
         overview_demo = render_section(d['overview_demo']) if d.get('overview_demo') else ''
+        intro_sections = ''.join(render_section(section) for section in d.get('intro_sections', []))
         report = render_retrospective(d['retrospective']) if d.get('retrospective') else ''
         hero_class = ' detail-hero-overview' if overview_demo else ''
         report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
         documents = render_documents(d.get('documents', []))
         document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
         website = d.get('project_website')
-        demo = d.get('demo_link') or ({'section':d['overview_demo']['id'], 'label':'Watch demo'} if overview_demo else None)
+        demo = d.get('demo_link') or ({'section':d['overview_demo']['id'], 'label':d['overview_demo'].get('resource_label','Watch demo')} if overview_demo else None)
         website_link = f'<a class="button button-primary" href="#{e(demo["section"])}">{e(demo["label"])}</a>' if demo else ''
         if website:
             button_style = 'button-secondary' if demo else 'button-primary'
             website_link += f'<a class="button {button_style}" href="{e(website["url"])}" target="_blank" rel="noopener">{e(website["label"])}</a>'
+        for section in d.get('intro_sections', []):
+            if section.get('resource_label'):
+                website_link += f'<a class="button button-secondary" href="#{e(section["id"])}">{e(section["resource_label"])}</a>'
         if d.get('retrospective'):
             for edition in d['retrospective']['editions']:
                 href = '../../assets/reports/' + e(edition['file'])
@@ -133,8 +142,11 @@ def render_all(root, content, details):
         if website_link:
             website_link = f'<nav class="detail-project-links" aria-label="Project resources">{website_link}</nav>'
         website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website_link else ''
-        if any(s.get('videos') or s.get('video_embed') for s in d['sections']) or overview_demo:
+        media_sections = d['sections'] + d.get('intro_sections', [])
+        if any(s.get('videos') or s.get('video_embed') for s in media_sections) or overview_demo:
             website_assets += f'<link rel="stylesheet" href="../../{asset_url("assets/robot-demos.css")}">'
+        if any(s.get('comparison') for s in media_sections):
+            website_assets += f'<script src="../../{asset_url("assets/project-media.js")}" defer></script>'
         method = ''
         if d.get('pipeline') and not system:
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
@@ -142,6 +154,7 @@ def render_all(root, content, details):
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
         outline = [{"id":"overview","title":"Overview"}]
         if overview_demo: outline.append({'id':d['overview_demo']['id'],'title':'Overview demo'})
+        outline.extend({'id':section['id'],'title':section['title']} for section in d.get('intro_sections', []))
         if report: outline.append({'id':'project-report','title':'Illustrated report'})
         if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
@@ -181,7 +194,7 @@ def render_all(root, content, details):
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
 <meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero{hero_class}" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div>{overview_demo}<dl class="project-facts{facts_style}">{facts}</dl>
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero{hero_class}" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div>{overview_demo}{intro_sections}<dl class="project-facts{facts_style}">{facts}</dl>
 {report}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug

@@ -19,3 +19,9 @@
   .project-videos.video-pair { grid-template-columns:1fr; gap:24px; }
   .video-download { display:block; margin:8px 0 0; }
 }
+
+.video-heading { padding:16px 18px; font-size:16px; line-height:1.4; border-bottom:1px solid var(--line); }
+.comparison-controls { display:flex; align-items:center; flex-wrap:wrap; gap:12px 18px; margin-top:22px; }
+.comparison-controls button { min-height:40px; padding:8px 17px; color:#fff; background:var(--blue); border:0; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; }
+.comparison-controls span { font-size:14px; line-height:1.6; color:var(--muted); }
+.video-comparison[data-video-comparison] .section-figures { margin-top:18px; }

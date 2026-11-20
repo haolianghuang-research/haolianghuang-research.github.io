@@ -3306,7 +3306,7 @@
           "url": "https://robotwin-platform.github.io/"
         }
       ],
-      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs and the complete materials archive are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors.",
+      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs and the complete materials archive are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors. The paired human/robot demo is the exact-full stamp_seal engineering smoke run of 30 September 2026, seed 100000. The human condition is sample 206 and the robot views are saved policy observations in RoboTwin simulation. The visible high-camera crop preserves all 37 source frames and their export timing; the original multiview recording remains available.",
       "featured": true,
       "status": "Ongoing research · August 2026–Present",
       "strengths": [
@@ -3374,8 +3374,49 @@
             "height": 828,
             "download": true
           }
-        ]
-      }
+        ],
+        "resource_label": "Composed demo"
+      },
+      "intro_sections": [
+        {
+          "id": "human-robot-demo",
+          "title": "Human demonstration and robot execution",
+          "overview": true,
+          "resource_label": "Human–robot comparison",
+          "paragraphs": [
+            "The exact-task human video used as the model’s visual condition is shown alongside its saved Zero-WAM policy rollout in RoboTwin simulation.",
+            "This is one engineering smoke example (seed 100000), separate from the composed-video examples and the ten-seed pilot below. The two recordings keep their original export timing; the robot recording shows sampled control observations."
+          ],
+          "video_layout": "pair",
+          "comparison": true,
+          "videos": [
+            {
+              "file": "ricl-stamp-seal-exact-human.mp4",
+              "poster": "ricl-stamp-seal-exact-human-poster.webp",
+              "title": "Exact-task human demonstration for stamp_seal",
+              "heading": "Human video condition",
+              "caption": "Exact-full HumanGen condition: stamp_seal, sample 206. This is the full human demonstration actually used by the paired smoke run.",
+              "width": 1108,
+              "height": 828,
+              "download": true
+            },
+            {
+              "file": "ricl-stamp-seal-smoke-high.mp4",
+              "poster": "ricl-stamp-seal-smoke-high-poster.webp",
+              "title": "Zero-WAM stamp_seal policy rollout in RoboTwin simulation",
+              "heading": "Robot policy rollout · simulation",
+              "caption": "High-camera crop from the recorded policy rollout: seed 100000, 37 sampled frames at 15 FPS. The complete multiview export remains linked in this section.",
+              "width": 320,
+              "height": 240,
+              "download": true
+            }
+          ],
+          "link": {
+            "url": "../../assets/projects/ricl-stamp-seal-smoke-multiview.mp4",
+            "title": "Open original multiview rollout"
+          }
+        }
+      ]
     },
     "d4rtvla": {
       "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",
