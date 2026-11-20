@@ -8,6 +8,17 @@ def render_figure(f):
     return f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" width="{f.get("width",1400)}" height="{f.get("height",900)}" loading="lazy"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
 
 
+def render_system_diagram(root, info):
+    svg = (root / 'assets' / 'projects' / info['file']).read_text()
+    controls = ''.join(f'<button type="button" data-architecture-view="{e(v["id"])}" aria-pressed="{str(i == 0).lower()}" aria-controls="architecture-panel-{e(v["id"])}">{e(v["label"])}</button>' for i,v in enumerate(info['views']))
+    panels = ''
+    for i,v in enumerate(info['views']):
+        steps = ''.join(f'<li><strong>{e(s["title"])}</strong><p>{e(s["text"])}</p></li>' for s in v['steps'])
+        hidden = ' hidden' if i else ''
+        panels += f'<section class="architecture-panel" id="architecture-panel-{e(v["id"])}" data-architecture-panel="{e(v["id"])}" aria-labelledby="architecture-view-{e(v["id"])}"{hidden}><h3 id="architecture-view-{e(v["id"])}">{e(v["title"])}</h3><p>{e(v["description"])}</p><ol>{steps}</ol></section>'
+    return f'''<section class="system-architecture" id="system-architecture" data-architecture-focus="system" aria-labelledby="system-architecture-heading"><div class="architecture-heading"><div><p class="eyebrow">System at a glance</p><h2 id="system-architecture-heading">{e(info['title'])}</h2></div><a class="text-link architecture-fullsize" href="../../assets/projects/{e(info['file'])}">Open full-size diagram</a></div><p class="architecture-intro">{e(info['intro'])}</p><div class="architecture-controls" role="group" aria-label="Choose an architecture view" hidden>{controls}</div><figure class="architecture-canvas">{svg}<figcaption>{e(info['caption'])}</figcaption></figure><div class="architecture-legend" aria-label="Diagram colors"><span class="architecture-key-agent">Agent reasoning</span><span class="architecture-key-control">VLA and action loop</span><span class="architecture-key-shared">Shared subtask state</span></div><div class="architecture-panels">{panels}</div></section>'''
+
+
 def render_section(s):
     technical = s.get('technical', False)
     if technical:
@@ -52,12 +63,15 @@ def render_all(root, content, details):
             hero_image = f'<figure class="detail-cover"><img src="../../assets/projects/{e(image["file"])}" alt="{e(image["alt"])}" width="1000" height="625"><figcaption>{e(image.get("caption","Project visualization"))}</figcaption></figure>'
         facts = ''.join(f'<div><dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd></div>' for f in d.get('facts', []))
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
+        system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
+        architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
         method = ''
-        if d.get('pipeline'):
+        if d.get('pipeline') and not system:
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
             method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
         outline = [{"id":"overview","title":"Overview"}]
+        if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
         outline.extend({"id":s["id"],"title":s["title"]} for s in d["sections"])
         sections = ''.join(render_section(s) for s in d['sections'])
@@ -90,10 +104,10 @@ def render_all(root, content, details):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
-<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}"><script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects', outline, p['title'])}
 <main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p></div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
-<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)

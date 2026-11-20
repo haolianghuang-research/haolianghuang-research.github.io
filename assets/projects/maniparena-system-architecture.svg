@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="maniparena-system-svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="maniparena-diagram-title maniparena-diagram-description">
+<title id="maniparena-diagram-title">ManipArena: asynchronous reasoning and learned robot control</title>
+<desc id="maniparena-diagram-description">Observations feed an asynchronous planner, progress predictor, evidence bank and verifier, and a shared pi-zero-point-five VLA policy. A cached subtask conditions the policy. The robot executes decoded actions and returns fresh observations. Verified completion updates the cached subtask. Training adapts one shared policy from twenty task datasets.</desc>
+<defs>
+<marker id="ma-arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#63758b"/></marker>
+<marker id="ma-arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7950ba"/></marker>
+<marker id="ma-arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#117a78"/></marker>
+</defs>
+<style>#maniparena-system-svg text{font-family:Arial,Helvetica,sans-serif;fill:#243040}.ma-title{font-size:35px;font-weight:700}.ma-subtitle{font-size:26px;fill:#58677c}.ma-heading{font-size:30px;font-weight:700}.ma-body{font-size:25px}.ma-small{font-size:23px;fill:#58677c}.ma-label{font-size:23px;font-weight:700}.ma-box-title{font-size:25px;font-weight:700}.ma-line{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.ma-agent-line{stroke:#7950ba;marker-end:url(#ma-arrow-purple)}.ma-control-line{stroke:#117a78;marker-end:url(#ma-arrow-teal)}.ma-gray-line{stroke:#63758b;marker-end:url(#ma-arrow-gray)}</style>
+<rect width="1600" height="1040" fill="#fff"/>
+<text x="32" y="52" class="ma-title">ManipArena · Agent + VLA system</text>
+<text x="32" y="90" class="ma-subtitle">The Agent manages task progress; the VLA generates continuous robot actions.</text>
+<g data-layer="observations">
+<rect x="30" y="180" width="260" height="570" rx="20" fill="#edf4fc" stroke="#cbdced" stroke-width="1.5"/>
+<text x="52" y="225" class="ma-heading">Inputs</text>
+<rect x="50" y="260" width="220" height="112" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="68" y="295" class="ma-box-title">Task instruction</text>
+<text x="68" y="332" class="ma-body">Natural-language</text>
+<text x="68" y="364" class="ma-body">goal</text>
+<rect x="50" y="410" width="220" height="153" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="68" y="445" class="ma-box-title">Observations</text>
+<text x="68" y="482" class="ma-body">Front + wrists</text>
+<text x="68" y="514" class="ma-body">Robot state</text>
+<text x="68" y="546" class="ma-body">Gripper history</text>
+<rect x="50" y="600" width="220" height="110" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="68" y="635" class="ma-box-title">Task knowledge</text>
+<text x="68" y="672" class="ma-body">Missions + skills</text>
+</g>
+<g data-layer="agent">
+<rect x="330" y="180" width="520" height="570" rx="20" fill="#f4effb" stroke="#dfd1ef" stroke-width="1.5"/>
+<text x="352" y="225" class="ma-heading">VLM Agent</text>
+<text x="596" y="225" class="ma-small">asynchronous</text>
+<rect x="355" y="260" width="470" height="92" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="373" y="295" class="ma-box-title">Planner · episode start</text>
+<text x="373" y="332" class="ma-body">Choose the initial task stage</text>
+<rect x="355" y="450" width="470" height="274" rx="14" fill="#faf7fe" stroke="#dfd1ef" stroke-width="1.5"/>
+<text x="375" y="484" class="ma-box-title">Progress monitoring</text>
+<rect x="375" y="500" width="430" height="49" rx="10" fill="#fff" stroke="#dfd1ef" stroke-width="1.5"/>
+<text x="392" y="533" class="ma-body">Latest-observation queue</text>
+<rect x="375" y="574" width="195" height="82" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="393" y="609" class="ma-box-title">Predictor</text>
+<text x="393" y="646" class="ma-body">Evidence bank</text>
+<rect x="590" y="574" width="215" height="82" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="608" y="609" class="ma-box-title">Verifier</text>
+<text x="608" y="646" class="ma-body">Done evidence</text>
+<rect x="375" y="672" width="430" height="39" rx="8" fill="#e4d8f4" stroke="#cfb8e6" stroke-width="1.5"/>
+<text x="390" y="699" class="ma-label">Completion gate: advance or hold</text>
+<path d="M590 352 V374" class="ma-line ma-agent-line"/>
+<path d="M470 549 V572" class="ma-line ma-agent-line"/>
+<path d="M570 611 H588" class="ma-line ma-agent-line"/>
+<path d="M697 656 V670" class="ma-line ma-agent-line"/>
+<path d="M805 691 H837 V434 H802 V422" class="ma-line ma-agent-line"/>
+</g>
+<g data-layer="shared">
+<rect x="355" y="376" width="470" height="46" rx="10" fill="#e1d3f1" stroke="#bda0dc" stroke-width="1.5"/>
+<text x="375" y="407" class="ma-box-title">Cached current subtask</text>
+</g>
+<g data-layer="policy">
+<rect x="890" y="180" width="340" height="570" rx="20" fill="#eaf5f3" stroke="#c0dfd8" stroke-width="1.5"/>
+<text x="912" y="225" class="ma-heading">π₀.₅ VLA policy</text>
+<rect x="912" y="294" width="296" height="124" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="930" y="329" class="ma-box-title">Policy inputs</text>
+<text x="930" y="366" class="ma-body">Images + robot state</text>
+<text x="930" y="398" class="ma-body">Task + cached subtask</text>
+<rect x="912" y="463" width="296" height="121" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="930" y="498" class="ma-box-title">LoRA-adapted OpenPI</text>
+<text x="930" y="535" class="ma-body">Vision-language model</text>
+<text x="930" y="567" class="ma-body">+ action expert</text>
+<rect x="912" y="625" width="296" height="82" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="930" y="660" class="ma-box-title">Action chunks</text>
+<text x="930" y="697" class="ma-body">Continuous control</text>
+<path d="M1060 418 V461" class="ma-line ma-control-line"/>
+<path d="M1060 584 V623" class="ma-line ma-control-line"/>
+</g>
+<g data-layer="robot">
+<rect x="1270" y="180" width="300" height="570" rx="20" fill="#fff3e8" stroke="#efd7c1" stroke-width="1.5"/>
+<text x="1292" y="225" class="ma-heading">Robot execution</text>
+<rect x="1292" y="290" width="256" height="233" rx="14" fill="#fff" stroke="#efd7c1" stroke-width="1.5"/>
+<text x="1310" y="328" class="ma-box-title">Robot + scene</text>
+<g stroke="#667789" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M1379 433 L1345 397 L1316 420 M1462 433 L1492 397 L1521 420"/><path d="M1310 419 L1305 434 M1320 419 L1326 434 M1516 419 L1510 434 M1526 419 L1532 434"/></g>
+<rect x="1380" y="373" width="82" height="84" rx="10" fill="#dbe5ee" stroke="#9aafbf" stroke-width="1.5"/>
+<circle cx="1421" cy="355" r="16" fill="#dbe5ee" stroke="#9aafbf" stroke-width="2"/><path d="M1374 464 H1468" stroke="#667789" stroke-width="8" stroke-linecap="round"/>
+<text x="1310" y="499" class="ma-small">Arms · grippers · base</text>
+<rect x="1292" y="615" width="256" height="92" rx="14" fill="#fff" stroke="#d9e2ed" stroke-width="1.5"/>
+<text x="1310" y="650" class="ma-box-title">Decode + execute</text>
+<text x="1310" y="687" class="ma-body">Task-specific checks</text>
+<path d="M1420 615 V525" class="ma-line ma-control-line"/>
+</g>
+<g data-layer="agent">
+<path d="M290 307 H353" class="ma-line ma-agent-line"/>
+<path d="M290 524 H373" class="ma-line ma-agent-line"/>
+<path d="M50 655 H12 V242 H590 V258" class="ma-line ma-gray-line" stroke-dasharray="8 7"/>
+</g>
+<g data-layer="shared">
+<path d="M825 399 H910" class="ma-line ma-agent-line"/>
+</g>
+<g data-layer="control">
+<path d="M160 180 V134 H1170 V292" class="ma-line ma-control-line"/>
+<text x="663" y="124" class="ma-small">Current camera images + robot state</text>
+<path d="M1208 666 H1290" class="ma-line ma-control-line"/>
+<path d="M1548 406 H1586 V798 H160 V752" class="ma-line ma-control-line"/>
+<text x="390" y="785" class="ma-label">New observations close both loops</text>
+</g>
+<g data-layer="policy">
+<rect x="30" y="842" width="1540" height="150" rx="18" fill="#f7f8fb" stroke="#dce1e9" stroke-width="1.5"/>
+<text x="52" y="878" class="ma-box-title">Training context</text>
+<rect x="52" y="895" width="320" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
+<text x="68" y="925" class="ma-box-title">20 task datasets</text>
+<text x="68" y="954" class="ma-small">LeRobot demonstrations</text>
+<rect x="425" y="895" width="330" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
+<text x="441" y="925" class="ma-box-title">Shared action format</text>
+<text x="441" y="954" class="ma-small">Tabletop + mobile robots</text>
+<rect x="810" y="895" width="310" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
+<text x="826" y="925" class="ma-box-title">LoRA adaptation</text>
+<text x="826" y="954" class="ma-small">Fine-tune π₀.₅</text>
+<rect x="1175" y="895" width="372" height="78" rx="10" fill="#fff" stroke="#dde3ec" stroke-width="1.5"/>
+<text x="1191" y="925" class="ma-box-title">One policy checkpoint</text>
+<text x="1191" y="954" class="ma-small">Shared across the task suite</text>
+<path d="M372 935 H423" class="ma-line ma-gray-line"/>
+<path d="M755 935 H808" class="ma-line ma-gray-line"/>
+<path d="M1120 935 H1173" class="ma-line ma-gray-line"/>
+</g>
+</svg>

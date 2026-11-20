@@ -1956,6 +1956,86 @@
         "file": "maniparena-cover.webp",
         "alt": "Two ManipArena benchmark scenes: pouring water and pairing gloves and socks",
         "caption": "ManipArena benchmark · Real-robot scenes"
+      },
+      "system_diagram": {
+        "file": "maniparena-system-architecture.svg",
+        "title": "System architecture",
+        "intro": "A visual-language Agent tracks the active task stage while one π₀.₅ policy generates robot actions. Their shared state is the cached current subtask.",
+        "caption": "Implementation schematic of the retained system. The first planning call is synchronous; progress monitoring then runs asynchronously. Fourteen tasks enable subtask tracking, while six use the whole-task instruction directly.",
+        "views": [
+          {
+            "id": "system",
+            "label": "Full system",
+            "title": "Two loops share one task state",
+            "description": "Fresh observations inform both reasoning and control. The Agent advances the task only after completion checks agree; the policy keeps using the latest valid subtask.",
+            "steps": [
+              {
+                "title": "Observe",
+                "text": "Read camera images, robot state and the task instruction."
+              },
+              {
+                "title": "Reason about progress",
+                "text": "Plan the stage, retain evidence and verify whether it is complete."
+              },
+              {
+                "title": "Generate actions",
+                "text": "Condition one VLA checkpoint on the images, state and current task stage."
+              },
+              {
+                "title": "Execute and observe again",
+                "text": "Decode commands for the robot and return the next measured observations."
+              }
+            ]
+          },
+          {
+            "id": "agent",
+            "label": "Agent loop",
+            "title": "Decide what to do next—and when to advance",
+            "description": "The Agent manages language-level task state. A latest-only queue prevents stale observations from piling up while the VLA continues with the cached stage.",
+            "steps": [
+              {
+                "title": "Initialize the plan",
+                "text": "Use the first scene, task instruction, missions and skills to choose the initial stage."
+              },
+              {
+                "title": "Keep fresh observations",
+                "text": "Replace queued images with newer observations when the Agent is still processing."
+              },
+              {
+                "title": "Predict and verify",
+                "text": "Combine fine-action progress, an evidence bank and completion verification."
+              },
+              {
+                "title": "Advance or hold",
+                "text": "Update the cached subtask after the completion gate passes; otherwise keep the current stage."
+              }
+            ]
+          },
+          {
+            "id": "control",
+            "label": "Action loop",
+            "title": "Turn the current task stage into robot motion",
+            "description": "OpenPI uses the same main checkpoint for whole-task and subtask-conditioned actions. Visual reasoning updates the text context rather than directly producing motor commands.",
+            "steps": [
+              {
+                "title": "Read policy inputs",
+                "text": "Combine front and wrist images, robot state, and task text with the cached subtask."
+              },
+              {
+                "title": "Predict an action chunk",
+                "text": "The LoRA-adapted π₀.₅ model and action expert generate continuous robot actions."
+              },
+              {
+                "title": "Decode and execute",
+                "text": "Restore tabletop or mobile control commands, with task-specific checks where enabled."
+              },
+              {
+                "title": "Close the feedback loop",
+                "text": "New images and robot state return to the policy and the asynchronous Agent."
+              }
+            ]
+          }
+        ]
       }
     },
     "commonroad": {
