@@ -138,15 +138,17 @@ def render_all(root, content, details):
         if gallery: outline.append({'id':'visuals','title':'Project visuals'})
         if documents: outline.append({'id':'documents','title':'Original documents'})
         if refs: outline.append({'id':'references','title':'Related resources'})
-        back_target = '../../#featured' if d.get('featured') else '../../#projects'
+        back_target = '../../#experience' if d.get('experience') else ('../../#featured' if d.get('featured') else '../../#projects')
+        back_label = 'Back to experience' if d.get('experience') else 'Back to projects'
+        nav_section = 'experience' if d.get('experience') else ('featured' if d.get('featured') else 'projects')
         og_image = f'<meta property="og:image" content="https://haolianghuang-research.github.io/assets/projects/{e(image["file"])}">' if image else ''
         html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
 <meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
-<a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', 'featured' if d.get('featured') else 'projects', outline, p['title'])}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">Back to projects</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>{document_shortcut}
+<a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>{document_shortcut}
 {system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug

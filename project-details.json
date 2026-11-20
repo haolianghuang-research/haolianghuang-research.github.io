@@ -3734,6 +3734,88 @@
         "alt": "Original method-overview figure from the forthcoming traffic-rule prediction paper",
         "caption": "Forthcoming paper · Method overview"
       }
+    },
+    "huawei-vehicle-dynamics": {
+      "experience": true,
+      "summary": "AI internship focused on foundation-model architecture design for CAN-bus time series, tire–road friction estimation and related vehicle-dynamics parameters, supported by data preparation and small-scale model experiments.",
+      "facts": [
+        {
+          "label": "Role",
+          "value": "AI Intern · Intelligent Vehicle Dynamics Controls"
+        },
+        {
+          "label": "Organization",
+          "value": "Huawei Munich Research Center · AEL"
+        },
+        {
+          "label": "Period",
+          "value": "March–August 2026"
+        },
+        {
+          "label": "Focus",
+          "value": "Time-series modeling, data engineering and evaluation"
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Prepare vehicle signals",
+          "text": "Organize CAN-bus recordings, align signals and check data quality."
+        },
+        {
+          "title": "Design temporal models",
+          "text": "Prototype sequence-model architectures for vehicle-dynamics estimation."
+        },
+        {
+          "title": "Evaluate and refine",
+          "text": "Compare model behavior with recording-level data splits and diagnostic analysis."
+        }
+      ],
+      "sections": [
+        {
+          "id": "problem",
+          "title": "Estimating hard-to-measure vehicle dynamics",
+          "paragraphs": [
+            "Vehicle signals provide an indirect view of the interaction between the tires and the road. My internship explored how CAN-bus time series could support estimation of tire–road friction and other vehicle-dynamics parameters.",
+            "The work combined foundation-model architecture design, initial experiments on small-scale datasets and preparation of larger CAN-bus datasets for subsequent training."
+          ]
+        },
+        {
+          "id": "model-research",
+          "title": "Model design and prototyping",
+          "paragraphs": [
+            "I designed and investigated time-series model architectures for the estimation task, including Transformer-based temporal modeling and prediction of related vehicle-dynamics quantities. Small-scale experiments supported iteration on the model structure and training setup.",
+            "The broader direction was to learn useful representations from vehicle signals and support multiple estimation tasks, with friction estimation serving as a central application."
+          ]
+        },
+        {
+          "id": "data-engineering",
+          "title": "Data preparation and signal analysis",
+          "paragraphs": [
+            "I prepared CAN-bus recordings for model training and evaluation, including preprocessing, normalization, temporal alignment, label-quality checks and diagnostic analysis of signal behavior.",
+            "Recording-level data splits kept overlapping windows from the same drive together. I also worked on signal-quality and leakage checks so that model comparisons reflected meaningful estimation behavior."
+          ]
+        },
+        {
+          "id": "engineering-scope",
+          "title": "Research and engineering contributions",
+          "bullets": [
+            "Connected model design with data preparation and repeatable experiment workflows.",
+            "Built diagnostic tools to inspect signals, model outputs and estimation errors.",
+            "Prepared large-scale CAN-bus data to support subsequent foundation-model training."
+          ]
+        }
+      ],
+      "thumbnail": {
+        "file": "huawei-can-workflow.svg",
+        "alt": "Conceptual workflow from CAN-bus time series through temporal modeling to vehicle-dynamics estimates",
+        "caption": "CAN time-series modeling · Conceptual workflow"
+      },
+      "hero_image": {
+        "file": "huawei-can-workflow.svg",
+        "alt": "Conceptual workflow from CAN-bus time series through temporal modeling to vehicle-dynamics estimates",
+        "caption": "CAN time-series modeling · Conceptual workflow"
+      },
+      "source_note": "Based on my internship summary, monthly work notes and retained CAN-modeling and data-analysis code. This page summarizes my role and methods at a high level."
     }
   },
   "additional_projects": [
@@ -3792,6 +3874,14 @@
       "organization": "TUM · Photogrammetry and Remote Sensing",
       "dates": "Jun – Aug 2026",
       "type": "Discontinued research prototype"
+    },
+    {
+      "id": "huawei-vehicle-dynamics",
+      "title": "CAN-Based Foundation Models for Vehicle Dynamics",
+      "label": "AI · Foundation models · Vehicle dynamics",
+      "organization": "Huawei Munich Research Center · AEL",
+      "dates": "Mar – Aug 2026",
+      "type": "AI internship"
     }
   ]
 }

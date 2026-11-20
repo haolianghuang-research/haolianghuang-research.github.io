@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Learning from vehicle signals</title>
+  <desc id="desc">Conceptual workflow: prepare CAN time series, develop temporal representations, and estimate friction and vehicle dynamics.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#f3f7ff"/><stop offset="1" stop-color="#e7eef8"/></linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="m1 1 5 3-5 3" fill="none" stroke="#91a4bf" stroke-width="1.5"/></marker>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <text x="64" y="73" font-size="20" font-weight="700" letter-spacing="2" fill="#4a6b94">AI · FOUNDATION MODELS</text>
+    <text x="64" y="138" font-size="49" font-weight="700" fill="#1b2d46">Learning from vehicle signals</text>
+    <text x="64" y="181" font-size="24" fill="#637891">CAN time series for friction and vehicle-dynamics estimation</text>
+    <g fill="#fff" stroke="#d6e0ee" stroke-width="2">
+      <rect x="64" y="249" width="300" height="304" rx="23"/>
+      <rect x="450" y="249" width="300" height="304" rx="23"/>
+      <rect x="836" y="249" width="300" height="304" rx="23"/>
+    </g>
+    <path d="M380 400h52M766 400h52" stroke="#91a4bf" stroke-width="3" marker-end="url(#arrow)"/>
+    <g fill="#253e60" font-size="24" font-weight="700">
+      <text x="91" y="293">CAN recordings</text>
+      <text x="477" y="293">Temporal models</text>
+      <text x="863" y="293">Dynamics estimates</text>
+    </g>
+    <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m91 362 23-7 20 9 19-20 20 13 23-29 22 19 25-9 24 20 27-13 32 9" stroke="#538cea"/>
+      <path d="m91 408 25 1 19-14 24 8 18-4 25 19 20-8 24 5 19-22 28 8 33-12" stroke="#52a8aa"/>
+      <path d="m91 449 22-7 21 8 20-4 23 8 22-5 25 10 20-11 24 6 27-7 31 9" stroke="#b79bce"/>
+    </g>
+    <g fill="#e9f0ff" stroke="#ccdaf3">
+      <rect x="481" y="337" width="238" height="49" rx="10"/>
+      <rect x="481" y="399" width="238" height="49" rx="10"/>
+    </g>
+    <text x="600" y="368" text-anchor="middle" font-size="20" fill="#3a5985">Sequence representations</text>
+    <text x="600" y="430" text-anchor="middle" font-size="20" fill="#3a5985">Model prototyping</text>
+    <circle cx="891" cy="365" r="25" fill="#eaf1ff"/>
+    <text x="891" y="374" text-anchor="middle" font-size="30" fill="#4679c2">μ</text>
+    <text x="932" y="371" font-size="21" fill="#3a5985">Road friction</text>
+    <circle cx="891" cy="431" r="25" fill="#e5f2f0"/>
+    <path d="m878 432 9-7 8 14 9-16" fill="none" stroke="#48948e" stroke-width="3"/>
+    <text x="932" y="438" font-size="21" fill="#3a5985">Vehicle dynamics</text>
+    <g fill="#7588a0" font-size="17">
+      <text x="91" y="515">Preprocessing &amp; quality checks</text>
+      <text x="477" y="515">Small-scale experiments</text>
+      <text x="863" y="515">Evaluation &amp; analysis</text>
+    </g>
+    <path d="M64 625h1072" stroke="#ced9e8"/>
+    <text x="64" y="670" font-size="20" fill="#6c809a">Huawei Munich Research Center · AI internship</text>
+    <text x="64" y="708" font-size="17" fill="#8493a7">Conceptual workflow · Public overview of responsibilities</text>
+  </g>
+</svg>

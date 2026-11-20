@@ -155,3 +155,10 @@ These are physical-robot deployment demonstrations. They supplement the earlier 
 Each corresponding `*-poster.webp` is a still extracted from that same video. Existing MP4 streams are remuxed for web playback without changing frames or timing. Animated GIFs are converted to a single-cycle H.264 MP4 at their source timing; image compression and format change, with no generated frames or altered motion. Metadata and audio are omitted from the public video copies.
 
 Safe RL embeds the original [SCDA supplementary video](https://www.youtube.com/watch?v=8LFlxN383Ig), published by Josip Josifovski and linked on the [SCDA project website](https://safe-cda.github.io/). It remains hosted by the original publisher and is credited as the coauthored study's supplementary material. Existing Agentic Planner replays retain their historical v0.6.0 labels and receive a direct watch link.
+
+## Experience and award presentation, 20 November 2026
+
+- `assets/organizations/huawei.png`: Huawei wordmark retained in the user's internship-presentation template assets. Used as a small organization identifier in the About and Experience sections. Brand ownership remains with Huawei.
+- `assets/projects/huawei-can-workflow.svg`: newly drawn conceptual diagram summarizing the public scope of the user's internship: CAN time-series preparation, temporal-model research, and vehicle-dynamics estimation. Curves are schematic illustrations, not measured signals. The figure does not reproduce an internal model architecture or experimental result.
+- The Huawei experience overview was checked against the retained March–August 2026 internship timeline and the CAN-modeling and data-analysis repository descriptions. It summarizes responsibilities and general methods. The source reports, employer data, internal configurations and experiment files are not included in the website assets.
+- Award cards reuse the previously credited CVPR 2026, ICCV 2025 and TUM marks to identify the corresponding competition venues. HiWi employment and the LMU / TUM research collaborations are explicitly labeled separately.

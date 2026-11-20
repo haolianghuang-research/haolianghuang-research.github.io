@@ -1,0 +1,49 @@
+.affiliation-logo-huawei { width:64px; height:16px; }
+.awards-section { padding:48px 0; }
+.awards-intro { max-width:830px; margin-bottom:30px; }
+.awards-intro .eyebrow { font-size:12px; margin-bottom:10px; }
+.awards-intro h2 { font-size:32px; letter-spacing:-.035em; line-height:1.2; }
+.awards-intro>p:last-child { font-size:17px; color:var(--muted); line-height:1.8; margin-top:16px; }
+.awards-grid { gap:20px; }
+.award-card { padding:25px 23px; border:1px solid var(--line); border-radius:20px; background:#fff; }
+.award-topline { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; }
+.award-topline .award-result { font-size:24px; margin:0; }
+.award-logo { display:inline-flex; flex-shrink:0; align-items:center; }
+.award-logo .affiliation-logo-cvpr { width:88px; height:27px; }
+.award-logo .affiliation-logo-iccv { width:82px; height:26px; }
+.award-logo .affiliation-logo-tum { width:43px; height:24px; padding:4px 5px; }
+.award-card h3 { font-size:18px; line-height:1.45; margin-bottom:12px; }
+.award-card .meta { font-size:13px; line-height:1.6; }
+.award-description { font-size:15px; color:#64646c; line-height:1.7; margin-top:14px; }
+.experience-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-top:32px; }
+.experience-card { display:flex; flex-direction:column; min-width:0; padding:30px; border:1px solid var(--line); border-radius:22px; background:var(--wash); scroll-margin-top:100px; }
+.experience-topline { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:18px; min-height:30px; }
+.experience-kind { font-size:14px; line-height:1.5; font-weight:600; color:var(--blue); }
+.experience-logo { display:inline-flex; align-items:center; flex-shrink:0; }
+.experience-logo .affiliation-logo-tum { width:43px; height:24px; padding:4px 5px; }
+.experience-logo .affiliation-logo-lmu { width:58px; height:28px; padding:4px; }
+.experience-logo .affiliation-logo-huawei { width:100px; height:27px; }
+.experience-card h3 { font-size:24px; line-height:1.3; margin:12px 0; }
+.experience-card .organization { font-size:15px; line-height:1.65; }
+.experience-card .advisors { font-size:13px; line-height:1.65; margin-top:8px; }
+.experience-fields { margin-top:19px; color:#7b7b84; font-size:12px; line-height:1.5; font-weight:600; letter-spacing:.07em; text-transform:uppercase; }
+.experience-highlights { padding-left:19px; margin:15px 0 25px; color:#515156; font-size:16px; line-height:1.75; }
+.experience-highlights li+li { margin-top:10px; }
+.experience-highlights li::marker { color:#9aa8b8; }
+.experience-links { display:flex; flex-wrap:wrap; gap:12px 22px; margin-top:auto; padding-top:20px; border-top:1px solid #dedee4; font-size:14px; font-weight:600; }
+@media (max-width:960px) {
+  .awards-grid { grid-template-columns:1fr; }
+  .award-card { padding:24px; }
+  .award-topline { margin-bottom:14px; }
+  .experience-card { padding:24px; }
+}
+@media (max-width:700px) {
+  .experience-grid { grid-template-columns:1fr; gap:20px; }
+  .experience-card h3 { font-size:23px; }
+}
+@media (max-width:640px) {
+  .awards-section { padding:32px 0; }
+  .awards-intro h2 { font-size:28px; }
+  .awards-intro .eyebrow { font-size:11px; letter-spacing:.07em; }
+  .awards-intro>p:last-child { font-size:16px; }
+}

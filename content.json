@@ -8,7 +8,8 @@
     "lmu": {"file": "lmu.png", "style": "lmu", "width": 269, "height": 130, "name": "LMU Munich"},
     "kit": {"file": "kit.svg", "style": "kit", "width": 196, "height": 90, "name": "Karlsruhe Institute of Technology"},
     "cvpr2026": {"file": "cvpr2026.png", "style": "cvpr", "width": 330, "height": 80, "name": "CVPR 2026 Workshop competition"},
-    "iccv2025": {"file": "iccv2025.png", "style": "iccv", "width": 400, "height": 110, "name": "ICCV 2025 Workshop competition"}
+    "iccv2025": {"file": "iccv2025.png", "style": "iccv", "width": 400, "height": 110, "name": "ICCV 2025 Workshop competition"},
+    "huawei": {"file": "huawei.png", "style": "huawei", "width": 529, "height": 116, "name": "Huawei Munich Research Center"}
   },
   "project_logos": {
     "rolewam": "tum",
@@ -35,26 +36,29 @@
   "about_affiliations": {
     "current": [
       {
-        "name": "TUM Cyber-Physical Systems (CPS)", "url": "#experience",
+        "name": "TUM Cyber-Physical Systems (CPS)",
+        "url": "#experience-cps-current",
         "logo": "tum",
-        "research": "I focus on path and motion planning for autonomous driving, including agentic planning and traffic-rule-aware decision-making."
+        "research": "I am a student research assistant working on path and motion planning for autonomous driving, including agentic planning and traffic-rule prediction."
       },
       {
-        "name": "LMU TRESP Lab", "url": "projects/ricl/",
+        "name": "LMU TRESP Lab",
+        "url": "projects/ricl/",
         "logo": "lmu",
-        "research": "I focus on integrating memory mechanisms with robotics, as part of the lab’s broader research on large language models, post-training and model memory."
+        "research": "I collaborate on integrating memory mechanisms with robotics, within the lab’s broader research on large language models, post-training and model memory."
       },
       {
-        "name": "TUM Photogrammetry and Remote Sensing", "url": "projects/rolewam/",
+        "name": "TUM Photogrammetry and Remote Sensing",
+        "url": "projects/rolewam/",
         "logo": "tum",
-        "research": "I work on embodied AI at the intersection of 3D computer vision and robotics."
+        "research": "I collaborate on embodied AI research at the intersection of 3D computer vision and robotics."
       }
     ]
   },
   "focus": "My work spans VLA and world–action models, robot in-context learning, 3D vision, reinforcement learning, and distributed training. I build workflows for data generation and processing, and agentic systems that connect learned models to physical manipulation, planning, and simulation.",
   "experience": [
     {
-      "title": "Student Research Assistant · Agentic Driving & Rule Prediction",
+      "title": "Path Planning & Traffic-Rule Prediction",
       "fields": [
         "AI",
         "Autonomous Driving",
@@ -64,10 +68,27 @@
       "dates": "Oct 2026 – Present",
       "description": "Developing a GPT-6.1 agentic planner for CommonRoad/SUMO, connecting language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks. Also working on Transformer-based neural prediction of time to traffic-rule violations.",
       "detail_id": "agentic-planner",
-      "advisors": "Youran Wang · Prof. Matthias Althoff"
+      "advisors": "Youran Wang · Prof. Matthias Althoff",
+      "id": "cps-current",
+      "logo": "tum",
+      "role_type": "Student research assistant · HiWi",
+      "highlights": [
+        "Developing an agentic driving planner that connects language reasoning with numerical motion planning, traffic prediction and rule checks.",
+        "Designing, testing and comparing neural architectures for traffic-rule violation prediction, with systematic hyperparameter search."
+      ],
+      "links": [
+        {
+          "id": "agentic-planner",
+          "label": "Agentic planning"
+        },
+        {
+          "id": "rule-prediction",
+          "label": "Neural rule prediction"
+        }
+      ]
     },
     {
-      "title": "Research · Robot In-Context Learning & Embodied RSI",
+      "title": "Robot In-Context Learning & Embodied RSI",
       "fields": [
         "AI",
         "VLA",
@@ -78,10 +99,23 @@
       "dates": "Aug 2026 – Present",
       "description": "After exploring the transfer of LLM-agent skills and memory to VLA policies in August, shifted to RICL / Zero-WAM in September. Building agent workflows for demonstration-video and action-clip data generation and processing. Beginning Embodied RSI research by studying algorithms for the RoboDojo competition Agent Track.",
       "detail_id": "ricl",
-      "advisors": "Sikuan Yan · Dr. Yunpu Ma"
+      "advisors": "Sikuan Yan · Dr. Yunpu Ma",
+      "id": "tresp-collaboration",
+      "logo": "lmu",
+      "role_type": "Research collaboration",
+      "highlights": [
+        "Researching the connection between model memory and robotics through RICL / Zero-WAM.",
+        "Building agent workflows for demonstration-video and action-clip data generation and processing; beginning Embodied RSI research for RoboDojo."
+      ],
+      "links": [
+        {
+          "id": "ricl",
+          "label": "RICL / Zero-WAM"
+        }
+      ]
     },
     {
-      "title": "Research · ManipArena, D4rtVLA & RoleWAM",
+      "title": "Embodied AI: ManipArena, D4rtVLA & RoleWAM",
       "fields": [
         "AI",
         "VLA",
@@ -91,7 +125,28 @@
       "dates": "Apr 2026 – Present",
       "description": "A continuous research experience: the CVPR ManipArena challenge in April–May, the D4rtVLA prototype in June–August, and RoleWAM from September. Current work develops joint attention across visual inputs, task-role maps, and actions, and explores integration with RoboTTT’s memory mechanism.",
       "detail_id": "rolewam",
-      "advisors": "Weihang Li"
+      "advisors": "Weihang Li",
+      "id": "prs-collaboration",
+      "logo": "tum",
+      "role_type": "Research collaboration",
+      "highlights": [
+        "Developed an Agent + VLA manipulation system for the CVPR ManipArena challenge, placing 4th among 32 teams.",
+        "Continued through the D4rtVLA prototype to RoleWAM, developing joint attention across visual inputs, task-role maps and actions, and exploring RoboTTT memory."
+      ],
+      "links": [
+        {
+          "id": "rolewam",
+          "label": "RoleWAM"
+        },
+        {
+          "id": "maniparena",
+          "label": "ManipArena"
+        },
+        {
+          "id": "d4rtvla",
+          "label": "D4rtVLA"
+        }
+      ]
     },
     {
       "title": "AI Intern · Intelligent Vehicle Dynamics Controls",
@@ -101,10 +156,24 @@
       ],
       "organization": "Huawei Munich Research Center · AEL",
       "dates": "Mar – Aug 2026",
-      "description": "Designed a CAN-based foundation model architecture to estimate tire–road friction coefficients and other hard-to-measure vehicle dynamics parameters, with initial development on small-scale CAN-bus time-series datasets. Prepared and processed large-scale CAN-bus datasets for subsequent foundation-model training."
+      "description": "Designed a CAN-based foundation model architecture to estimate tire–road friction coefficients and other hard-to-measure vehicle dynamics parameters, with initial development on small-scale CAN-bus time-series datasets. Prepared and processed large-scale CAN-bus datasets for subsequent foundation-model training.",
+      "id": "huawei",
+      "logo": "huawei",
+      "role_type": "Industry internship",
+      "highlights": [
+        "Designed a CAN-based foundation-model architecture for tire–road friction and other hard-to-measure vehicle dynamics parameters, starting with small-scale experiments.",
+        "Prepared large-scale CAN-bus data and developed preprocessing, signal-quality checks and evaluation workflows for subsequent model training."
+      ],
+      "detail_id": "huawei-vehicle-dynamics",
+      "links": [
+        {
+          "id": "huawei-vehicle-dynamics",
+          "label": "Internship overview"
+        }
+      ]
     },
     {
-      "title": "Student Research Assistant · Cyber-Physical Systems",
+      "title": "CommonRoad & Autonomous-Driving Research",
       "fields": [
         "AI",
         "Autonomous Driving"
@@ -112,7 +181,20 @@
       "organization": "Technical University of Munich · CPS",
       "dates": "Mar 2025 – Feb 2026",
       "description": "Worked on CommonRoad competition management, algorithm design, autonomous-driving AI systems, and data processing.",
-      "detail_id": "commonroad"
+      "detail_id": "commonroad",
+      "id": "cps-previous",
+      "logo": "tum",
+      "role_type": "Student research assistant · HiWi",
+      "highlights": [
+        "Supported CommonRoad competition workflows and algorithm development for autonomous-driving motion planning.",
+        "Worked on scenario-data preparation, processing and planning-tool workflows."
+      ],
+      "links": [
+        {
+          "id": "commonroad",
+          "label": "Related CommonRoad work"
+        }
+      ]
     }
   ],
   "awards": [
@@ -121,24 +203,27 @@
       "result": "4th / 32 teams",
       "title": "ManipArena Real-Robot Manipulation Challenge",
       "venue": "CVPR 2026 Workshop",
-      "description": "Built an agent + VLA manipulation system, combining learned control with visual planning, evidence verification, and unified robot action interfaces.",
-      "detail_id": "maniparena"
+      "description": "Agent + VLA integration for long-horizon, real-robot manipulation.",
+      "detail_id": "maniparena",
+      "logo": "cvpr2026"
     },
     {
       "year": "2025",
       "result": "First prize",
       "title": "Category-Level Object Pose Estimation in the Wild",
       "venue": "ICCV 2025 Workshop",
-      "description": "Integrated GCEPose and DINOv3 with geometric validation, category priors, and mixed PACE/Omni6DPose training.",
-      "detail_id": "category-pose"
+      "description": "3D geometry, data pipelines and model training for object pose estimation.",
+      "detail_id": "category-pose",
+      "logo": "iccv2025"
     },
     {
       "year": "2024",
       "result": "First prize",
       "title": "CommonRoad AI Programming Prize Challenge",
       "venue": "Technical University of Munich",
-      "description": "Designed a search-based motion planner for autonomous vehicles in CommonRoad scenarios.",
-      "detail_id": "commonroad"
+      "description": "Search-based motion planning for autonomous-driving scenarios.",
+      "detail_id": "commonroad",
+      "logo": "tum"
     }
   ],
   "projects": [
@@ -502,5 +587,17 @@
       "title": "机器人方向简历",
       "detail": "中文 · 2 页"
     }
-  ]
+  ],
+  "about_previous": {
+    "prefix": "Previously, I was an AI intern at",
+    "name": "Huawei Munich Research Center",
+    "logo": "huawei",
+    "url": "projects/huawei-vehicle-dynamics/",
+    "research": "working on CAN-based foundation models for vehicle dynamics and tire–road friction estimation."
+  },
+  "awards_intro": {
+    "eyebrow": "Robotics · 3D vision · Autonomous driving",
+    "title": "Selected awards & competitions",
+    "description": "I connect model development, data engineering and system integration to solve practical problems across these fields. My competition work has earned two first prizes and a fourth-place finish among 32 teams."
+  }
 }
