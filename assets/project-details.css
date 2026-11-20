@@ -37,3 +37,5 @@
 .project-overview-demo { max-width:860px; margin:45px auto 40px; }
 .project-overview-demo h2 { font-size:27px; line-height:1.35; letter-spacing:-.035em; margin-bottom:18px; }
 @media (max-width:640px) { .project-overview-demo { margin-top:32px; } .project-overview-demo h2 { font-size:25px; } }
+
+.detail-heading .detail-resource-note { font-size:15px; line-height:1.7; color:var(--muted); margin-top:24px; margin-bottom:-10px; }

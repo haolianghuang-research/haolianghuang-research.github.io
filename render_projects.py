@@ -106,7 +106,7 @@ def render_all(root, content, details):
         status = f'<p class="detail-status">{e(d["status"])}</p>' if d.get('status') else ''
         image = d.get('hero_image') or d.get('thumbnail')
         hero_image = ''
-        if image and not d.get('overview_demo'):
+        if image and not d.get('overview_demo') and d.get('hero_layout') != 'text':
             hero_image = f'<figure class="detail-cover"><img src="../../assets/projects/{e(image["file"])}" alt="{e(image["alt"])}" width="1000" height="625"><figcaption>{e(image.get("caption","Project visualization"))}</figcaption></figure>'
         facts = ''.join(f'<div><dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd></div>' for f in d.get('facts', []))
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
@@ -115,7 +115,11 @@ def render_all(root, content, details):
         overview_demo = render_section(d['overview_demo']) if d.get('overview_demo') else ''
         intro_sections = ''.join(render_section(section) for section in d.get('intro_sections', []))
         report = render_retrospective(d['retrospective']) if d.get('retrospective') else ''
-        hero_class = ' detail-hero-overview' if overview_demo else ''
+        hero_class = ' detail-hero-overview' if overview_demo or d.get('hero_layout') == 'text' else ''
+        report_after = d.get('retrospective', {}).get('after_section')
+        report_at_top = report if not report_after else ''
+        report_outline = d.get('retrospective', {}).get('outline_title', 'Illustrated report')
+        resource_note = f'<p class="detail-resource-note">{e(d["resource_note"])}</p>' if d.get('resource_note') else ''
         report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
         documents = render_documents(d.get('documents', []))
         document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
@@ -131,12 +135,14 @@ def render_all(root, content, details):
         if d.get('retrospective'):
             for edition in d['retrospective']['editions']:
                 href = '../../assets/reports/' + e(edition['file'])
-                label = '中文报告' if edition['lang'].startswith('zh') else 'English report'
-                website_link += f'<a class="button button-secondary" href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">{label}</a>'
+                label = edition.get('resource_label') or ('中文报告' if edition['lang'].startswith('zh') else 'English report')
+                button_style = 'button-primary' if edition.get('primary') else 'button-secondary'
+                website_link += f'<a class="button {button_style}" href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">{e(label)}</a>'
             package = d['retrospective'].get('companion_package')
             if package:
                 href = '../../assets/reports/' + e(package['file'])
-                website_link += f'<a class="button button-secondary" href="{href}" download type="application/zip">Materials</a>'
+                label = package.get('resource_label', 'Materials')
+                website_link += f'<a class="button button-secondary" href="{href}" download type="application/zip">{e(label)}</a>'
         if documents:
             website_link += '<a class="button button-secondary" href="#documents">Reports &amp; slides</a>'
         if website_link:
@@ -155,11 +161,14 @@ def render_all(root, content, details):
         outline = [{"id":"overview","title":"Overview"}]
         if overview_demo: outline.append({'id':d['overview_demo']['id'],'title':'Overview demo'})
         outline.extend({'id':section['id'],'title':section['title']} for section in d.get('intro_sections', []))
-        if report: outline.append({'id':'project-report','title':'Illustrated report'})
+        if report and not report_after: outline.append({'id':'project-report','title':report_outline})
         if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
-        outline.extend({"id":s["id"],"title":s["title"]} for s in d["sections"])
-        sections = ''.join(render_section(s) for s in d['sections'])
+        for section in d['sections']:
+            outline.append({'id':section['id'],'title':section['title']})
+            if report_after == section['id']:
+                outline.append({'id':'project-report','title':report_outline})
+        sections = ''.join(render_section(section) + (report if report_after == section['id'] else '') for section in d['sections'])
         gallery = ''
         if d.get('gallery'):
             gallery = '<section class="detail-section" id="visuals"><h2>Project visuals</h2><div class="project-gallery">'
@@ -194,8 +203,8 @@ def render_all(root, content, details):
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
 <meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero{hero_class}" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{website_link}</div>{hero_image}</div>{overview_demo}{intro_sections}<dl class="project-facts{facts_style}">{facts}</dl>
-{report}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero{hero_class}" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{resource_note}{website_link}</div>{hero_image}</div>{overview_demo}{intro_sections}<dl class="project-facts{facts_style}">{facts}</dl>
+{report_at_top}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)

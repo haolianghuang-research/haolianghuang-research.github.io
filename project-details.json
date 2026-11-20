@@ -2963,7 +2963,7 @@
       }
     },
     "ricl": {
-      "summary": "Researching robot in-context learning with the released Zero-WAM backbone, using human demonstrations to guide new tasks. I designed and implemented a closed-loop agentic data-generation system that connects task-grounded planning, independent review, failure-driven repair, persistent orchestration and content/GPU supervision.",
+      "summary": "Studying how human demonstrations and reusable action clips can guide new robot tasks with the released Zero-WAM backbone. My work combines robot in-context learning, dataset construction and controlled transfer evaluation, supported by a closed-loop Agent system for generating, reviewing and curating demonstration data.",
       "facts": [
         {
           "label": "Research focus",
@@ -3171,8 +3171,26 @@
           ]
         },
         {
+          "id": "project-demo",
+          "title": "Dataset example: composed human-video context",
+          "paragraphs": [
+            "This dataset example assembles grasping, movement and pressing clips from three HumanGen source tasks into a visual condition for stamp_seal. It shows how reusable action segments become demonstration context for the experiments."
+          ],
+          "videos": [
+            {
+              "file": "ricl-stamp-seal-composed-context.mp4",
+              "poster": "ricl-stamp-seal-composed-poster.webp",
+              "title": "Composed human-video context for stamp_seal",
+              "caption": "Three-source HumanGen composition: grasp/lift from place_object_scale, movement from move_stapler_pad and pressing from press_stapler. Visible changes in object and scene mark clip boundaries. This video illustrates context construction; robot evaluation is reported separately.",
+              "width": 1108,
+              "height": 828,
+              "download": true
+            }
+          ]
+        },
+        {
           "id": "composition-example",
-          "title": "A second composition: bimanual task context",
+          "title": "Dataset example: bimanual clip composition",
           "paragraphs": [
             "For the place_bread_basket study, I assembled a bimanual grasp segment from place_burger_fries with a placement segment from place_cans_plasticbox. The example exposes the cross-task composition directly, including the change of objects and scene at the boundary."
           ],
@@ -3231,6 +3249,42 @@
             "This is a small full-video replacement pilot; it does not establish a reliable advantage for atomic composition or dynamic switching.",
             "The local protocol uses attention window 16 and a 3 cm stamp-placement tolerance, versus the upstream 1 cm condition; the results should not be merged with the published benchmark."
           ]
+        },
+        {
+          "id": "human-robot-demo",
+          "title": "Evaluation example: human condition and robot rollout",
+          "paragraphs": [
+            "The exact-task human video used as the model’s visual condition is shown alongside its saved Zero-WAM policy rollout in RoboTwin simulation.",
+            "This is one engineering smoke example (seed 100000), separate from the composed-video examples and the ten-seed pilot below. The two recordings keep their original export timing; the robot recording shows sampled control observations."
+          ],
+          "video_layout": "pair",
+          "comparison": true,
+          "videos": [
+            {
+              "file": "ricl-stamp-seal-exact-human.mp4",
+              "poster": "ricl-stamp-seal-exact-human-poster.webp",
+              "title": "Exact-task human demonstration for stamp_seal",
+              "heading": "Human video condition",
+              "caption": "Exact-full HumanGen condition: stamp_seal, sample 206. This is the full human demonstration actually used by the paired smoke run.",
+              "width": 1108,
+              "height": 828,
+              "download": true
+            },
+            {
+              "file": "ricl-stamp-seal-smoke-high.mp4",
+              "poster": "ricl-stamp-seal-smoke-high-poster.webp",
+              "title": "Zero-WAM stamp_seal policy rollout in RoboTwin simulation",
+              "heading": "Robot policy rollout · simulation",
+              "caption": "High-camera crop from the recorded policy rollout: seed 100000, 37 sampled frames at 15 FPS. The complete multiview export remains linked in this section.",
+              "width": 320,
+              "height": 240,
+              "download": true
+            }
+          ],
+          "link": {
+            "url": "../../assets/projects/ricl-stamp-seal-smoke-multiview.mp4",
+            "title": "Open original multiview rollout"
+          }
         },
         {
           "id": "progress",
@@ -3324,99 +3378,47 @@
         "caption": "AI-generated conditioning stills · Data workflow"
       },
       "retrospective": {
-        "eyebrow": "Agent architecture & data systems · November 2026",
-        "title": "Engineering the agentic data workflow",
-        "description": "An illustrated, bilingual engineering record of the HumanGen / transfer-HG pipeline: task-grounded planning, independent review, targeted repair, persistent orchestration, data provenance and content/GPU supervision. Both editions are 11 pages.",
-        "card_link": "Agent architecture report",
+        "eyebrow": "Dataset-construction Agent system · module report",
+        "title": "Dataset-construction Agent system report",
+        "description": "These reports summarize the dataset-construction Agent system within RICL / Zero-WAM: HumanGen / transfer-HG generation, independent review, repair, provenance and content/GPU supervision. They document this engineering module and its implementation evidence. Each language edition is 11 pages.",
+        "card_link": "Dataset Agent report",
         "editions": [
           {
             "file": "ricl/agentic-data-generation-en-2026-11.pdf",
             "cover": "ricl-agentic-report-en-cover.webp",
-            "title": "English engineering report",
+            "title": "Dataset-construction Agent report",
             "language": "English",
             "lang": "en",
-            "description": "Agent architecture, review and repair, provenance, token-aware execution and supervision.",
+            "description": "Report on the dataset-construction Agent module: generation, review, repair, provenance and operations.",
             "pages": 11,
-            "bytes": 101645
+            "bytes": 101645,
+            "resource_label": "Dataset Agent system report (EN)",
+            "primary": true
           },
           {
             "file": "ricl/agentic-data-generation-zh-2026-11.pdf",
             "cover": "ricl-agentic-report-zh-cover.webp",
-            "title": "中文工程报告",
+            "title": "数据集构建 Agent 系统报告",
             "language": "中文",
             "lang": "zh-Hans",
-            "description": "Agent 架构、生成审核闭环、证据绑定、开销控制及内容与 GPU 监督。",
+            "description": "RICL / Zero-WAM 中的数据集构建 Agent 模块总结：生成、审核、修复、溯源与运行监督。",
             "pages": 11,
-            "bytes": 399180
+            "bytes": 399180,
+            "resource_label": "数据集构建 Agent 系统报告"
           }
         ],
         "companion_package": {
           "file": "ricl/agentic-data-generation-materials-2026-11.zip",
-          "label": "Download complete materials",
-          "description": "Both reports, standalone vector diagrams, editable source and the evidence index.",
-          "bytes": 1741078
-        }
+          "label": "Download Dataset Agent materials",
+          "description": "Supporting material for the dataset-construction Agent system: bilingual reports, diagrams, editable report source and evidence index.",
+          "bytes": 1741078,
+          "resource_label": "Dataset Agent materials"
+        },
+        "outline_title": "Dataset Agent report",
+        "after_section": "agentic-architecture"
       },
-      "overview_demo": {
-        "id": "project-demo",
-        "title": "Composed human-video demo",
-        "overview": true,
-        "paragraphs": [
-          "A saved example from my context-construction experiments: grasping, movement and pressing clips from three different tasks are assembled into one visual condition for stamp_seal."
-        ],
-        "videos": [
-          {
-            "file": "ricl-stamp-seal-composed-context.mp4",
-            "poster": "ricl-stamp-seal-composed-poster.webp",
-            "title": "Composed human-video context for stamp_seal",
-            "caption": "Three-source HumanGen composition: grasp/lift from place_object_scale, movement from move_stapler_pad and pressing from press_stapler. Visible changes in object and scene mark clip boundaries. This video illustrates context construction; robot evaluation is reported separately.",
-            "width": 1108,
-            "height": 828,
-            "download": true
-          }
-        ],
-        "resource_label": "Composed demo"
-      },
-      "intro_sections": [
-        {
-          "id": "human-robot-demo",
-          "title": "Human demonstration and robot execution",
-          "overview": true,
-          "resource_label": "Human–robot comparison",
-          "paragraphs": [
-            "The exact-task human video used as the model’s visual condition is shown alongside its saved Zero-WAM policy rollout in RoboTwin simulation.",
-            "This is one engineering smoke example (seed 100000), separate from the composed-video examples and the ten-seed pilot below. The two recordings keep their original export timing; the robot recording shows sampled control observations."
-          ],
-          "video_layout": "pair",
-          "comparison": true,
-          "videos": [
-            {
-              "file": "ricl-stamp-seal-exact-human.mp4",
-              "poster": "ricl-stamp-seal-exact-human-poster.webp",
-              "title": "Exact-task human demonstration for stamp_seal",
-              "heading": "Human video condition",
-              "caption": "Exact-full HumanGen condition: stamp_seal, sample 206. This is the full human demonstration actually used by the paired smoke run.",
-              "width": 1108,
-              "height": 828,
-              "download": true
-            },
-            {
-              "file": "ricl-stamp-seal-smoke-high.mp4",
-              "poster": "ricl-stamp-seal-smoke-high-poster.webp",
-              "title": "Zero-WAM stamp_seal policy rollout in RoboTwin simulation",
-              "heading": "Robot policy rollout · simulation",
-              "caption": "High-camera crop from the recorded policy rollout: seed 100000, 37 sampled frames at 15 FPS. The complete multiview export remains linked in this section.",
-              "width": 320,
-              "height": 240,
-              "download": true
-            }
-          ],
-          "link": {
-            "url": "../../assets/projects/ricl-stamp-seal-smoke-multiview.mp4",
-            "title": "Open original multiview rollout"
-          }
-        }
-      ]
+      "hero_layout": "text",
+      "resource_note": "Module reports: the dataset-construction Agent system within RICL / Zero-WAM."
     },
     "d4rtvla": {
       "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",
