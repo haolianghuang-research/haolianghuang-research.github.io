@@ -55,7 +55,8 @@
       }
     ]
   },
-  "focus": "My work spans VLA and world–action models, robot in-context learning, 3D vision, reinforcement learning, and distributed training. I build workflows for data generation and processing, and agentic systems that connect learned models to physical manipulation, planning, and simulation.",
+  "focus": "My work spans VLA and world-action models, robot in-context learning, 3D vision, reinforcement learning, distributed training, and agent design for physical AI. I enjoy building agentic systems that automate workflows such as data generation and processing, and connect learned models to physical manipulation, planning, and simulation.",
+  "focus_outlook": "Looking ahead, I aim to integrate insights from VLA and world-action models, 3D/4D visual understanding, and memory mechanisms for LLMs and WAMs into these agentic systems, building a foundation for future research on Embodied RSI.",
   "experience": [
     {
       "title": "Path Planning & Traffic-Rule Prediction",
