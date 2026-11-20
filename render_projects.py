@@ -29,6 +29,13 @@ def render_section(s):
     if s.get('figures'):
         layout = ' figure-pair' if s.get('figure_layout') == 'pair' else ''
         out += f'<div class="section-figures{layout}">' + ''.join(render_figure(f) for f in s['figures']) + '</div>'
+    if s.get('videos'):
+        out += '<div class="section-figures project-videos">'
+        for v in s['videos']:
+            src = '../../assets/projects/' + e(v['file'])
+            poster = '../../assets/projects/' + e(v['poster'])
+            out += f'<figure><video controls playsinline preload="none" poster="{poster}" width="1920" height="1080" aria-label="{e(v["title"])}"><source src="{src}" type="video/mp4">Your browser does not support video. <a href="{src}">Download the replay</a>.</video><figcaption>{e(v["caption"])}</figcaption></figure>'
+        out += '</div>'
     return out + ('</div></details>' if technical else '</section>')
 
 

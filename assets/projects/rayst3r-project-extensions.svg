@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="RaySt3R with instance-aware project extensions">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#8b97a7"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#202933}.title{font-size:36px;font-weight:700}.sub{font-size:24px;fill:#647184}.head{font-size:26px;font-weight:700}.body{font-size:24px}.tag{font-size:22px;font-weight:700;fill:#2563a8}.line{fill:none;stroke:#8b97a7;stroke-width:2.5;marker-end:url(#arrow)}</style>
+<rect width="1400" height="780" fill="#fff"/>
+<text x="44" y="64" class="title">RaySt3R with instance-aware project extensions</text>
+<text x="44" y="106" class="sub">Backbone geometry, added feature learning and shared-view supervision</text>
+<rect x="44" y="180" width="290" height="210" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="68" y="224" class="head">Observed RGB-D</text>
+<text x="68" y="267" class="body">Calibrated cameras</text>
+<text x="68" y="301" class="body">Foreground masks</text>
+<text x="68" y="335" class="body">Labels for training</text>
+<rect x="400" y="160" width="430" height="250" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="424" y="204" class="head">RaySt3R backbone</text>
+<text x="424" y="247" class="body">Ray + pointmap encoders</text>
+<text x="424" y="281" class="body">DINO appearance features</text>
+<text x="424" y="315" class="body">Transformer view decoder</text>
+<text x="424" y="349" class="body">Intermediate feature scales</text>
+<rect x="910" y="160" width="446" height="180" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="934" y="204" class="head">Geometry prediction</text>
+<text x="934" y="247" class="body">Novel-view depth and masks</text>
+<text x="934" y="281" class="body">Completed 3D point clouds</text>
+<rect x="910" y="385" width="446" height="230" rx="18" fill="#eef5f2" stroke="#d8e0ea"/>
+<text x="934" y="429" class="head">Added PartHead</text>
+<text x="934" y="472" class="body">Four-scale feature adaptation</text>
+<text x="934" y="506" class="body">Three geometry-fusion stages</text>
+<text x="934" y="540" class="body">Cross-attention refinement</text>
+<text x="934" y="574" class="body">Eight-channel instance features</text>
+<path d="M334 285 H398" class="line"/>
+<path d="M830 245 H908" class="line"/>
+<path d="M830 335 H870 V485 H908" class="line"/>
+<rect x="44" y="475" width="786" height="210" rx="18" fill="#f5f2fa" stroke="#e0dbea"/>
+<text x="70" y="520" class="head">Training additions</text>
+<text x="70" y="565" class="body">Input-view + novel-view supervision</text>
+<text x="70" y="599" class="body">Cross-view instance pull/push loss</text>
+<text x="70" y="633" class="body">Eroded positive labels reduce boundary contamination</text>
+<path d="M910 575 H860 V710 H440 V687" class="line"/>
+<text x="44" y="745" class="sub">Implementation schematic · Color features are learned instance embeddings, not language labels.</text>
+</svg>

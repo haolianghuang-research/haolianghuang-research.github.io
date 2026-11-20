@@ -818,15 +818,15 @@
       }
     },
     "semantic-reconstruction": {
-      "summary": "Exploring how geometric completion and learned instance features can turn partial RGB-D observations into more complete, structured 3D representations, with an emphasis on scalable training and evaluation.",
+      "summary": "Extending RaySt3R from geometric completion toward instance-aware 3D reconstruction, with multi-view training, a geometry-conditioned part-feature head, cross-view supervision and scalable data pipelines.",
       "facts": [
         {
           "label": "Setting",
           "value": "TUM · CAMP · Research project"
         },
         {
-          "label": "Core methods",
-          "value": "RaySt3R, multi-scale part features, VGGT and VolSplat baselines"
+          "label": "Backbone and extensions",
+          "value": "RaySt3R · multi-scale PartHead · geometry-conditioned feature fusion"
         },
         {
           "label": "Data",
@@ -858,20 +858,70 @@
       "sections": [
         {
           "id": "task",
-          "title": "Task and research focus",
+          "title": "Extending RaySt3R for structured 3D completion",
           "paragraphs": [
-            "A single view exposes only part of an object. Geometry completion aims to infer missing surfaces; a useful scene representation must also preserve which object or part each point belongs to. This project explored that intersection through existing reconstruction models, additional feature learning, and experiments on large rendered datasets.",
-            "My work combined method integration and selected model refinement with the engineering needed to run data generation, distributed training and large-scale experiments. The project builds on pretrained research models rather than treating those models as original inventions.",
-            "The project included collaboration with a Carnegie Mellon University researcher from the RaySt3R author team. My work focused on model integration and refinement, distributed training on Slurm, large-scale experiments, and data-generation workflows."
+            "The main project builds on RaySt3R, which predicts novel-view geometry from partial RGB-D observations. Our goal is to reconstruct missing surfaces while learning features that preserve object-instance structure across views. This requires more than running the released model: our branch modifies the model, losses, data loading, supervision and visualization workflow.",
+            "My work combined model integration and refinement with distributed training, large-scale experiments and data-generation workflows. The project included collaboration with a Carnegie Mellon University researcher from the RaySt3R author team. The additions described below belong to our team implementation; the original RaySt3R backbone remains credited to its authors."
+          ]
+        },
+        {
+          "id": "extensions",
+          "title": "What we added to the backbone",
+          "paragraphs": [
+            "The checked-out branch adds a PartAdaptor and PartHead to the RayQuery model. Four decoder feature scales feed a refinement pyramid, while three scales of geometric point features enter through cross-attention. High-resolution fusion uses windowed attention. The configured output is an eight-channel embedding for instance/part structure.",
+            "The feature objective pulls embeddings from the same instance together and separates different instances across scene views. Eroded labels are used for the pull term to reduce boundary contamination, while the original instance labels remain available for separation. Input-view and novel-view predictions can be supervised jointly through the same model branch."
+          ],
+          "table": {
+            "headers": [
+              "Extension",
+              "Implementation",
+              "Purpose"
+            ],
+            "rows": [
+              [
+                "Geometry-aware features",
+                "Four-scale adaptation with three geometry-fusion stages",
+                "Combine appearance and reconstructed structure."
+              ],
+              [
+                "Instance separation",
+                "Cross-view pull/push loss with eroded positive labels",
+                "Learn coherent embeddings with cleaner object boundaries."
+              ],
+              [
+                "Multi-view supervision",
+                "Joint input-view and novel-view prediction/loss",
+                "Constrain observed and completed geometry together."
+              ],
+              [
+                "Dataset integration",
+                "SOPE raw RGB, EXR depth, masks and camera metadata",
+                "Preserve geometry through object-centric preprocessing."
+              ],
+              [
+                "Experiment inspection",
+                "Shared-PCA colors, cluster maps and point-cloud instance assignment",
+                "Check feature consistency across views and in 3D."
+              ]
+            ]
+          },
+          "figures": [
+            {
+              "file": "rayst3r-project-extensions.svg",
+              "alt": "RaySt3R backbone and the project extensions for geometry-conditioned part features and cross-view supervision",
+              "caption": "Architecture schematic redrawn from the modified RaySt3R implementation. It describes implemented modules; it is not a rendered reconstruction or a benchmark result.",
+              "width": 1400,
+              "height": 780
+            }
           ]
         },
         {
           "id": "architecture",
-          "title": "Architecture and methods",
+          "title": "Backbone, feature fusion and 3D association",
           "paragraphs": [
-            "The RaySt3R configuration uses separate ray and pointmap encoders and a Transformer decoder conditioned on DINO features. Depth and foreground-mask heads produce novel-view geometry. An added PartHead adapts four feature scales and injects three scales of point features through cross-attention, using windowed attention for larger maps.",
-            "The configured instance/part representation has eight feature channels. A discriminative loss pulls features from the same instance together and pushes different instances apart; eroded masks provide cleaner positive labels near object boundaries. This is instance-aware feature learning, rather than an implemented open-vocabulary language head.",
-            "Complementary baselines offer different representations: VGGT predicts geometric scene properties with a feed-forward Transformer; VolSplat constructs voxel-aligned 3D features and decodes them into Gaussian primitives for novel-view rendering."
+            "The backbone uses ray and pointmap encoders, DINO appearance features and a Transformer decoder to predict depth and foreground masks for queried views. Our added feature branch reuses intermediate decoder representations and injects geometric features during refinement.",
+            "For inspection, the implementation fits a shared PCA transform across predicted views so that the same embedding directions receive comparable colors. Input instance masks can also define query embeddings: cosine similarity assigns predicted points to those instance queries before the views are fused. These operations make cross-view feature consistency visible rather than relying on depth appearance alone.",
+            "VGGT and VolSplat were complementary baselines in the broader project. This page focuses on the modified RaySt3R system and its learned instance representation."
           ]
         },
         {
@@ -932,7 +982,7 @@
           "url": "https://arxiv.org/abs/2503.11651"
         }
       ],
-      "source_note": "Based on the team’s model implementation, dataset loaders, training configuration, and saved experiment notebooks. Reconstruction backbones are credited in the related resources.",
+      "source_note": "Reviewed against the team’s modified RaySt3R branch, particularly RayQuery, PartAdaptor, PartHead, feature losses, SOPE loading, evaluation/export and Slurm launch scripts, plus saved experiment notebooks. The source history records substantial extensions beyond the released backbone. The diagram summarizes code; notebook masks show preprocessing. No saved reconstruction recording or new benchmark score is implied by either visual.",
       "thumbnail": {
         "file": "semantic-reconstruction-cover.webp",
         "alt": "RGB scene of household objects used in the semantic reconstruction project",
@@ -1746,6 +1796,73 @@
           ]
         },
         {
+          "id": "task-suite",
+          "title": "Twenty tasks, three kinds of reasoning",
+          "paragraphs": [
+            "The retained task report covers 20 real-robot tasks: ten execution-reasoning tasks, five semantic-reasoning tasks and five mobile-manipulation tasks. A shared policy handles the full suite; the final task registry enables visual subtask tracking for 14 tasks, including all five mobile tasks.",
+            "Sixteen tasks have historical subtask annotations, but only fourteen activate the tracker in the final configuration. Keeping the data annotations, training variants and deployed task registry separate was an important part of making the system reproducible."
+          ],
+          "table": {
+            "headers": [
+              "Task family",
+              "Scope",
+              "Example challenge"
+            ],
+            "rows": [
+              [
+                "Execution reasoning",
+                "10 tasks; 7 use subtask tracking",
+                "Order cup placement, insert a connector, open and fill a pencil case."
+              ],
+              [
+                "Semantic reasoning",
+                "5 tasks; 2 use subtask tracking",
+                "Read button order or match objects to shape-labeled containers."
+              ],
+              [
+                "Mobile manipulation",
+                "5 tasks; all use subtask tracking",
+                "Navigate, carry an object, place it and return to the home pose."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "task-examples",
+          "title": "Task examples",
+          "figures": [
+            {
+              "file": "maniparena-atlas-arrange-cup-inverted-triangle.webp",
+              "alt": "Dual-arm robot and three cups in the ManipArena cup-arrangement task",
+              "caption": "Cup arrangement: establish two base positions, place the third cup, then retreat. Task reference frame from the retained atlas.",
+              "width": 1280,
+              "height": 720
+            },
+            {
+              "file": "maniparena-atlas-classify-items-as-shape.webp",
+              "alt": "Robot workspace with objects and three shape-labeled sorting containers",
+              "caption": "Shape sorting: ground object identities and container labels in the current scene before executing the placement sequence. Task reference frame.",
+              "width": 1280,
+              "height": 720
+            },
+            {
+              "file": "maniparena-atlas-put-stationery-in-case.webp",
+              "alt": "Dual-arm robot facing a pencil case and scattered stationery",
+              "caption": "Pencil-case task: opening, three separate insertion cycles and closing require persistent progress state. Task reference frame.",
+              "width": 1280,
+              "height": 720
+            },
+            {
+              "file": "maniparena-atlas-organize-shoes.webp",
+              "alt": "Sofa, shoes and rack in a mobile manipulation scene",
+              "caption": "Shoe organization combines navigation, manipulation and return-home stages. These atlas frames describe the tasks; they are not scored-trial outcomes.",
+              "width": 640,
+              "height": 480
+            }
+          ],
+          "figure_layout": "pair"
+        },
+        {
           "id": "architecture",
           "title": "One policy, two decision timescales",
           "paragraphs": [
@@ -1770,6 +1887,15 @@
             "Training mixes the 20 ManipArena real-task demonstration datasets in LeRobot format. The raw tabletop and mobile records use different vector layouts. I map them into a common representation while preserving what each channel physically means.",
             "Tabletop state and action use fourteen dual-arm end-effector/gripper channels. Mobile state adds head and lift information for seventeen dimensions; mobile action additionally includes three base-velocity controls for twenty dimensions. Both action layouts are padded to the model's 32-dimensional space.",
             "End-effector pose and head/lift deltas are handled separately from absolute gripper and base-velocity commands. At inference, decoded outputs restore the appropriate tabletop or mobile control protocol. This interface work is essential for sharing a policy without silently changing the meaning of its actions."
+          ]
+        },
+        {
+          "id": "failure-analysis",
+          "title": "What failed, and how the system responded",
+          "paragraphs": [
+            "My VLA diagnosis notes identify two recurring problems: visually similar states can require different next actions, and a failed manipulation can move the scene outside the successful demonstrations used for training. Subtask-conditioned language helps with the first problem; the second motivates explicit recovery logic and better coverage of failure states in the data.",
+            "The VLM notes document ambiguities in distance, opening extent, occlusion and short contact events. A single image can make grasping and releasing look alike, and sparse observations can miss one of several repeated object transfers. I used explicit completion evidence, temporal image pairs, persistent stage identities and task-specific perception checks to reduce these errors.",
+            "For example, the pencil-case mission checks three observed pick–transfer–release cycles before allowing closure. Button pressing requires both contact and withdrawal, and connector insertion requires alignment, seating and release evidence. These mechanisms address specific failure modes observed during development; they do not imply universal recovery from unseen failures."
           ]
         },
         {
@@ -1814,7 +1940,7 @@
           "url": "https://github.com/Physical-Intelligence/openpi"
         }
       ],
-      "source_note": "Based on the project's retained training/deployment implementation and summaries. Competition placement is recorded in the CV; the detailed system description includes subsequent development.",
+      "source_note": "Reviewed against my retained CVPR2026-Workshop technical report, the HTML training/deployment reports, the 20-task atlas, and the VLA/VLM diagnosis notes. The task registry, optional training paths and final inference defaults are described separately. Atlas images are task references, not evidence of scored-trial success. Competition placement and subsequent system development remain distinct.",
       "featured": true,
       "status": "CVPR 2026 Workshop · 4th / 32 teams",
       "strengths": [
@@ -2607,6 +2733,37 @@
           ]
         },
         {
+          "id": "presentation-demo",
+          "title": "Presentation: adaptive planning and failure memory",
+          "paragraphs": [
+            "My project presentation illustrates how the agent adapts its planning tools and reference path when a default continuation fails. Its v0.6.0 architecture includes a section-scoring strategy, several numerical planning options, fallback trajectories and a failure-memory path for difficult road geometry.",
+            "The presentation reports 143/143 scenes passed and includes the Augsburg-13_1 and Jena-14_4 replays below. This is a historical presentation snapshot: its architecture permits rollback and retry, which are visible in the replay annotations. The later forward-only 100-scenario campaigns above use their own protocols and results."
+          ],
+          "figures": [
+            {
+              "file": "agentic-presentation-architecture-v060.webp",
+              "alt": "Historical Agentic Planner architecture with LLM agent, planning toolbox and execution feedback",
+              "caption": "Original architecture figure from my Agentic Planner presentation, slide 1. It describes v0.6.0, including rollback/retry and memory-based recovery.",
+              "width": 1672,
+              "height": 941
+            }
+          ],
+          "videos": [
+            {
+              "file": "agentic-presentation-v060-augsburg-13_1.mp4",
+              "poster": "agentic-presentation-augsburg-v060.webp",
+              "title": "Augsburg-13_1 historical planner replay",
+              "caption": "Augsburg-13_1 · 11.5-second silent replay embedded in slide 2. Shows the road, planner scores and historical recovery steps."
+            },
+            {
+              "file": "agentic-presentation-v060-jena-14_4.mp4",
+              "poster": "agentic-presentation-jena-v060.webp",
+              "title": "Jena-14_4 historical planner replay",
+              "caption": "Jena-14_4 · 14-second silent replay embedded in slide 3. The overlay identifies v0.6.0 and its rollback/retry behavior."
+            }
+          ]
+        },
+        {
           "id": "progress",
           "title": "Current research and engineering focus",
           "paragraphs": [
@@ -2619,7 +2776,7 @@
           "title": "Related work: neural traffic-rule prediction",
           "paragraphs": [
             "My HiWi work also includes predicting when a traffic-rule violation may occur. A Transformer processes grouped histories of vehicle dynamics and logical robustness features, together with a road-network representation; a logistic-hazard decoder estimates the event-time distribution rather than only a yes/no label.",
-            "The workflow covers highD, inD, and MONA data, hyperparameter search with Optuna TPE, and validation across five seeds. A retained feature-ablation study contains six rules × nine configurations × five seeds, totaling 270 checkpoints. It compares the contribution of rule-robustness histories, vehicle-state features, and road context. Those results are validation results; an independent test evaluation is not claimed."
+            "I am responsible for neural-network architecture design, testing and model comparison, as well as hyperparameter search. The work includes comparisons of MLP, GRU and Transformer encoders with several event-time decoders, orthogonal-array screening and Optuna TPE refinement. Multi-seed validation and feature ablations support the comparisons."
           ],
           "link": {
             "url": "../rule-prediction/",
@@ -2667,7 +2824,7 @@
           "note": "Interactive traffic simulation."
         }
       ],
-      "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols.",
+      "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols. The three-slide Agentic Planner presentation supplies the separately labeled v0.6.0 architecture and two embedded replays; its presentation-reported 143-scene result is not pooled with later campaigns.",
       "featured": true,
       "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
       "strengths": [
@@ -2686,7 +2843,7 @@
       }
     },
     "rule-prediction": {
-      "summary": "Learning when a traffic-rule violation may occur from vehicle histories, logical robustness features, and road-network context, using a Transformer with a logistic-hazard decoder.",
+      "summary": "Designing and comparing neural architectures for traffic-rule event-time prediction, with grouped sequence features, survival-model decoders and systematic hyperparameter search.",
       "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
       "facts": [
         {
@@ -2698,8 +2855,8 @@
           "value": "highD · inD · MONA"
         },
         {
-          "label": "Study",
-          "value": "6 rules · 9 feature settings · 5 seeds"
+          "label": "Experiments",
+          "value": "12 model variants · 10 search factors · multi-seed feature ablations"
         },
         {
           "label": "Advisors",
@@ -2734,6 +2891,16 @@
           ]
         },
         {
+          "id": "contribution",
+          "title": "My contribution",
+          "bullets": [
+            "Designed and refined the neural-network architecture, from grouped vehicle, rule-robustness and road-context encoders to temporal modeling and event-time decoding.",
+            "Implemented and tested model variants, and compared MLP, GRU and Transformer encoders with Weibull, PMF, DRSA and logistic-hazard alternatives under a shared evaluation protocol.",
+            "Designed and ran the hyperparameter-search workflow: balanced orthogonal-array screening, Optuna TPE refinement and confirmation across common random seeds.",
+            "Analyzed controlled feature ablations, checkpoint inventories and metric comparisons to explain which inputs and architectural choices supported prediction quality."
+          ]
+        },
+        {
           "id": "model",
           "title": "Transformer and logistic-hazard model",
           "paragraphs": [
@@ -2742,13 +2909,63 @@
           ]
         },
         {
-          "id": "contribution",
-          "title": "My work on the research workflow",
-          "bullets": [
-            "Developing and evaluating the grouped sequence model and event-time prediction setup.",
-            "Using Optuna TPE for hyperparameter search, with checkpoint selection based on validation metrics.",
-            "Comparing explicit feature groups through controlled masks while retaining the model branches and input shapes.",
-            "Preparing multi-seed results, selected-checkpoint inventories, and paired feature-ablation summaries."
+          "id": "model-comparison",
+          "title": "Architecture comparison before tuning",
+          "paragraphs": [
+            "The retained manuscript compares twelve encoder–decoder/objective combinations on five traffic rules and five random seeds. Parameter budgets are kept close to 40 K, so the comparison examines representation and event-time modeling rather than simply increasing network size.",
+            "Transformer–Logistic-Hazard has the lowest combined validation rank in that comparison. Transformer–Weibull is close, and other variants lead individual metrics. I therefore compare discrimination, calibration and event-horizon precision together instead of choosing a network from one favorable score."
+          ],
+          "table": {
+            "headers": [
+              "Representative model",
+              "Mean validation AUC",
+              "Mean validation IBS",
+              "Combined rank"
+            ],
+            "rows": [
+              [
+                "MLP + Logistic-Hazard",
+                "0.9643",
+                "0.0452",
+                "6.36"
+              ],
+              [
+                "GRU + Logistic-Hazard",
+                "0.9644",
+                "0.0450",
+                "5.51"
+              ],
+              [
+                "Transformer + Weibull",
+                "0.9640",
+                "0.0441",
+                "4.67"
+              ],
+              [
+                "Transformer + Logistic-Hazard",
+                "0.9666",
+                "0.0439",
+                "4.60"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "hyperparameter-search",
+          "title": "From architecture selection to hyperparameter search",
+          "paragraphs": [
+            "After architecture selection, I searched ten factors covering optimization, regularization, the feature encoders, fusion width, Transformer capacity, attention heads and decoder width. The retained search record uses 567 orthogonal-array configurations for balanced screening and 120 additional Optuna TPE configurations for adaptive refinement.",
+            "Screening and refinement use two seeds; the shortlists proceed to confirmation with five common seeds. Checkpoint and configuration selection use validation data, with the independent test split kept out of the search. The selected settings are then held fixed for feature ablations.",
+            "The November manuscript snapshot reports a mean validation AUC of 0.9748 ± 0.0013, integrated Brier score of 0.0315 ± 0.0006 and average precision of 0.9505 ± 0.0020 for the selected configuration. Each seed is first averaged across the five rules; the reported variation is the sample standard deviation across the five seeds. These are validation results after tuning."
+          ],
+          "figures": [
+            {
+              "file": "rule-prediction-study-design.svg",
+              "alt": "Architecture comparison, orthogonal-array screening, TPE refinement and five-seed confirmation",
+              "caption": "Study workflow redrawn from the retained architecture-comparison and search records. The five-rule selection study is separate from the six-rule feature-ablation inventory.",
+              "width": 1400,
+              "height": 720
+            }
           ]
         },
         {
@@ -2776,7 +2993,7 @@
         }
       ],
       "gallery": [],
-      "source_note": "Based on the retained model configuration, completed feature-ablation report, and selected-checkpoint inventory. Public summary omits private datasets, paths, configurations, and credentials. Updated November 2026.",
+      "source_note": "Reviewed against the retained model factories and Transformer implementation, the November 2026 manuscript sections on architecture comparison and hyperparameter search, the orthogonal-array design audit, and the six-rule feature-ablation inventory. The five-rule model/search study and six-rule ablation study have separate scopes. Numerical results are validation-based; independent test performance is not claimed.",
       "related": [
         "agentic-planner"
       ],

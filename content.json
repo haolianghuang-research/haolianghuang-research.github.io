@@ -147,7 +147,7 @@
       "dates": "Oct 2026 – Present",
       "type": "Student research assistant project",
       "category": "learning",
-      "description": "Predicting time to traffic-rule violations with a Transformer and logistic-hazard decoder, using logical robustness, vehicle histories, and road context.",
+      "description": "Designed, tested and compared neural architectures for traffic-rule event-time prediction. Combined Transformer and survival-model experiments with systematic hyperparameter search and multi-seed feature ablations.",
       "tags": [
         "Transformer",
         "Survival prediction",
@@ -162,7 +162,7 @@
       "category": "vision",
       "label": "AI · 3D CV",
       "type": "Research project",
-      "description": "Integrated and benchmarked RaySt3R, VGGT, and VolSplat for semantic-aware 3D reconstruction. Contributed to model components and refinement, and led Slurm-based distributed training, large-scale HPC experiments, and scalable data generation pipelines.",
+      "description": "Extended RaySt3R with geometry-conditioned instance features, multi-view supervision and new data pipelines. Contributed to model refinement and led Slurm-based distributed training and large-scale experiments; also explored VGGT and VolSplat baselines.",
       "tags": [
         "3D reconstruction",
         "Slurm / HPC",

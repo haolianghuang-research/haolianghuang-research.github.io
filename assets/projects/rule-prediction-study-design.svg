@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-label="Neural architecture design and systematic model selection">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#8b97a7"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#202933}.title{font-size:36px;font-weight:700}.sub{font-size:24px;fill:#647184}.head{font-size:26px;font-weight:700}.body{font-size:24px}.tag{font-size:22px;font-weight:700;fill:#2563a8}.line{fill:none;stroke:#8b97a7;stroke-width:2.5;marker-end:url(#arrow)}</style>
+<rect width="1400" height="720" fill="#fff"/>
+<text x="44" y="64" class="title">Neural architecture design and systematic model selection</text>
+<text x="44" y="108" class="sub">Five-rule validation study · common data protocol · independent test split kept out of selection</text>
+<rect x="44" y="170" width="304" height="260" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="68" y="214" class="head">Compare models</text>
+<text x="68" y="257" class="body">12 model variants</text>
+<text x="68" y="291" class="body">MLP, GRU, Transformer</text>
+<text x="68" y="325" class="body">Event-time decoders</text>
+<text x="68" y="359" class="body">About 40 K parameters</text>
+<rect x="380" y="170" width="304" height="260" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="404" y="214" class="head">Balanced screening</text>
+<text x="404" y="257" class="body">567 configurations</text>
+<text x="404" y="291" class="body">10 search factors</text>
+<text x="404" y="325" class="body">Orthogonal-array design</text>
+<text x="404" y="359" class="body">Two seeds</text>
+<rect x="716" y="170" width="304" height="260" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="740" y="214" class="head">Adaptive refinement</text>
+<text x="740" y="257" class="body">120 configurations</text>
+<text x="740" y="291" class="body">Optuna multivariate TPE</text>
+<text x="740" y="325" class="body">Validation-guided search</text>
+<text x="740" y="359" class="body">Two seeds</text>
+<rect x="1052" y="170" width="304" height="260" rx="18" fill="#f2f6fb" stroke="#d8e0ea"/>
+<text x="1076" y="214" class="head">Confirmation</text>
+<text x="1076" y="257" class="body">Common five seeds</text>
+<text x="1076" y="291" class="body">Fixed selection criteria</text>
+<text x="1076" y="325" class="body">Validation winner frozen</text>
+<text x="1076" y="359" class="body">Feature ablations follow</text>
+<path d="M348 300 H378" class="line"/>
+<path d="M684 300 H714" class="line"/>
+<path d="M1020 300 H1050" class="line"/>
+<rect x="44" y="485" width="1312" height="155" rx="18" fill="#eef5f2" stroke="#d8e6df"/>
+<text x="72" y="529" class="head">Selected Transformer–Logistic-Hazard configuration</text>
+<text x="72" y="573" class="body">Validation AUC  0.9748 ± 0.0013     |     IBS  0.0315 ± 0.0006     |     AP  0.9505 ± 0.0020</text>
+<text x="44" y="686" class="sub">November 2026 manuscript snapshot · Mean across five rules, then mean ± sample SD across five seeds.</text>
+</svg>
