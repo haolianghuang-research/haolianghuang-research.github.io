@@ -147,7 +147,7 @@
       "dates": "Oct 2026 – Present",
       "type": "Student research assistant project",
       "category": "learning",
-      "description": "Designed, tested and compared neural architectures for traffic-rule event-time prediction. Combined Transformer and survival-model experiments with systematic hyperparameter search and multi-seed feature ablations.",
+      "description": "Forthcoming coauthored work on traffic-rule event-time prediction. Designed, tested and compared neural architectures, combining Transformer and survival models with systematic hyperparameter search and multi-seed feature ablations.",
       "tags": [
         "Transformer",
         "Survival prediction",

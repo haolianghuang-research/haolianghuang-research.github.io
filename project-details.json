@@ -3236,7 +3236,7 @@
     },
     "rule-prediction": {
       "summary": "Designing and comparing neural architectures for traffic-rule event-time prediction, with grouped sequence features, survival-model decoders and systematic hyperparameter search.",
-      "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
+      "status": "Forthcoming paper · TUM CPS HiWi · October 2026–Present",
       "facts": [
         {
           "label": "Model",
@@ -3275,6 +3275,22 @@
       ],
       "sections": [
         {
+          "id": "publication",
+          "title": "Forthcoming paper",
+          "paragraphs": [
+            "Predictive Monitoring of Traffic Rules Using Survival Analysis — a forthcoming coauthored paper on predicting when surrounding vehicles may violate traffic rules. The selected figures below show the method, neural architecture and a highway driving example."
+          ],
+          "figures": [
+            {
+              "file": "rule-prediction-paper-concept.webp",
+              "alt": "Observed traffic scene, trajectory history, road network and traffic rule feed a neural violation-time predictor and risk-aware driving response",
+              "caption": "Method overview from our forthcoming paper: traffic histories, road context and formalized rules inform a predicted distribution of the first violation time.",
+              "width": 1016,
+              "height": 848
+            }
+          ]
+        },
+        {
           "id": "problem",
           "title": "Predict time, not only a violation label",
           "paragraphs": [
@@ -3298,6 +3314,15 @@
           "paragraphs": [
             "The model groups the time-varying inputs by their meaning: logical robustness features and vehicle dynamics are encoded with their respective branches, while road segments supply environmental context. A sequence Transformer aggregates the observation history, and a logistic-hazard decoder predicts discrete event-time hazards.",
             "The retained configuration uses an observation history of up to 32 steps, a 64-dimensional Transformer representation, two attention heads, and a road-network encoder. These describe one selected experimental configuration, rather than a universal architecture claim."
+          ],
+          "figures": [
+            {
+              "file": "rule-prediction-paper-architecture.webp",
+              "alt": "Vehicle, robustness and road-segment MLP branches fuse into a sequence encoder with Weibull, PMF or hazard decoders and a survival loss",
+              "caption": "Neural learning pipeline from our forthcoming paper. Separate feature encoders feed a shared temporal representation; alternative decoders model the distribution of the first violation time. The diagram includes the architecture variants compared in the study.",
+              "width": 2072,
+              "height": 920
+            }
           ]
         },
         {
@@ -3375,6 +3400,22 @@
             "In the fixed validation setup, the complete input achieved the highest overall mean composite score. Removing both logical-robustness feature groups produced the largest aggregate loss. This supports the value of rule-related history in that experiment; it does not establish a statistically significant winner for every individual rule.",
             "The study reports seed variation and paired differences. The reported checkpoints and rankings are validation-based, and no independent test evaluation is claimed."
           ]
+        },
+        {
+          "id": "traffic-use-case",
+          "title": "From predicted risk to driving response",
+          "paragraphs": [
+            "The coauthored paper also studies how predicted rule-violation risk can inform a driving response. In the highway cut-in example, the predictor estimates the future violation-time distribution and a risk-aware planner decelerates before the unsafe maneuver. The plots compare this replanned response with the recorded run."
+          ],
+          "figures": [
+            {
+              "file": "rule-prediction-paper-highway.webp",
+              "alt": "Recorded and risk-aware highway cut-in trajectories, predicted hazard and violation-time distribution, and the resulting ego-vehicle speed",
+              "caption": "Highway cut-in example from our forthcoming paper. The recorded and risk-aware trajectories are shown alongside predicted hazards, the violation-time distribution and ego-vehicle speed.",
+              "width": 2064,
+              "height": 1076
+            }
+          ]
         }
       ],
       "references": [
@@ -3385,19 +3426,19 @@
         }
       ],
       "gallery": [],
-      "source_note": "Reviewed against the retained model factories and Transformer implementation, the November 2026 manuscript sections on architecture comparison and hyperparameter search, the orthogonal-array design audit, and the six-rule feature-ablation inventory. The five-rule model/search study and six-rule ablation study have separate scopes. Numerical results are validation-based; independent test performance is not claimed.",
+      "source_note": "Selected original figures from our forthcoming coauthored paper, Predictive Monitoring of Traffic Rules Using Survival Analysis (Wang, Gressenbuch, Huang, Lin and Althoff). Project details were also checked against the retained model factories, Transformer implementation, architecture comparison, hyperparameter search and feature-ablation records. The five-rule model/search study and six-rule ablation study have separate scopes; the model-selection results above are validation-based.",
       "related": [
         "agentic-planner"
       ],
       "thumbnail": {
-        "file": "rule-prediction-cover.svg",
-        "alt": "Conceptual model diagram showing vehicle histories, a Transformer, and time-to-violation prediction",
-        "caption": "Model schematic · Conceptual illustration"
+        "file": "rule-prediction-paper-cover.webp",
+        "alt": "Original method-overview figure from the forthcoming traffic-rule prediction paper",
+        "caption": "Forthcoming paper · Method overview"
       },
       "hero_image": {
-        "file": "rule-prediction-cover.svg",
-        "alt": "Conceptual model diagram showing vehicle histories, a Transformer, and time-to-violation prediction",
-        "caption": "Model schematic · Conceptual illustration"
+        "file": "rule-prediction-paper-cover.webp",
+        "alt": "Original method-overview figure from the forthcoming traffic-rule prediction paper",
+        "caption": "Forthcoming paper · Method overview"
       }
     }
   },
