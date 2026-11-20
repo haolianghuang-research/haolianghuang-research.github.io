@@ -1,8 +1,7 @@
 .affiliation-logo-huawei { width:64px; height:16px; }
 .awards-section { padding:48px 0; }
 .awards-intro { max-width:830px; margin-bottom:30px; }
-.awards-intro .eyebrow { font-size:12px; margin-bottom:10px; }
-.awards-intro h2 { font-size:32px; letter-spacing:-.035em; line-height:1.2; }
+.awards-intro .eyebrow { margin-bottom:10px; }
 .awards-intro>p:last-child { font-size:17px; color:var(--muted); line-height:1.8; margin-top:16px; }
 .awards-grid { gap:20px; }
 .award-card { padding:25px 23px; border:1px solid var(--line); border-radius:20px; background:#fff; }
@@ -43,7 +42,5 @@
 }
 @media (max-width:640px) {
   .awards-section { padding:32px 0; }
-  .awards-intro h2 { font-size:28px; }
-  .awards-intro .eyebrow { font-size:11px; letter-spacing:.07em; }
   .awards-intro>p:last-child { font-size:16px; }
 }
