@@ -352,7 +352,7 @@
       "dates": "Summer semester 2025",
       "type": "Team course project",
       "category": "vision",
-      "description": "A marker-based AR solar system built with Godot 4, C++ and OpenCV. Connected camera-derived marker poses to 3D planet models and an ordering game; my work focused on game-state reliability, restart behavior and camera-aligned UI integration.",
+      "description": "AR coursework progressing from C++/OpenCV marker detection and pose estimation to a Godot solar-system team application. Implemented the exercise’s vision-to-scene pipeline and improved game-state reliability, restart behavior and camera-aligned UI integration in the team project.",
       "tags": [
         "Augmented reality",
         "Godot / C++",

@@ -4293,7 +4293,7 @@
       "source_note": "Based on my internship summary, monthly work notes and retained CAN-modeling and data-analysis code. This page summarizes my role and methods at a high level."
     },
     "ar-solar-system": {
-      "summary": "An interactive solar-system AR application built with Godot 4, a C++ GDExtension and OpenCV. Printed markers anchor 3D planets and information labels; an ordering game turns the same physical scene into a spatial learning task. My work focuses on reliable game-state transitions, repeatable restarts and camera-aligned UI behavior.",
+      "summary": "My AR coursework connects a C++/OpenCV marker-tracking exercise with a Godot solar-system team application. The exercise covers detection, subpixel corner refinement, binary marker decoding, PnP pose estimation and 3D scene integration. In the team application, I also worked on reliable game rounds, restart logic and camera-aligned UI behavior.",
       "status": "Course project · Summer semester 2025",
       "facts": [
         {
@@ -4315,8 +4315,14 @@
       ],
       "timeline": {
         "title": "From marker tracking to a repeatable AR interaction",
-        "intro": "The team developed the application in June–July 2025. I focused on game-state reliability and display integration in the 4–5 July iteration.",
+        "intro": "The coursework combines a computer-vision exercise implementation with the solar-system team application. The team repository records development in June–July 2025, including my application and integration fixes on 4–5 July.",
         "entries": [
+          {
+            "period": "Summer semester 2025",
+            "title": "Course foundation: a marker-to-3D AR pipeline",
+            "url": "#exercise-foundation",
+            "description": "Built up the C++/OpenCV tracking exercise: image thresholding, quadrilateral filtering, subpixel corners, binary decoding and marker poses. Connected those poses to visible 3D objects and diagnostic overlays in Godot."
+          },
           {
             "period": "17 Jun 2025",
             "date_iso": "2025-06-17",
@@ -4345,7 +4351,7 @@
             "description": "Updated the tutorial text and planet colors. The original user guide is available below as a PDF export."
           }
         ],
-        "note": "These dates identify retained repository milestones within the summer-semester project. The team application and my specific recorded contributions are described separately."
+        "note": "The exercise phase is dated to the course semester; the day-level milestones follow the solar-system team repository. Team functionality and my specific recorded contributions remain distinguished."
       },
       "pipeline": [
         {
@@ -4375,12 +4381,23 @@
           ]
         },
         {
+          "id": "exercise-foundation",
+          "title": "Course foundation: implementing the vision-to-scene pipeline",
+          "paragraphs": [
+            "The earlier ar-exercise implementation contains the computer-vision work behind the application. A C++ CVCamera class is exposed to Godot through GDExtension, while a GDScript controller advances recorded camera frames, displays image-processing modes and updates marker-attached scene objects.",
+            "Thresholded images provide candidate contours. Polygon approximation, size limits and convexity tests select quadrilaterals. Edge-strip samples, line fitting and line intersections refine the corners before perspective normalization and rotation-aware binary marker decoding.",
+            "The pose stage uses known marker dimensions, four image corners and OpenCV solvePnP to construct a 4×4 rigid transform. The exercise converts the axes for Godot and exposes per-marker presence and transforms to GDScript. The demo attaches two scene objects to selected marker IDs and controls their visibility from the current detections.",
+            "Color, grayscale, threshold and diagnostic-overlay views make the stages inspectable, with an interactive threshold control. The local source also retains course solution references; this work is presented as a course exercise implementation and integration, with the course foundation credited."
+          ]
+        },
+        {
           "id": "contribution",
           "title": "My contribution",
           "paragraphs": [
-            "I focused on making game rounds repeatable and keeping the application’s controls aligned with its camera input. My 4–5 July changes covered the following:"
+            "My work spans the earlier computer-vision exercise and the later team application. The exercise implementation supplies the perception-to-Godot path; my 4–5 July team-project commits document the application fixes below."
           ],
           "bullets": [
+            "Implemented and integrated the course exercise’s marker-processing stages: contour filtering, subpixel corner refinement, binary ID decoding, PnP pose estimation, and marker-driven 3D scene updates.",
             "Fixed the restart path by clearing cached planet transforms when beginning a new round, so a previous arrangement does not remain the basis of the next game.",
             "Implemented clearer start, exit and replay transitions, coordinating button text with completion-state handling.",
             "Aligned the window, camera canvas, render viewport and bottom controls with the input image dimensions; updated Windows export and imported-texture settings."
@@ -4461,7 +4478,7 @@
         "alt": "Nine printed binary AR markers arranged on a wooden table in an original project camera recording",
         "caption": "Original marker scene · Camera input"
       },
-      "source_note": "Reviewed against the retained Solar System Augmented Reality repository, the original tutorial, CVCamera and Gameplay implementation, and June–July 2025 commit history. The course is recorded as Erweiterte Realität (IN2018), summer semester 2025. Team functionality is distinguished from Haoliang Huang’s documented 4–5 July changes. Images and the embedded recording are original marker-camera inputs. The original tutorial is preserved as a static PDF export.",
+      "source_note": "Reviewed against the retained Solar System Augmented Reality repository, the original tutorial, CVCamera and Gameplay implementation, and June–July 2025 commit history. The course is recorded as Erweiterte Realität (IN2018), summer semester 2025. Team functionality is distinguished from Haoliang Huang’s documented 4–5 July changes. Images and the embedded recording are original marker-camera inputs. The original tutorial is preserved as a static PDF export. The user additionally identified the local ar-exercise source. Its CVCamera implementation and Godot demo were inspected together with the retained course solution references. The exercise repository has no commits, so its phase is dated only to the user-confirmed summer semester.",
       "related": [
         "pose",
         "semantic-reconstruction"
