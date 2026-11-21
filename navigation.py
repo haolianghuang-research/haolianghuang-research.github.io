@@ -15,7 +15,7 @@ def render_navigation(content, prefix='', current='about', outline=None, page_ti
     primary = [('featured','Research'),('projects','Projects'),('experience','Experience'),('cv','CV')]
     top = ''.join(f'<a href="{prefix}#{slug}" data-nav-section="{slug}"' + (' aria-current="location"' if slug == current else '') + f'>{title}</a>' for slug,title in primary)
     if outline is None:
-        short = {'rolewam':'RoleWAM','ricl':'RICL / Zero-WAM','agentic-planner':'Agentic Planner','d4rtvla':'D4rtVLA / InstructD4RT','maniparena':'ManipArena · CVPR','category-pose':'6D Pose · ICCV'}
+        short = {'rolewam':'RoleWAM','ricl':'Memory · RICL / Zero-WAM','agentic-planner':'Agentic Driving','d4rtvla':'D4rtVLA / InstructD4RT','maniparena':'ManipArena · CVPR','category-pose':'6D Pose · ICCV'}
         children = [{'id':'research-'+p['id'],'title':short.get(p['id'],p['title'])} for p in content['featured_projects']]
         outline = [
             {'id':'about','title':'About'},

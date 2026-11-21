@@ -4,12 +4,48 @@
   "github": "https://github.com/haolianghuang-research",
   "intro": "I study how robots can use visual experience, language, and memory to learn new tasks. I am a master’s student in Robotics, Cognition, Intelligence at the Technical University of Munich, with a B.Sc. in Computer Science from KIT.",
   "organization_logos": {
-    "tum": {"file": "tum.svg", "style": "tum", "width": 73, "height": 38, "name": "Technical University of Munich"},
-    "lmu": {"file": "lmu.png", "style": "lmu", "width": 269, "height": 130, "name": "LMU Munich"},
-    "kit": {"file": "kit.svg", "style": "kit", "width": 196, "height": 90, "name": "Karlsruhe Institute of Technology"},
-    "cvpr2026": {"file": "cvpr2026.png", "style": "cvpr", "width": 330, "height": 80, "name": "CVPR 2026 Workshop competition"},
-    "iccv2025": {"file": "iccv2025.png", "style": "iccv", "width": 400, "height": 110, "name": "ICCV 2025 Workshop competition"},
-    "huawei": {"file": "huawei.png", "style": "huawei", "width": 529, "height": 116, "name": "Huawei Munich Research Center"}
+    "tum": {
+      "file": "tum.svg",
+      "style": "tum",
+      "width": 73,
+      "height": 38,
+      "name": "Technical University of Munich"
+    },
+    "lmu": {
+      "file": "lmu.png",
+      "style": "lmu",
+      "width": 269,
+      "height": 130,
+      "name": "LMU Munich"
+    },
+    "kit": {
+      "file": "kit.svg",
+      "style": "kit",
+      "width": 196,
+      "height": 90,
+      "name": "Karlsruhe Institute of Technology"
+    },
+    "cvpr2026": {
+      "file": "cvpr2026.png",
+      "style": "cvpr",
+      "width": 330,
+      "height": 80,
+      "name": "CVPR 2026 Workshop competition"
+    },
+    "iccv2025": {
+      "file": "iccv2025.png",
+      "style": "iccv",
+      "width": 400,
+      "height": 110,
+      "name": "ICCV 2025 Workshop competition"
+    },
+    "huawei": {
+      "file": "huawei.png",
+      "style": "huawei",
+      "width": 529,
+      "height": 116,
+      "name": "Huawei Munich Research Center"
+    }
   },
   "project_logos": {
     "rolewam": "tum",
@@ -485,6 +521,19 @@
   ],
   "featured_projects": [
     {
+      "id": "agentic-planner",
+      "title": "Agentic Driving",
+      "status": "Ongoing · TUM CPS · Oct 2026–Present",
+      "summary": "A CommonRoad agentic planner connecting language reasoning to numerical path and motion planning, traffic prediction and checked execution in live SUMO simulation.",
+      "contribution": "Building the agent–tool architecture, traffic-interaction reasoning and reproducible closed-loop evaluation, with release-specific results.",
+      "skills": [
+        "Agent architecture",
+        "Path & motion planning",
+        "Closed-loop evaluation"
+      ],
+      "evidence": null
+    },
+    {
       "id": "rolewam",
       "title": "RoleWAM",
       "status": "Ongoing · Sep 2026–Present",
@@ -499,27 +548,14 @@
     },
     {
       "id": "ricl",
-      "title": "RICL / Zero-WAM",
+      "title": "Memory for VLA & WAM",
       "status": "Ongoing · Aug 2026–Present",
-      "summary": "Human-video context for new robot tasks, supported by a closed-loop agentic data system with independent review, targeted repair and content/GPU supervision.",
-      "contribution": "Designed and implemented the agent architecture, persistent orchestration and provenance checks; building reusable clips and controlled context-transfer experiments.",
+      "summary": "From Skill-VLA and task-skill agents to RICL with Zero-WAM: investigating how memory, reusable skills and demonstration context can guide robot action.",
+      "contribution": "Built task-skill generation and retrieval workflows, developed a RICL-VLA extension, and designed the current agentic demonstration-data system.",
       "skills": [
-        "Agent architecture",
-        "Robot in-context learning",
-        "Data systems"
-      ],
-      "evidence": null
-    },
-    {
-      "id": "agentic-planner",
-      "title": "Agentic Driving & Rule Prediction",
-      "status": "TUM CPS · Oct 2026–Present",
-      "summary": "A GPT-6.1 agent connected to motion planners, traffic prediction, and checked execution in CommonRoad/SUMO.",
-      "contribution": "Building the agent–tool interface and evaluation system; also developing neural traffic-rule prediction.",
-      "skills": [
-        "Agent systems",
-        "Autonomous driving",
-        "Neural prediction"
+        "Memory",
+        "RICL / Zero-WAM",
+        "Agent architecture"
       ],
       "evidence": null
     },
@@ -528,12 +564,12 @@
       "title": "D4rtVLA / InstructD4RT",
       "status": "Discontinued · Jun–Aug 2026",
       "status_kind": "prototype",
-      "summary": "Adapting OpenD4RT to predict future key-object features for VLA action generation, followed by instruction-conditioned grounding.",
-      "contribution": "Trained the future-feature prediction path and built InstructD4RT; discontinued the direction after finding limited generalization.",
+      "summary": "4D reconstruction + VLA: adapting OpenD4RT, a 4D reconstruction model, to predict future key-object features that condition robot action generation.",
+      "contribution": "Trained the future-feature prediction path and its VLA interface; explored instruction-conditioned InstructD4RT and stopped that branch after generalization limitations.",
       "skills": [
-        "4D perception",
-        "Future-feature prediction",
-        "VLA"
+        "4D reconstruction",
+        "VLA conditioning",
+        "Future-feature prediction"
       ],
       "evidence": null
     },

@@ -8,6 +8,25 @@ def render_figure(f):
     return f'<figure><a href="{img}" aria-label="Open full-size image: {e(f["alt"])}"><img src="{img}" alt="{e(f["alt"])}" width="{f.get("width",1400)}" height="{f.get("height",900)}" loading="lazy"></a><figcaption>{e(f["caption"])}</figcaption></figure>'
 
 
+def render_timeline(info, slug):
+    items = ''
+    for item in info['entries']:
+        focused = item.get('project') == slug
+        item_class = ' class="timeline-focus"' if focused else ''
+        period = e(item['period'])
+        if item.get('date_iso'):
+            period = f'<time datetime="{e(item["date_iso"])}">{period}</time>'
+        title = e(item['title'])
+        if item.get('url'):
+            target = '#contribution' if focused else item['url']
+            title = f'<a href="{e(target)}">{title}</a>'
+        label = item.get('label') or ('This project' if focused else '')
+        badge = f'<span class="timeline-label">{e(label)}</span>' if label else ''
+        items += f'<li{item_class}><p class="timeline-period">{period}</p><div class="timeline-entry"><h3>{title}</h3>{badge}<p>{e(item["description"])}</p></div></li>'
+    note = f'<p class="timeline-note">{e(info["note"])}</p>' if info.get('note') else ''
+    return f'<section class="project-timeline" id="timeline" aria-labelledby="timeline-heading"><p class="eyebrow">Research timeline</p><h2 id="timeline-heading">{e(info["title"])}</h2><p class="timeline-intro">{e(info["intro"])}</p><ol class="timeline-list">{items}</ol>{note}</section>'
+
+
 def render_system_diagram(root, info):
     svg = (root / 'assets' / 'projects' / info['file']).read_text()
     controls = ''.join(f'<button type="button" data-architecture-view="{e(v["id"])}" aria-pressed="{str(i == 0).lower()}" aria-controls="architecture-panel-{e(v["id"])}">{e(v["label"])}</button>' for i,v in enumerate(info['views']))
@@ -106,6 +125,9 @@ def render_all(root, content, details):
             hero_image = f'<figure class="detail-cover"><img src="../../assets/projects/{e(image["file"])}" alt="{e(image["alt"])}" width="1000" height="625"><figcaption>{e(image.get("caption","Project visualization"))}</figcaption></figure>'
         facts = ''.join(f'<div><dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd></div>' for f in d.get('facts', []))
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
+        timeline_info = d.get('timeline') or details.get('research_timelines', {}).get(d.get('research_timeline'))
+        timeline = render_timeline(timeline_info, slug) if timeline_info else ''
+        timeline_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-timeline.css")}">' if timeline else ''
         system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
         body_sections = ([d['overview_demo']] if d.get('overview_demo') else []) + d.get('intro_sections', []) + d['sections']
@@ -155,9 +177,10 @@ def render_all(root, content, details):
         method = ''
         if d.get('pipeline') and not system:
             nodes = ''.join(f'<li><span class="step-number">0{i+1}</span><strong>{e(n["title"])}</strong><span>{e(n["text"])}</span></li>' for i,n in enumerate(d['pipeline']))
-            method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
+            method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">{e(d.get("pipeline_title", "How it works"))}</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
         outline = [{"id":"overview","title":"Overview"}]
+        if timeline: outline.append({'id':'timeline','title':'Research timeline'})
         if report and not report_after: outline.append({'id':'project-report','title':report_outline})
         if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
@@ -198,10 +221,10 @@ def render_all(root, content, details):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
 <title>{e(p['title'])} | Haoliang Huang</title><meta name="description" content="{e(d['summary'])}"><meta name="author" content="Haoliang Huang"><link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
-<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script><link rel="stylesheet" href="../../{asset_url('assets/site-effects.css')}"><script src="../../{asset_url('assets/site-effects.js')}" defer></script></head><body>
+<meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}{timeline_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script><link rel="stylesheet" href="../../{asset_url('assets/site-effects.css')}"><script src="../../{asset_url('assets/site-effects.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
 <main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{resource_note}{website_link}</div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
-{report_at_top}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
+{timeline}{report_at_top}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug
         destination.mkdir(parents=True,exist_ok=True)

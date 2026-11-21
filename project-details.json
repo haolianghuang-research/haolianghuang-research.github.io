@@ -2685,7 +2685,8 @@
           }
         ],
         "scope": "project"
-      }
+      },
+      "research_timeline": "perception-action"
     },
     "commonroad": {
       "summary": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",
@@ -3006,14 +3007,15 @@
         "file": "rolewam-cover.webp",
         "alt": "RoboTwin RGB observation beside the corresponding task-role labels",
         "caption": "RGB and RoleMap · Training example"
-      }
+      },
+      "research_timeline": "perception-action"
     },
     "ricl": {
-      "summary": "Studying how human demonstrations and reusable action clips can guide new robot tasks with the released Zero-WAM backbone. My work combines robot in-context learning, dataset construction and controlled transfer evaluation, supported by a closed-loop Agent system for generating, reviewing and curating demonstration data.",
+      "summary": "My research on memory for VLA and world–action models progressed from Skill-VLA and task-level skill agents to robot in-context learning. The current focus is RICL with Zero-WAM: using human demonstrations and reusable action clips to guide robot tasks, supported by an agentic system for dataset construction.",
       "facts": [
         {
           "label": "Research focus",
-          "value": "Robot in-context learning, demonstration transfer and agentic data systems"
+          "value": "Memory for VLA/WAM, reusable skills and robot in-context learning"
         },
         {
           "label": "Backbone",
@@ -3051,9 +3053,28 @@
           "id": "question",
           "title": "The research question",
           "paragraphs": [
-            "At TRESP Lab, I first explored transferring skill and memory mechanisms from LLM agents to VLA policies in August 2026. The limitations of that approach motivated a shift to RICL / Zero-WAM in September, focusing on what a robot can learn directly from demonstration context.",
+            "This research began at TRESP Lab with a broader question: how can memory and reusable experience help VLA and world–action models act on new tasks? I first explored Skill-VLA and task-level skill agents, then developed a RICL-VLA extension before focusing on RICL with the released Zero-WAM backbone.",
             "A human demonstration specifies more than an object name: it conveys action order, contact, movement, and the intended final state. My RICL project asks how much of that information can be reused when the target robot task changes. Instead of requiring one exact human demonstration for every scene, the longer-term objective is to construct appropriate visual guidance from reusable skills.",
             "The project separates two questions: whether a complete video from a related task transfers useful information, and whether shorter, spatially compatible clips can be composed into stronger instructions. This distinction keeps a simple transfer baseline separate from the more ambitious compositional-learning objective."
+          ]
+        },
+        {
+          "id": "skill-vla",
+          "title": "First stage: Skill-VLA and task-skill agents",
+          "paragraphs": [
+            "I explored transferring the procedural skills and memory mechanisms of LLM agents into robot policies. Alongside MemoryVLA baseline execution, I worked on an agent system that writes reusable skills for individual LIBERO tasks from demonstration evidence.",
+            "The retained implementation processes RLDS demonstrations through a Trajectory Guide, semantic interpretation, a hierarchical Trajectory Agent and a Skill Agent. It uses synchronized front/wrist video, robot state and tracked entity identities to describe task success, action order, attention, verification and recovery.",
+            "A shared persistent skill store supports retrieval and ADD, UPDATE, NOOP or DEPRECATE decisions. Overlapping skills are consolidated instead of accumulating paraphrases, while provenance links the records back to their demonstration evidence. This was an early engineering contribution in the memory-to-robotics research line.",
+            "Paired skill/no-skill evaluations made it important to test whether textual guidance actually helps the action policy. I therefore treated skill retrieval as a research hypothesis and explored demonstrations as a more direct form of robot context."
+          ]
+        },
+        {
+          "id": "ricl-vla",
+          "title": "Second stage: RICL-VLA before Zero-WAM",
+          "paragraphs": [
+            "On 13 September 2026, I committed a RICL-VLA extension to an OpenPI-based codebase and added action-aligned media logging. This stage studied how retrieved robot demonstrations can precede a query observation so that the policy receives observation–action context, rather than only a retrieved textual skill.",
+            "The retained RoboTwin design uses DINOv3 features from the head and both wrist cameras for demonstration retrieval. Selected examples supply their original RGB, robot state, instruction and action chunks to a π₀.₅-style context; the query action remains a training target. The design notes distinguish implemented retrieval experiments from the still-planned RoboTwin training integration.",
+            "The later Zero-WAM work keeps the same research question about reusable context while shifting to human-video conditioning of a world–action model. The sections below describe that current backbone, the data system around it and the controlled transfer experiments."
           ]
         },
         {
@@ -3410,7 +3431,7 @@
           "url": "https://robotwin-platform.github.io/"
         }
       ],
-      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors. The paired human/robot demo is the exact-full stamp_seal engineering smoke run of 30 September 2026, seed 100000. The human condition is sample 206 and the robot views are saved policy observations in RoboTwin simulation. The visible high-camera crop preserves all 37 source frames and their export timing; the original multiview recording remains available.",
+      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors. The paired human/robot demo is the exact-full stamp_seal engineering smoke run of 30 September 2026, seed 100000. The human condition is sample 206 and the robot views are saved policy observations in RoboTwin simulation. The visible high-camera crop preserves all 37 source frames and their export timing; the original multiview recording remains available. The early research progression was checked against the HK2 MemoryVLA experiment log (5 August 2026), the retained LIBERO Agent import/store commits (5 September), the author’s RICL-VLA commits (13 September) and the RoboTwin retrieval design. Commit/import dates are historical evidence points, not claims that the current full implementation already existed on those dates.",
       "featured": true,
       "status": "Ongoing research · August 2026–Present",
       "strengths": [
@@ -3460,10 +3481,53 @@
         "outline_title": "Dataset Agent report",
         "scope": "module",
         "archive_intro": "Module reports for the dataset-construction Agent system within RICL / Zero-WAM. The English and Chinese reports cover this engineering module: generation, review, repair, provenance and operations."
+      },
+      "pipeline_title": "Current Zero-WAM data and evaluation workflow",
+      "timeline": {
+        "title": "From memory and task skills to RICL / Zero-WAM",
+        "intro": "One research line, with successive ways of bringing prior experience into robot policies: skill memory, retrieved demonstrations, then human-video context for a world–action model.",
+        "entries": [
+          {
+            "period": "5 Aug 2026",
+            "date_iso": "2026-08-05",
+            "title": "MemoryVLA baseline and Skill-VLA exploration",
+            "url": "#skill-vla",
+            "description": "Established an end-to-end MemoryVLA execution baseline in SimplerEnv while exploring how procedural skills and memory from LLM agents could help a VLA policy. This provided a working platform for testing memory-guided robot action."
+          },
+          {
+            "period": "5 Sep 2026",
+            "date_iso": "2026-09-05",
+            "title": "Task-level Skill Agent",
+            "url": "#skill-vla",
+            "description": "Explored an agent pipeline that turns LIBERO demonstrations into reusable task, action and interaction skills. A shared memory store supports retrieval, revision and consolidation, linking task-level reasoning to the robot policy."
+          },
+          {
+            "period": "13 Sep 2026",
+            "date_iso": "2026-09-13",
+            "title": "RICL-VLA: demonstrations inside the policy context",
+            "url": "#ricl-vla",
+            "description": "Extended an OpenPI / π₀.₅ codebase with RICL-VLA and action-aligned media logging. The next step was to provide observation–action demonstrations as policy context, moving beyond a retrieved textual instruction."
+          },
+          {
+            "period": "30 Sep 2026",
+            "date_iso": "2026-09-30",
+            "title": "RICL with the released Zero-WAM backbone",
+            "url": "#human-robot-demo",
+            "description": "Moved to human-video conditioning with the released Zero-WAM world–action model. A saved stamp_seal smoke rollout anchors this stage; subsequent work asks how exact, related and composed demonstrations transfer to a robot task."
+          },
+          {
+            "period": "Oct–Nov 2026",
+            "title": "Compositional data and closed-loop Agent engineering",
+            "url": "#agentic-architecture",
+            "label": "Ongoing",
+            "description": "Built a closed-loop Agent system for demonstration-data construction: reusable clips, spatial/task matching, independent review, targeted repair, provenance and content/GPU supervision. The 20 November bilingual report summarizes this engineering module; the robot-learning research continues."
+          }
+        ],
+        "note": "Dates mark retained experiments, imports, commits and reports; they do not imply that every component was completed on that date or that earlier branches stopped immediately. The research began in August 2026 and remains ongoing."
       }
     },
     "d4rtvla": {
-      "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",
+      "summary": "4D reconstruction + VLA: I adapted and trained OpenD4RT, a 4D reconstruction model, to predict future key-object features as guidance for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued after generalization limitations.",
       "facts": [
         {
           "label": "Research setting",
@@ -3679,7 +3743,8 @@
       "demo_link": {
         "section": "tracking-demos",
         "label": "Watch project videos"
-      }
+      },
+      "research_timeline": "perception-action"
     },
     "agentic-planner": {
       "summary": "Building a GPT-6.1 agentic planner that connects language reasoning to numerical motion planning, set-based traffic prediction, and traffic-rule checks in closed-loop CommonRoad/SUMO simulation.",
@@ -3750,6 +3815,37 @@
           ]
         },
         {
+          "id": "presentation-demo",
+          "title": "Presentation: adaptive planning and failure memory",
+          "paragraphs": [
+            "My project presentation illustrates how the agent adapts its planning tools and reference path when a default continuation fails. Its v0.6.0 architecture includes a section-scoring strategy, several numerical planning options, fallback trajectories and a failure-memory path for difficult road geometry.",
+            "The presentation reports 143/143 scenes passed and includes the Augsburg-13_1 and Jena-14_4 replays below. This is a historical presentation snapshot: its architecture permits rollback and retry, which are visible in the replay annotations. The later forward-only 100-scenario campaigns above use their own protocols and results."
+          ],
+          "figures": [
+            {
+              "file": "agentic-presentation-architecture-v060.webp",
+              "alt": "Historical Agentic Planner architecture with LLM agent, planning toolbox and execution feedback",
+              "caption": "Original architecture figure from my Agentic Planner presentation, slide 1. It describes v0.6.0, including rollback/retry and memory-based recovery.",
+              "width": 1672,
+              "height": 941
+            }
+          ],
+          "videos": [
+            {
+              "file": "agentic-presentation-v060-augsburg-13_1.mp4",
+              "poster": "agentic-presentation-augsburg-v060.webp",
+              "title": "Augsburg-13_1 historical planner replay",
+              "caption": "Augsburg-13_1 · 11.5-second silent replay embedded in slide 2. Shows the road, planner scores and historical recovery steps."
+            },
+            {
+              "file": "agentic-presentation-v060-jena-14_4.mp4",
+              "poster": "agentic-presentation-jena-v060.webp",
+              "title": "Jena-14_4 historical planner replay",
+              "caption": "Jena-14_4 · 14-second silent replay embedded in slide 3. The overlay identifies v0.6.0 and its rollback/retry behavior."
+            }
+          ]
+        },
+        {
           "id": "prediction",
           "title": "Causal prediction and bounded delegation",
           "paragraphs": [
@@ -3791,55 +3887,12 @@
           ]
         },
         {
-          "id": "presentation-demo",
-          "title": "Presentation: adaptive planning and failure memory",
-          "paragraphs": [
-            "My project presentation illustrates how the agent adapts its planning tools and reference path when a default continuation fails. Its v0.6.0 architecture includes a section-scoring strategy, several numerical planning options, fallback trajectories and a failure-memory path for difficult road geometry.",
-            "The presentation reports 143/143 scenes passed and includes the Augsburg-13_1 and Jena-14_4 replays below. This is a historical presentation snapshot: its architecture permits rollback and retry, which are visible in the replay annotations. The later forward-only 100-scenario campaigns above use their own protocols and results."
-          ],
-          "figures": [
-            {
-              "file": "agentic-presentation-architecture-v060.webp",
-              "alt": "Historical Agentic Planner architecture with LLM agent, planning toolbox and execution feedback",
-              "caption": "Original architecture figure from my Agentic Planner presentation, slide 1. It describes v0.6.0, including rollback/retry and memory-based recovery.",
-              "width": 1672,
-              "height": 941
-            }
-          ],
-          "videos": [
-            {
-              "file": "agentic-presentation-v060-augsburg-13_1.mp4",
-              "poster": "agentic-presentation-augsburg-v060.webp",
-              "title": "Augsburg-13_1 historical planner replay",
-              "caption": "Augsburg-13_1 · 11.5-second silent replay embedded in slide 2. Shows the road, planner scores and historical recovery steps."
-            },
-            {
-              "file": "agentic-presentation-v060-jena-14_4.mp4",
-              "poster": "agentic-presentation-jena-v060.webp",
-              "title": "Jena-14_4 historical planner replay",
-              "caption": "Jena-14_4 · 14-second silent replay embedded in slide 3. The overlay identifies v0.6.0 and its rollback/retry behavior."
-            }
-          ]
-        },
-        {
           "id": "progress",
           "title": "Current research and engineering focus",
           "paragraphs": [
             "Development continues on traffic-policy reasoning, forecast completeness, timing-aware interaction, planner recovery from the current state, and reliable model/tool transport. The published selected-forecast engineering revision has its own component and tool-loading validation; it does not inherit a full-suite result from an older release.",
             "The central capability developed here is connecting an uncertain reasoning system to a stateful physical simulator through explicit contracts, useful feedback, and reproducible experiments. Native CommonRoad, SUMO, planner, and SPOT/SONIA components remain credited foundations; my work is the agentic integration and the execution/evaluation machinery around them."
           ]
-        },
-        {
-          "id": "rule-prediction",
-          "title": "Related work: neural traffic-rule prediction",
-          "paragraphs": [
-            "My HiWi work also includes predicting when a traffic-rule violation may occur. A Transformer processes grouped histories of vehicle dynamics and logical robustness features, together with a road-network representation; a logistic-hazard decoder estimates the event-time distribution rather than only a yes/no label.",
-            "I am responsible for neural-network architecture design, testing and model comparison, as well as hyperparameter search. The work includes comparisons of MLP, GRU and Transformer encoders with several event-time decoders, orthogonal-array screening and Optuna TPE refinement. Multi-seed validation and feature ablations support the comparisons."
-          ],
-          "link": {
-            "url": "../rule-prediction/",
-            "title": "Read the neural rule-prediction project"
-          }
         }
       ],
       "gallery": [
@@ -3882,7 +3935,7 @@
           "note": "Interactive traffic simulation."
         }
       ],
-      "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols. The three-slide Agentic Planner presentation supplies the separately labeled v0.6.0 architecture and two embedded replays; its presentation-reported 143-scene result is not pooled with later campaigns.",
+      "source_note": "Based on the project's frozen campaign reports, release manifests, execution contracts, and replay artifacts. Ongoing development; performance numbers are tied to their stated versions and protocols. The three-slide Agentic Planner presentation supplies the separately labeled v0.6.0 architecture and two embedded replays; its presentation-reported 143-scene result is not pooled with later campaigns. The development timeline was cross-checked against the retained early-agent archive, the version/research index and dated November 2026 development records. Neural traffic-rule prediction is presented as a separate related project.",
       "featured": true,
       "status": "Ongoing · TUM CPS HiWi · October 2026–Present",
       "strengths": [
@@ -3916,6 +3969,38 @@
       "demo_link": {
         "section": "presentation-demo",
         "label": "Watch planning replays"
+      },
+      "timeline": {
+        "title": "From a tool-using driving agent to checked closed-loop planning",
+        "intro": "My CPS HiWi project focuses on autonomous-driving path and motion planning. Its development history separates early recovery-oriented prototypes from later forward-only evaluation.",
+        "entries": [
+          {
+            "period": "Oct 2026",
+            "title": "CPS HiWi: autonomous-driving planning",
+            "url": "#task",
+            "description": "Started student research assistant work on path and motion planning, combining language-agent reasoning with numerical planners and CommonRoad/SUMO execution."
+          },
+          {
+            "period": "29 Oct–5 Nov 2026",
+            "title": "Agent tools, planner choices and failure analysis",
+            "url": "#architecture",
+            "description": "Developed the early live-simulation agent and successive car-tool interfaces: observation, reference paths, candidate comparison and checked execution. Later prototype branches explored failure memory and rollback; each retained batch has its own source and protocol."
+          },
+          {
+            "period": "Nov 2026",
+            "title": "Historical project presentation",
+            "url": "#presentation-demo",
+            "description": "The v0.6.0 presentation explains adaptive planner/tool selection and failure-memory recovery, with retained replays. Its rollback-enabled results remain a historical snapshot rather than the score of the current forward-only system."
+          },
+          {
+            "period": "17–18 Nov 2026 onward",
+            "title": "Forward-only interaction and forecast validation",
+            "url": "#prediction",
+            "label": "Ongoing",
+            "description": "Current development studies traffic-policy reasoning, bounded execution and causal occupancy checks. The selected-forecast revision ranks candidates using the original objective, then checks a three-second forecast of the selected trajectory; newer revisions keep their own validation and evaluation evidence."
+          }
+        ],
+        "note": "The historical presentation and later forward-only studies use different protocols. Their results are retained separately rather than combined into a single success claim."
       }
     },
     "rule-prediction": {
@@ -4243,11 +4328,11 @@
     },
     {
       "id": "ricl",
-      "title": "RICL: Demonstration Transfer with Zero-WAM",
+      "title": "Memory for VLA & WAM: RICL / Zero-WAM",
       "label": "AI · VLA · WAM · Agent",
       "organization": "LMU Munich · TRESP Lab",
       "dates": "Aug 2026 – Present",
-      "type": "Robot learning and agent systems"
+      "type": "Robot memory, in-context learning and agent systems"
     },
     {
       "id": "agentic-planner",
@@ -4273,5 +4358,36 @@
       "dates": "Mar – Aug 2026",
       "type": "AI internship"
     }
-  ]
+  ],
+  "research_timelines": {
+    "perception-action": {
+      "title": "ManipArena, D4rtVLA and RoleWAM",
+      "intro": "A continuous research series with TUM Photogrammetry and Remote Sensing: from deploying an agent–VLA manipulation system, to studying 4D visual guidance, then task-role-aware world–action modeling.",
+      "entries": [
+        {
+          "period": "Apr–May 2026",
+          "project": "maniparena",
+          "title": "ManipArena: agent + VLA on robot tasks",
+          "url": "../maniparena/",
+          "description": "Adapted π₀.₅ across the competition task suite, connected it to asynchronous planning and progress verification, and studied subtask conditioning and Text-CFG. The team placed fourth among 32 teams."
+        },
+        {
+          "period": "Jun–Aug 2026",
+          "project": "d4rtvla",
+          "title": "D4rtVLA: 4D reconstruction as VLA guidance",
+          "url": "../d4rtvla/",
+          "description": "Used OpenD4RT’s 4D reconstruction representation to predict future key-object features for VLA action generation. A later InstructSAM-inspired InstructD4RT branch was discontinued after generalization limitations."
+        },
+        {
+          "period": "Sep 2026–Present",
+          "project": "rolewam",
+          "title": "RoleWAM: roles, joint attention and memory",
+          "url": "../rolewam/",
+          "label": "Ongoing",
+          "description": "Developing joint attention between RGB, task-role maps and actions, followed by research into RoboTTT-inspired memory for manipulation. Earlier control benchmarks and current memory experiments are reported separately."
+        }
+      ],
+      "note": "Project periods follow my research history. Meeting notes dated 18 and 24 June document the OpenD4RT / DynamicVLA direction; retained September RoleWAM experiments anchor the subsequent transition."
+    }
+  }
 }
