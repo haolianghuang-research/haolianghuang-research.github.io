@@ -107,6 +107,7 @@ html = f'''<!doctype html>
 <link rel="stylesheet" href="{asset_url('assets/styles.css')}"><link rel="stylesheet" href="{asset_url('assets/featured.css')}"><link rel="stylesheet" href="{asset_url('assets/navigation.css')}"><script src="{asset_url('assets/navigation.js')}" defer></script><script src="{asset_url('assets/site.js')}" defer></script>
 <link rel="stylesheet" href="{asset_url('assets/project-links.css')}">
 <link rel="stylesheet" href="{asset_url('assets/profile-sections.css')}">
+<link rel="stylesheet" href="{asset_url('assets/site-effects.css')}"><script src="{asset_url('assets/site-effects.js')}" defer></script>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 {render_navigation(c)}
 <main class="page" id="main">

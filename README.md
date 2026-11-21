@@ -34,6 +34,16 @@ Sections can also define a `figures` list using the same image fields plus intri
 
 ## Site navigation
 
+The existing white layout and gray cards retain their original styles. Shared
+`assets/site-effects.css` adds a static, very faint blue/lilac glow behind the page.
+`assets/site-effects.js` supplies a locally authored fluid cursor behind the content,
+so opaque cards and images stay clear and all links remain clickable. Its `settings`
+object controls opacity (0.27), brush radius (24 CSS pixels), and dissipation (1.9).
+The animation runs only after mouse interaction, stops after the pigment fades, and
+is disabled for coarse pointers and the reduced-motion preference. Background tabs
+pause and clear the simulation. Both effects are hidden when printing. The shared
+assets are included by both page generators and use the existing cache hashes.
+
 `navigation.py` renders the four primary links and a document outline. The homepage outline lists every major section and the six selected projects; each project detail page supplies its own method, data, evaluation, and visual sections. `assets/navigation.css` provides the pinned left desktop panel and a native-dialog drawer that slides in from the left. At widths of at least 1480px, the outline opens alongside the content; narrower screens open it with **Contents**. Desktop collapse preference lasts for the browser session.
 
 The full-width sticky header keeps the brand at the left edge regardless of the outline state. The pinned outline is 220px wide and starts below the measured header height; only the main content and footer reserve a left column. The narrower modal drawer is 280px wide, and its backdrop starts below the header.
