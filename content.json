@@ -68,7 +68,8 @@
     "mobile-robots": "kit",
     "traffic": "kit",
     "commonroad": "tum",
-    "ar-solar-system": "tum"
+    "ar-solar-system": "tum",
+    "huawei-vehicle-dynamics": "huawei"
   },
   "about_affiliations": {
     "current": [
@@ -272,12 +273,66 @@
       "organization": "Technical University of Munich · Cyber-Physical Systems",
       "dates": "Oct 2026 – Present",
       "type": "Student research assistant project",
-      "category": "learning",
       "description": "Forthcoming coauthored work on traffic-rule event-time prediction. Designed, tested and compared neural architectures, combining Transformer and survival models with systematic hyperparameter search and multi-seed feature ablations.",
       "tags": [
         "Transformer",
         "Survival prediction",
         "CommonRoad"
+      ],
+      "categories": [
+        "autonomous-driving"
+      ]
+    },
+    {
+      "id": "d4rtvla",
+      "title": "D4rtVLA / InstructD4RT",
+      "label": "AI · VLA · 4D CV",
+      "organization": "TUM · Photogrammetry and Remote Sensing",
+      "dates": "Jun – Aug 2026",
+      "type": "Discontinued research prototype",
+      "categories": [
+        "robotics",
+        "vision"
+      ],
+      "description": "4D reconstruction + VLA: I adapted and trained OpenD4RT, a 4D reconstruction model, to predict future key-object features as guidance for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued after generalization limitations.",
+      "tags": [
+        "4D reconstruction",
+        "VLA",
+        "Future-feature prediction"
+      ]
+    },
+    {
+      "id": "maniparena",
+      "title": "AI Agent + VLA for ManipArena",
+      "label": "AI · VLA · Agent",
+      "organization": "TUM · Photogrammetry and Remote Sensing · CVPR Workshop",
+      "dates": "Apr – May 2026",
+      "type": "Competition project",
+      "categories": [
+        "robotics"
+      ],
+      "description": "Fourth place among 32 teams in the CVPR 2026 Workshop ManipArena challenge. I built a manipulation stack that combines a multi-task VLA policy with asynchronous visual task planning and evidence-based progress verification, bridging learned control with long-horizon robot behavior.",
+      "tags": [
+        "π₀.₅ / Text-CFG",
+        "Agent orchestration",
+        "CVPR · 4th / 32"
+      ]
+    },
+    {
+      "id": "huawei-vehicle-dynamics",
+      "title": "CAN-Based Foundation Models for Vehicle Dynamics",
+      "label": "AI · Foundation models · Vehicle dynamics",
+      "organization": "Huawei Munich Research Center · AEL",
+      "dates": "Mar – Aug 2026",
+      "type": "AI internship",
+      "categories": [
+        "foundation-models"
+      ],
+      "description": "AI internship focused on foundation-model architecture design for CAN-bus time series, tire–road friction estimation and related vehicle-dynamics parameters, supported by data preparation and small-scale model experiments.",
+      "tags": [
+        "CAN time series",
+        "Foundation models",
+        "Vehicle dynamics"
       ]
     },
     {
@@ -285,7 +340,6 @@
       "title": "Semantic-Aware 3D Reconstruction",
       "organization": "TUM · CAMP",
       "dates": "Nov 2025 – Apr 2026",
-      "category": "vision",
       "label": "AI · 3D CV",
       "type": "Research project",
       "description": "Extended RaySt3R with geometry-conditioned instance features, multi-view supervision and new data pipelines. Contributed to model refinement and led Slurm-based distributed training and large-scale experiments; also explored VGGT and VolSplat baselines.",
@@ -294,14 +348,16 @@
         "Slurm / HPC",
         "Distributed training"
       ],
-      "visual": "reconstruction"
+      "visual": "reconstruction",
+      "categories": [
+        "vision"
+      ]
     },
     {
       "id": "humanoid",
       "title": "Whole-Body Humanoid Loco-Manipulation",
       "organization": "TUM · AIR",
       "dates": "Oct 2025 – Feb 2026",
-      "category": "robotics",
       "label": "AI · Robotics · RL",
       "type": "Practical course",
       "description": "Adapted human-motion tracking to Booster T1 and built a hierarchical teacher–student pipeline for whole-body box interaction in simulation. Combined GMR retargeting, PPO, DAgger, and visual features with a reusable low-level tracker.",
@@ -310,14 +366,33 @@
         "Hierarchical RL",
         "Loco-manipulation"
       ],
-      "visual": "humanoid"
+      "visual": "humanoid",
+      "categories": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "category-pose",
+      "title": "Category-Level 6D Object Pose Estimation",
+      "label": "AI · 3D CV",
+      "organization": "ICCV 2025 Workshop · WCLOP Challenge",
+      "dates": "2025",
+      "type": "Competition project",
+      "categories": [
+        "vision"
+      ],
+      "description": "First-prize ICCV 2025 challenge work integrating GCEPose with DINOv3 features and category shape priors. My main contributions were the cross-dataset geometry pipeline, shape/semantic prior generation, mixed-data loading and large-scale training experiments.",
+      "tags": [
+        "GCEPose / DINOv3",
+        "Data geometry",
+        "ICCV · First prize"
+      ]
     },
     {
       "id": "pi0",
       "title": "π₀ / π₀.₅ Deployment & Real-World Benchmarking",
       "organization": "TUM · AIR",
       "dates": "May – Dec 2025",
-      "category": "robotics",
       "label": "AI · VLA",
       "type": "Lab project",
       "description": "Deployed π₀ on LeRobot SO-101 and π₀.₅ on Franka. Collected real-world demonstrations and evaluated manipulation behavior on physical robots, including block stacking.",
@@ -326,14 +401,16 @@
         "SO-101 / Franka",
         "Real-world evaluation"
       ],
-      "visual": "manipulation"
+      "visual": "manipulation",
+      "categories": [
+        "robotics"
+      ]
     },
     {
       "id": "pose",
       "title": "Open-Vocabulary 6D Object Pose Estimation",
       "organization": "TUM · CAMP",
       "dates": "Apr – Aug 2025",
-      "category": "vision",
       "label": "AI · 3D CV",
       "type": "Practical course",
       "description": "Built a zero-shot pipeline for unseen objects by combining Grounded-SAM-2 for open-vocabulary segmentation, InstantMesh / Trellis / Hunyuan3D for single-image 3D reconstruction, and Any6D for pose estimation.",
@@ -342,7 +419,10 @@
         "Grounded-SAM-2",
         "Any6D"
       ],
-      "visual": "pose"
+      "visual": "pose",
+      "categories": [
+        "vision"
+      ]
     },
     {
       "id": "ar-solar-system",
@@ -351,12 +431,14 @@
       "organization": "Technical University of Munich · Augmented Reality (IN2018)",
       "dates": "Summer semester 2025",
       "type": "Team course project",
-      "category": "vision",
       "description": "AR coursework progressing from C++/OpenCV marker detection and pose estimation to a Godot solar-system team application. Implemented the exercise’s vision-to-scene pipeline and improved game-state reliability, restart behavior and camera-aligned UI integration in the team project.",
       "tags": [
         "Augmented reality",
         "Godot / C++",
         "Marker pose estimation"
+      ],
+      "categories": [
+        "software"
       ]
     },
     {
@@ -364,7 +446,6 @@
       "title": "Safe Reinforcement Learning for Manipulation",
       "organization": "TUM · AIR · AI4DI",
       "dates": "Nov 2024 – Mar 2025",
-      "category": "robotics",
       "label": "AI · Robotics · RL",
       "type": "Guided research",
       "description": "Built a KUKA sim-to-real adaptation workflow with calibrated dynamics, safety-constrained RL and continual learning. Compared four training strategies and evaluated retention across four reaching targets.",
@@ -373,14 +454,33 @@
         "Sim-to-real",
         "ROS / Docker"
       ],
-      "visual": "safe-rl"
+      "visual": "safe-rl",
+      "categories": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "commonroad",
+      "title": "Search-Based Motion Planning with CommonRoad",
+      "label": "Autonomous driving",
+      "organization": "Technical University of Munich",
+      "dates": "2024–2025",
+      "type": "AI programming prize challenge",
+      "categories": [
+        "autonomous-driving"
+      ],
+      "description": "A search-based autonomous-driving planner that combines motion primitives, a task-aware heuristic, and safety-oriented pruning. The project won first prize in TUM's CommonRoad AI Programming Prize Challenge.",
+      "tags": [
+        "Motion planning",
+        "Heuristic search",
+        "First prize"
+      ]
     },
     {
       "id": "bitnet",
       "title": "Quantized Large Language Models",
       "organization": "KIT · cv:hci",
       "dates": "Apr – Aug 2024",
-      "category": "learning",
       "label": "AI · NLP",
       "type": "Seminar with practice",
       "description": "Investigated 1-bit and 1.58-bit Transformer layers and trained a quantized BERT model on Toxic Comment Classification data. Compared the practical training and inference costs with the theoretical efficiency of low-bit computation.",
@@ -389,14 +489,16 @@
         "BERT",
         "Quantization"
       ],
-      "visual": "quantization"
+      "visual": "quantization",
+      "categories": [
+        "nlp"
+      ]
     },
     {
       "id": "vae",
       "title": "Variational Autoencoders for Image Generation",
       "organization": "KIT · ISAS",
       "dates": "Apr – Aug 2024",
-      "category": "learning",
       "label": "AI · Generative models",
       "type": "University internship",
       "description": "Compared VAE, CVAE, and Gaussian-process-prior VAE models on MNIST and FacePlace, studying latent-space structure, conditional generation, and identity/viewpoint-aware reconstruction.",
@@ -404,6 +506,9 @@
         "VAE / CVAE",
         "Generative modeling",
         "Python"
+      ],
+      "categories": [
+        "foundation-models"
       ]
     },
     {
@@ -411,7 +516,6 @@
       "title": "Benchmarking Inverse Kinematics Algorithms",
       "organization": "KIT · IRL",
       "dates": "May 2023 – Feb 2024",
-      "category": "robotics",
       "label": "Robotics",
       "type": "Bachelor's thesis",
       "description": "Benchmarked Cartesian-space controllers and open-source inverse kinematics algorithms for the Franka Emika robot. Worked with robotic manipulation platforms, controller systems, and MuJoCo.",
@@ -419,6 +523,9 @@
         "Inverse kinematics",
         "Franka",
         "Python / C++"
+      ],
+      "categories": [
+        "robotics"
       ]
     },
     {
@@ -426,7 +533,6 @@
       "title": "Interactive Robot Learning",
       "organization": "KIT · IRL",
       "dates": "Apr – Sep 2023",
-      "category": "robotics",
       "label": "ML · Robotics",
       "type": "University internship",
       "description": "Built an articulated MuJoCo kitchen and Blender assets for HoloLens, then explored Franka door opening through demonstrations and probabilistic movement primitives.",
@@ -434,6 +540,9 @@
         "Learning from demonstration",
         "Movement primitives",
         "MuJoCo / Blender"
+      ],
+      "categories": [
+        "robotics"
       ]
     },
     {
@@ -441,7 +550,6 @@
       "title": "An Experimental Platform for Outlier Data",
       "organization": "KIT · IPD Böhm",
       "dates": "Nov 2022 – Feb 2023",
-      "category": "systems",
       "label": "Software systems",
       "type": "Software development practice",
       "description": "Contributed to Odex, a Django/MySQL web platform for running and comparing PyOD outlier-detection methods on user-uploaded high-dimensional data and feature subspaces.",
@@ -449,6 +557,9 @@
         "Django / MySQL",
         "PyOD",
         "Subspace analysis"
+      ],
+      "categories": [
+        "software"
       ]
     },
     {
@@ -456,7 +567,6 @@
       "title": "Mobile Robots Competition",
       "organization": "KIT · H²T",
       "dates": "Oct 2022 – Feb 2023",
-      "category": "robotics",
       "label": "Robotics",
       "type": "Practical course",
       "description": "Designed and programmed a LEGO Mindstorms EV3 robot for a multi-stage course, combining mechanical CAD studies, sensor integration, PID control and state-machine logic.",
@@ -464,6 +574,9 @@
         "Sensor integration",
         "PID control",
         "MicroPython"
+      ],
+      "categories": [
+        "robotics"
       ]
     },
     {
@@ -471,7 +584,6 @@
       "title": "CNN-Based Traffic Surveys from Drone Video",
       "organization": "KIT · IFV",
       "dates": "May 2021 – Jan 2022",
-      "category": "vision",
       "label": "AI · 2D CV",
       "type": "Master's thesis project",
       "description": "Fine-tuned YOLO detector families using VisDrone and evaluated them on custom annotated drone videos. Built a lane-aware tracker and directional vehicle counter to compare complete traffic-analysis pipelines.",
@@ -479,6 +591,9 @@
         "YOLO / VisDrone",
         "Vehicle tracking",
         "Traffic counting"
+      ],
+      "categories": [
+        "vision"
       ]
     }
   ],
@@ -652,5 +767,35 @@
     "eyebrow": "Robotics · 3D vision · Autonomous driving",
     "title": "Selected awards & competitions",
     "description": "I connect model development, data engineering and system integration to solve practical problems across these fields. My competition work has earned two first prizes and a fourth-place finish among 32 teams."
-  }
+  },
+  "project_categories": [
+    {
+      "id": "all",
+      "label": "All projects"
+    },
+    {
+      "id": "robotics",
+      "label": "Robotics"
+    },
+    {
+      "id": "vision",
+      "label": "Computer vision"
+    },
+    {
+      "id": "autonomous-driving",
+      "label": "Autonomous driving"
+    },
+    {
+      "id": "foundation-models",
+      "label": "Foundation models"
+    },
+    {
+      "id": "nlp",
+      "label": "NLP"
+    },
+    {
+      "id": "software",
+      "label": "Software"
+    }
+  ]
 }

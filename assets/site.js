@@ -10,7 +10,8 @@ if (filters && projects.length) {
     const category = button.dataset.filter;
     let visible = 0;
     projects.forEach(project => {
-      project.hidden = category !== 'all' && project.dataset.category !== category;
+      const categories = (project.dataset.categories || project.dataset.category || '').split(/\s+/);
+      project.hidden = category !== 'all' && !categories.includes(category);
       if (!project.hidden) visible += 1;
     });
     filters.querySelectorAll('button').forEach(item => {

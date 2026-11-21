@@ -4488,30 +4488,6 @@
   },
   "additional_projects": [
     {
-      "id": "maniparena",
-      "title": "AI Agent + VLA for ManipArena",
-      "label": "AI · VLA · Agent",
-      "organization": "TUM · Photogrammetry and Remote Sensing · CVPR Workshop",
-      "dates": "Apr – May 2026",
-      "type": "Competition project"
-    },
-    {
-      "id": "category-pose",
-      "title": "Category-Level 6D Object Pose Estimation",
-      "label": "AI · 3D CV",
-      "organization": "ICCV 2025 Workshop · WCLOP Challenge",
-      "dates": "2025",
-      "type": "Competition project"
-    },
-    {
-      "id": "commonroad",
-      "title": "Search-Based Motion Planning with CommonRoad",
-      "label": "Autonomous driving",
-      "organization": "Technical University of Munich",
-      "dates": "2024–2025",
-      "type": "AI programming prize challenge"
-    },
-    {
       "id": "rolewam",
       "title": "RoleWAM: Task-Aware World–Action Modeling",
       "label": "AI · VLA · WAM",
@@ -4534,22 +4510,6 @@
       "organization": "TUM · Cyber-Physical Systems",
       "dates": "Oct 2026 – Present",
       "type": "Planning and evaluation systems"
-    },
-    {
-      "id": "d4rtvla",
-      "title": "D4rtVLA / InstructD4RT",
-      "label": "AI · VLA · 4D CV",
-      "organization": "TUM · Photogrammetry and Remote Sensing",
-      "dates": "Jun – Aug 2026",
-      "type": "Discontinued research prototype"
-    },
-    {
-      "id": "huawei-vehicle-dynamics",
-      "title": "CAN-Based Foundation Models for Vehicle Dynamics",
-      "label": "AI · Foundation models · Vehicle dynamics",
-      "organization": "Huawei Munich Research Center · AEL",
-      "dates": "Mar – Aug 2026",
-      "type": "AI internship"
     }
   ],
   "research_timelines": {
