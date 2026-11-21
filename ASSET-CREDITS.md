@@ -216,3 +216,7 @@ The bilingual engineering PDFs and ZIP are explicitly labeled as reports and sup
 ## Summary resources and original-document archive, 20 November 2026
 
 Resource scope is explicit in the project metadata. Full-project summaries retain direct header links; the ManipArena bilingual retrospective is a project-level summary. The RICL dataset-construction Agent report is module-level material: both PDFs and their unchanged supporting ZIP appear in the bottom **Original documents** archive, reached from the header and the corresponding Agent architecture section. Its existing `#project-report` anchor remains an alias for the archive, preserving earlier links. Dataset and evaluation videos remain in their relevant body sections. No source documents or media were altered by this navigation change.
+
+## Shared detail-page presentation, 21 November 2026
+
+All 21 project detail pages use a left-hand introduction with summary links and a right-hand static project image, stacking on smaller screens. Reviewed whole-project reports, theses and final presentations can be opened directly from the header. Module reports, reading notes and supporting documents remain in the bottom **Original documents** section, with a header shortcut wherever archived documents exist. Videos and external project websites remain in the relevant body sections and references. Materials/ZIP download controls have been removed throughout the site; the RICL archive now presents only its two module-report PDFs. Existing media and PDF files are unchanged.

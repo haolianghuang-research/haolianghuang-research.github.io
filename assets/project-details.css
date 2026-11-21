@@ -4,6 +4,8 @@
 @media(max-width:640px){.detail-page{margin-left:22px;margin-right:22px;padding-top:20px}.back-link{font-size:13px;margin-bottom:25px}.detail-hero{gap:25px}.detail-heading h1{font-size:34px;line-height:1.17;letter-spacing:-.7px;margin:12px 0 20px}.detail-lead{font-size:17px;line-height:1.75}.detail-affiliation{font-size:14px}.detail-cover figcaption{font-size:11px;padding:11px 14px}.project-facts,.project-facts.facts-four{grid-template-columns:1fr 1fr;gap:23px 18px;padding:23px 20px;margin:30px 0}.project-facts dt{font-size:11px}.project-facts dd{font-size:13px}.detail-content h2{font-size:25px;line-height:1.4;margin-bottom:18px}.detail-section p,.detail-section li{font-size:16px;line-height:1.85}.method-pipeline{gap:10px}.method-pipeline li{padding:15px}.method-pipeline strong{font-size:15px}.method-pipeline li>span:last-child{font-size:13px}.technical-detail summary{font-size:18px;padding:17px}.technical-body{padding:18px}.table-scroll{margin:22px 0 0}th,td{padding:12px;min-width:100px}.project-gallery figcaption{font-size:13px;padding:15px}.related-projects{padding:35px 0}.related-projects>div{grid-template-columns:1fr;gap:12px}.related-projects>div>a{padding:20px}.related-projects strong{font-size:18px}.detail-bottom{font-size:13px;padding-bottom:35px;flex-wrap:wrap}}
 /* Academic Portfolio visual treatment with the shared sliding project outline. */
 .detail-page { padding-top:32px; }
+.detail-hero { grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); }
+.detail-heading,.detail-cover { min-width:0; }
 .detail-heading h1 { color:var(--ink); font-weight:700; letter-spacing:-.05em; }
 .detail-cover { border-radius:22px; }
 .detail-cover figcaption { background:var(--wash); }
@@ -31,11 +33,7 @@
 @media (max-width:1200px) { .detail-page { margin-inline:auto; } }
 @media (max-width:640px) { .detail-page { margin-inline:auto; padding-top:23px; } .detail-heading h1 { font-size:35px; } }
 
-/* Summary resources and demonstration lead the project narrative. */
-.detail-hero-overview { display:block; max-width:960px; margin-inline:auto; text-align:center; }
-.detail-hero-overview .detail-project-links { justify-content:center; }
-.project-overview-demo { max-width:860px; margin:45px auto 40px; }
-.project-overview-demo h2 { font-size:27px; line-height:1.35; letter-spacing:-.035em; margin-bottom:18px; }
-@media (max-width:640px) { .project-overview-demo { margin-top:32px; } .project-overview-demo h2 { font-size:25px; } }
+/* Keep the summary and static visual together; body media follows the method. */
+@media (max-width:900px) { .detail-hero { grid-template-columns:1fr; } }
 
 .detail-heading .detail-resource-note { font-size:15px; line-height:1.7; color:var(--muted); margin-top:24px; margin-bottom:-10px; }

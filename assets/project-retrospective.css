@@ -21,9 +21,4 @@
  .retrospective-description { font-size:14px; }
 }
 
-.retrospective-package { display:flex; align-items:center; flex-wrap:wrap; gap:12px 24px; padding-top:22px; margin-top:22px; border-top:1px solid #dce4ed; }
-.retrospective-package>a { display:inline-flex; align-items:center; min-height:42px; font-size:15px; font-weight:600; color:var(--blue); border-bottom:1px solid #b7cfe9; }
-.retrospective-package>p { flex:1 1 250px; margin:0; font-size:14px; line-height:1.7; color:#626873; }
-.retrospective-package>p>span { display:block; font-size:13px; color:#6b7481; }
-.retrospective-package>a:focus-visible { outline:3px solid #7caeeb; outline-offset:4px; }
 .detail-section img[src*="/ricl-agentic-"] { max-height:none; }

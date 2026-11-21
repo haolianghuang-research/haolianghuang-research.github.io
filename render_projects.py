@@ -26,18 +26,12 @@ def render_retrospective(info):
         cover = '../../assets/projects/' + e(item['cover'])
         size = f'{item["bytes"] / 1024 / 1024:.1f} MB'
         cards += f'''<article class="retrospective-card"><a class="retrospective-cover" href="{href}#view=FitH" target="_blank" rel="noopener" aria-label="Read {e(item['title'])}"><img src="{cover}" alt="{e(item['title'])} cover" width="420" height="594" loading="lazy"></a><div><p class="retrospective-edition">{e(item['language'])} · {item['pages']} pages · {size}</p><h3 lang="{e(item['lang'])}">{e(item['title'])}</h3><p class="retrospective-description">{e(item['description'])}</p><div class="retrospective-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">Read PDF</a><a href="{href}" download type="application/pdf">Download</a></div></div></article>'''
-    package = ''
-    if info.get('companion_package'):
-        item = info['companion_package']
-        href = '../../assets/reports/' + e(item['file'])
-        size = f'{item["bytes"] / 1024 / 1024:.1f} MB'
-        package = f'''<div class="retrospective-package"><a href="{href}" download type="application/zip">{e(item['label'])}</a><p>{e(item['description'])}<span>ZIP · {e(size)}</span></p></div>'''
     eyebrow = info.get('eyebrow', 'Illustrated project report · November 2026')
-    return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">{e(eyebrow)}</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div>{package}</section>'''
+    return f'''<section class="project-retrospective" id="project-report" aria-labelledby="retrospective-heading"><p class="eyebrow">{e(eyebrow)}</p><h2 id="retrospective-heading">{e(info['title'])}</h2><p class="retrospective-intro">{e(info['description'])}</p><div class="retrospective-editions">{cards}</div></section>'''
 
 
-def render_documents(documents, package=None, description=None, aliases=()):
-    if not documents and not package:
+def render_documents(documents, description=None, aliases=()):
+    if not documents:
         return ''
     cards = ''
     for item in documents:
@@ -50,10 +44,6 @@ def render_documents(documents, package=None, description=None, aliases=()):
         if item.get('public_copy'):
             note += '<p class="document-note">Public copy: personal identifiers removed.</p>'
         cards += f'''<article class="document-card"><div class="document-heading"><span class="document-format" aria-hidden="true">PDF</span><div><p class="document-kind">{e(item['kind'])} · {e(format_label)}</p><h3>{e(item['title'])}</h3><p class="document-meta">{e(pages)} · {e(size)} · {e(item['language'])}</p>{note}</div></div><div class="document-actions"><a href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf" aria-label="View PDF: {e(item['title'])}">View PDF</a><a href="{href}" download="{download_name}" type="application/pdf" aria-label="Download PDF: {e(item['title'])}">Download</a></div></article>'''
-    if package:
-        href = '../../assets/reports/' + e(package['file'])
-        size = f'{package["bytes"] / 1024 / 1024:.1f} MB'
-        cards += f'''<article class="document-card"><div class="document-heading"><span class="document-format" aria-hidden="true">ZIP</span><div><p class="document-kind">Supporting archive</p><h3>{e(package['title'])}</h3><p class="document-meta">{e(size)}</p><p class="document-note">{e(package['description'])}</p></div></div><div class="document-actions"><a href="{href}" download type="application/zip" aria-label="Download archive: {e(package['title'])}">Download</a></div></article>'''
     intro = description or 'Project reports, theses and retained presentations in their original language. Presentations are provided as static PDF exports; personal identifiers are removed where necessary.'
     anchors = ''.join(f'<span class="document-anchor" id="{e(alias)}" aria-hidden="true"></span>' for alias in aliases)
     return f'''<section class="detail-section project-documents" id="documents" aria-labelledby="documents-heading">{anchors}<h2 id="documents-heading">Original documents</h2><p class="documents-intro">{e(intro)}</p><div class="document-list">{cards}</div></section>'''
@@ -112,71 +102,55 @@ def render_all(root, content, details):
         status = f'<p class="detail-status">{e(d["status"])}</p>' if d.get('status') else ''
         image = d.get('hero_image') or d.get('thumbnail')
         hero_image = ''
-        if image and not d.get('overview_demo') and d.get('hero_layout') != 'text':
+        if image:
             hero_image = f'<figure class="detail-cover"><img src="../../assets/projects/{e(image["file"])}" alt="{e(image["alt"])}" width="1000" height="625"><figcaption>{e(image.get("caption","Project visualization"))}</figcaption></figure>'
         facts = ''.join(f'<div><dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd></div>' for f in d.get('facts', []))
         facts_style = ' facts-four' if len(d.get('facts',[])) == 4 else ''
         system = render_system_diagram(root, d['system_diagram']) if d.get('system_diagram') else ''
         architecture_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/system-architecture.css")}"><script src="../../{asset_url("assets/system-architecture.js")}" defer></script>' if system else ''
-        overview_demo = render_section(d['overview_demo']) if d.get('overview_demo') else ''
-        intro_sections = ''.join(render_section(section) for section in d.get('intro_sections', []))
+        body_sections = ([d['overview_demo']] if d.get('overview_demo') else []) + d.get('intro_sections', []) + d['sections']
         report_info = d.get('retrospective')
         project_report = report_info if report_info and report_info.get('scope', 'project') == 'project' else None
         module_report = report_info if report_info and report_info.get('scope') == 'module' else None
         report = render_retrospective(project_report) if project_report else ''
-        hero_class = ' detail-hero-overview' if overview_demo or d.get('hero_layout') == 'text' else ''
         report_after = project_report.get('after_section') if project_report else None
         report_at_top = report if not report_after else ''
         report_outline = project_report.get('outline_title', 'Illustrated report') if project_report else ''
         resource_note = f'<p class="detail-resource-note">{e(d["resource_note"])}</p>' if d.get('resource_note') else ''
         report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
         archived_documents = list(d.get('documents', []))
-        archived_package = None
         archive_intro = None
         archive_aliases = ()
         if module_report:
             for edition in module_report['editions']:
                 archived_documents.append({
                     'file':edition['file'], 'title':edition['title'], 'language':edition['language'],
-                    'kind':'Dataset-construction Agent system · module report', 'format':'Original PDF',
+                    'kind':module_report.get('eyebrow', 'Module report'), 'format':'Original PDF',
                     'pages':edition['pages'], 'bytes':edition['bytes'], 'note':edition['description']
                 })
-            package = module_report.get('companion_package')
-            if package:
-                archived_package = {**package, 'title':'Dataset Agent system: source, diagrams and evidence bundle'}
             archive_intro = module_report.get('archive_intro')
             archive_aliases = ('project-report',)
-        documents = render_documents(archived_documents, archived_package, archive_intro, archive_aliases)
+        documents = render_documents(archived_documents, archive_intro, archive_aliases)
         document_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-documents.css")}">' if documents else ''
-        website = d.get('project_website')
-        demo = d.get('demo_link') or ({'section':d['overview_demo']['id'], 'label':d['overview_demo'].get('resource_label','Watch demo')} if overview_demo else None)
-        website_link = f'<a class="button button-primary" href="#{e(demo["section"])}">{e(demo["label"])}</a>' if demo else ''
-        if website:
-            button_style = 'button-secondary' if demo else 'button-primary'
-            website_link += f'<a class="button {button_style}" href="{e(website["url"])}" target="_blank" rel="noopener">{e(website["label"])}</a>'
-        for section in d.get('intro_sections', []):
-            if section.get('resource_label'):
-                website_link += f'<a class="button button-secondary" href="#{e(section["id"])}">{e(section["resource_label"])}</a>'
-        if project_report:
-            for edition in project_report['editions']:
-                href = '../../assets/reports/' + e(edition['file'])
-                label = edition.get('resource_label') or ('中文报告' if edition['lang'].startswith('zh') else 'English report')
-                button_style = 'button-primary' if edition.get('primary') else 'button-secondary'
-                website_link += f'<a class="button {button_style}" href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">{e(label)}</a>'
-            package = project_report.get('companion_package')
-            if package:
-                href = '../../assets/reports/' + e(package['file'])
-                label = package.get('resource_label', 'Materials')
-                website_link += f'<a class="button button-secondary" href="{href}" download type="application/zip">{e(label)}</a>'
+        # Only reviewed whole-project summaries belong in the hero. Module
+        # documents stay in the archive; videos stay in their body sections.
+        summary_documents = [item for item in d.get('documents', []) if item.get('scope') == 'project' and item.get('resource_label')]
+        summary_editions = project_report['editions'] if project_report else []
+        website_link = ''
+        for item in summary_editions + summary_documents:
+            href = '../../assets/reports/' + e(item['file'])
+            label = item.get('resource_label') or item['title']
+            button_style = 'button-secondary' if website_link else 'button-primary'
+            website_link += f'<a class="button {button_style}" href="{href}#view=FitH" target="_blank" rel="noopener" type="application/pdf">{e(label)}</a>'
         if documents:
-            website_link += '<a class="button button-secondary" href="#documents">Original documents</a>'
+            button_style = 'button-secondary' if website_link else 'button-primary'
+            website_link += f'<a class="button {button_style}" href="#documents">Original documents</a>'
         if website_link:
             website_link = f'<nav class="detail-project-links" aria-label="Project resources">{website_link}</nav>'
         website_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-links.css")}">' if website_link else ''
-        media_sections = d['sections'] + d.get('intro_sections', [])
-        if any(s.get('videos') or s.get('video_embed') for s in media_sections) or overview_demo:
+        if any(s.get('videos') or s.get('video_embed') for s in body_sections):
             website_assets += f'<link rel="stylesheet" href="../../{asset_url("assets/robot-demos.css")}">'
-        if any(s.get('comparison') for s in media_sections):
+        if any(s.get('comparison') for s in body_sections):
             website_assets += f'<script src="../../{asset_url("assets/project-media.js")}" defer></script>'
         method = ''
         if d.get('pipeline') and not system:
@@ -184,16 +158,14 @@ def render_all(root, content, details):
             method = f'<section class="pipeline-section" id="method-at-a-glance" aria-labelledby="pipeline-heading"><p class="eyebrow">Method at a glance</p><h2 id="pipeline-heading">How it works</h2><ol class="method-pipeline">{nodes}</ol><p class="diagram-caption">Project workflow schematic.</p></section>'
         section_links = ''.join(f'<a href="#{e(s["id"])}">{e(s["title"])}</a>' for s in d['sections'])
         outline = [{"id":"overview","title":"Overview"}]
-        if overview_demo: outline.append({'id':d['overview_demo']['id'],'title':'Overview demo'})
-        outline.extend({'id':section['id'],'title':section['title']} for section in d.get('intro_sections', []))
         if report and not report_after: outline.append({'id':'project-report','title':report_outline})
         if system: outline.append({"id":"system-architecture","title":"System architecture"})
         if method: outline.append({"id":"method-at-a-glance","title":"Method at a glance"})
-        for section in d['sections']:
+        for section in body_sections:
             outline.append({'id':section['id'],'title':section['title']})
             if report_after == section['id']:
                 outline.append({'id':'project-report','title':report_outline})
-        sections = ''.join(render_section(section) + (report if report_after == section['id'] else '') for section in d['sections'])
+        sections = ''.join(render_section(section) + (report if report_after == section['id'] else '') for section in body_sections)
         gallery = ''
         if d.get('gallery'):
             gallery = '<section class="detail-section" id="visuals"><h2>Project visuals</h2><div class="project-gallery">'
@@ -228,7 +200,7 @@ def render_all(root, content, details):
 <meta property="og:title" content="{e(p['title'])} | Haoliang Huang"><meta property="og:description" content="{e(d['summary'])}"><meta property="og:type" content="article"><meta property="og:url" content="{canonical}">{og_image}
 <meta name="theme-color" content="#173f58"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../{asset_url('assets/styles.css')}"><link rel="stylesheet" href="../../{asset_url('assets/project-details.css')}"><link rel="stylesheet" href="../../{asset_url('assets/navigation.css')}">{architecture_assets}{document_assets}{website_assets}{report_assets}<script src="../../{asset_url('assets/navigation.js')}" defer></script><script src="../../{asset_url('assets/project-details.js')}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>{render_navigation(content, '../../', nav_section, outline, p['title'])}
-<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero{hero_class}" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{resource_note}{website_link}</div>{hero_image}</div>{overview_demo}{intro_sections}<dl class="project-facts{facts_style}">{facts}</dl>
+<main class="detail-page" id="main"><a class="back-link" href="{back_target}">{back_label}</a><div class="detail-hero" id="overview"><div class="detail-heading"><p class="eyebrow">{e(p['label'])}</p>{status}<h1>{e(p['title'])}</h1><p class="detail-lead">{e(d['summary'])}</p><p class="detail-affiliation">{e(p['organization'])}<span>{e(p['dates'])} · {e(p['type'])}</span></p>{resource_note}{website_link}</div>{hero_image}</div><dl class="project-facts{facts_style}">{facts}</dl>
 {report_at_top}{system}<div class="detail-layout"><article class="detail-content">{method}{sections}{gallery}{documents}{refs}<p class="source-note">{e(d.get('source_note','Based on my project report and implementation.'))}</p></article></div>{related}
 <section class="detail-bottom"><a href="../../#featured">Explore selected research</a><a href="mailto:{e(content['email'])}">Discuss this project</a></section></main><footer class="footer"><div><span>© 2026 Haoliang Huang</span><span>Research portfolio · November 2026</span><a href="../../">Home</a></div></footer></body></html>'''
         destination = root/'projects'/slug

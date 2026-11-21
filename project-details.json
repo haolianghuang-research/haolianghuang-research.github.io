@@ -100,7 +100,9 @@
           "format": "Original PDF",
           "pages": 5,
           "bytes": 120814,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Seminar report"
         },
         {
           "file": "bitnet/seminar-presentation.pdf",
@@ -110,7 +112,9 @@
           "format": "PDF export of original slides",
           "pages": 21,
           "bytes": 1955639,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Presentation"
         }
       ]
     },
@@ -232,7 +236,9 @@
           "format": "Original PDF",
           "pages": 29,
           "bytes": 4831422,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Project report"
         },
         {
           "file": "vae/final-project-presentation.pdf",
@@ -242,7 +248,9 @@
           "format": "PDF export of original slides",
           "pages": 43,
           "bytes": 4913284,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Presentation"
         }
       ]
     },
@@ -470,7 +478,9 @@
           "format": "Original PDF",
           "pages": 132,
           "bytes": 14740474,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Thesis"
         },
         {
           "file": "ik/bachelor-defense.pdf",
@@ -480,7 +490,9 @@
           "format": "PDF export of original slides",
           "pages": 75,
           "bytes": 7410099,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Defense slides"
         }
       ],
       "demo_link": {
@@ -625,7 +637,9 @@
           "format": "Original PDF",
           "pages": 8,
           "bytes": 71045,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Course report"
         },
         {
           "file": "interactive-learning/practical-course-presentation.pdf",
@@ -635,7 +649,9 @@
           "format": "PDF export of original slides",
           "pages": 17,
           "bytes": 1273141,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Presentation"
         }
       ],
       "demo_link": {
@@ -775,7 +791,9 @@
           "format": "PDF export of original slides",
           "pages": 22,
           "bytes": 1607625,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Final presentation"
         },
         {
           "file": "outlier/test-phase-presentation.pdf",
@@ -785,7 +803,8 @@
           "format": "PDF export of original slides",
           "pages": 23,
           "bytes": 1663646,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "supporting"
         }
       ]
     },
@@ -899,7 +918,8 @@
           "pages": 4,
           "bytes": 3341430,
           "public_copy": true,
-          "note": "Original handwritten course submission."
+          "note": "Original handwritten course submission.",
+          "scope": "module"
         },
         {
           "file": "mobile-robots/personal-exercise-2.pdf",
@@ -910,7 +930,8 @@
           "pages": 1,
           "bytes": 646606,
           "public_copy": true,
-          "note": "Original handwritten course submission."
+          "note": "Original handwritten course submission.",
+          "scope": "module"
         }
       ]
     },
@@ -1050,7 +1071,9 @@
           "format": "Original PDF",
           "pages": 94,
           "bytes": 7685120,
-          "public_copy": true
+          "public_copy": true,
+          "scope": "project",
+          "resource_label": "Thesis"
         },
         {
           "file": "traffic/thesis-defense.pdf",
@@ -1060,7 +1083,9 @@
           "format": "PDF export of original slides",
           "pages": 24,
           "bytes": 2301771,
-          "public_copy": true
+          "public_copy": true,
+          "scope": "project",
+          "resource_label": "Defense slides"
         }
       ]
     },
@@ -1436,7 +1461,8 @@
           "format": "Original PDF",
           "pages": 7,
           "bytes": 110896,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "module"
         },
         {
           "file": "pose/final-project-presentation.pdf",
@@ -1446,7 +1472,9 @@
           "format": "PDF export of original slides",
           "pages": 65,
           "bytes": 4807335,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Project presentation"
         }
       ],
       "project_website": {
@@ -1625,7 +1653,9 @@
           "format": "PDF export of original slides",
           "pages": 26,
           "bytes": 2015699,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Challenge presentation"
         }
       ]
     },
@@ -1788,7 +1818,9 @@
           "format": "PDF export of original slides",
           "pages": 29,
           "bytes": 1869775,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Project presentation"
         }
       ],
       "demo_link": {
@@ -1956,7 +1988,9 @@
           "format": "PDF export of original slides",
           "pages": 17,
           "bytes": 1352721,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Final presentation"
         }
       ],
       "demo_link": {
@@ -2185,7 +2219,9 @@
           "format": "Original PDF",
           "pages": 17,
           "bytes": 1919364,
-          "public_copy": true
+          "public_copy": true,
+          "scope": "project",
+          "resource_label": "Research report"
         },
         {
           "file": "safe-rl/final-presentation.pdf",
@@ -2195,7 +2231,9 @@
           "format": "PDF export of original slides",
           "pages": 15,
           "bytes": 990555,
-          "public_copy": true
+          "public_copy": true,
+          "scope": "project",
+          "resource_label": "Presentation"
         },
         {
           "file": "safe-rl/scda-paper.pdf",
@@ -2205,7 +2243,8 @@
           "format": "Original PDF",
           "pages": 8,
           "bytes": 735060,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "supporting"
         }
       ],
       "project_website": {
@@ -2594,7 +2633,8 @@
           "format": "PDF export of original report",
           "pages": 30,
           "bytes": 650014,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project"
         },
         {
           "file": "maniparena/vla-diagnosis-notes.pdf",
@@ -2604,7 +2644,8 @@
           "format": "Original PDF",
           "pages": 7,
           "bytes": 613032,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "module"
         },
         {
           "file": "maniparena/vlm-diagnosis-notes.pdf",
@@ -2614,7 +2655,8 @@
           "format": "Original PDF",
           "pages": 2,
           "bytes": 439643,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "module"
         }
       ],
       "retrospective": {
@@ -2762,7 +2804,8 @@
           "format": "Original PDF",
           "pages": 2,
           "bytes": 60070,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "supporting"
         },
         {
           "file": "commonroad/winner-presentation.pdf",
@@ -2772,7 +2815,9 @@
           "format": "PDF export of original slides",
           "pages": 4,
           "bytes": 431491,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Winner presentation"
         }
       ]
     },
@@ -3038,7 +3083,7 @@
           ],
           "link": {
             "url": "#documents",
-            "title": "Read the Dataset Agent system reports and supporting material"
+            "title": "Read the Dataset Agent system reports"
           }
         },
         {
@@ -3260,7 +3305,7 @@
           "title": "Evaluation example: human condition and robot rollout",
           "paragraphs": [
             "The exact-task human video used as the model’s visual condition is shown alongside its saved Zero-WAM policy rollout in RoboTwin simulation.",
-            "This is one engineering smoke example (seed 100000), separate from the composed-video examples and the ten-seed pilot below. The two recordings keep their original export timing; the robot recording shows sampled control observations."
+            "This is one engineering smoke example (seed 100000), separate from the composed-video examples and the ten-seed pilot above. The two recordings keep their original export timing; the robot recording shows sampled control observations."
           ],
           "video_layout": "pair",
           "comparison": true,
@@ -3365,7 +3410,7 @@
           "url": "https://robotwin-platform.github.io/"
         }
       ],
-      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs and the complete materials archive are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors. The paired human/robot demo is the exact-full stamp_seal engineering smoke run of 30 September 2026, seed 100000. The human condition is sample 206 and the robot views are saved policy observations in RoboTwin simulation. The visible high-camera crop preserves all 37 source frames and their export timing; the original multiview recording remains available.",
+      "source_note": "Based on my data specifications, workflow reviews, model inspection, and retained pilot records. Zero-WAM is the released backbone of its original authors. HumanGen stills are identified as AI-generated conditioning examples. Updated November 2026. The preliminary Embodied RSI scope was cross-checked against my Notion research index and its executor, skills, memory and execution-interface notes. The agentic data-system sections are based on the author-provided bilingual engineering report dated 20 November 2026 and its 18-source evidence index. This report records the inspected November 13–16 implementation revisions, with configuration values distinguished from live production status and measured efficiency. Report PDFs are provided unchanged; web figures preserve the original vector artwork. The two composition videos were retrieved from the retained Linux Zero-WAM/visualization pilot exports. Original frames and timing are preserved in the web copies; HumanGen source material and the Zero-WAM backbone remain credited to their original authors. The paired human/robot demo is the exact-full stamp_seal engineering smoke run of 30 September 2026, seed 100000. The human condition is sample 206 and the robot views are saved policy observations in RoboTwin simulation. The visible high-camera crop preserves all 37 source frames and their export timing; the original multiview recording remains available.",
       "featured": true,
       "status": "Ongoing research · August 2026–Present",
       "strengths": [
@@ -3412,18 +3457,10 @@
             "resource_label": "数据集构建 Agent 系统报告"
           }
         ],
-        "companion_package": {
-          "file": "ricl/agentic-data-generation-materials-2026-11.zip",
-          "label": "Download Dataset Agent materials",
-          "description": "Supporting material for the dataset-construction Agent system: bilingual reports, diagrams, editable report source and evidence index.",
-          "bytes": 1741078,
-          "resource_label": "Dataset Agent materials"
-        },
         "outline_title": "Dataset Agent report",
         "scope": "module",
-        "archive_intro": "Module reports and supporting files for the dataset-construction Agent system within RICL / Zero-WAM. The English and Chinese reports cover this engineering module: generation, review, repair, provenance and operations."
-      },
-      "hero_layout": "text"
+        "archive_intro": "Module reports for the dataset-construction Agent system within RICL / Zero-WAM. The English and Chinese reports cover this engineering module: generation, review, repair, provenance and operations."
+      }
     },
     "d4rtvla": {
       "summary": "Adapted and trained the OpenD4RT 4D reconstruction model as a world-model-like predictor of future key-object features for VLA action generation. A later InstructD4RT branch, inspired by InstructSAM, was planned for integration; the direction was discontinued because its generalization was insufficient.",
@@ -3623,7 +3660,8 @@
           "pages": 15,
           "bytes": 1713672,
           "public_copy": false,
-          "note": "Literature-reading slides, separate from the prototype’s own experimental results."
+          "note": "Literature-reading slides, separate from the prototype’s own experimental results.",
+          "scope": "module"
         },
         {
           "file": "d4rtvla/dynamicvla-reading-presentation.pdf",
@@ -3634,7 +3672,8 @@
           "pages": 21,
           "bytes": 2979492,
           "public_copy": false,
-          "note": "Literature-reading slides, separate from the prototype’s own experimental results."
+          "note": "Literature-reading slides, separate from the prototype’s own experimental results.",
+          "scope": "module"
         }
       ],
       "demo_link": {
@@ -3869,7 +3908,9 @@
           "format": "PDF export of original slides",
           "pages": 3,
           "bytes": 899309,
-          "public_copy": false
+          "public_copy": false,
+          "scope": "project",
+          "resource_label": "Project presentation"
         }
       ],
       "demo_link": {
