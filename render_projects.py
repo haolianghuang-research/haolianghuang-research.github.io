@@ -141,7 +141,7 @@ def render_all(root, content, details):
         resource_note = f'<p class="detail-resource-note">{e(d["resource_note"])}</p>' if d.get('resource_note') else ''
         report_assets = f'<link rel="stylesheet" href="../../{asset_url("assets/project-retrospective.css")}">' if report else ''
         archived_documents = list(d.get('documents', []))
-        archive_intro = None
+        archive_intro = d.get('documents_intro')
         archive_aliases = ()
         if module_report:
             for edition in module_report['editions']:

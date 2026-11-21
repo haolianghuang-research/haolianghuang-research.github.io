@@ -4291,6 +4291,182 @@
         "caption": "CAN time-series modeling · Conceptual workflow"
       },
       "source_note": "Based on my internship summary, monthly work notes and retained CAN-modeling and data-analysis code. This page summarizes my role and methods at a high level."
+    },
+    "ar-solar-system": {
+      "summary": "An interactive solar-system AR application built with Godot 4, a C++ GDExtension and OpenCV. Printed markers anchor 3D planets and information labels; an ordering game turns the same physical scene into a spatial learning task. My work focuses on reliable game-state transitions, repeatable restarts and camera-aligned UI behavior.",
+      "status": "Course project · Summer semester 2025",
+      "facts": [
+        {
+          "label": "Application",
+          "value": "Marker-based augmented reality · Solar-system learning game"
+        },
+        {
+          "label": "Stack",
+          "value": "Godot 4 · GDScript · C++ GDExtension · OpenCV"
+        },
+        {
+          "label": "Geometry",
+          "value": "Binary fiducial decoding · PnP pose estimation · 3D scene transforms"
+        },
+        {
+          "label": "Setting",
+          "value": "TUM IN2018 · Summer semester 2025 · Team project"
+        }
+      ],
+      "timeline": {
+        "title": "From marker tracking to a repeatable AR interaction",
+        "intro": "The team developed the application in June–July 2025. I focused on game-state reliability and display integration in the 4–5 July iteration.",
+        "entries": [
+          {
+            "period": "17 Jun 2025",
+            "date_iso": "2025-06-17",
+            "title": "Native extension and planet assets",
+            "url": "#architecture",
+            "description": "Connected the Godot C++ extension and 3D planet assets, bringing the course’s computer-vision foundation into an interactive scene."
+          },
+          {
+            "period": "21–24 Jun 2025",
+            "title": "Camera registration and learning interaction",
+            "url": "#interaction",
+            "description": "Team development aligns the rendered scene with camera images and adds planet information, animations and ordering-game behavior."
+          },
+          {
+            "period": "4–5 Jul 2025",
+            "title": "My work: restart logic and display integration",
+            "url": "#contribution",
+            "label": "My commits",
+            "description": "Repaired cached-state handling between rounds, clarified start/exit/restart transitions, aligned the window and bottom controls with camera dimensions, and updated platform export and asset-import settings."
+          },
+          {
+            "period": "6 Jul 2025",
+            "date_iso": "2025-07-06",
+            "title": "Tutorial and visual refinement",
+            "url": "#documents",
+            "description": "Updated the tutorial text and planet colors. The original user guide is available below as a PDF export."
+          }
+        ],
+        "note": "These dates identify retained repository milestones within the summer-semester project. The team application and my specific recorded contributions are described separately."
+      },
+      "pipeline": [
+        {
+          "title": "Acquire",
+          "text": "Read live camera frames or a recorded marker sequence."
+        },
+        {
+          "title": "Detect & decode",
+          "text": "Find quadrilateral markers, refine corners and recover their binary IDs."
+        },
+        {
+          "title": "Estimate & render",
+          "text": "Estimate marker pose with PnP and place the matching planet in the Godot scene."
+        },
+        {
+          "title": "Interact",
+          "text": "Show planet facts, evaluate marker ordering and manage game rounds."
+        }
+      ],
+      "sections": [
+        {
+          "id": "task",
+          "title": "An educational AR scene with a physical interface",
+          "paragraphs": [
+            "The team project turns nine printed markers into the Sun and eight planets. Looking at a marker reveals its associated 3D model, name and information. Users then rearrange the physical markers to place the planets in their expected order from the Sun.",
+            "The application combines classical computer vision, calibrated geometry and interactive graphics. The main engineering challenge is keeping camera images, marker poses, rendered models and game state consistent as markers move or disappear."
+          ]
+        },
+        {
+          "id": "contribution",
+          "title": "My contribution",
+          "paragraphs": [
+            "I focused on making game rounds repeatable and keeping the application’s controls aligned with its camera input. My 4–5 July changes covered the following:"
+          ],
+          "bullets": [
+            "Fixed the restart path by clearing cached planet transforms when beginning a new round, so a previous arrangement does not remain the basis of the next game.",
+            "Implemented clearer start, exit and replay transitions, coordinating button text with completion-state handling.",
+            "Aligned the window, camera canvas, render viewport and bottom controls with the input image dimensions; updated Windows export and imported-texture settings."
+          ]
+        },
+        {
+          "id": "architecture",
+          "title": "Architecture: camera geometry inside an interactive renderer",
+          "paragraphs": [
+            "A native C++ CVCamera component exposes OpenCV capture and marker tracking through Godot’s GDExtension interface. The vision path thresholds the image, finds candidate quadrilaterals and refines their corners. It rectifies each candidate into a small grid, checks the black border and decodes the inner binary pattern across possible rotations.",
+            "Four image corners and the marker’s configured physical dimensions feed OpenCV solvePnP. Rotation and translation are converted into a homogeneous pose and then into Godot’s coordinate conventions. The scene maps each recognized ID to its planet model and updates the associated transform and labels.",
+            "Camera image dimensions and the projection field of view connect the video background to the virtual camera. The planet assets use adjusted visual scales and labels for an understandable tabletop experience."
+          ]
+        },
+        {
+          "id": "interaction",
+          "title": "Game logic, marker visibility and restart behavior",
+          "paragraphs": [
+            "The ordering game uses the tracked planet transforms to compute distances from the Sun and sort the planets. The resulting order is compared with the expected sequence; label colors provide feedback and a completion state controls the success animation.",
+            "Marker loss and cached positions must be handled together with game state. My restart fix removes cached transforms at the beginning of a new round, while the start/exit/replay controls determine when completion checks are active. These changes support repeated interaction with the same physical marker set."
+          ]
+        },
+        {
+          "id": "data",
+          "title": "Inputs and assets",
+          "paragraphs": [
+            "Inputs are live or replayed RGB camera frames, nine printed binary markers, and textured 3D planet meshes. The repository includes marker images, Godot scenes, planet assets and several recorded camera sequences for testing tracking and interaction.",
+            "The still images and video shown here are original camera inputs from that project. They show the physical markers and user movement; the rendered AR planet layer is described through the implementation and project workflow."
+          ]
+        },
+        {
+          "id": "marker-input",
+          "title": "Recorded input: rearranging the physical markers",
+          "paragraphs": [
+            "This original recording provides a repeatable input sequence for the ordering game. A user moves and reorders printed markers on a table. It is shown as camera input, without a rendered planet overlay."
+          ],
+          "videos": [
+            {
+              "file": "ar-solar-marker-reordering-input.mp4",
+              "poster": "ar-solar-marker-input-poster.webp",
+              "width": 832,
+              "height": 464,
+              "title": "Original camera input showing marker reordering for the solar-system AR game",
+              "caption": "Original game_demo camera sequence from the team repository, approximately 50 seconds. The video stream is preserved without re-encoding; this is the application input.",
+              "download": true
+            }
+          ]
+        }
+      ],
+      "gallery": [],
+      "references": [
+        {
+          "title": "Original Solar System Augmented Reality team repository",
+          "url": "https://github.com/philippw23/Solar-System-Augmented-Reality-Project",
+          "note": "Team code, assets and project credits. The CVCamera foundation also credits the course contributors."
+        }
+      ],
+      "documents": [
+        {
+          "file": "ar-solar-system/original-user-tutorial.pdf",
+          "title": "Solar System AR: original user tutorial",
+          "kind": "User tutorial",
+          "language": "English",
+          "format": "PDF export",
+          "pages": 1,
+          "bytes": 24865,
+          "scope": "module",
+          "note": "PDF export of the original Tutorial.docx from the team project. Explains the marker-based exploration and ordering challenge."
+        }
+      ],
+      "thumbnail": {
+        "file": "ar-solar-marker-scene.webp",
+        "alt": "Nine printed binary AR markers arranged on a wooden table in an original project camera recording",
+        "caption": "Original marker scene · Camera input"
+      },
+      "hero_image": {
+        "file": "ar-solar-marker-scene.webp",
+        "alt": "Nine printed binary AR markers arranged on a wooden table in an original project camera recording",
+        "caption": "Original marker scene · Camera input"
+      },
+      "source_note": "Reviewed against the retained Solar System Augmented Reality repository, the original tutorial, CVCamera and Gameplay implementation, and June–July 2025 commit history. The course is recorded as Erweiterte Realität (IN2018), summer semester 2025. Team functionality is distinguished from Haoliang Huang’s documented 4–5 July changes. Images and the embedded recording are original marker-camera inputs. The original tutorial is preserved as a static PDF export.",
+      "related": [
+        "pose",
+        "semantic-reconstruction"
+      ],
+      "documents_intro": "Original user tutorial for the team AR application, covering marker-based exploration and the planet-ordering challenge. Provided as a static PDF export."
     }
   },
   "additional_projects": [

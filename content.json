@@ -67,7 +67,8 @@
     "outlier": "kit",
     "mobile-robots": "kit",
     "traffic": "kit",
-    "commonroad": "tum"
+    "commonroad": "tum",
+    "ar-solar-system": "tum"
   },
   "about_affiliations": {
     "current": [
@@ -342,6 +343,21 @@
         "Any6D"
       ],
       "visual": "pose"
+    },
+    {
+      "id": "ar-solar-system",
+      "title": "Solar System Augmented Reality",
+      "label": "AR · Computer vision · Interactive graphics",
+      "organization": "Technical University of Munich · Augmented Reality (IN2018)",
+      "dates": "Summer semester 2025",
+      "type": "Team course project",
+      "category": "vision",
+      "description": "A marker-based AR solar system built with Godot 4, C++ and OpenCV. Connected camera-derived marker poses to 3D planet models and an ordering game; my work focused on game-state reliability, restart behavior and camera-aligned UI integration.",
+      "tags": [
+        "Augmented reality",
+        "Godot / C++",
+        "Marker pose estimation"
+      ]
     },
     {
       "id": "safe-rl",
