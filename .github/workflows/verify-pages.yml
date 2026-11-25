@@ -1,0 +1,44 @@
+name: Verify GitHub Pages
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify live pages
+    if: >-
+      github.event.deployment.environment == 'github-pages' &&
+      github.event.deployment.ref == 'main' &&
+      github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: verify-live-pages
+      cancel-in-progress: true
+    steps:
+      - name: Check out the deployed revision
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          persist-credentials: false
+
+      - name: Check the homepage
+        run: node .github/scripts/verify-pages.cjs home
+
+      - name: Check the proposal page and its files
+        run: node .github/scripts/verify-pages.cjs proposal
+
+      - name: Install browser for the unlock check
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/pages-verification" --no-save --no-package-lock playwright@1.65.1
+          "$RUNNER_TEMP/pages-verification/node_modules/.bin/playwright" install --with-deps chromium
+
+      - name: Open the proposal with its share key
+        env:
+          PROPOSAL_LINK_KEY: ${{ secrets.PROPOSAL_LINK_KEY }}
+        shell: bash
+        run: NODE_PATH="$RUNNER_TEMP/pages-verification/node_modules" node .github/scripts/verify-pages.cjs unlock
