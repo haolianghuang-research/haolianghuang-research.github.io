@@ -4,11 +4,11 @@ async function openSharedPage() {
 
   const status = document.getElementById("status");
   if (!/^[A-Za-z0-9_-]{43}$/.test(encodedKey) || !crypto.subtle) {
-    status.textContent = "请在支持加密的浏览器中打开完整的 HTTPS 分享链接。";
+    status.textContent = "Open the complete HTTPS share link in a current browser.";
     return;
   }
 
-  status.textContent = "正在打开共享页面…";
+  status.textContent = "Opening the shared page…";
   try {
     const base64Key = encodedKey.replaceAll("-", "+").replaceAll("_", "/") + "=";
     const bytes = Uint8Array.from(atob(base64Key), character => character.charCodeAt(0));
@@ -23,7 +23,7 @@ async function openSharedPage() {
     }, key, payload.subarray(12));
 
     const frame = document.createElement("iframe");
-    frame.title = "CommonRoad 研究提案";
+    frame.title = "CommonRoad Research Proposal";
     frame.setAttribute("sandbox", "allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox");
     const url = URL.createObjectURL(new Blob([documentBytes], { type: "text/html;charset=utf-8" }));
     frame.src = url;
@@ -31,9 +31,9 @@ async function openSharedPage() {
       if (!event.persisted) URL.revokeObjectURL(url);
     });
     document.getElementById("gate").replaceWith(frame);
-    document.title = "CommonRoad Agent v0.8.0｜研究提案";
+    document.title = "CommonRoad Agent v0.8.0 | Research Proposal";
   } catch {
-    status.textContent = "无法打开页面。请核对完整分享链接，或稍后重试。";
+    status.textContent = "Unable to open this page. Check the complete share link or try again later.";
   }
 }
 
