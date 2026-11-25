@@ -48,8 +48,9 @@ async function checkUnlock() {
   try {
     const page = await browser.newPage();
     await page.goto(`${site}/proposal/#${key}`, { waitUntil: "domcontentloaded" });
-    const proposal = page.frameLocator('iframe[title="CommonRoad Research Proposal"]');
-    await proposal.getByRole("heading", { level: 1 }).waitFor({ timeout: 20000 });
+    // The loader creates the blob frame only after successful decryption.
+    const proposal = page.frameLocator('iframe[src^="blob:"]');
+    await proposal.locator("h1:visible").first().waitFor({ timeout: 20000 });
     console.log("The proposal share link unlocked and rendered its heading.");
   } catch {
     // Browser errors can include the share URL or text from the decrypted page.

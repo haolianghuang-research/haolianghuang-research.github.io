@@ -1,4 +1,5 @@
 name: Verify GitHub Pages
+run-name: Verify GitHub Pages (${{ github.event.deployment_status.state }})
 
 on:
   deployment_status:
@@ -10,9 +11,9 @@ jobs:
   verify:
     name: Verify live pages
     if: >-
-      github.event.deployment.environment == 'github-pages' &&
-      github.event.deployment.ref == 'main' &&
-      github.event.deployment_status.state == 'success'
+      github.event.deployment_status.state == 'success' &&
+      (github.event.deployment_status.environment == 'github-pages' ||
+       github.event.deployment.environment == 'github-pages')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency:
@@ -22,7 +23,7 @@ jobs:
       - name: Check out the deployed revision
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.deployment.sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Check the homepage
