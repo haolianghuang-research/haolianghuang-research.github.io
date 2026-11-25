@@ -13,7 +13,7 @@ async function openSharedPage() {
     const base64Key = encodedKey.replaceAll("-", "+").replaceAll("_", "/") + "=";
     const bytes = Uint8Array.from(atob(base64Key), character => character.charCodeAt(0));
     const key = await crypto.subtle.importKey("raw", bytes, "AES-GCM", false, ["decrypt"]);
-    const response = await fetch("content.bin?v=327c3c2ec45469dc", { credentials: "omit" });
+    const response = await fetch("content.bin?v=b4a80d19dc2782f6", { credentials: "omit" });
     if (!response.ok) throw new Error("Content unavailable");
     const payload = new Uint8Array(await response.arrayBuffer());
     const documentBytes = await crypto.subtle.decrypt({
