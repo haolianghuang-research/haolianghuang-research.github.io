@@ -13,7 +13,7 @@ async function openSharedPage() {
     const base64Key = encodedKey.replaceAll("-", "+").replaceAll("_", "/") + "=";
     const bytes = Uint8Array.from(atob(base64Key), character => character.charCodeAt(0));
     const key = await crypto.subtle.importKey("raw", bytes, "AES-GCM", false, ["decrypt"]);
-    const response = await fetch("content.bin?v=b4a80d19dc2782f6", { credentials: "omit" });
+    const response = await fetch("content.bin?v=13a38cbe7b328a28", { credentials: "omit" });
     if (!response.ok) throw new Error("Content unavailable");
     const payload = new Uint8Array(await response.arrayBuffer());
     const documentBytes = await crypto.subtle.decrypt({
@@ -22,8 +22,9 @@ async function openSharedPage() {
       additionalData: new TextEncoder().encode("commonroad-proposal-v1"),
     }, key, payload.subarray(12));
 
+    const title = new TextDecoder().decode(documentBytes).match(/<title>([^<]+)<\/title>/i)?.[1];
     const frame = document.createElement("iframe");
-    frame.title = "CommonRoad Research Proposal";
+    frame.title = title || "Research proposal";
     frame.allowFullscreen = true;
     frame.setAttribute("sandbox", "allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox");
     const url = URL.createObjectURL(new Blob([documentBytes], { type: "text/html;charset=utf-8" }));
@@ -32,7 +33,7 @@ async function openSharedPage() {
       if (!event.persisted) URL.revokeObjectURL(url);
     });
     document.getElementById("gate").replaceWith(frame);
-    document.title = "CommonRoad Agent v0.8.0 | Research Proposal";
+    document.title = frame.title;
   } catch {
     status.textContent = "Unable to open this page. Check the complete share link or try again later.";
   }
